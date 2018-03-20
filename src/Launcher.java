@@ -4,9 +4,10 @@
  * Launches the game
  */
 public class Launcher {
-    // CONSTRUCTOR //
+// CONSTRUCTORS //
     public static void main(String[] args) {
         // Temporary launch code
-        new DisplayWindow("Projectile Game", 800, 600);
+        Game game = new Game("Projectile Game", 800, 600);
+        game.start();
     }
 }

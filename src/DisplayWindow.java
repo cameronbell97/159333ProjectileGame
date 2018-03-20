@@ -7,7 +7,7 @@ import java.awt.*;
  * Displays the window in which the game operates
  */
 public class DisplayWindow {
-    // VARIABLES //
+// VARIABLES //
     private JFrame frame;
     private String fTitle;
     private int fWidth;
@@ -15,7 +15,7 @@ public class DisplayWindow {
 
     private Canvas canvas;
 
-    // CONSTRUCTOR //
+// CONSTRUCTORS //
     public DisplayWindow(String title, int width, int height) {
         fTitle = title;
         fWidth = width;
