@@ -7,6 +7,6 @@ public class Launcher {
     // CONSTRUCTOR //
     public static void main(String[] args) {
         // Temporary launch code
-        new DisplayWindow("Game", 800, 600);
+        new DisplayWindow("Projectile Game", 800, 600);
     }
 }
