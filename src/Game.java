@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.io.IOException;
 
 /**
  * Cameron Bell - 20/03/2018
@@ -41,16 +42,30 @@ public class Game implements Runnable{
     }
 
     // Method to render the graphics on the screen
-    public void draw() {
+    public void draw() throws IOException {
         bufferStrategy = displayCanvas.getBufferStrategy();
         if(bufferStrategy == null) {
             displayCanvas.createBufferStrategy(3);
             return;
         }
         g = bufferStrategy.getDrawGraphics();
-        // Draw
 
-        g.fillRect(0, 0, gameWidth/2, gameHeight/2);
+        // Draw
+        g.clearRect(0, 0, gameWidth, gameHeight); // Clear the screen before drawing
+
+        //test code
+//        for(int i = 0; i < (gameHeight/4)-1; i++) {
+//            if(g.getColor() == Color.magenta) g.setColor(Color.orange);
+//            else g.setColor(Color.magenta);
+//            g.drawRect(i*4, i*4, (gameWidth-(i*8)), (gameHeight-(i*8)));
+//        }
+
+        g.setColor(Color.BLUE);
+        g.fillRect(0,0,16,16);
+        g.fillRect(16,16,32,32);
+        g.fillRect(32+16,32+16,64,64);
+        g.fillRect(64+32+16,64+32+16,128,128);
+        g.drawImage(ImageLoader.load("player_placeholder.png"), 128+64+32+16,128+64+32+16,null);
 
         // Finish
 
@@ -64,7 +79,11 @@ public class Game implements Runnable{
         initialise();
         while(isRunning) { // The Game Loop
             update(); // Update game state
-            draw(); // Render the graphics on the screen
+            try {
+                draw(); // Render the graphics on the screen
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
