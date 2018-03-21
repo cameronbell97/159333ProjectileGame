@@ -13,7 +13,7 @@ public class DisplayWindow {
     private int fWidth;
     private int fHeight;
 
-    private Canvas canvas;
+    public Canvas canvas;
 
 // CONSTRUCTORS //
     public DisplayWindow(String title, int width, int height) {
@@ -37,5 +37,10 @@ public class DisplayWindow {
         frame.add(canvas); // Puts the canvas in the JFrame
         frame.pack();
 
+    }
+
+// GETTERS & SETTERS //
+    public Canvas getCanvas() {
+        return canvas;
     }
 }

@@ -7,7 +7,7 @@ public class Launcher {
 // CONSTRUCTORS //
     public static void main(String[] args) {
         // Temporary launch code
-        Game game = new Game("Projectile Game", 800, 600);
+        Game game = new Game("Projectile Game", 600, 800);
         game.start();
     }
 }

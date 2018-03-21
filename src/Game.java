@@ -1,3 +1,6 @@
+import java.awt.*;
+import java.awt.image.BufferStrategy;
+
 /**
  * Cameron Bell - 20/03/2018
  * Game Class
@@ -11,7 +14,11 @@ public class Game implements Runnable{
     private boolean isRunning;
 
     private DisplayWindow display;
+    private Canvas displayCanvas;
     private Thread thread;
+
+    private BufferStrategy bufferStrategy;
+    private Graphics g;
 
 // CONSTRUCTORS //
     public Game(String title, int height, int width) {
@@ -24,7 +31,8 @@ public class Game implements Runnable{
 // METHODS //
     // Method to initialise game window
     public void initialise() {
-        display = new DisplayWindow(gameTitle, gameHeight, gameWidth);
+        display = new DisplayWindow(gameTitle, gameWidth, gameHeight);
+        displayCanvas = display.getCanvas();
     }
 
     // Method to update the game state
@@ -34,7 +42,20 @@ public class Game implements Runnable{
 
     // Method to render the graphics on the screen
     public void draw() {
+        bufferStrategy = displayCanvas.getBufferStrategy();
+        if(bufferStrategy == null) {
+            displayCanvas.createBufferStrategy(3);
+            return;
+        }
+        g = bufferStrategy.getDrawGraphics();
+        // Draw
 
+        g.fillRect(0, 0, gameWidth/2, gameHeight/2);
+
+        // Finish
+
+        bufferStrategy.show();
+        g.dispose();
     }
 
     // Threading Methods //
