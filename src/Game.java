@@ -20,6 +20,7 @@ public class Game implements Runnable{
 
     private BufferStrategy bufferStrategy;
     private Graphics g;
+    private SpriteSheet spritesheet;
 
 // CONSTRUCTORS //
     public Game(String title, int height, int width) {
@@ -31,9 +32,10 @@ public class Game implements Runnable{
 
 // METHODS //
     // Method to initialise game window
-    public void initialise() {
+    public void initialise() throws IOException {
         display = new DisplayWindow(gameTitle, gameWidth, gameHeight);
         displayCanvas = display.getCanvas();
+        spritesheet = new SpriteSheet(ImageLoader.load("tile01.png")); // load the spritesheet
     }
 
     // Method to update the game state
@@ -50,8 +52,12 @@ public class Game implements Runnable{
         }
         g = bufferStrategy.getDrawGraphics();
 
-        // Draw
+        // Draw to the screen // ---------
         g.clearRect(0, 0, gameWidth, gameHeight); // Clear the screen before drawing
+
+        g.drawImage(spritesheet.getSprite("player"), 64, 64, null);
+        g.drawImage(spritesheet.extract(64, 0, 64, 64), 128, 64, null);
+        g.drawImage(spritesheet.getSprite("player"), 96, 128, null);
 
         //test code
 //        for(int i = 0; i < (gameHeight/4)-1; i++) {
@@ -60,12 +66,14 @@ public class Game implements Runnable{
 //            g.drawRect(i*4, i*4, (gameWidth-(i*8)), (gameHeight-(i*8)));
 //        }
 
-        g.setColor(Color.BLUE);
-        g.fillRect(0,0,16,16);
-        g.fillRect(16,16,32,32);
-        g.fillRect(32+16,32+16,64,64);
-        g.fillRect(64+32+16,64+32+16,128,128);
-        g.drawImage(ImageLoader.load("player_placeholder.png"), 128+64+32+16,128+64+32+16,null);
+//        g.setColor(Color.BLUE);
+//        g.fillRect(0,0,16,16);
+//        g.fillRect(16,16,32,32);
+//        g.fillRect(32+16,32+16,64,64);
+//        g.fillRect(64+32+16,64+32+16,128,128);
+//        g.drawImage(ImageLoader.load("player_placeholder.png"), 128+64+32+16,128+64+32+16,null);
+//        g.drawImage(ImageLoader.load("player_placeholder.png"), 128+64+32+16,128+64+32+16+16,null);
+//        g.drawImage(ImageLoader.load("tile01.png"), 128+64+32+16+16,128+64+32+16+16+16,null);
 
         // Finish
 
@@ -76,7 +84,12 @@ public class Game implements Runnable{
     // Threading Methods //
 
     public void run() {
-        initialise();
+        try {
+            initialise();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(5);
+        }
         while(isRunning) { // The Game Loop
             update(); // Update game state
             try {
