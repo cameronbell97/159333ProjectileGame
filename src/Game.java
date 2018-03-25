@@ -9,6 +9,8 @@ import java.io.IOException;
  */
 public class Game implements Runnable{
 // VARIABLES //
+    private static final int FPS = 60;
+
     private String gameTitle;
     private int gameHeight;
     private int gameWidth;
@@ -21,6 +23,8 @@ public class Game implements Runnable{
     private BufferStrategy bufferStrategy;
     private Graphics g;
     private SpriteSheet spritesheet;
+
+    int smello = 0;
 
 // CONSTRUCTORS //
     public Game(String title, int height, int width) {
@@ -40,7 +44,7 @@ public class Game implements Runnable{
 
     // Method to update the game state
     public void update() {
-
+        smello++;
     }
 
     // Method to render the graphics on the screen
@@ -55,9 +59,9 @@ public class Game implements Runnable{
         // Draw to the screen // ---------
         g.clearRect(0, 0, gameWidth, gameHeight); // Clear the screen before drawing
 
-        g.drawImage(spritesheet.getSprite("player"), 64, 64, null);
-        g.drawImage(spritesheet.extract(64, 0, 64, 64), 128, 64, null);
-        g.drawImage(spritesheet.getSprite("player"), 96, 128, null);
+        g.drawImage(spritesheet.getSprite("player"), smello+64, 64, null);
+        g.drawImage(spritesheet.extract(64, 0, 64, 64), smello*2+128, 64, null);
+        g.drawImage(spritesheet.getSprite("player"), smello+96, smello+128, null);
 
         //test code
 //        for(int i = 0; i < (gameHeight/4)-1; i++) {
@@ -90,14 +94,41 @@ public class Game implements Runnable{
             e.printStackTrace();
             System.exit(5);
         }
-        while(isRunning) { // The Game Loop
-            update(); // Update game state
-            try {
-                draw(); // Render the graphics on the screen
-            } catch (IOException e) {
-                e.printStackTrace();
+
+        // FPS/Gamestate Limiting code
+        double timepertick = 1000000000 / FPS; // Max time (in nanoseconds) that the game loop needs to be run by
+        double delta = 0; // Time (nanoseconds) till next game loop cycle
+        long now; // Current computer time
+        long lasttime = System.nanoTime(); // Previous computer time
+        long timer = 0;
+        long ticks = 0;
+
+        // The Game Loop // -- Start --
+        while(isRunning) {
+            now = System.nanoTime();
+            delta += (now - lasttime) / timepertick; // Delta += time until next we run the game loop next
+            lasttime = now;
+            timer += now - lasttime;
+
+            if (delta >= 1) {
+                update(); // Update game state
+                try {
+                    draw(); // Render the graphics on the screen
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                delta--;
+                ticks++;
+            }
+
+            // FPS counter
+            if (timer >= 1000000000) {
+                // Print FPS here to get one every second
+                ticks = 0;
+                timer = 0;
             }
         }
+        // The Game Loop // -- End --
     }
 
     // Method executed on game start
