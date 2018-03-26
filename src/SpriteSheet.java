@@ -1,7 +1,8 @@
 import java.awt.image.BufferedImage;
 
 /**
- * Created by Cameron on 25/03/2018.
+ * Cameron Bell - 25/03/2018
+ * Sprite Sheet Class
  */
 public class SpriteSheet {
 // CONSTANT VARIABLES //

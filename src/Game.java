@@ -22,9 +22,8 @@ public class Game implements Runnable{
 
     private BufferStrategy bufferStrategy;
     private Graphics g;
-    private SpriteSheet spritesheet;
 
-    int smello = 0;
+    private Screen mainMenuScreen;
 
 // CONSTRUCTORS //
     public Game(String title, int height, int width) {
@@ -39,12 +38,16 @@ public class Game implements Runnable{
     public void initialise() throws IOException {
         display = new DisplayWindow(gameTitle, gameWidth, gameHeight);
         displayCanvas = display.getCanvas();
-        spritesheet = new SpriteSheet(ImageLoader.load("tile01.png")); // load the spritesheet
+
+        mainMenuScreen = new MainMenuScreen();
+        ScreenManager.setScreen(mainMenuScreen);
     }
 
     // Method to update the game state
     public void update() {
-        smello++;
+        if (ScreenManager.getScreen() != null) {
+            ScreenManager.getScreen().update();
+        }
     }
 
     // Method to render the graphics on the screen
@@ -58,26 +61,10 @@ public class Game implements Runnable{
 
         // Draw to the screen // ---------
         g.clearRect(0, 0, gameWidth, gameHeight); // Clear the screen before drawing
+        if (ScreenManager.getScreen() != null) {
+            ScreenManager.getScreen().draw(g);
+        }
 
-        g.drawImage(spritesheet.getSprite("player"), smello+64, 64, null);
-        g.drawImage(spritesheet.extract(64, 0, 64, 64), smello*2+128, 64, null);
-        g.drawImage(spritesheet.getSprite("player"), smello+96, smello+128, null);
-
-        //test code
-//        for(int i = 0; i < (gameHeight/4)-1; i++) {
-//            if(g.getColor() == Color.magenta) g.setColor(Color.orange);
-//            else g.setColor(Color.magenta);
-//            g.drawRect(i*4, i*4, (gameWidth-(i*8)), (gameHeight-(i*8)));
-//        }
-
-//        g.setColor(Color.BLUE);
-//        g.fillRect(0,0,16,16);
-//        g.fillRect(16,16,32,32);
-//        g.fillRect(32+16,32+16,64,64);
-//        g.fillRect(64+32+16,64+32+16,128,128);
-//        g.drawImage(ImageLoader.load("player_placeholder.png"), 128+64+32+16,128+64+32+16,null);
-//        g.drawImage(ImageLoader.load("player_placeholder.png"), 128+64+32+16,128+64+32+16+16,null);
-//        g.drawImage(ImageLoader.load("tile01.png"), 128+64+32+16+16,128+64+32+16+16+16,null);
 
         // Finish
 

@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * Created by Cameron on 21/03/2018.
+ * Cameron Bell - 21/03/2018
+ * Image Loader Class
  */
 public class ImageLoader {
 // METHODS //
