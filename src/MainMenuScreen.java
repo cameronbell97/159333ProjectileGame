@@ -2,8 +2,10 @@ import java.awt.*;
 import java.io.IOException;
 
 /**
- * Created by Cameron on 26/03/2018.
+ * Cameron Bell - 26/03/2018
+ * Main Menu Screen Class
  */
+
 public class MainMenuScreen extends Screen{
 // VARIABLES //
     private SpriteSheet spritesheet;
