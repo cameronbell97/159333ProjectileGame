@@ -8,11 +8,11 @@ import java.io.IOException;
 
 public class GameScreen extends Screen {
 // VARIABLES //
-    private SpriteSheet spritesheet;
+    private AssetManager assMan;
 
 // CONSTRUCTORS //
     public GameScreen() throws IOException {
-        spritesheet = new SpriteSheet(ImageLoader.load("tile01.png")); // load the spritesheet
+        assMan = AssetManager.get();
     }
 
 // METHODS //
@@ -24,6 +24,6 @@ public class GameScreen extends Screen {
     @Override
     public void draw(Graphics g) {
 
-        g.drawImage(spritesheet.getSprite("player"), 64, 64, null);
+        g.drawImage(assMan.getSprite("player"), 64, 64, null);
     }
 }

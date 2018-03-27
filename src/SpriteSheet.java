@@ -20,25 +20,16 @@ public class SpriteSheet {
     public SpriteSheet(BufferedImage img){
         sheet = img;
         imgArray = new BufferedImage[SHEETX][SHEETY];
-        compile();
+        compile(); // Build the sheet
     }
 
-    // METHODS //
+    // TODO implement a constructor that defines sheetx and sheety,
+    // TODO  in the event of multiple spritesheets with different dimensions
+
+// METHODS //
     // Method to extract a subimage from given co-ordinates and dimensions
     public BufferedImage extract(int x, int y, int w, int h) {
         return sheet.getSubimage(x, y, w, h);
-    }
-
-    // Method to get an extracted image from a preset name
-    public BufferedImage getSprite(String key) {
-        if(key == null) return null; // If key is null, return null
-
-        switch (key) {
-            case "player":
-                return imgArray[1][0];
-        }
-
-        return null; // If key is unknown, return null
     }
 
     // Method to programmatically extract the entire spritesheet into the BufferedImage 2D array
@@ -48,5 +39,13 @@ public class SpriteSheet {
                 imgArray[x][y] = extract(x * SPRITEWIDTH, y * SPRITEHEIGHT, SPRITEWIDTH, SPRITEHEIGHT);
             }
         }
+    }
+
+    // Method to retrieve a sprite of x,y co-ords
+    public BufferedImage getSprite(int x, int y) {
+        if(x >= 0 && y >= 0 && x < SHEETX && y < SHEETY) {
+            return imgArray[x][y];
+        }
+        return null;
     }
 }

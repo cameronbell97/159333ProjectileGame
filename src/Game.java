@@ -23,6 +23,7 @@ public class Game implements Runnable{
     private BufferStrategy bufferStrategy;
     private Graphics g;
 
+    // Screens
     private Screen mainMenuScreen;
 
 // CONSTRUCTORS //
