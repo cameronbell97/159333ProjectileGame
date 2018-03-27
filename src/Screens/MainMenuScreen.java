@@ -1,5 +1,8 @@
 package Screens;
 
+import Assets.ImageLoader;
+import Assets.SpriteSheet;
+
 import java.awt.*;
 import java.io.IOException;
 
@@ -10,11 +13,9 @@ import java.io.IOException;
 
 public class MainMenuScreen extends Screen{
 // VARIABLES //
-    private SpriteSheet spritesheet;
 
 // CONSTRUCTORS //
     public MainMenuScreen() throws IOException {
-        spritesheet = new SpriteSheet(ImageLoader.load("tile01.png")); // load the spritesheet
     }
 
 // METHODS //

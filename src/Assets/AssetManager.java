@@ -17,7 +17,7 @@ public class AssetManager {
     public AssetManager() {
         // Build Spritesheet //
         try {
-            sheet1 = new SpriteSheet(ImageLoader.load("tile01.png")); // load the spritesheet
+            sheet1 = new SpriteSheet(ImageLoader.load("../tile01.png")); // load the spritesheet
         } catch (IOException e) {
             e.printStackTrace();
         }

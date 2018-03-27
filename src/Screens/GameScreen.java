@@ -1,5 +1,8 @@
 package Screens;
 
+import Assets.AssetManager;
+import Entities.PlayerEntity;
+
 import java.awt.*;
 import java.io.IOException;
 
@@ -11,21 +14,22 @@ import java.io.IOException;
 public class GameScreen extends Screen {
 // VARIABLES //
     private AssetManager assMan;
+    private PlayerEntity player;
 
 // CONSTRUCTORS //
     public GameScreen() throws IOException {
         assMan = AssetManager.get();
+        player = new PlayerEntity(64, 64);
     }
 
 // METHODS //
     @Override
     public void update() {
-
+        player.update();
     }
 
     @Override
     public void draw(Graphics g) {
-
-        g.drawImage(assMan.getSprite("player"), 64, 64, null);
+        player.draw(g);
     }
 }
