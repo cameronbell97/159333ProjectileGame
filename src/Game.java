@@ -1,3 +1,7 @@
+import Screens.MainMenuScreen;
+import Screens.Screen;
+import Screens.ScreenManager;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;

@@ -1,3 +1,5 @@
+package Assets;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 

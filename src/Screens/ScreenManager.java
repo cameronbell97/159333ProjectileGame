@@ -1,6 +1,10 @@
+package Screens;
+
+import Screens.Screen;
+
 /**
  * Cameron Bell - 26/03/2018
- * Screen Manager Class
+ * Screens.Screen Manager Class
  */
 public class ScreenManager {
 // VARIABLES //

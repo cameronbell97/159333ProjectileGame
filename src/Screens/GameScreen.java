@@ -1,9 +1,11 @@
+package Screens;
+
 import java.awt.*;
 import java.io.IOException;
 
 /**
  * Cameron Bell - 26/03/2018
- * Game Screen Class
+ * Game Screens.Screen Class
  */
 
 public class GameScreen extends Screen {

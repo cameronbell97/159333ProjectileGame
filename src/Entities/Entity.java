@@ -1,8 +1,10 @@
+package Entities;
+
 import java.awt.*;
 
 /**
  * Cameron Bell - 27/03/2018
- * Entity Abstract Class
+ * Entities.Entity Abstract Class
  */
 
 public abstract class Entity {

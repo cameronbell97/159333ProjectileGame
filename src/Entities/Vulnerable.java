@@ -1,6 +1,8 @@
+package Entities;
+
 /**
  * Cameron Bell - 27/03/2018
- * Vulnerable Entity Class
+ * Entities.Vulnerable Entities.Entity Class
  * To be used for entities that are not invulnerable (i.e player & enemies)
  */
 

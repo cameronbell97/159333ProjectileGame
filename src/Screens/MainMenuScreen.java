@@ -1,9 +1,11 @@
+package Screens;
+
 import java.awt.*;
 import java.io.IOException;
 
 /**
  * Cameron Bell - 26/03/2018
- * Main Menu Screen Class
+ * Main Menu Screens.Screen Class
  */
 
 public class MainMenuScreen extends Screen{
