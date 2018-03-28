@@ -1,3 +1,6 @@
+package Game;
+
+import Screens.GameScreen;
 import Screens.MainMenuScreen;
 import Screens.Screen;
 import Screens.ScreenManager;
@@ -8,7 +11,7 @@ import java.io.IOException;
 
 /**
  * Cameron Bell - 20/03/2018
- * Game Class
+ * Game.Game Class
  * High level class used to instantiate game and encompass a lot of classes and entities
  */
 public class Game implements Runnable{
@@ -27,8 +30,11 @@ public class Game implements Runnable{
     private BufferStrategy bufferStrategy;
     private Graphics g;
 
+    private KeyManager km;
+
     // Screens
     private Screen mainMenuScreen;
+    private Screen gameScreen;
 
 // CONSTRUCTORS //
     public Game(String title, int height, int width) {
@@ -42,10 +48,14 @@ public class Game implements Runnable{
     // Method to initialise game window
     public void initialise() throws IOException {
         display = new DisplayWindow(gameTitle, gameWidth, gameHeight);
+        km = new KeyManager();
+        display.getFrame().addKeyListener(km);
         displayCanvas = display.getCanvas();
 
-        mainMenuScreen = new MainMenuScreen();
-        ScreenManager.setScreen(mainMenuScreen);
+        // Initialise screens
+        gameScreen = new GameScreen(this);
+        mainMenuScreen = new MainMenuScreen(this);
+        ScreenManager.setScreen(gameScreen);
     }
 
     // Method to update the game state
@@ -53,6 +63,7 @@ public class Game implements Runnable{
         if (ScreenManager.getScreen() != null) {
             ScreenManager.getScreen().update();
         }
+        km.update();
     }
 
     // Method to render the graphics on the screen
@@ -95,12 +106,12 @@ public class Game implements Runnable{
         long timer = 0;
         long ticks = 0;
 
-        // The Game Loop // -- Start --
+        // The Game.Game Loop // -- Start --
         while(isRunning) {
             now = System.nanoTime();
             delta += (now - lasttime) / timepertick; // Delta += time until next we run the game loop next
-            lasttime = now;
             timer += now - lasttime;
+            lasttime = now;
 
             if (delta >= 1) {
                 update(); // Update game state
@@ -115,12 +126,12 @@ public class Game implements Runnable{
 
             // FPS counter
             if (timer >= 1000000000) {
-                // Print FPS here to get one every second
+            System.out.println("FPS = " + ticks);   // DEBUG // Print FPS here to get one every second
                 ticks = 0;
                 timer = 0;
             }
         }
-        // The Game Loop // -- End --
+        // The Game.Game Loop // -- End --
     }
 
     // Method executed on game start
@@ -128,7 +139,7 @@ public class Game implements Runnable{
         if(isRunning) return; // Safeguard in case start() is called a second time
         isRunning = true;
         thread = new Thread(this); // Start new thread of this class
-        thread.start(); // Calls run() on Game object in thread
+        thread.start(); // Calls run() on Game.Game object in thread
     }
 
     // Method executed on game stop
@@ -141,5 +152,9 @@ public class Game implements Runnable{
         catch (java.lang.InterruptedException e) {
             //!// Do something
         }
+    }
+
+    public KeyManager getKeyManager() {
+        return km;
     }
 }

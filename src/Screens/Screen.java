@@ -1,4 +1,5 @@
 package Screens;
+import Game.Game;
 
 import java.awt.*;
 
@@ -8,6 +9,15 @@ import java.awt.*;
  * Abstract class defining the basics for a game screen
  */
 public abstract class Screen {
+// VARIABLES //
+    protected Game game;
+
+// CONSTRUCTORS //
+    public Screen(Game game) {
+        this.game = game;
+    }
+
+// METHODS //
     public abstract void update();
     public abstract void draw(Graphics g);
 }

@@ -1,9 +1,11 @@
+package Game;
+
 import javax.swing.*;
 import java.awt.*;
 
 /**
  * Cameron Bell - 20/03/2018
- * DisplayWindow Class
+ * Game.DisplayWindow Class
  * Displays the window in which the game operates
  */
 public class DisplayWindow {
@@ -33,6 +35,7 @@ public class DisplayWindow {
         canvas.setPreferredSize(new Dimension(fWidth, fHeight));
         canvas.setMinimumSize(new Dimension(fWidth, fHeight));
         canvas.setMaximumSize(new Dimension(fWidth, fHeight));
+        canvas.setFocusable(false);
 
         frame.add(canvas); // Puts the canvas in the JFrame
         frame.pack();
@@ -42,5 +45,9 @@ public class DisplayWindow {
 // GETTERS & SETTERS //
     public Canvas getCanvas() {
         return canvas;
+    }
+
+    public JFrame getFrame() {
+        return frame;
     }
 }

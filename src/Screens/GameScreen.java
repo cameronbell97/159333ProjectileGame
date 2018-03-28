@@ -2,13 +2,14 @@ package Screens;
 
 import Assets.AssetManager;
 import Entities.PlayerEntity;
+import Game.Game;
 
 import java.awt.*;
 import java.io.IOException;
 
 /**
  * Cameron Bell - 26/03/2018
- * Game Screens.Screen Class
+ * Game.Game Screens.Screen Class
  */
 
 public class GameScreen extends Screen {
@@ -17,9 +18,10 @@ public class GameScreen extends Screen {
     private PlayerEntity player;
 
 // CONSTRUCTORS //
-    public GameScreen() throws IOException {
+    public GameScreen(Game game) throws IOException {
+        super(game);
         assMan = AssetManager.get();
-        player = new PlayerEntity(64, 64);
+        player = new PlayerEntity(game, 1280/2-32, 720/2-32);
     }
 
 // METHODS //
