@@ -14,6 +14,7 @@ public abstract class Entity {
     protected float xmove, ymove;
     protected int width, height;
     protected double direction;
+    protected double moveSpeed;
 
 // CONSTRUCTORS //
     public Entity (float x, float y, int w, int h) {
@@ -22,6 +23,7 @@ public abstract class Entity {
         width = w;
         height = h;
         direction = 0.5*Math.PI; // direction = 90 degrees but in radians
+        moveSpeed = DEF_SPEED;
     }
 
 // METHODS //

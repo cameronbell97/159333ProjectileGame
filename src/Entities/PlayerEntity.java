@@ -10,23 +10,27 @@ import java.awt.*;
  * Player Entity Class
  * The controllable player
  */
-public class PlayerEntity extends Vulnerable {
+public class PlayerEntity extends VulnerableEntity {
 // VARIABLES //
     public static final int DEF_PLAYER_WIDTH = 64;
     public static final int DEF_PLAYER_HEIGHT = 64;
+    public static final double DEF_ROT_SPEED = 0.008*Math.PI;
     AssetManager assMan = AssetManager.get();
     Game game;
     protected int speedMultiplier;
+    protected double rotationSpeed;
 
-    // Inherits //
+    // Inherits From // Entity
     // public static final float DEF_SPEED = 1;
     // protected float xpos, ypos;
     // protected float xmove, ymove;
     // protected int width, height;
-    // protected float direction;
-    // public static final int DEF_HP = 1;
-    // protected int hp;
-    // protected float moveSpeed;
+    // protected double direction;
+    // protected double moveSpeed;
+
+    // Inherits From // VulnerableEntity
+    //public static final int DEF_HP = 1;
+    //protected int hp;
 
 // CONSTRUCTORS //
     public PlayerEntity(Game gm, float x, float y) {
@@ -43,6 +47,7 @@ public class PlayerEntity extends Vulnerable {
         game = gm;
         speedMultiplier = 1;
         setSpeed(4);
+        rotationSpeed = DEF_ROT_SPEED;
     }
 
     @Override
