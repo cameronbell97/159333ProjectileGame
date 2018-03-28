@@ -29,6 +29,13 @@ public class AssetManager {
         if(key == null) return null; // If key is null, return null
 
         switch (key) {
+            case "LTWall":
+                try {
+                    return ImageLoader.load("../wall_lt.png");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
             case "player":
                 return sheet1.getSprite(1, 0);
         }
