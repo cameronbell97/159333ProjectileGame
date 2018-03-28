@@ -16,6 +16,7 @@ public class PlayerEntity extends Vulnerable {
     public static final int DEF_PLAYER_HEIGHT = 64;
     AssetManager assMan = AssetManager.get();
     Game game;
+    protected int speedMultiplier;
 
     // Inherits //
     // public static final float DEF_SPEED = 1;
@@ -30,14 +31,20 @@ public class PlayerEntity extends Vulnerable {
 // CONSTRUCTORS //
     public PlayerEntity(Game gm, float x, float y) {
         super(x, y, DEF_PLAYER_WIDTH, DEF_PLAYER_HEIGHT);
-        game = gm;
+        initialise(gm);
     }
     public PlayerEntity(Game gm, float x, float y, int w, int h) {
         super(x, y, w, h);
-        game = gm;
+        initialise(gm);
     }
 
 // METHODS //
+    public void initialise(Game gm) {
+        game = gm;
+        speedMultiplier = 1;
+        setSpeed(4);
+    }
+
     @Override
     public void update() {
         getInput();
@@ -48,10 +55,14 @@ public class PlayerEntity extends Vulnerable {
         // Resets the movement so that the player doesn't keep moving indefinitely
         xmove = 0;
         ymove = 0;
+        speedMultiplier = 1;
 
+        if(game.getKeyManager().ctrl) {
+            speedMultiplier = 2;
+        }
         if(game.getKeyManager().forward) {
-            ymove = (float)(moveSpeed * -Math.sin(direction * speedMultiplier));
-            xmove = (float)(moveSpeed * Math.cos(direction * speedMultiplier));
+            ymove = (float)(moveSpeed * -Math.sin(direction)* speedMultiplier);
+            xmove = (float)(moveSpeed * Math.cos(direction)* speedMultiplier);
         }
         if(game.getKeyManager().left) {
             direction += rotationSpeed;

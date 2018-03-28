@@ -13,7 +13,6 @@ public abstract class Vulnerable extends Entity{
     protected int hp;
     protected double moveSpeed;
     protected double rotationSpeed;
-    protected int speedMultiplier;
 
     // Inherits //
     // public static final float DEF_SPEED = 1;
@@ -28,12 +27,11 @@ public abstract class Vulnerable extends Entity{
         hp = DEF_HP;
         moveSpeed = DEF_SPEED;
         rotationSpeed = DEF_ROT_SPEED;
-        speedMultiplier = 1;
     }
 
 // GETTERS & SETTERS //
     public int getHP() { return hp; }
     public double getMoveSpeed() { return moveSpeed; }
     public void setHP(int hp) { this.hp = hp; }
-    public void setSpeed() { this.moveSpeed = moveSpeed; }
+    public void setSpeed(double ms) { moveSpeed = ms; }
 }

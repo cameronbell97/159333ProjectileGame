@@ -15,7 +15,8 @@ public class KeyManager implements KeyListener{
     public boolean
             left,
             right,
-            forward;
+            forward,
+            ctrl;
 
 // CONSTRUCTORS //
     public KeyManager() {
@@ -29,6 +30,7 @@ public class KeyManager implements KeyListener{
         left = keys[KeyEvent.VK_A];
         right = keys[KeyEvent.VK_D];
         forward = keys[KeyEvent.VK_W];
+        ctrl = keys[KeyEvent.VK_CONTROL];
     }
 
     @Override
