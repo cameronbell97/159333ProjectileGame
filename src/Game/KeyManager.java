@@ -5,7 +5,9 @@ import java.awt.event.KeyListener;
 import java.nio.file.FileSystemNotFoundException;
 
 /**
- * Created by Cameron on 27/03/2018.
+ * Cameron Bell - 27/03/2018
+ * Key Manager Class
+ * A class that records key presses for gameplay
  */
 public class KeyManager implements KeyListener{
 // VARIABLES //

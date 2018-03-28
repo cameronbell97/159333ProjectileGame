@@ -6,29 +6,69 @@ import Assets.AssetManager;
 import java.awt.*;
 
 /**
- * Created by Cameron on 27/03/2018.
+ * Cameron Bell - 27/03/2018
+ * Player Entity Class
+ * The controllable player
  */
 public class PlayerEntity extends Vulnerable {
 // VARIABLES //
+    public static final int DEF_PLAYER_WIDTH = 64;
+    public static final int DEF_PLAYER_HEIGHT = 64;
     AssetManager assMan = AssetManager.get();
     Game game;
 
+    // Inherits //
+    // public static final float DEF_SPEED = 1;
+    // protected float xpos, ypos;
+    // protected float xmove, ymove;
+    // protected int width, height;
+    // protected float direction;
+    // public static final int DEF_HP = 1;
+    // protected int hp;
+    // protected float moveSpeed;
+
 // CONSTRUCTORS //
     public PlayerEntity(Game gm, float x, float y) {
-        super(x, y);
+        super(x, y, DEF_PLAYER_WIDTH, DEF_PLAYER_HEIGHT);
+        game = gm;
+    }
+    public PlayerEntity(Game gm, float x, float y, int w, int h) {
+        super(x, y, w, h);
         game = gm;
     }
 
 // METHODS //
     @Override
     public void update() {
-        if(game.getKeyManager().forward) ypos -= 4;
-        if(game.getKeyManager().left) xpos -= 4;
-        if(game.getKeyManager().right) xpos += 4;
+        getInput();
+        move();
+    }
+
+    private void getInput() {
+        // Resets the movement so that the player doesn't keep moving indefinitely
+        xmove = 0;
+        ymove = 0;
+
+        if(game.getKeyManager().forward) {
+            ymove = (float)(moveSpeed * -Math.sin(direction * speedMultiplier));
+            xmove = (float)(moveSpeed * Math.cos(direction * speedMultiplier));
+        }
+        if(game.getKeyManager().left) {
+            direction += rotationSpeed;
+        }
+        if(game.getKeyManager().right) {
+            direction -= rotationSpeed;
+        }
     }
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(assMan.getSprite("player"), (int)xpos, (int)ypos, null);
+        g.drawImage( // draw image at position (xpos,ypos)
+                assMan.getSprite("player"), // with the 'player' sprite
+                (int)xpos,
+                (int)ypos,
+                width, // of the object's set width
+                height, // and of the object's set height
+                null);
     }
 }

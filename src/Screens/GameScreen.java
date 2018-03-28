@@ -3,6 +3,7 @@ package Screens;
 import Assets.AssetManager;
 import Entities.PlayerEntity;
 import Game.Game;
+import Game.Launcher;
 
 import java.awt.*;
 import java.io.IOException;
@@ -21,7 +22,10 @@ public class GameScreen extends Screen {
     public GameScreen(Game game) throws IOException {
         super(game);
         assMan = AssetManager.get();
-        player = new PlayerEntity(game, 1280/2-32, 720/2-32);
+        player = new PlayerEntity(
+                game,
+                Launcher.DEF_GAME_WIDTH/2-player.DEF_PLAYER_WIDTH/2,
+                Launcher.DEF_GAME_HEIGHT/2-player.DEF_PLAYER_HEIGHT/2);
     }
 
 // METHODS //
