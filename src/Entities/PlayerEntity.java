@@ -14,7 +14,7 @@ public class PlayerEntity extends VulnerableEntity {
 // VARIABLES //
     public static final int DEF_PLAYER_WIDTH = 64;
     public static final int DEF_PLAYER_HEIGHT = 64;
-    public static final double DEF_ROT_SPEED = 0.008*Math.PI;
+    public static final double DEF_ROT_SPEED = 0.015*Math.PI;
     AssetManager assMan = AssetManager.get();
     Game game;
     protected int speedMultiplier;

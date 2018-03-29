@@ -24,7 +24,7 @@ public class Wall {
     public Wall() {
         width = DEF_WIDTH;
         height = DEF_HEIGHT;
-        sprite = AssetManager.get().getSprite("LTWall");
+        sprite = null;
     }
 
     public Wall(BufferedImage img, int w, int h) {
