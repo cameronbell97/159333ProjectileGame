@@ -25,6 +25,13 @@ public class SpriteSheet {
         compile(); // Build the sheet
     }
 
+    // Constructor overloaded for custom sheet dimensions
+    public SpriteSheet(BufferedImage img, int sheetx, int sheety, int w, int h){
+        sheet = img;
+        imgArray = new BufferedImage[sheetx][sheety];
+        compile(sheetx, sheety, w, h); // Build the sheet
+    }
+
     // TODO implement a constructor that defines sheetx and sheety,
     // TODO  in the event of multiple spritesheets with different dimensions
 
@@ -39,6 +46,15 @@ public class SpriteSheet {
         for(int x = 0; x < SHEETX; x++) {
             for(int y = 0; y < SHEETY; y++) {
                 imgArray[x][y] = extract(x * SPRITEWIDTH, y * SPRITEHEIGHT, SPRITEWIDTH, SPRITEHEIGHT);
+            }
+        }
+    }
+
+    // Method overloaded for custom sheet dimensions
+    private void compile(int sheetx, int sheety, int w, int h) {
+        for(int x = 0; x < sheetx; x++) {
+            for(int y = 0; y < sheety; y++) {
+                imgArray[x][y] = extract(x * w, y * h, w, h);
             }
         }
     }

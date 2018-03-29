@@ -13,6 +13,7 @@ public class AssetManager {
 
 // VARIABLES //
     private SpriteSheet sheet1 = null;
+    private SpriteSheet wall_sheet = null;
     private BufferedImage walls[];
 
 // CONSTRUCTORS //
@@ -23,35 +24,21 @@ public class AssetManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try {
+            wall_sheet = new SpriteSheet(ImageLoader.load("../walls.png"), 2, 2, 16, 16); // load the spritesheet
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         // Walls //
-        walls = new BufferedImage[6];
+        walls = new BufferedImage[2];
         try {
-            walls[0] = ImageLoader.load("../wall_lt.png");
+            walls[0] = ImageLoader.load("../wall_h.png");
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            walls[1] = ImageLoader.load("../wall_rt.png");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            walls[2] = ImageLoader.load("../wall_rb.png");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            walls[3] = ImageLoader.load("../wall_lb.png");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            walls[4] = ImageLoader.load("../wall_h.png");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            walls[5] = ImageLoader.load("../wall_v.png");
+            walls[1] = ImageLoader.load("../wall_v.png");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -64,17 +51,17 @@ public class AssetManager {
 
         switch (key) {
             case "LTWall":
-                return walls[0];
+                return wall_sheet.getSprite(0, 0);
             case "RTWall":
-                return walls[1];
+                return wall_sheet.getSprite(0, 1);
             case "RBWall":
-                return walls[2];
+                return wall_sheet.getSprite(1, 1);
             case "LBWall":
-                return walls[3];
+                return wall_sheet.getSprite(1, 0);
             case "HozWall":
-                return walls[4];
+                return walls[0];
             case "VerWall":
-                return walls[5];
+                return walls[1];
             case "player":
                 return sheet1.getSprite(1, 0);
         }
