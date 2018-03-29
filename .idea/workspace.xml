@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="947d8217-6e43-4e5a-ba32-8c43edca0f02" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/walls.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Assets/AssetManager.java" afterPath="$PROJECT_DIR$/src/Assets/AssetManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Assets/SpriteSheet.java" afterPath="$PROJECT_DIR$/src/Assets/SpriteSheet.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -112,8 +109,8 @@
       <file leaf-file-name="AssetManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Assets/AssetManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="63" column="30" lean-forward="false" selection-start-line="63" selection-start-column="30" selection-end-line="63" selection-end-column="30" />
+            <state relative-caret-position="350">
+              <caret line="27" column="22" lean-forward="false" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -819,12 +816,12 @@
       <workItem from="1521948746621" duration="4594000" />
       <workItem from="1522030273919" duration="7005000" />
       <workItem from="1522126524929" duration="15076000" />
-      <workItem from="1522364505064" duration="1979000" />
+      <workItem from="1522364505064" duration="2083000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46726000" />
+    <option name="totallyTimeSpent" value="46830000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
@@ -1338,8 +1335,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Assets/AssetManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="63" column="30" lean-forward="false" selection-start-line="63" selection-start-column="30" selection-end-line="63" selection-end-column="30" />
+        <state relative-caret-position="350">
+          <caret line="27" column="22" lean-forward="false" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
           <folding />
         </state>
       </provider>

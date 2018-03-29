@@ -18,12 +18,14 @@ public class AssetManager {
 
 // CONSTRUCTORS //
     public AssetManager() {
-        // Build Spritesheet //
+        // Build Spritesheets //
+        // Main sheet
         try {
             sheet1 = new SpriteSheet(ImageLoader.load("../tile01.png")); // load the spritesheet
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // Walls sheet
         try {
             wall_sheet = new SpriteSheet(ImageLoader.load("../walls.png"), 2, 2, 16, 16); // load the spritesheet
         } catch (IOException e) {
