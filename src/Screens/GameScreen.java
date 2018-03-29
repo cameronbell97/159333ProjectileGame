@@ -1,6 +1,7 @@
 package Screens;
 
 import Assets.AssetManager;
+import Entities.EntityManager;
 import Entities.PlayerEntity;
 import Entities.Wall;
 import Game.Game;
@@ -19,16 +20,22 @@ public class GameScreen extends Screen {
     private AssetManager assMan;
     private PlayerEntity player;
     Wall walls[][];
+    private EntityManager entityManager;
 
     // CONSTRUCTORS //
     public GameScreen(Game game) throws IOException {
+        // Super Call
         super(game);
+
+        // Declarations
+        entityManager = new EntityManager();
         assMan = AssetManager.get();
         player = new PlayerEntity(
                 game,
                 Launcher.DEF_GAME_WIDTH/2-player.DEF_PLAYER_WIDTH/2,
                 Launcher.DEF_GAME_HEIGHT/2-player.DEF_PLAYER_HEIGHT/2)
         ;
+
         // Make walls
         walls = new Wall[2][4];
         if(Launcher.DEF_GAME_WIDTH >= 32 && Launcher.DEF_GAME_HEIGHT >= 32) {
@@ -68,12 +75,15 @@ public class GameScreen extends Screen {
             }
 
         } else walls = null;
+
+        // Entity Subscriptions
+        entityManager.subscribe(player);
     }
 
 // METHODS //
     @Override
     public void update() {
-        player.update();
+        entityManager.update();
     }
 
     @Override
@@ -95,6 +105,6 @@ public class GameScreen extends Screen {
         }
 
         // Draw Player
-        player.draw(g);
+        entityManager.draw(g);
     }
 }

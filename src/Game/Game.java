@@ -1,5 +1,6 @@
 package Game;
 
+import Entities.EntityManager;
 import Screens.GameScreen;
 import Screens.MainMenuScreen;
 import Screens.Screen;
