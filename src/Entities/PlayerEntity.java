@@ -10,6 +10,7 @@ import java.awt.*;
  * Player Entity Class
  * The controllable player
  */
+
 public class PlayerEntity extends VulnerableEntity {
 // VARIABLES //
     public static final int DEF_PLAYER_WIDTH = 64;

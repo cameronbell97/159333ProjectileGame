@@ -1,15 +1,14 @@
 package Entities;
 
-import Assets.AssetManager;
-import Assets.ImageLoader;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
 
 /**
- * Created by Cameron on 28/03/2018.
+ * Cameron Bell - 28/03/2018
+ * Wall Class
+ * A simple class to be expanded on later
  */
+
 public class Wall {
 // VARIABLES //
     public static final int DEF_WIDTH = 16;

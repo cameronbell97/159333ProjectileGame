@@ -9,6 +9,7 @@ import java.util.List;
  * Entity Manager Class
  * A class object that will contain all the entities that need to be regularly updated/drawn
  */
+
 public class EntityManager {
 // VARIABLES //
     List<Entity> ents; // A list of Entities

@@ -5,6 +5,7 @@ package Game;
  * Game.Launcher Class
  * Launches the game
  */
+
 public class Launcher {
 // VARIABLES //
     public static final int DEF_GAME_HEIGHT = 720;

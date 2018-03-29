@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
  * Cameron Bell - 25/03/2018
  * Sprite Sheet Class
  */
+
 public class SpriteSheet {
 // CONSTANT VARIABLES //
     private static final int

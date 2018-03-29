@@ -8,6 +8,7 @@ import java.awt.*;
  * Game.DisplayWindow Class
  * Displays the window in which the game operates
  */
+
 public class DisplayWindow {
 // VARIABLES //
     private JFrame frame;
