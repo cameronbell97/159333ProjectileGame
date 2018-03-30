@@ -1,6 +1,8 @@
 package Entities;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 
@@ -20,6 +22,8 @@ public abstract class Entity {
     protected double direction;
     protected double moveSpeed;
     protected BufferedImage img;
+    AffineTransform aTrans;
+    AffineTransformOp aTransOp;
     Handler handler;
 
 // CONSTRUCTORS //

@@ -6,7 +6,6 @@ import Assets.AssetManager;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
 
 /**
  * Cameron Bell - 27/03/2018
@@ -22,9 +21,6 @@ public class PlayerEntity extends VulnerableEntity {
     AssetManager assMan = AssetManager.get();
     protected int speedMultiplier;
     protected double rotationSpeed;
-    public BufferedImage origin;
-    AffineTransform tx;
-    AffineTransformOp op;
 
 // CONSTRUCTORS //
     public PlayerEntity(Handler handler, float x, float y) {
@@ -43,9 +39,8 @@ public class PlayerEntity extends VulnerableEntity {
         rotationSpeed = DEF_ROT_SPEED;
 //        img = assMan.getSprite("player");
         img = assMan.getSprite(1, 2, 0);
-        origin = assMan.getSprite("player");
-        tx = AffineTransform.getRotateInstance(0, width/2, height/2);
-        op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+        aTrans = AffineTransform.getRotateInstance(0, width/2, height/2);
+        aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
     }
 
     @Override
@@ -87,19 +82,19 @@ public class PlayerEntity extends VulnerableEntity {
 //                width, // of the object's set width
 //                height, // and of the object's set height
 //                null);
-//        g.drawImage(op.filter(assMan.getSprite("player"), null), (int)xpos, (int)ypos, null);
+//        g.drawImage(aTransOp.filter(assMan.getSprite("player"), null), (int)xpos, (int)ypos, null);
 
         // New Draw Code
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(op.filter(img, null), (int)xpos, (int)ypos, null);
+        g2d.drawImage(aTransOp.filter(img, null), (int)xpos, (int)ypos, null);
         g2d.dispose();
     }
 
     // Method to rotate the image
     private void rotate() {
         // TODO // Rotate Sprite Without Cutoffs
-        tx = AffineTransform.getRotateInstance(-direction+(Math.PI/2), width/2, height/2);
-        op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+        aTrans = AffineTransform.getRotateInstance(-direction+(Math.PI/2), width/2, height/2);
+        aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
 
     }
 }
