@@ -10,8 +10,8 @@ import java.awt.image.BufferedImage;
 public class SpriteSheet {
 // CONSTANT VARIABLES //
     private static final int
-        SHEETX = 8,
-        SHEETY = 8,
+        SHEETX = 4,
+        SHEETY = 4,
         SPRITEWIDTH = 64,
         SPRITEHEIGHT = 64;
 

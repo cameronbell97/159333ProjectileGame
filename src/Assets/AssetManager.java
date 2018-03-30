@@ -16,15 +16,22 @@ public class AssetManager {
 
 // VARIABLES //
     private SpriteSheet sheet1 = null;
+    private SpriteSheet sheet2 = null;
     private SpriteSheet wall_sheet = null;
     private BufferedImage walls[];
 
 // CONSTRUCTORS //
     public AssetManager() {
         // Build Spritesheets //
-        // Main sheet
+        // Sheet01
         try {
             sheet1 = new SpriteSheet(ImageLoader.load("../tile01.png")); // load the spritesheet
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Sheet02
+        try {
+            sheet2 = new SpriteSheet(ImageLoader.load("../tile02.png"), 4, 4, 32, 32); // load the spritesheet
         } catch (IOException e) {
             e.printStackTrace();
         }

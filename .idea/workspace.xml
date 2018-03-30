@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="947d8217-6e43-4e5a-ba32-8c43edca0f02" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/ship_draft.pdn" afterPath="$PROJECT_DIR$/res/ship_draft.pdn" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/tile01.png" afterPath="$PROJECT_DIR$/res/tile01.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entities/Entity.java" afterPath="$PROJECT_DIR$/src/Entities/Entity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entities/PlayerEntity.java" afterPath="$PROJECT_DIR$/src/Entities/PlayerEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entities/VulnerableEntity.java" afterPath="$PROJECT_DIR$/src/Entities/VulnerableEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Assets/AssetManager.java" afterPath="$PROJECT_DIR$/src/Assets/AssetManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Assets/SpriteSheet.java" afterPath="$PROJECT_DIR$/src/Assets/SpriteSheet.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -60,7 +58,7 @@
         <entry file="file://$PROJECT_DIR$/src/Entities/VulnerableEntity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
-              <caret line="13" column="21" lean-forward="false" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+              <caret line="13" column="21" lean-forward="true" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -117,23 +115,23 @@
       <file leaf-file-name="AssetManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Assets/AssetManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+            <state relative-caret-position="544">
+              <caret line="33" column="45" lean-forward="true" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
               <folding>
-                <marker date="1522384855726" expanded="true" signature="83:91" ph="/**...*/" />
-                <marker date="1522384855726" expanded="true" signature="1885:2155" ph="{...}" />
+                <marker date="1522398779400" expanded="true" signature="83:91" ph="/**...*/" />
+                <marker date="1522398779400" expanded="true" signature="2142:2412" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameScreen.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Screens/GameScreen.java">
+      <file leaf-file-name="SpriteSheet.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Assets/SpriteSheet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="501">
-              <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+            <state relative-caret-position="697">
+              <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1263#1264#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -184,8 +182,6 @@
         <option value="$PROJECT_DIR$/src/Entities/Solid.java" />
         <option value="$PROJECT_DIR$/src/Entities/Wall.java" />
         <option value="$PROJECT_DIR$/src/Entities/EntityManager.java" />
-        <option value="$PROJECT_DIR$/src/Assets/SpriteSheet.java" />
-        <option value="$PROJECT_DIR$/src/Assets/AssetManager.java" />
         <option value="$PROJECT_DIR$/src/Game/Save.java" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/Game/Launcher.java" />
@@ -197,6 +193,8 @@
         <option value="$PROJECT_DIR$/src/Entities/Entity.java" />
         <option value="$PROJECT_DIR$/src/Entities/VulnerableEntity.java" />
         <option value="$PROJECT_DIR$/src/Entities/PlayerEntity.java" />
+        <option value="$PROJECT_DIR$/src/Assets/SpriteSheet.java" />
+        <option value="$PROJECT_DIR$/src/Assets/AssetManager.java" />
       </list>
     </option>
   </component>
@@ -767,12 +765,12 @@
       <workItem from="1522030273919" duration="7005000" />
       <workItem from="1522126524929" duration="15076000" />
       <workItem from="1522364505064" duration="2083000" />
-      <workItem from="1522379540917" duration="14809000" />
+      <workItem from="1522379540917" duration="15306000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61639000" />
+    <option name="totallyTimeSpent" value="62136000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -826,16 +824,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Game/KeyManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="32" column="41" lean-forward="false" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entities/PlayerEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1108,14 +1096,6 @@
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/awt/image/BufferedImage.java" />
-    <entry file="file://$PROJECT_DIR$/src/Assets/SpriteSheet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="31" column="44" lean-forward="false" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-20389">
@@ -1148,18 +1128,6 @@
           <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Screens/Screen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="39" lean-forward="false" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#322#323#0" expanded="true" />
-            <element signature="e#349#350#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1221,14 +1189,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entities/VulnerableEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="21" lean-forward="false" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entities/EntityManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="467">
@@ -1247,13 +1207,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screens/Screen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="39" lean-forward="false" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#322#323#0" expanded="true" />
+            <element signature="e#349#350#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entities/VulnerableEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="21" lean-forward="true" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/awt/image/BufferedImage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="1201" column="0" lean-forward="false" selection-start-line="1201" selection-start-column="0" selection-end-line="1201" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Assets/SpriteSheet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding>
+            <element signature="e#1263#1264#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Assets/AssetManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+        <state relative-caret-position="544">
+          <caret line="33" column="45" lean-forward="true" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
           <folding>
-            <marker date="1522384855726" expanded="true" signature="83:91" ph="/**...*/" />
-            <marker date="1522384855726" expanded="true" signature="1885:2155" ph="{...}" />
+            <marker date="1522398779400" expanded="true" signature="83:91" ph="/**...*/" />
+            <marker date="1522398779400" expanded="true" signature="2142:2412" ph="{...}" />
           </folding>
         </state>
       </provider>
