@@ -1,5 +1,11 @@
 package Game;
 
+/**
+ * Cameron Bell - 30/03/2018
+ * Handler Class
+ * The handler
+ */
+
 public class Handler {
 // VARIABLES //
     private Game game;

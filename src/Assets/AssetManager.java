@@ -18,6 +18,7 @@ public class AssetManager {
     private SpriteSheet sheet1 = null;
     private SpriteSheet sheet2 = null;
     private SpriteSheet wall_sheet = null;
+    private SpriteSheet char_sheet = null;
     private BufferedImage walls[];
 
 // CONSTRUCTORS //
@@ -38,6 +39,12 @@ public class AssetManager {
         // Walls sheet
         try {
             wall_sheet = new SpriteSheet(ImageLoader.load("../walls.png"), 2, 2, 16, 16); // load the spritesheet
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Walls sheet
+        try {
+            char_sheet = new SpriteSheet(ImageLoader.load("../characters01.png"), 10, 3, 5, 9); // load the spritesheet
         } catch (IOException e) {
             e.printStackTrace();
         }
