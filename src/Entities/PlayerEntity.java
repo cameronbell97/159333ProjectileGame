@@ -22,6 +22,7 @@ public class PlayerEntity extends VulnerableEntity {
     private int speedMultiplier;
     private double rotationSpeed;
     private boolean reverseThrust; // If true, player can reverse
+    private float decelerate;
 
 
 // CONSTRUCTORS //
@@ -44,6 +45,7 @@ public class PlayerEntity extends VulnerableEntity {
         aTrans = AffineTransform.getRotateInstance(0, width/2, height/2);
         aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
         reverseThrust = true;
+        decelerate = (float)0.15;
     }
 
     @Override
@@ -53,9 +55,12 @@ public class PlayerEntity extends VulnerableEntity {
     }
 
     private void getInput() {
-        // Resets the movement so that the player doesn't keep moving indefinitely
-        xmove = 0;
-        ymove = 0;
+        // Deceleration mechanics
+        if(xmove > 0) xmove = Math.max(0, xmove - decelerate);
+        if(xmove < 0) xmove = Math.min(0, xmove + decelerate);
+        if(ymove > 0) ymove = Math.max(0, ymove - decelerate);
+        if(ymove < 0) ymove = Math.min(0, ymove + decelerate);
+
         speedMultiplier = 1;
 
         if(handler.getKeyManager().ctrl) {
