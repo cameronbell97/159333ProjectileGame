@@ -1,6 +1,5 @@
 package Game;
 
-import Entities.EntityManager;
 import Screens.GameScreen;
 import Screens.MainMenuScreen;
 import Screens.Screen;
@@ -15,6 +14,7 @@ import java.io.IOException;
  * Game.Game Class
  * High level class used to instantiate game and encompass a lot of classes and entities
  */
+
 public class Game implements Runnable{
 // VARIABLES //
     private static final int FPS = 60;

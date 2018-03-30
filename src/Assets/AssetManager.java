@@ -4,8 +4,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
- * Created by Cameron on 27/03/2018.
+ * Cameron Bell - 27/03/2018
+ * Asset Manager Class
+ * Class that holds the game assets
  */
+
 public class AssetManager {
 // SINGLETON PATTERN //
     private static AssetManager self = new AssetManager();
@@ -55,11 +58,11 @@ public class AssetManager {
             case "LTWall":
                 return wall_sheet.getSprite(0, 0);
             case "RTWall":
-                return wall_sheet.getSprite(0, 1);
+                return wall_sheet.getSprite(1, 0);
             case "RBWall":
                 return wall_sheet.getSprite(1, 1);
             case "LBWall":
-                return wall_sheet.getSprite(1, 0);
+                return wall_sheet.getSprite(0, 1);
             case "HozWall":
                 return walls[0];
             case "VerWall":

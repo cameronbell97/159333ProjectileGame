@@ -8,6 +8,7 @@ import java.awt.*;
  * Screens.Screen Class
  * Abstract class defining the basics for a game screen
  */
+
 public abstract class Screen {
 // VARIABLES //
     protected Game game;

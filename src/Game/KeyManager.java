@@ -2,13 +2,13 @@ package Game;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.nio.file.FileSystemNotFoundException;
 
 /**
  * Cameron Bell - 27/03/2018
  * Key Manager Class
  * A class that records key presses for gameplay
  */
+
 public class KeyManager implements KeyListener{
 // VARIABLES //
     private boolean[] keys;
