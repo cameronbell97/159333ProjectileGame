@@ -19,8 +19,10 @@ public class PlayerEntity extends VulnerableEntity {
     public static final int DEF_PLAYER_HEIGHT = 64;
     public static final double DEF_ROT_SPEED = 0.015*Math.PI;
     AssetManager assMan = AssetManager.get();
-    protected int speedMultiplier;
-    protected double rotationSpeed;
+    private int speedMultiplier;
+    private double rotationSpeed;
+    private boolean reverseThrust; // If true, player can reverse
+
 
 // CONSTRUCTORS //
     public PlayerEntity(Handler handler, float x, float y) {
@@ -37,10 +39,11 @@ public class PlayerEntity extends VulnerableEntity {
         speedMultiplier = 1;
         setSpeed(4);
         rotationSpeed = DEF_ROT_SPEED;
-//        img = assMan.getSprite("player");
-        img = assMan.getSprite(1, 2, 0);
+        img = assMan.getSprite("player");
+//        img = assMan.getSprite(1, 2, 0);
         aTrans = AffineTransform.getRotateInstance(0, width/2, height/2);
         aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
+        reverseThrust = true;
     }
 
     @Override
@@ -61,6 +64,10 @@ public class PlayerEntity extends VulnerableEntity {
         if(handler.getKeyManager().forward) {
             ymove = (float)(moveSpeed * -Math.sin(direction)* speedMultiplier);
             xmove = (float)(moveSpeed * Math.cos(direction)* speedMultiplier);
+        }
+        if(handler.getKeyManager().back && reverseThrust) {
+            ymove = (float)(moveSpeed * Math.sin(direction)* speedMultiplier);
+            xmove = (float)(moveSpeed * -Math.cos(direction)* speedMultiplier);
         }
         if(handler.getKeyManager().left) {
             direction += rotationSpeed * speedMultiplier;
@@ -90,4 +97,8 @@ public class PlayerEntity extends VulnerableEntity {
         g2d.dispose();
     }
 
+// GETTERS & SETTERS //
+    public void setReverseThrust(boolean reverseThrust) {
+        this.reverseThrust = reverseThrust;
+    }
 }

@@ -69,20 +69,20 @@ public class AssetManager {
         if(key == null) return null; // If key is null, return null
 
         switch (key) {
-            case "LTWall":
-                return wall_sheet.getSprite(0, 0);
-            case "RTWall":
-                return wall_sheet.getSprite(1, 0);
-            case "RBWall":
-                return wall_sheet.getSprite(1, 1);
-            case "LBWall":
-                return wall_sheet.getSprite(0, 1);
-            case "HozWall":
-                return walls[0];
-            case "VerWall":
-                return walls[1];
             case "player":
-                return sheet1.getSprite(1, 0);
+                return sheet1.getSprite(3, 0);
+            case "LTWall":
+            return wall_sheet.getSprite(0, 0);
+            case "RTWall":
+            return wall_sheet.getSprite(1, 0);
+            case "RBWall":
+            return wall_sheet.getSprite(1, 1);
+            case "LBWall":
+            return wall_sheet.getSprite(0, 1);
+            case "HozWall":
+            return walls[0];
+            case "VerWall":
+            return walls[1];
         }
 
         return null; // If key is unknown, return null
