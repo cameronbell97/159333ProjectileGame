@@ -41,8 +41,16 @@ public abstract class Entity {
     public abstract void update();
     public abstract void draw(Graphics g);
 
-    public void move() {
+    protected void move() {
         xpos += xmove;
         ypos += ymove;
+    }
+
+    // Method to rotate the image
+    protected void rotate() {
+        // TODO // Rotate Sprite Without Cutoffs
+        aTrans = AffineTransform.getRotateInstance(-direction+(Math.PI/2), width/2, height/2);
+        aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
+
     }
 }

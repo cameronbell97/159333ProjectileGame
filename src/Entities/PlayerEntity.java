@@ -90,11 +90,4 @@ public class PlayerEntity extends VulnerableEntity {
         g2d.dispose();
     }
 
-    // Method to rotate the image
-    private void rotate() {
-        // TODO // Rotate Sprite Without Cutoffs
-        aTrans = AffineTransform.getRotateInstance(-direction+(Math.PI/2), width/2, height/2);
-        aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
-
-    }
 }
