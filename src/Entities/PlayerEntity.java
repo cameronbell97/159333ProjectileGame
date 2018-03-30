@@ -45,7 +45,7 @@ public class PlayerEntity extends VulnerableEntity {
         aTrans = AffineTransform.getRotateInstance(0, width/2, height/2);
         aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
         reverseThrust = true;
-        decelerate = (float)0.15;
+        decelerate = (float)0.06;
     }
 
     @Override
@@ -56,10 +56,10 @@ public class PlayerEntity extends VulnerableEntity {
 
     private void getInput() {
         // Deceleration mechanics
-        if(xmove > 0) xmove = Math.max(0, xmove - decelerate);
-        if(xmove < 0) xmove = Math.min(0, xmove + decelerate);
-        if(ymove > 0) ymove = Math.max(0, ymove - decelerate);
-        if(ymove < 0) ymove = Math.min(0, ymove + decelerate);
+        if(xmove > 0) xmove = Math.max(0, xmove - xmove*((float)0.01 + decelerate));
+        if(xmove < 0) xmove = Math.min(0, xmove - xmove*((float)0.01 + decelerate));
+        if(ymove > 0) ymove = Math.max(0, ymove - ymove*((float)0.01 + decelerate));
+        if(ymove < 0) ymove = Math.min(0, ymove - ymove*((float)0.01 + decelerate));
 
         speedMultiplier = 1;
 
