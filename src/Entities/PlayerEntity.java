@@ -1,5 +1,5 @@
 package Entities;
-import Game.Game;
+import Game.Handler;
 
 import Assets.AssetManager;
 
@@ -17,7 +17,6 @@ public class PlayerEntity extends VulnerableEntity {
     public static final int DEF_PLAYER_HEIGHT = 64;
     public static final double DEF_ROT_SPEED = 0.015*Math.PI;
     AssetManager assMan = AssetManager.get();
-    Game game;
     protected int speedMultiplier;
     protected double rotationSpeed;
 
@@ -34,18 +33,17 @@ public class PlayerEntity extends VulnerableEntity {
     //protected int hp;
 
 // CONSTRUCTORS //
-    public PlayerEntity(Game gm, float x, float y) {
-        super(x, y, DEF_PLAYER_WIDTH, DEF_PLAYER_HEIGHT);
-        initialise(gm);
+    public PlayerEntity(Handler handler, float x, float y) {
+        super(handler, x, y, DEF_PLAYER_WIDTH, DEF_PLAYER_HEIGHT);
+        initialise();
     }
-    public PlayerEntity(Game gm, float x, float y, int w, int h) {
-        super(x, y, w, h);
-        initialise(gm);
+    public PlayerEntity(Handler handler, float x, float y, int w, int h) {
+        super(handler, x, y, w, h);
+        initialise();
     }
 
 // METHODS //
-    public void initialise(Game gm) {
-        game = gm;
+    public void initialise() {
         speedMultiplier = 1;
         setSpeed(4);
         rotationSpeed = DEF_ROT_SPEED;
@@ -63,17 +61,17 @@ public class PlayerEntity extends VulnerableEntity {
         ymove = 0;
         speedMultiplier = 1;
 
-        if(game.getKeyManager().ctrl) {
+        if(handler.getKeyManager().ctrl) {
             speedMultiplier = 2;
         }
-        if(game.getKeyManager().forward) {
+        if(handler.getKeyManager().forward) {
             ymove = (float)(moveSpeed * -Math.sin(direction)* speedMultiplier);
             xmove = (float)(moveSpeed * Math.cos(direction)* speedMultiplier);
         }
-        if(game.getKeyManager().left) {
+        if(handler.getKeyManager().left) {
             direction += rotationSpeed;
         }
-        if(game.getKeyManager().right) {
+        if(handler.getKeyManager().right) {
             direction -= rotationSpeed;
         }
     }

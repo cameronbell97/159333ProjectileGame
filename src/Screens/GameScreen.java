@@ -4,7 +4,7 @@ import Assets.AssetManager;
 import Entities.EntityManager;
 import Entities.PlayerEntity;
 import Entities.Wall;
-import Game.Game;
+import Game.Handler;
 import Game.Launcher;
 
 import java.awt.*;
@@ -23,15 +23,15 @@ public class GameScreen extends Screen {
     private EntityManager entityManager;
 
     // CONSTRUCTORS //
-    public GameScreen(Game game) throws IOException {
+    public GameScreen(Handler handler) throws IOException {
         // Super Call
-        super(game);
+        super(handler);
 
         // Declarations
         entityManager = new EntityManager();
         assMan = AssetManager.get();
         player = new PlayerEntity(
-                game,
+                handler,
                 Launcher.DEF_GAME_WIDTH/2-player.DEF_PLAYER_WIDTH/2,
                 Launcher.DEF_GAME_HEIGHT/2-player.DEF_PLAYER_HEIGHT/2)
         ;
@@ -101,7 +101,6 @@ public class GameScreen extends Screen {
             for(int i = 0; i < 4; i++) {
                 if(walls[1][i] != null) walls[1][i].draw(g);
             }
-            // TODO draw top/bot/left/right walls
         }
 
         // Draw Player

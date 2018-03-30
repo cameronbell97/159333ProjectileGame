@@ -8,8 +8,8 @@ package Game;
 
 public class Launcher {
 // VARIABLES //
-    public static final int DEF_GAME_HEIGHT = 720;
-    public static final int DEF_GAME_WIDTH = 1280;
+    public static final int DEF_GAME_HEIGHT = 800;
+    public static final int DEF_GAME_WIDTH = 800;
 
 // CONSTRUCTORS //
     public static void main(String[] args) {
