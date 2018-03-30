@@ -4,6 +4,9 @@ import Game.Handler;
 import Assets.AssetManager;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 
 /**
  * Cameron Bell - 27/03/2018
@@ -19,18 +22,9 @@ public class PlayerEntity extends VulnerableEntity {
     AssetManager assMan = AssetManager.get();
     protected int speedMultiplier;
     protected double rotationSpeed;
-
-    // Inherits From // Entity
-    // public static final float DEF_SPEED = 1;
-    // protected float xpos, ypos;
-    // protected float xmove, ymove;
-    // protected int width, height;
-    // protected double direction;
-    // protected double moveSpeed;
-
-    // Inherits From // VulnerableEntity
-    //public static final int DEF_HP = 1;
-    //protected int hp;
+    public BufferedImage origin;
+    AffineTransform tx;
+    AffineTransformOp op;
 
 // CONSTRUCTORS //
     public PlayerEntity(Handler handler, float x, float y) {
@@ -47,6 +41,11 @@ public class PlayerEntity extends VulnerableEntity {
         speedMultiplier = 1;
         setSpeed(4);
         rotationSpeed = DEF_ROT_SPEED;
+//        img = assMan.getSprite("player");
+        img = assMan.getSprite(1, 2, 0);
+        origin = assMan.getSprite("player");
+        tx = AffineTransform.getRotateInstance(0, width/2, height/2);
+        op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
     }
 
     @Override
@@ -69,21 +68,38 @@ public class PlayerEntity extends VulnerableEntity {
             xmove = (float)(moveSpeed * Math.cos(direction)* speedMultiplier);
         }
         if(handler.getKeyManager().left) {
-            direction += rotationSpeed;
+            direction += rotationSpeed * speedMultiplier;
+            rotate();
         }
         if(handler.getKeyManager().right) {
-            direction -= rotationSpeed;
+            direction -= rotationSpeed * speedMultiplier;
+            rotate();
         }
     }
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage( // draw image at position (xpos,ypos)
-                assMan.getSprite("player"), // with the 'player' sprite
-                (int)xpos,
-                (int)ypos,
-                width, // of the object's set width
-                height, // and of the object's set height
-                null);
+        // Old Draw Code
+//        g.drawImage( // draw image at position (xpos,ypos)
+//                img, // with the 'player' sprite
+//                (int)xpos,
+//                (int)ypos,
+//                width, // of the object's set width
+//                height, // and of the object's set height
+//                null);
+//        g.drawImage(op.filter(assMan.getSprite("player"), null), (int)xpos, (int)ypos, null);
+
+        // New Draw Code
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(op.filter(img, null), (int)xpos, (int)ypos, null);
+        g2d.dispose();
+    }
+
+    // Method to rotate the image
+    private void rotate() {
+        // TODO // Rotate Sprite Without Cutoffs
+        tx = AffineTransform.getRotateInstance(-direction+(Math.PI/2), width/2, height/2);
+        op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+
     }
 }

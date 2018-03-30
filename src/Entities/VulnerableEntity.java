@@ -13,14 +13,6 @@ public abstract class VulnerableEntity extends Entity{
     public static final int DEF_HP = 1;
     protected int hp;
 
-    // Inherits From // Entity
-    // public static final float DEF_SPEED = 1;
-    // protected float xpos, ypos;
-    // protected float xmove, ymove;
-    // protected int width, height;
-    // protected double direction;
-    // protected double moveSpeed;
-
 // CONSTRUCTORS //
     public VulnerableEntity(Handler handler, float x, float y, int w, int h) {
         super(handler, x, y, w, h);

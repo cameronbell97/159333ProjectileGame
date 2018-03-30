@@ -1,6 +1,9 @@
 package Entities;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+
 import Game.Handler;
 
 /**
@@ -16,6 +19,7 @@ public abstract class Entity {
     protected int width, height;
     protected double direction;
     protected double moveSpeed;
+    protected BufferedImage img;
     Handler handler;
 
 // CONSTRUCTORS //
