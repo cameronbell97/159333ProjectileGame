@@ -70,7 +70,7 @@ public class AssetManager {
 
         switch (key) {
             case "player":
-                return sheet1.getSprite(3, 0);
+                return sheet1.getSprite(0, 0);
             case "LTWall":
             return wall_sheet.getSprite(0, 0);
             case "RTWall":

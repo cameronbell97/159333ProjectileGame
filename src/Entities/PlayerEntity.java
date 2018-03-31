@@ -63,7 +63,7 @@ public class PlayerEntity extends VulnerableEntity {
 
         speedMultiplier = 1;
 
-        if(handler.getKeyManager().ctrl) {
+        if(handler.getKeyManager().ctrl || handler.getKeyManager().shift) {
             speedMultiplier = 2;
         }
         if(handler.getKeyManager().forward) {
