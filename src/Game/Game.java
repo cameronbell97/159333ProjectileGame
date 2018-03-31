@@ -21,6 +21,7 @@ public class Game implements Runnable{
 
     private String gameTitle;
     private int gameHeight;
+
     private int gameWidth;
     private boolean isRunning;
 
@@ -32,6 +33,9 @@ public class Game implements Runnable{
     private Graphics g;
 
     private KeyManager km;
+    private Save save;
+
+    private Handler handler;
 
     // Screens
     private Screen mainMenuScreen;
@@ -48,15 +52,21 @@ public class Game implements Runnable{
 // METHODS //
     // Method to initialise game window
     public void initialise() throws IOException {
+        // Initialise game function utilities
         display = new DisplayWindow(gameTitle, gameWidth, gameHeight);
         km = new KeyManager();
         display.getFrame().addKeyListener(km);
         displayCanvas = display.getCanvas();
+        handler = new Handler(this);
 
         // Initialise screens
-        gameScreen = new GameScreen(this);
-        mainMenuScreen = new MainMenuScreen(this);
+        gameScreen = new GameScreen(handler);
+        mainMenuScreen = new MainMenuScreen(handler);
         ScreenManager.setScreen(gameScreen);
+
+        // Initialise save data
+        save = new Save();
+        if(!save.load()) save.create(); // If load fails, create a blank save
     }
 
     // Method to update the game state
@@ -155,7 +165,16 @@ public class Game implements Runnable{
         }
     }
 
+// GETTERS & SETTERS //
     public KeyManager getKeyManager() {
         return km;
+    }
+
+    public int getGameHeight() {
+        return gameHeight;
+    }
+
+    public int getGameWidth() {
+        return gameWidth;
     }
 }

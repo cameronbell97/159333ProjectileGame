@@ -1,5 +1,7 @@
 package Entities;
 
+import Game.Handler;
+
 /**
  * Cameron Bell - 27/03/2018
  * VulnerableEntity Entity Class
@@ -11,17 +13,9 @@ public abstract class VulnerableEntity extends Entity{
     public static final int DEF_HP = 1;
     protected int hp;
 
-    // Inherits From // Entity
-    // public static final float DEF_SPEED = 1;
-    // protected float xpos, ypos;
-    // protected float xmove, ymove;
-    // protected int width, height;
-    // protected double direction;
-    // protected double moveSpeed;
-
 // CONSTRUCTORS //
-    public VulnerableEntity(float x, float y, int w, int h) {
-        super(x, y, w, h);
+    public VulnerableEntity(Handler handler, float x, float y, int w, int h) {
+        super(handler, x, y, w, h);
         hp = DEF_HP;
     }
 

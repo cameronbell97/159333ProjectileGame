@@ -16,6 +16,9 @@ public class KeyManager implements KeyListener{
             left,
             right,
             forward,
+            back,
+            shift,
+            spacebar,
             ctrl;
 
 // CONSTRUCTORS //
@@ -30,7 +33,10 @@ public class KeyManager implements KeyListener{
         left = keys[KeyEvent.VK_A];
         right = keys[KeyEvent.VK_D];
         forward = keys[KeyEvent.VK_W];
+        back = keys[KeyEvent.VK_S];
         ctrl = keys[KeyEvent.VK_CONTROL];
+        shift = keys[KeyEvent.VK_SHIFT];
+        spacebar = keys[KeyEvent.VK_SPACE];
     }
 
     @Override
