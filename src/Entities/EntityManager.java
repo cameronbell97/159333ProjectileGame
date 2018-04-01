@@ -1,5 +1,7 @@
 package Entities;
 
+import Game.iObserver;
+
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.List;
  * A class object that will contain all the entities that need to be regularly updated/drawn
  */
 
-public class EntityManager {
+public class EntityManager implements iObserver {
 // VARIABLES //
     List<Entity> ents; // A list of Entities
 
@@ -24,6 +26,11 @@ public class EntityManager {
     // Method that subscribes an entity to the entity manager
     public void subscribe(Entity e) {
         ents.add(e);
+    }
+
+    @Override
+    public void unsubscribe(Entity e) {
+        ents.remove(e);
     }
 
     // Method that calls update() on every entity
