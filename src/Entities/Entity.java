@@ -6,6 +6,7 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 
+import Entities.Collision.CollisionArea;
 import Game.Handler;
 
 /**
@@ -22,6 +23,8 @@ public abstract class Entity {
     protected double direction;
     protected double moveSpeed;
     protected BufferedImage img;
+    protected CollisionArea collision;
+
     AffineTransform aTrans;
     AffineTransformOp aTransOp;
     Handler handler;
@@ -52,5 +55,17 @@ public abstract class Entity {
         aTrans = AffineTransform.getRotateInstance(-direction+(Math.PI/2), width/2, height/2);
         aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
 
+    }
+
+    public CollisionArea getCollision() {
+        return collision;
+    }
+
+    public float getXpos() {
+        return xpos;
+    }
+
+    public float getYpos() {
+        return ypos;
     }
 }

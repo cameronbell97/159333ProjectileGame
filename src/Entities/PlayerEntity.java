@@ -1,4 +1,5 @@
 package Entities;
+import Entities.Collision.CollisionBox;
 import Game.Handler;
 
 import Assets.AssetManager;
@@ -46,12 +47,14 @@ public class PlayerEntity extends VulnerableEntity {
         aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
         reverseThrust = true;
         decelerate = (float)0.06;
+        collision = new CollisionBox(xpos+18, ypos+18, 28, 28);
     }
 
     @Override
     public void update() {
         getInput();
         move();
+        collision.update(this);
     }
 
     private void getInput() {
