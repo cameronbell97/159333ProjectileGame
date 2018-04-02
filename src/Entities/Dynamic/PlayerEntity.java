@@ -1,5 +1,6 @@
 package Entities.Dynamic;
 import Entities.Collision.CollisionBox;
+import Entities.iVulnerableEntity;
 import Game.Handler;
 
 import Assets.AssetManager;
@@ -14,7 +15,7 @@ import java.awt.image.AffineTransformOp;
  * The controllable player
  */
 
-public class PlayerEntity extends VulnerableEntity {
+public class PlayerEntity extends DynamicEntity implements iVulnerableEntity {
 // VARIABLES //
     public static final int DEF_PLAYER_WIDTH = 64;
     public static final int DEF_PLAYER_HEIGHT = 64;
@@ -24,6 +25,7 @@ public class PlayerEntity extends VulnerableEntity {
     private double rotationSpeed;
     private boolean reverseThrust; // If true, player can reverse
     private float decelerate;
+    private int health;
 
 
 // CONSTRUCTORS //
@@ -48,6 +50,7 @@ public class PlayerEntity extends VulnerableEntity {
         reverseThrust = true;
         decelerate = (float)0.06;
         collision = new CollisionBox(xpos+18, ypos+18, 28, 28);
+        health = 10;
     }
 
     public void move() {
@@ -160,8 +163,28 @@ public class PlayerEntity extends VulnerableEntity {
         g2d.dispose();
     }
 
+    @Override
+    public void addHP(int hp) {
+        health += hp;
+    }
+
+    @Override
+    public void die() {
+
+    }
+
 // GETTERS & SETTERS //
     public void setReverseThrust(boolean reverseThrust) {
         this.reverseThrust = reverseThrust;
+    }
+
+    @Override
+    public int getHP() {
+        return health;
+    }
+
+    @Override
+    public void setHP(int hp) {
+        health = hp;
     }
 }
