@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="947d8217-6e43-4e5a-ba32-8c43edca0f02" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Entities/iVulnerableEntity.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Entities/Dynamic/VulnerableEntity.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entities/Dynamic/PlayerEntity.java" afterPath="$PROJECT_DIR$/src/Entities/Dynamic/PlayerEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entities/Entity.java" afterPath="$PROJECT_DIR$/src/Entities/Entity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entities/Static/Wall.java" afterPath="$PROJECT_DIR$/src/Entities/Static/Wall.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,8 +21,8 @@
       <file leaf-file-name="Entity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entities/Entity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="43" column="5" lean-forward="true" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+            <state relative-caret-position="501">
+              <caret line="52" column="5" lean-forward="true" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -55,7 +53,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayerEntity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PlayerEntity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entities/Dynamic/PlayerEntity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="629">
@@ -64,6 +62,19 @@
                 <element signature="imports" expanded="true" />
                 <element signature="e#5573#5574#0" expanded="true" />
                 <element signature="e#5601#5602#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Wall.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Entities/Static/Wall.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="28" column="8" lean-forward="false" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
+              <folding>
+                <element signature="e#671#672#0" expanded="true" />
+                <element signature="e#749#750#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -132,18 +143,18 @@
         <option value="$PROJECT_DIR$/src/Entities/PlayerEntity.java" />
         <option value="$PROJECT_DIR$/src/Entities/iCanAnimate.java" />
         <option value="$PROJECT_DIR$/src/Entities/DynamicEntity.java" />
-        <option value="$PROJECT_DIR$/src/Entities/Static/Wall.java" />
         <option value="$PROJECT_DIR$/src/Game/Game.java" />
         <option value="$PROJECT_DIR$/src/Game/Handler.java" />
         <option value="$PROJECT_DIR$/src/Screens/Screen.java" />
         <option value="$PROJECT_DIR$/src/Screens/GameScreen.java" />
         <option value="$PROJECT_DIR$/src/Entities/EntityManager.java" />
-        <option value="$PROJECT_DIR$/src/Entities/Entity.java" />
         <option value="$PROJECT_DIR$/src/Entities/Dynamic/DynamicEntity.java" />
         <option value="$PROJECT_DIR$/src/Entities/Dynamic/VulnerableEntity.java" />
         <option value="$PROJECT_DIR$/src/Entities/Dynamic/iVulnerableEntity.java" />
         <option value="$PROJECT_DIR$/src/Entities/Dynamic/PlayerEntity.java" />
         <option value="$PROJECT_DIR$/src/Entities/iVulnerableEntity.java" />
+        <option value="$PROJECT_DIR$/src/Entities/Entity.java" />
+        <option value="$PROJECT_DIR$/src/Entities/Static/Wall.java" />
       </list>
     </option>
   </component>
@@ -739,12 +750,12 @@
       <workItem from="1522436748830" duration="3714000" />
       <workItem from="1522476838648" duration="794000" />
       <workItem from="1522538587546" duration="651000" />
-      <workItem from="1522616617549" duration="9067000" />
+      <workItem from="1522616617549" duration="9409000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79215000" />
+    <option name="totallyTimeSpent" value="79557000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1099,14 +1110,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entities/Static/Wall.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Screens/ScreenManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1170,16 +1173,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entities/Entity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="43" column="5" lean-forward="true" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entities/Dynamic/DynamicEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -1223,6 +1216,27 @@
             <element signature="imports" expanded="true" />
             <element signature="e#5573#5574#0" expanded="true" />
             <element signature="e#5601#5602#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entities/Entity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="501">
+          <caret line="52" column="5" lean-forward="true" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entities/Static/Wall.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="28" column="8" lean-forward="false" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
+          <folding>
+            <element signature="e#671#672#0" expanded="true" />
+            <element signature="e#749#750#0" expanded="true" />
           </folding>
         </state>
       </provider>
