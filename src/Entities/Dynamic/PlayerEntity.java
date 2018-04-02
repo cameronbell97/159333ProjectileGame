@@ -1,6 +1,7 @@
 package Entities.Dynamic;
 import Entities.Collision.CollisionBox;
-import Entities.iVulnerableEntity;
+import Entities.EntityManager;
+import Entities.iVulnerable;
 import Game.Handler;
 
 import Assets.AssetManager;
@@ -15,7 +16,7 @@ import java.awt.image.AffineTransformOp;
  * The controllable player
  */
 
-public class PlayerEntity extends DynamicEntity implements iVulnerableEntity {
+public class PlayerEntity extends DynamicEntity implements iVulnerable {
 // VARIABLES //
     public static final int DEF_PLAYER_WIDTH = 64;
     public static final int DEF_PLAYER_HEIGHT = 64;
@@ -45,8 +46,6 @@ public class PlayerEntity extends DynamicEntity implements iVulnerableEntity {
         rotationSpeed = DEF_ROT_SPEED;
         img = assMan.getSprite("player");
 //        img = assMan.getSprite(1, 2, 0);
-        aTrans = AffineTransform.getRotateInstance(0, width/2, height/2);
-        aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
         reverseThrust = true;
         decelerate = (float)0.06;
         collision = new CollisionBox(xpos+18, ypos+18, 28, 28);
@@ -143,24 +142,9 @@ public class PlayerEntity extends DynamicEntity implements iVulnerableEntity {
             direction -= rotationSpeed * speedMultiplier;
             rotate();
         }
-    }
-
-    @Override
-    public void draw(Graphics g) {
-        // Old Draw Code
-//        g.drawImage( // draw image at position (xpos,ypos)
-//                img, // with the 'player' sprite
-//                (int)xpos,
-//                (int)ypos,
-//                width, // of the object's set width
-//                height, // and of the object's set height
-//                null);
-//        g.drawImage(aTransOp.filter(assMan.getSprite("player"), null), (int)xpos, (int)ypos, null);
-
-        // New Draw Code
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(aTransOp.filter(img, null), (int)xpos, (int)ypos, null);
-        g2d.dispose();
+        if(handler.getKeyManager().spacebar) {
+            EntityManager.get().subscribe(new BulletPlayer(handler,this));
+        }
     }
 
     @Override

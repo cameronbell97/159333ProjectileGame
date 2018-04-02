@@ -28,7 +28,7 @@ public class GameScreen extends Screen {
         super(handler);
 
         // Declarations
-        entityManager = new EntityManager();
+        entityManager = EntityManager.get();
         assMan = AssetManager.get();
         player = new PlayerEntity(
                 handler,

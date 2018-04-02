@@ -1,5 +1,6 @@
 package Entities.Dynamic;
 
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import Entities.Entity;
@@ -25,6 +26,8 @@ public abstract class DynamicEntity extends Entity{
         super(handler, x, y, w, h);
         direction = 0.5*Math.PI; // direction = 90 degrees but in radians
         moveSpeed = DEF_SPEED;
+        aTrans = AffineTransform.getRotateInstance(0, width/2, height/2);
+        aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
     }
 
 // METHODS //
@@ -47,7 +50,16 @@ public abstract class DynamicEntity extends Entity{
 
     }
 
+    @Override
+    public void draw(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(aTransOp.filter(img, null), (int)xpos, (int)ypos, null);
+    }
+
 // GETTERS & SETTERS //
     public double getMoveSpeed() { return moveSpeed; }
     public void setSpeed(double ms) { moveSpeed = ms; }
+    public double getDirection() {
+        return direction;
+    }
 }

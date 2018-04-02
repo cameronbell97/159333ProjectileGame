@@ -72,10 +72,10 @@ public class Game implements Runnable{
 
     // Method to update the game state
     public void update() {
+        km.update();
         if (ScreenManager.getScreen() != null) {
             ScreenManager.getScreen().update();
         }
-        km.update();
     }
 
     // Method to render the graphics on the screen
