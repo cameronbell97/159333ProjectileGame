@@ -33,11 +33,6 @@ public abstract class Entity {
     public abstract void update();
     public abstract void draw(Graphics g);
 
-    // Get the position of the centre of the entity
-    public Point2D getCentre() {
-        return new Point2D(xpos + width / 2, ypos = height / 2);
-    }
-
 // GETTERS & SETTERS //
     public CollisionBox getCollision() {
         return collision;

@@ -1,3 +1,6 @@
+package Game;
+
+import Entities.Collision.CollisionBox;
 import Entities.Dynamic.DynamicEntity;
 import Entities.Entity;
 import javafx.geometry.Point2D;
@@ -8,16 +11,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SAT {
-    public static boolean isColliding(DynamicEntity e1, DynamicEntity e2) {
+    public static boolean isColliding(CollisionBox c1, CollisionBox c2) {
         // TODO // check
 
         List<Point2D> axes = new ArrayList<>();
-        axes.addAll(getAxes(e1.getDirection()));
-        axes.addAll(getAxes(e2.getDirection()));
+        axes.addAll(getAxes(c1.getDirection()));
+        axes.addAll(getAxes(c2.getDirection()));
         axes = axes.stream().map(Point2D::normalize).collect(Collectors.toList());
 
-        List<Point2D> corns1 = getCorners(e1);
-        List<Point2D> corns2 = getCorners(e2);
+        List<Point2D> corns1 = getCorners(c1);
+        List<Point2D> corns2 = getCorners(c2);
 
         // Check for overlap
         for (Point2D ax : axes) {
@@ -40,7 +43,7 @@ public class SAT {
         );
     }
 
-    private static List<Point2D> getCornerVs(Entity e) {
+    private static List<Point2D> getCornerVs(CollisionBox e) {
         return Arrays.asList(
                 new Point2D(e.getXpos(), e.getYpos()),
                 new Point2D(e.getXpos() + e.getWidth(), e.getYpos() + e.getHeight()),
@@ -49,7 +52,7 @@ public class SAT {
         ).stream().map(p -> p.subtract(e.getCentre())).collect(Collectors.toList());
     }
 
-    private static List<Point2D> getCorners(DynamicEntity e) {
+    public static List<Point2D> getCorners(CollisionBox e) {
         return getCornerVs(e).stream().map(p -> new Point2D(
                 p.getX() * Math.cos(e.getDirection()) - p.getY() * Math.sin(e.getDirection()),
                 p.getX() * Math.sin(e.getDirection()) + p.getY() * Math.cos(e.getDirection())

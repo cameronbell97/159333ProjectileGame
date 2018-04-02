@@ -45,7 +45,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
 //        img = assMan.getSprite(1, 2, 0);
         reverseThrust = true;
         decelerate = (float)0.06;
-        collision = new CollisionBox(xpos+18, ypos+18, 28, 28);
+        collision = new CollisionBox(xpos+22, ypos+17, 20, 35, 22, 17, this);
         health = 10;
         shoot_release = true;
     }
@@ -60,10 +60,10 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
         // If moving right
         if(xmove > 0) {
             // If you would NOT move out of the screen
-            if(collision.getXpos() + 28/*CollisionBox Width*/ + xmove <= handler.getWidth())
+            if(collision.getXpos() + collision.getWidth()/*CollisionBox Width*/ + xmove <= handler.getWidth())
                 xpos += xmove;
             else {
-                xpos = handler.getWidth() - width + (collision.getXpos() - xpos);
+                xpos = handler.getWidth() - collision.getWidth() - collision.getXoff();
                 xmove = 0;
             }
         }
@@ -85,10 +85,11 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
         // If moving down
         if(ymove > 0) {
             // If you would NOT move out of the screen
-            if(collision.getYpos() + 28/*CollisionBox Width*/ + ymove <= handler.getHeight())
+            if(collision.getYpos() + collision.getHeight()/*CollisionBox Width*/ + ymove <= handler.getHeight())
                 ypos += ymove;
             else {
-                ypos = handler.getHeight() - height + (collision.getYpos() - ypos);
+//                ypos = handler.getHeight() - height + (collision.getYpos() - ypos);
+                ypos = handler.getHeight() - collision.getHeight() - collision.getYoff();
                 ymove = 0;
             }
         }
@@ -109,7 +110,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
     public void update() {
         getInput();
         move();
-        collision.update(this);
+        collision.update();
     }
 
     private void getInput() {

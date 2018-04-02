@@ -104,7 +104,7 @@ public class GameScreen extends Screen {
 //        }
 
         // draw collision box for player // TODO // remove
-//        player.getCollision().draw(g);
+        player.getCollision().draw(g);
 
         // Draw All Entities
         entityManager.draw(g);
