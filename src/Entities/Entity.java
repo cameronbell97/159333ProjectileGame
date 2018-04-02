@@ -1,6 +1,6 @@
 package Entities;
 
-import Entities.Collision.CollisionArea;
+import Entities.Collision.CollisionBox;
 import Game.Handler;
 import javafx.geometry.Point2D;
 
@@ -17,7 +17,7 @@ public abstract class Entity {
     protected float xpos, ypos;
     protected int width, height;
     protected BufferedImage img;
-    protected CollisionArea collision;
+    protected CollisionBox collision;
     protected Handler handler;
 
 // CONSTRUCTORS //
@@ -39,7 +39,7 @@ public abstract class Entity {
     }
 
 // GETTERS & SETTERS //
-    public CollisionArea getCollision() {
+    public CollisionBox getCollision() {
         return collision;
     }
     public float getXpos() {

@@ -58,6 +58,9 @@ public class EntityManager implements iObserver {
             ents.remove(e);
         }
         unsub_queue.clear(); // Clear the sub_queue
+
+        // Check for collisions
+        checkCollisions();
     }
 
     // Method that calls draw() on every entity
@@ -67,4 +70,7 @@ public class EntityManager implements iObserver {
         }
     }
 
+    public void checkCollisions() {
+
+    }
 }

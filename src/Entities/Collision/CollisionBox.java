@@ -4,30 +4,25 @@ import Entities.Dynamic.DynamicEntity;
 
 import java.awt.*;
 
-public class CollisionBox extends CollisionArea{
+public class CollisionBox{
 // VARIABLES //
+    private float xpos, ypos;
     private int width, height;
 
 // CONSTRUCTORS //
-    public CollisionBox() {
-        super();
-        width = 0;
-        height = 0;
-    }
     public CollisionBox(float x, float y, int w, int h) {
-        super(x, y);
+        xpos = 0;
+        ypos = 0;
         width = w;
         height = h;
     }
 
 // METHODS //
-    @Override
     public void draw(Graphics g) {
         g.setColor(Color.ORANGE);
         g.fillRect((int)xpos, (int)ypos, width, height);
     }
 
-    @Override
     public void update(DynamicEntity e) {
         setXpos(e.getXpos()+18);
         setYpos(e.getYpos()+18);
@@ -48,5 +43,21 @@ public class CollisionBox extends CollisionArea{
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public float getXpos() {
+        return xpos;
+    }
+
+    public void setXpos(float xpos) {
+        this.xpos = xpos;
+    }
+
+    public float getYpos() {
+        return ypos;
+    }
+
+    public void setYpos(float ypos) {
+        this.ypos = ypos;
     }
 }

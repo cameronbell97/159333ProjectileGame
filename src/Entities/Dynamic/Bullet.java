@@ -1,5 +1,6 @@
 package Entities.Dynamic;
 
+import Entities.Entity;
 import Entities.EntityManager;
 import Game.Handler;
 import Game.Launcher;
@@ -7,6 +8,9 @@ import Game.Launcher;
 import java.awt.*;
 
 public abstract class Bullet extends DynamicEntity{
+// VARIABLES //
+    protected Entity parent;
+
 // CONSTRUCTORS //
     public Bullet(Handler handler, int w, int h, DynamicEntity parent) {
         super(
@@ -15,6 +19,7 @@ public abstract class Bullet extends DynamicEntity{
                 parent.getYpos() + (parent.getHeight() / 2) - (h / 2),
                 w, h)
         ;
+        this.parent = parent;
 
         direction = parent.getDirection();
 
