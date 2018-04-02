@@ -27,6 +27,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
     private boolean reverseThrust; // If true, player can reverse
     private float decelerate;
     private int health;
+    private boolean shoot_release;
 
 
 // CONSTRUCTORS //
@@ -50,6 +51,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
         decelerate = (float)0.06;
         collision = new CollisionBox(xpos+18, ypos+18, 28, 28);
         health = 10;
+        shoot_release = true;
     }
 
     public void move() {
@@ -142,9 +144,11 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
             direction -= rotationSpeed * speedMultiplier;
             rotate();
         }
-        if(handler.getKeyManager().spacebar) {
+        if(handler.getKeyManager().spacebar && shoot_release) {
             EntityManager.get().subscribe(new BulletPlayer(handler,this));
+            shoot_release = false;
         }
+        if(!handler.getKeyManager().spacebar) shoot_release = true;
     }
 
     @Override
