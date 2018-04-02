@@ -2,6 +2,7 @@ package Entities;
 
 import Entities.Collision.CollisionArea;
 import Game.Handler;
+import javafx.geometry.Point2D;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -31,6 +32,11 @@ public abstract class Entity {
 // METHODS //
     public abstract void update();
     public abstract void draw(Graphics g);
+
+    // Get the position of the centre of the entity
+    public Point2D getCentre() {
+        return new Point2D(xpos + width / 2, ypos = height / 2);
+    }
 
 // GETTERS & SETTERS //
     public CollisionArea getCollision() {

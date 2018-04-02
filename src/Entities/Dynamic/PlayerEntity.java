@@ -6,10 +6,6 @@ import Game.Handler;
 
 import Assets.AssetManager;
 
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-
 /**
  * Cameron Bell - 27/03/2018
  * Player DynamicEntity Class
