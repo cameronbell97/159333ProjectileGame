@@ -2,8 +2,8 @@ package Screens;
 
 import Assets.AssetManager;
 import Entities.EntityManager;
-import Entities.PlayerEntity;
-import Entities.Wall;
+import Entities.Dynamic.PlayerEntity;
+import Entities.Static.Wall;
 import Game.Handler;
 import Game.Launcher;
 

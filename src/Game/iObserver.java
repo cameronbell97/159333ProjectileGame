@@ -1,6 +1,6 @@
 package Game;
 
-import Entities.DynamicEntity;
+import Entities.Dynamic.DynamicEntity;
 
 /**
  * Cameron Bell - 02/04/2018

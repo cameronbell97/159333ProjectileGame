@@ -1,59 +1,40 @@
-package Entities;
+package Entities.Dynamic;
 
-import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-
-import Entities.Collision.CollisionArea;
+import Entities.Entity;
 import Game.Handler;
-import Game.Game;
 
 /**
  * Cameron Bell - 27/03/2018
- * DynamicEntity Abstract Class
+ * Dynamic Entity Abstract Class
  */
 
-public abstract class DynamicEntity {
+public abstract class DynamicEntity extends Entity{
 // VARIABLES //
     public static final float DEF_SPEED = 1;
-    protected float xpos, ypos;
     protected float xmove, ymove;
-    protected int width, height;
     protected double direction;
     protected double moveSpeed;
-    protected BufferedImage img;
-    protected CollisionArea collision;
 
     AffineTransform aTrans;
     AffineTransformOp aTransOp;
-    Handler handler;
 
 // CONSTRUCTORS //
     public DynamicEntity(Handler handler, float x, float y, int w, int h) {
-        xpos = x;
-        ypos = y;
-        width = w;
-        height = h;
+        super(handler, x, y, w, h);
         direction = 0.5*Math.PI; // direction = 90 degrees but in radians
         moveSpeed = DEF_SPEED;
-        this.handler = handler;
     }
 
 // METHODS //
-    public abstract void update();
-    public abstract void draw(Graphics g);
-
     protected void move() {
         moveX();
         moveY();
     }
-
     protected void moveX() {
         xpos += xmove;
     }
-
     protected void moveY() {
         ypos += ymove;
     }
@@ -66,15 +47,7 @@ public abstract class DynamicEntity {
 
     }
 
-    public CollisionArea getCollision() {
-        return collision;
-    }
-
-    public float getXpos() {
-        return xpos;
-    }
-
-    public float getYpos() {
-        return ypos;
-    }
+// GETTERS & SETTERS //
+    public double getMoveSpeed() { return moveSpeed; }
+    public void setSpeed(double ms) { moveSpeed = ms; }
 }

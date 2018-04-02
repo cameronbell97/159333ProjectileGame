@@ -1,5 +1,6 @@
 package Entities;
 
+import Entities.Dynamic.DynamicEntity;
 import Game.iObserver;
 
 import java.awt.*;

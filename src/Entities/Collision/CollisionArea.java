@@ -1,6 +1,6 @@
 package Entities.Collision;
 
-import Entities.DynamicEntity;
+import Entities.Dynamic.DynamicEntity;
 
 import java.awt.*;
 

@@ -1,4 +1,4 @@
-package Entities;
+package Entities.Dynamic;
 
 import Game.Handler;
 
@@ -21,7 +21,5 @@ public abstract class VulnerableEntity extends DynamicEntity {
 
 // GETTERS & SETTERS //
     public int getHP() { return hp; }
-    public double getMoveSpeed() { return moveSpeed; }
     public void setHP(int hp) { this.hp = hp; }
-    public void setSpeed(double ms) { moveSpeed = ms; }
 }

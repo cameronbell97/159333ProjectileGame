@@ -1,4 +1,4 @@
-package Entities;
+package Entities.Dynamic;
 import Entities.Collision.CollisionBox;
 import Game.Handler;
 
