@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 
 import Entities.Collision.CollisionArea;
 import Game.Handler;
+import Game.Game;
 
 /**
  * Cameron Bell - 27/03/2018
@@ -45,7 +46,15 @@ public abstract class Entity {
     public abstract void draw(Graphics g);
 
     protected void move() {
+        moveX();
+        moveY();
+    }
+
+    protected void moveX() {
         xpos += xmove;
+    }
+
+    protected void moveY() {
         ypos += ymove;
     }
 

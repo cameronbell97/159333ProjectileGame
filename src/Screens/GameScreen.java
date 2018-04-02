@@ -92,16 +92,16 @@ public class GameScreen extends Screen {
         g.setColor(Color.black);
         g.fillRect(0, 0, Launcher.DEF_GAME_WIDTH, Launcher.DEF_GAME_HEIGHT);
 
-        // Draw Walls
-        if(walls != null) {
-            for(int i = 0; i < 4; i++) {
-                walls[0][i].draw(g);
-            }
-
-            for(int i = 0; i < 4; i++) {
-                if(walls[1][i] != null) walls[1][i].draw(g);
-            }
-        }
+//        // Draw Walls
+//        if(walls != null) {
+//            for(int i = 0; i < 4; i++) {
+//                walls[0][i].draw(g);
+//            }
+//
+//            for(int i = 0; i < 4; i++) {
+//                if(walls[1][i] != null) walls[1][i].draw(g);
+//            }
+//        }
 
         // draw collision box for player // TODO // remove
         player.getCollision().draw(g);

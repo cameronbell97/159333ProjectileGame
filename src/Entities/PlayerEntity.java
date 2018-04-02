@@ -50,6 +50,53 @@ public class PlayerEntity extends VulnerableEntity {
         collision = new CollisionBox(xpos+18, ypos+18, 28, 28);
     }
 
+    public void move() {
+        moveX();
+        moveY();
+    }
+
+    @Override
+    protected void moveX() {
+        // If moving right
+        if(xmove > 0) {
+            // If you would NOT move out of the screen
+            if(collision.getXpos() + 28/*CollisionBox Width*/ + xmove <= handler.getWidth())
+                xpos += xmove;
+            else
+                xpos = handler.getWidth() - width + (collision.getXpos()-xpos);
+        }
+        // If moving left
+        if(xmove < 0) {
+            // If you would NOT move out of the screen
+            if(collision.getXpos() + xmove >= 0)
+                xpos += xmove;
+            else
+                // else player's X position = zero - the difference between the collision's X position and the player's
+                xpos = 0 - (collision.getXpos()-xpos);
+        }
+    }
+
+    @Override
+    protected void moveY() {
+        // If moving down
+        if(ymove > 0) {
+            // If you would NOT move out of the screen
+            if(collision.getYpos() + 28/*CollisionBox Width*/ + ymove <= handler.getHeight())
+                ypos += ymove;
+            else
+                ypos = handler.getHeight() - height + (collision.getYpos()-ypos);
+        }
+        // If moving up
+        if(ymove < 0) {
+            // If you would NOT move out of the screen
+            if(collision.getYpos() + ymove >= 0)
+                ypos += ymove;
+            else
+                // else player's Y position = zero - the difference between the collision's Y position and the player's
+                ypos = 0 - (collision.getYpos()-ypos);
+        }
+    }
+
     @Override
     public void update() {
         getInput();

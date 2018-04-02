@@ -20,9 +20,10 @@ public class Game implements Runnable{
     private static final int FPS = 60;
 
     private String gameTitle;
-    private int gameHeight;
 
+    private int gameHeight;
     private int gameWidth;
+
     private boolean isRunning;
 
     private DisplayWindow display;
