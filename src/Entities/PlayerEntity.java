@@ -10,7 +10,7 @@ import java.awt.image.AffineTransformOp;
 
 /**
  * Cameron Bell - 27/03/2018
- * Player Entity Class
+ * Player DynamicEntity Class
  * The controllable player
  */
 
@@ -62,17 +62,21 @@ public class PlayerEntity extends VulnerableEntity {
             // If you would NOT move out of the screen
             if(collision.getXpos() + 28/*CollisionBox Width*/ + xmove <= handler.getWidth())
                 xpos += xmove;
-            else
-                xpos = handler.getWidth() - width + (collision.getXpos()-xpos);
+            else {
+                xpos = handler.getWidth() - width + (collision.getXpos() - xpos);
+                xmove = 0;
+            }
         }
         // If moving left
         if(xmove < 0) {
             // If you would NOT move out of the screen
             if(collision.getXpos() + xmove >= 0)
                 xpos += xmove;
-            else
+            else {
                 // else player's X position = zero - the difference between the collision's X position and the player's
-                xpos = 0 - (collision.getXpos()-xpos);
+                xpos = 0 - (collision.getXpos() - xpos);
+                xmove = 0;
+            }
         }
     }
 
@@ -83,17 +87,21 @@ public class PlayerEntity extends VulnerableEntity {
             // If you would NOT move out of the screen
             if(collision.getYpos() + 28/*CollisionBox Width*/ + ymove <= handler.getHeight())
                 ypos += ymove;
-            else
-                ypos = handler.getHeight() - height + (collision.getYpos()-ypos);
+            else {
+                ypos = handler.getHeight() - height + (collision.getYpos() - ypos);
+                ymove = 0;
+            }
         }
         // If moving up
         if(ymove < 0) {
             // If you would NOT move out of the screen
             if(collision.getYpos() + ymove >= 0)
                 ypos += ymove;
-            else
+            else {
                 // else player's Y position = zero - the difference between the collision's Y position and the player's
                 ypos = 0 - (collision.getYpos()-ypos);
+                ymove = 0;
+            }
         }
     }
 

@@ -1,6 +1,6 @@
 package Entities.Collision;
 
-import Entities.Entity;
+import Entities.DynamicEntity;
 
 import java.awt.*;
 
@@ -20,7 +20,7 @@ public abstract class CollisionArea {
 
 // METHODS //
     public abstract void draw(Graphics g);
-    public abstract void update(Entity e);
+    public abstract void update(DynamicEntity e);
 
 // GETTERS & SETTERS //
     public float getXpos() {

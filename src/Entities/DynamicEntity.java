@@ -12,10 +12,10 @@ import Game.Game;
 
 /**
  * Cameron Bell - 27/03/2018
- * Entity Abstract Class
+ * DynamicEntity Abstract Class
  */
 
-public abstract class Entity {
+public abstract class DynamicEntity {
 // VARIABLES //
     public static final float DEF_SPEED = 1;
     protected float xpos, ypos;
@@ -31,7 +31,7 @@ public abstract class Entity {
     Handler handler;
 
 // CONSTRUCTORS //
-    public Entity (Handler handler, float x, float y, int w, int h) {
+    public DynamicEntity(Handler handler, float x, float y, int w, int h) {
         xpos = x;
         ypos = y;
         width = w;

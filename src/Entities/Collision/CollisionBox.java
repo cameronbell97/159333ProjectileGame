@@ -1,6 +1,6 @@
 package Entities.Collision;
 
-import Entities.Entity;
+import Entities.DynamicEntity;
 
 import java.awt.*;
 
@@ -28,7 +28,7 @@ public class CollisionBox extends CollisionArea{
     }
 
     @Override
-    public void update(Entity e) {
+    public void update(DynamicEntity e) {
         setXpos(e.getXpos()+18);
         setYpos(e.getYpos()+18);
     }

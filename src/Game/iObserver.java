@@ -1,6 +1,6 @@
 package Game;
 
-import Entities.Entity;
+import Entities.DynamicEntity;
 
 /**
  * Cameron Bell - 02/04/2018
@@ -9,6 +9,6 @@ import Entities.Entity;
  */
 
 public interface iObserver {
-    public void subscribe(Entity e);
-    public void unsubscribe(Entity e);
+    public void subscribe(DynamicEntity e);
+    public void unsubscribe(DynamicEntity e);
 }
