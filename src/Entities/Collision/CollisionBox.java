@@ -1,44 +1,40 @@
 package Entities.Collision;
 
+import Assets.AssetManager;
 import Entities.Dynamic.DynamicEntity;
 import Entities.EntityManager;
+import Game.Handler;
 import Game.SAT;
 import javafx.geometry.Point2D;
 import java.util.List;
 import java.awt.Graphics;
 import java.awt.Color;
 
-public class CollisionBox{
+public class CollisionBox extends DynamicEntity{
 // VARIABLES //
-    private float xpos, ypos, xoff, yoff;
-    private int width, height;
+    private float xoff, yoff;
     private double direction;
     private DynamicEntity parent;
 
 // CONSTRUCTORS //
-    public CollisionBox(float x, float y, int w, int h, float xo, float yo, DynamicEntity p) {
-        xpos = x;
-        ypos = y;
-        width = w;
-        height = h;
+    public CollisionBox(Handler handler, float x, float y, int w, int h, float xo, float yo, DynamicEntity p) {
+        super(handler, x, y, w, h);
         xoff = xo;
         yoff = yo;
         direction = 0;
         parent = p;
+        setXpos(parent.getXpos()+xoff);
+        setYpos(parent.getYpos()+yoff);
+        img = AssetManager.get().getSprite("Coll");
         EntityManager.get().subscribe(this);
     }
 
 // METHODS //
-    public void draw(Graphics g) {
-        g.setColor(Color.ORANGE);
-        g.fillRect((int)xpos, (int)ypos, width, height);
-    }
 
     public void update() {
         setXpos(parent.getXpos()+xoff);
         setYpos(parent.getYpos()+yoff);
-//        direction = parent.getDirection();
-        // TODO // Get min & max values
+        // TODO // Get min & max values to use for checking out of bounds / screen
 //        corners = SAT.getCorners(this);
 //        double min1 = corns1.stream().mapToDouble(p -> p.dotProduct(ax)).min().getAsDouble();
 //        double min2 = corns1.stream().mapToDouble(p -> p.dotProduct(ax)).min().getAsDouble();
@@ -54,21 +50,6 @@ public class CollisionBox{
     }
 
 // GETTERS & SETTERS //
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
 
     public float getXpos() {
         return xpos;

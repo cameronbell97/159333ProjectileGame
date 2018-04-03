@@ -107,4 +107,10 @@ public class EntityManager implements iObserver {
             }
         }
     }
+
+    public void drawCollisionBoxes(Graphics g) {
+        for(CollisionBox c : cols) {
+            c.draw(g);
+        }
+    }
 }

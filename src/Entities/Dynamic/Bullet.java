@@ -41,7 +41,7 @@ public abstract class Bullet extends DynamicEntity{
     @Override
     public void update() {
         move();
-        if(xpos <= 32 || ypos <= 32 || xpos >= Launcher.DEF_GAME_WIDTH + 32 || ypos >= Launcher.DEF_GAME_HEIGHT + 32) {
+        if(xpos <= -32 || ypos <= -32 || xpos >= Launcher.DEF_GAME_WIDTH + 32 || ypos >= Launcher.DEF_GAME_HEIGHT + 32) {
             destroy();
         }
     }

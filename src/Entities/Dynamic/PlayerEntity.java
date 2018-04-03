@@ -45,7 +45,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
 //        img = assMan.getSprite(1, 2, 0);
         reverseThrust = true;
         decelerate = (float)0.06;
-        collision = new CollisionBox(xpos+22, ypos+17, 20, 35, 22, 17, this);
+        collision = new CollisionBox(handler, xpos+22, ypos+17, 20, 35, 22, 17, this);
         health = 10;
         shoot_release = true;
     }
@@ -136,10 +136,12 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
         if(handler.getKeyManager().left) {
             direction += rotationSpeed * speedMultiplier;
             rotate();
+            collision.rotate(direction);
         }
         if(handler.getKeyManager().right) {
             direction -= rotationSpeed * speedMultiplier;
             rotate();
+            collision.rotate(direction);
         }
         if(handler.getKeyManager().spacebar && shoot_release) {
             EntityManager.get().subscribe(new BulletPlayer(handler,this));

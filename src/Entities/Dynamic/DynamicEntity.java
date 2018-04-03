@@ -50,10 +50,19 @@ public abstract class DynamicEntity extends Entity{
 
     }
 
+    // Method to rotate the image
+    protected void rotate(double dir) {
+        // TODO // Rotate Sprite Without Cutoffs
+        direction = dir;
+        aTrans = AffineTransform.getRotateInstance(-direction+(Math.PI/2), width/2, height/2);
+        aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
+
+    }
+
     @Override
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(aTransOp.filter(img, null), (int)xpos, (int)ypos, null);
+        g2d.drawImage(aTransOp.filter(img, null), (int)xpos, (int)ypos,  null);
     }
 
 // GETTERS & SETTERS //
