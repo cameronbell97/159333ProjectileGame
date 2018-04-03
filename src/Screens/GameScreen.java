@@ -20,7 +20,6 @@ public class GameScreen extends Screen {
 // VARIABLES //
     private AssetManager assMan;
     private PlayerEntity player;
-    Wall walls[][];
     private EntityManager entityManager;
     private WallTest walt;
 
@@ -38,11 +37,12 @@ public class GameScreen extends Screen {
                 Launcher.DEF_GAME_HEIGHT/2-player.DEF_PLAYER_HEIGHT/2)
         ;
 
-        walt = new WallTest(handler, AssetManager.get().getSprite("LTWall"), 100, 100, 16, 16);
+        walt = new WallTest(handler, AssetManager.get().getSprite(1, 3, 3), 100, 100, 64, 64);
+        walt.getCollision().setImg(AssetManager.get().getSprite(1, 3, 3));
 
         // DynamicEntity Subscriptions
         entityManager.subscribe(player);
-//        entityManager.subscribe(walt);
+        entityManager.subscribe(walt);
 
     }
 

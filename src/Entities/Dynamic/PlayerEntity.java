@@ -18,7 +18,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
     public static final int DEF_PLAYER_HEIGHT = 64;
     public static final double DEF_ROT_SPEED = 0.015*Math.PI;
     AssetManager assMan = AssetManager.get();
-    private int speedMultiplier;
+    private float speedMultiplier;
     private double rotationSpeed;
     private boolean reverseThrust; // If true, player can reverse
     private float decelerate;
@@ -124,6 +124,9 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
 
         if(handler.getKeyManager().ctrl || handler.getKeyManager().shift) {
             speedMultiplier = 2;
+        }
+        if(handler.getKeyManager().alt) {
+            speedMultiplier = (float)0.1;
         }
         if(handler.getKeyManager().forward) {
             ymove = (float)(moveSpeed * -Math.sin(direction)* speedMultiplier);

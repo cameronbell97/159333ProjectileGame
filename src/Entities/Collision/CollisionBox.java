@@ -14,7 +14,6 @@ import java.awt.Color;
 public class CollisionBox extends DynamicEntity{
 // VARIABLES //
     private float xoff, yoff;
-    private double direction;
     private Entity parent;
 
 // CONSTRUCTORS //
@@ -22,7 +21,6 @@ public class CollisionBox extends DynamicEntity{
         super(handler, x, y, w, h);
         xoff = xo;
         yoff = yo;
-        direction = 0;
         this.parent = parent;
         img = AssetManager.get().getSprite("Coll");
         EntityManager.get().subscribe(this);
@@ -72,9 +70,5 @@ public class CollisionBox extends DynamicEntity{
 
     public float getYoff() {
         return yoff;
-    }
-
-    public double getDirection() {
-        return direction;
     }
 }

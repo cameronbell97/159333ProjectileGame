@@ -26,14 +26,15 @@ public class SAT {
         for (Point2D ax : axes) {
             // Get min & max values
             double min1 = corns1.stream().mapToDouble(p -> p.dotProduct(ax)).min().getAsDouble();
-            double min2 = corns1.stream().mapToDouble(p -> p.dotProduct(ax)).min().getAsDouble();
-            double max1 = corns2.stream().mapToDouble(p -> p.dotProduct(ax)).max().getAsDouble();
+            double max1 = corns1.stream().mapToDouble(p -> p.dotProduct(ax)).max().getAsDouble();
+
+            double min2 = corns2.stream().mapToDouble(p -> p.dotProduct(ax)).min().getAsDouble();
             double max2 = corns2.stream().mapToDouble(p -> p.dotProduct(ax)).max().getAsDouble();
 
             if(max1 < min2 || max2 < min1) return false; // Check for collision
         }
 
-        return false;
+        return true;
     }
 
     public static List<Point2D> getAxes(double rotation){
@@ -49,10 +50,7 @@ public class SAT {
                 new Point2D(e.getXpos() + e.getWidth(), e.getYpos() + e.getHeight()),
                 new Point2D(e.getXpos() + e.getWidth(), e.getYpos()),
                 new Point2D(e.getXpos(), e.getYpos() + e.getHeight())
-        )
-                .stream()
-                .map(p -> p.subtract(e.getCentre()))
-                .collect(Collectors.toList());
+        ).stream().map(p -> p.subtract(e.getCentre())).collect(Collectors.toList());
         // p -> p.subtract(e.getCentre()) // is where the y axis gets fucked // turns to 17
     }
 

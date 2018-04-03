@@ -69,6 +69,6 @@ public abstract class DynamicEntity extends Entity{
     public double getMoveSpeed() { return moveSpeed; }
     public void setSpeed(double ms) { moveSpeed = ms; }
     public double getDirection() {
-        return direction;
+        return direction + (Math.PI / 2);
     }
 }
