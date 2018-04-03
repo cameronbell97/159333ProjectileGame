@@ -2,7 +2,6 @@ package Entities;
 
 import Entities.Collision.CollisionBox;
 import Game.Handler;
-import javafx.geometry.Point2D;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

@@ -4,6 +4,7 @@ import Assets.AssetManager;
 import Entities.EntityManager;
 import Entities.Dynamic.PlayerEntity;
 import Entities.Static.Wall;
+import Entities.Static.WallTest;
 import Game.Handler;
 import Game.Launcher;
 
@@ -21,8 +22,9 @@ public class GameScreen extends Screen {
     private PlayerEntity player;
     Wall walls[][];
     private EntityManager entityManager;
+    private WallTest walt;
 
-    // CONSTRUCTORS //
+// CONSTRUCTORS //
     public GameScreen(Handler handler) throws IOException {
         // Super Call
         super(handler);
@@ -36,9 +38,11 @@ public class GameScreen extends Screen {
                 Launcher.DEF_GAME_HEIGHT/2-player.DEF_PLAYER_HEIGHT/2)
         ;
 
+        walt = new WallTest(handler, AssetManager.get().getSprite("LTWall"), 100, 100, 16, 16);
+
         // DynamicEntity Subscriptions
         entityManager.subscribe(player);
-
+//        entityManager.subscribe(walt);
 
     }
 

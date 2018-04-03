@@ -49,7 +49,11 @@ public class SAT {
                 new Point2D(e.getXpos() + e.getWidth(), e.getYpos() + e.getHeight()),
                 new Point2D(e.getXpos() + e.getWidth(), e.getYpos()),
                 new Point2D(e.getXpos(), e.getYpos() + e.getHeight())
-        ).stream().map(p -> p.subtract(e.getCentre())).collect(Collectors.toList());
+        )
+                .stream()
+                .map(p -> p.subtract(e.getCentre()))
+                .collect(Collectors.toList());
+        // p -> p.subtract(e.getCentre()) // is where the y axis gets fucked // turns to 17
     }
 
     public static List<Point2D> getCorners(CollisionBox e) {
