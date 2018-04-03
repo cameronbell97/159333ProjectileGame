@@ -20,6 +20,7 @@ public class AssetManager {
     private SpriteSheet wall_sheet = null;
     private SpriteSheet char_sheet = null;
     private BufferedImage walls[];
+    private BufferedImage bulletplayer;
 
 // CONSTRUCTORS //
     public AssetManager() {
@@ -42,7 +43,7 @@ public class AssetManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // Walls sheet
+        // Characters sheet
         try {
             char_sheet = new SpriteSheet(ImageLoader.load("../characters01.png"), 10, 3, 5, 9); // load the spritesheet
         } catch (IOException e) {
@@ -61,6 +62,12 @@ public class AssetManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        try {
+            bulletplayer = ImageLoader.load("../bullet_player.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 // METHODS //
@@ -72,17 +79,19 @@ public class AssetManager {
             case "player":
                 return sheet1.getSprite(0, 0);
             case "LTWall":
-            return wall_sheet.getSprite(0, 0);
+                return wall_sheet.getSprite(0, 0);
             case "RTWall":
-            return wall_sheet.getSprite(1, 0);
+                return wall_sheet.getSprite(1, 0);
             case "RBWall":
-            return wall_sheet.getSprite(1, 1);
+                return wall_sheet.getSprite(1, 1);
             case "LBWall":
-            return wall_sheet.getSprite(0, 1);
+                return wall_sheet.getSprite(0, 1);
             case "HozWall":
-            return walls[0];
+                return walls[0];
             case "VerWall":
-            return walls[1];
+                return walls[1];
+            case "BulletPlayer":
+                return bulletplayer;
         }
 
         return null; // If key is unknown, return null

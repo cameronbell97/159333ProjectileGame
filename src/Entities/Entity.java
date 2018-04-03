@@ -1,39 +1,30 @@
 package Entities;
 
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-
+import Entities.Collision.CollisionArea;
 import Game.Handler;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
 /**
- * Cameron Bell - 27/03/2018
+ * Cameron Bell - 02/04/2018
  * Entity Abstract Class
  */
 
 public abstract class Entity {
 // VARIABLES //
-    public static final float DEF_SPEED = 1;
     protected float xpos, ypos;
-    protected float xmove, ymove;
     protected int width, height;
-    protected double direction;
-    protected double moveSpeed;
     protected BufferedImage img;
-    AffineTransform aTrans;
-    AffineTransformOp aTransOp;
-    Handler handler;
+    protected CollisionArea collision;
+    protected Handler handler;
 
 // CONSTRUCTORS //
-    public Entity (Handler handler, float x, float y, int w, int h) {
-        xpos = x;
-        ypos = y;
-        width = w;
-        height = h;
-        direction = 0.5*Math.PI; // direction = 90 degrees but in radians
-        moveSpeed = DEF_SPEED;
+    public Entity(Handler handler, float x, float y, int w, int h) {
+        this.xpos = x;
+        this.ypos = y;
+        this.width = w;
+        this.height = h;
         this.handler = handler;
     }
 
@@ -41,16 +32,26 @@ public abstract class Entity {
     public abstract void update();
     public abstract void draw(Graphics g);
 
-    protected void move() {
-        xpos += xmove;
-        ypos += ymove;
+// GETTERS & SETTERS //
+    public CollisionArea getCollision() {
+        return collision;
     }
-
-    // Method to rotate the image
-    protected void rotate() {
-        // TODO // Rotate Sprite Without Cutoffs
-        aTrans = AffineTransform.getRotateInstance(-direction+(Math.PI/2), width/2, height/2);
-        aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
-
+    public float getXpos() {
+        return xpos;
+    }
+    public float getYpos() {
+        return ypos;
+    }
+    public int getWidth() {
+        return width;
+    }
+    public void setWidth(int width) {
+        this.width = width;
+    }
+    public int getHeight() {
+        return height;
+    }
+    public void setHeight(int height) {
+        this.height = height;
     }
 }

@@ -20,9 +20,10 @@ public class Game implements Runnable{
     private static final int FPS = 60;
 
     private String gameTitle;
-    private int gameHeight;
 
+    private int gameHeight;
     private int gameWidth;
+
     private boolean isRunning;
 
     private DisplayWindow display;
@@ -71,10 +72,10 @@ public class Game implements Runnable{
 
     // Method to update the game state
     public void update() {
+        km.update();
         if (ScreenManager.getScreen() != null) {
             ScreenManager.getScreen().update();
         }
-        km.update();
     }
 
     // Method to render the graphics on the screen

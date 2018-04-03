@@ -37,6 +37,7 @@ public class KeyManager implements KeyListener{
         ctrl = keys[KeyEvent.VK_CONTROL];
         shift = keys[KeyEvent.VK_SHIFT];
         spacebar = keys[KeyEvent.VK_SPACE];
+
     }
 
     @Override

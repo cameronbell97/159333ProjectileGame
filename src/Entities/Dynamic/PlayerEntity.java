@@ -1,4 +1,7 @@
-package Entities;
+package Entities.Dynamic;
+import Entities.Collision.CollisionBox;
+import Entities.EntityManager;
+import Entities.iVulnerable;
 import Game.Handler;
 
 import Assets.AssetManager;
@@ -9,11 +12,11 @@ import java.awt.image.AffineTransformOp;
 
 /**
  * Cameron Bell - 27/03/2018
- * Player Entity Class
+ * Player DynamicEntity Class
  * The controllable player
  */
 
-public class PlayerEntity extends VulnerableEntity {
+public class PlayerEntity extends DynamicEntity implements iVulnerable {
 // VARIABLES //
     public static final int DEF_PLAYER_WIDTH = 64;
     public static final int DEF_PLAYER_HEIGHT = 64;
@@ -23,6 +26,8 @@ public class PlayerEntity extends VulnerableEntity {
     private double rotationSpeed;
     private boolean reverseThrust; // If true, player can reverse
     private float decelerate;
+    private int health;
+    private boolean shoot_release;
 
 
 // CONSTRUCTORS //
@@ -42,16 +47,73 @@ public class PlayerEntity extends VulnerableEntity {
         rotationSpeed = DEF_ROT_SPEED;
         img = assMan.getSprite("player");
 //        img = assMan.getSprite(1, 2, 0);
-        aTrans = AffineTransform.getRotateInstance(0, width/2, height/2);
-        aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
         reverseThrust = true;
         decelerate = (float)0.06;
+        collision = new CollisionBox(xpos+18, ypos+18, 28, 28);
+        health = 10;
+        shoot_release = true;
+    }
+
+    public void move() {
+        moveX();
+        moveY();
+    }
+
+    @Override
+    protected void moveX() {
+        // If moving right
+        if(xmove > 0) {
+            // If you would NOT move out of the screen
+            if(collision.getXpos() + 28/*CollisionBox Width*/ + xmove <= handler.getWidth())
+                xpos += xmove;
+            else {
+                xpos = handler.getWidth() - width + (collision.getXpos() - xpos);
+                xmove = 0;
+            }
+        }
+        // If moving left
+        if(xmove < 0) {
+            // If you would NOT move out of the screen
+            if(collision.getXpos() + xmove >= 0)
+                xpos += xmove;
+            else {
+                // else player's X position = zero - the difference between the collision's X position and the player's
+                xpos = 0 - (collision.getXpos() - xpos);
+                xmove = 0;
+            }
+        }
+    }
+
+    @Override
+    protected void moveY() {
+        // If moving down
+        if(ymove > 0) {
+            // If you would NOT move out of the screen
+            if(collision.getYpos() + 28/*CollisionBox Width*/ + ymove <= handler.getHeight())
+                ypos += ymove;
+            else {
+                ypos = handler.getHeight() - height + (collision.getYpos() - ypos);
+                ymove = 0;
+            }
+        }
+        // If moving up
+        if(ymove < 0) {
+            // If you would NOT move out of the screen
+            if(collision.getYpos() + ymove >= 0)
+                ypos += ymove;
+            else {
+                // else player's Y position = zero - the difference between the collision's Y position and the player's
+                ypos = 0 - (collision.getYpos()-ypos);
+                ymove = 0;
+            }
+        }
     }
 
     @Override
     public void update() {
         getInput();
         move();
+        collision.update(this);
     }
 
     private void getInput() {
@@ -82,28 +144,35 @@ public class PlayerEntity extends VulnerableEntity {
             direction -= rotationSpeed * speedMultiplier;
             rotate();
         }
+        if(handler.getKeyManager().spacebar && shoot_release) {
+            EntityManager.get().subscribe(new BulletPlayer(handler,this));
+            shoot_release = false;
+        }
+        if(!handler.getKeyManager().spacebar) shoot_release = true;
     }
 
     @Override
-    public void draw(Graphics g) {
-        // Old Draw Code
-//        g.drawImage( // draw image at position (xpos,ypos)
-//                img, // with the 'player' sprite
-//                (int)xpos,
-//                (int)ypos,
-//                width, // of the object's set width
-//                height, // and of the object's set height
-//                null);
-//        g.drawImage(aTransOp.filter(assMan.getSprite("player"), null), (int)xpos, (int)ypos, null);
+    public void addHP(int hp) {
+        health += hp;
+    }
 
-        // New Draw Code
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(aTransOp.filter(img, null), (int)xpos, (int)ypos, null);
-        g2d.dispose();
+    @Override
+    public void die() {
+
     }
 
 // GETTERS & SETTERS //
     public void setReverseThrust(boolean reverseThrust) {
         this.reverseThrust = reverseThrust;
+    }
+
+    @Override
+    public int getHP() {
+        return health;
+    }
+
+    @Override
+    public void setHP(int hp) {
+        health = hp;
     }
 }
