@@ -58,6 +58,8 @@ public class GameScreen extends Screen {
 
         // Draw All Entities
         entityManager.draw(g);
-        entityManager.drawCollisionBoxes(g);
+
+        // If DRAW_COLLISIONS = true, draw all subscribed collision boxes
+        if(Game.Game.DRAW_COLLISIONS) entityManager.drawCollisionBoxes(g);
     }
 }
