@@ -21,7 +21,6 @@ public class GameScreen extends Screen {
     private AssetManager assMan;
     private PlayerEntity player;
     private EntityManager entityManager;
-    private WallTest walt;
 
 // CONSTRUCTORS //
     public GameScreen(Handler handler) throws IOException {
@@ -37,12 +36,8 @@ public class GameScreen extends Screen {
                 Launcher.DEF_GAME_HEIGHT/2-player.DEF_PLAYER_HEIGHT/2)
         ;
 
-        walt = new WallTest(handler, AssetManager.get().getSprite(1, 3, 3), 100, 100, 64, 64);
-        walt.getCollision().setImg(AssetManager.get().getSprite(1, 3, 3));
-
         // DynamicEntity Subscriptions
         entityManager.subscribe(player);
-        entityManager.subscribe(walt);
 
     }
 

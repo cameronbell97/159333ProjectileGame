@@ -18,7 +18,7 @@ import java.io.IOException;
 public class Game implements Runnable{
 // VARIABLES //
     private static final int FPS = 60;
-    public static final boolean DRAW_COLLISIONS = true;
+    public static final boolean DRAW_COLLISIONS = false;
 
     private String gameTitle;
 
