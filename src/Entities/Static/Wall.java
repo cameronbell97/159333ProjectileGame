@@ -34,6 +34,11 @@ public class Wall extends Entity{
         g.drawImage(sprite, (int)xpos, (int)ypos, width, height, null);
     }
 
+    @Override
+    public void collide(Entity ec) {
+        
+    }
+
     public void setPos(int x, int y) {
         xpos = x;
         ypos = y;

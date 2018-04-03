@@ -41,10 +41,15 @@ public class CollisionBox extends DynamicEntity{
     public Point2D getCentre() {
         return new Point2D(xpos + width / 2, ypos + height / 2);
     }
-
     private void destroy() {
         EntityManager.get().unsubscribe(this);
     }
+
+    @Override
+    public void collide(Entity ec) {
+        if(ec.getParent() != null && parent != null) parent.collide(ec.getParent());
+    }
+
 
 // GETTERS & SETTERS //
 

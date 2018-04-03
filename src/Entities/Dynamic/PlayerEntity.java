@@ -1,5 +1,6 @@
 package Entities.Dynamic;
 import Entities.Collision.CollisionBox;
+import Entities.Entity;
 import Entities.EntityManager;
 import Entities.iVulnerable;
 import Game.Handler;
@@ -111,6 +112,11 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
         getInput();
         move();
         collision.update();
+    }
+
+    @Override
+    public void collide(Entity ec) {
+
     }
 
     private void getInput() {

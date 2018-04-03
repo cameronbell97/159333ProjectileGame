@@ -62,4 +62,5 @@ public abstract class Entity {
     public Entity getParent() {
         return parent;
     }
+    public abstract void collide(Entity ec);
 }
