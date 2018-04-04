@@ -8,10 +8,10 @@ import Entities.EntityManager;
 import Entities.iVulnerable;
 import Game.Handler;
 import Game.Launcher;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 public class Asteroid extends DynamicEntity implements iVulnerable {
 // VARIABLES //
+    private static final int OFFSCREEN_BOUNDARY = 96;
 
     int level;
     int hp;
@@ -54,6 +54,13 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
         move();
         collision.update();
         collision.rotate(direction);
+
+        if(     xpos <= -OFFSCREEN_BOUNDARY ||
+                ypos <= -OFFSCREEN_BOUNDARY ||
+                xpos >= Launcher.DEF_GAME_WIDTH + OFFSCREEN_BOUNDARY ||
+                ypos >= Launcher.DEF_GAME_HEIGHT + OFFSCREEN_BOUNDARY) {
+            die();
+        }
     }
 
     @Override
@@ -61,17 +68,21 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
         if(ec instanceof Entities.Dynamic.BulletPlayer) {
             addHP(-2);
         }
+        if(ec instanceof Entities.Dynamic.PlayerEntity) {
+            setHP(0);
+        }
 
     }
 
 // GETTERS & SETTERS //
     @Override
     public int getHP() {
-        return 0;
+        return hp;
     }
     @Override
     public void setHP(int hp) {
-
+        this.hp = hp;
+        if(this.hp <= 0) die();
     }
     @Override
     public void addHP(int hp) {
@@ -80,7 +91,9 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
     }
     @Override
     public void die() {
-        EntityManager.get().unsubscribe(this);
-        EntityManager.get().unsubscribe(collision);
+//        if(level<=1) {
+            EntityManager.get().unsubscribe(this);
+            EntityManager.get().unsubscribe(collision);
+//        }
     }
 }

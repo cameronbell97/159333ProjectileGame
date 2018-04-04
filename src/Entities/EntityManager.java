@@ -55,6 +55,11 @@ public class EntityManager implements iObserver {
         subscribe(p);
     }
 
+    public void unsubPlayer(PlayerEntity p) {
+        player = null;
+        unsubscribe(p);
+    }
+
     @Override
     public void unsubscribe(Entity e) {
         unsub_queue.add(e);
@@ -105,7 +110,7 @@ public class EntityManager implements iObserver {
             e.draw(g);
         }
         // Draw Player on top of everything else
-        player.draw(g);
+        if(player != null) player.draw(g);
     }
 
     public void checkCollisions() {

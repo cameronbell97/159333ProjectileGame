@@ -117,7 +117,9 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
 
     @Override
     public void collide(Entity ec) {
-
+        if(ec instanceof Entities.Dynamic.Enemies.Asteroid) {
+            addHP(-1);
+        }
     }
 
     private void getInput() {
@@ -163,11 +165,13 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
     @Override
     public void addHP(int hp) {
         health += hp;
+        if(health <= 0) die();
     }
 
     @Override
     public void die() {
-
+        EntityManager.get().unsubPlayer(this);
+        EntityManager.get().unsubscribe(this.collision);
     }
 
 // GETTERS & SETTERS //
