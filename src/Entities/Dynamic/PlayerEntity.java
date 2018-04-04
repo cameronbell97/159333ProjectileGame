@@ -49,6 +49,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
         collision = new CollisionBox(handler, xpos+22, ypos+17, 20, 35, 22, 17, this);
         health = 10;
         shoot_release = true;
+        EntityManager.get().subPlayer(this);
     }
 
     public void move() {

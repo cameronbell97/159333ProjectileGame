@@ -1,6 +1,7 @@
 package Entities;
 
 import Entities.Collision.CollisionBox;
+import Entities.Dynamic.PlayerEntity;
 import Game.SAT;
 import Game.iObserver;
 
@@ -20,6 +21,7 @@ public class EntityManager implements iObserver {
     public static EntityManager get() { return self; }
 
 // VARIABLES //
+    PlayerEntity player;
     List<Entity> ents; // A list of Entities
     List<Entity> sub_queue; // A list of Entities
     List<Entity> unsub_queue; // A list of Entities
@@ -29,6 +31,7 @@ public class EntityManager implements iObserver {
 
 // CONSTRUCTORS //
     public EntityManager() {
+        player = null;
         ents = new ArrayList<Entity>();
         sub_queue = new ArrayList<Entity>();
         unsub_queue = new ArrayList<Entity>();
@@ -45,6 +48,11 @@ public class EntityManager implements iObserver {
     // Method that subscribes an collision box to the entity manager
     public void subscribe(CollisionBox e) {
         sub_cueue.add(e);
+    }
+
+    public void subPlayer(PlayerEntity p) {
+        player = p;
+        subscribe(p);
     }
 
     @Override
@@ -96,6 +104,8 @@ public class EntityManager implements iObserver {
         for(Entity e : ents) {
             e.draw(g);
         }
+        // Draw Player on top of everything else
+        player.draw(g);
     }
 
     public void checkCollisions() {

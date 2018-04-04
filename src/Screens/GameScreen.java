@@ -36,9 +36,6 @@ public class GameScreen extends Screen {
                 Launcher.DEF_GAME_HEIGHT/2-player.DEF_PLAYER_HEIGHT/2)
         ;
 
-        // DynamicEntity Subscriptions
-        entityManager.subscribe(player);
-
     }
 
 // METHODS //
