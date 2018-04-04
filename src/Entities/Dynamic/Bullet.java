@@ -6,6 +6,8 @@ import Game.Handler;
 import Game.Launcher;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 
 public abstract class Bullet extends DynamicEntity{
 // CONSTRUCTORS //
@@ -16,6 +18,7 @@ public abstract class Bullet extends DynamicEntity{
                 parent.getYpos() + (parent.getHeight() / 2) - (h / 2),
                 w, h)
         ;
+//        customAffines();
         this.parent = parent;
         direction = parent.getDirection() - (Math.PI/2); // Get the direction
 
@@ -43,6 +46,17 @@ public abstract class Bullet extends DynamicEntity{
         collision.update();
         collision.rotate(direction);
     }
+
+//    @Override
+//    public void draw(Graphics g) {
+//        Graphics2D g2d = (Graphics2D) g;
+//        g2d.drawImage(aTransOp.filter(img, null), (int)xpos - IMG_X_OFFSET, (int)ypos,  null);
+//    }
+//
+//    private void customAffines() {
+//        aTrans = AffineTransform.getRotateInstance(0, (width/2)+(IMG_X_OFFSET*2), height/2);
+//        aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
+//    }
 
     private void destroy() {
         EntityManager.get().unsubscribe(this.collision);
