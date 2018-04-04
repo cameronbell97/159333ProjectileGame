@@ -154,13 +154,13 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
         }
         if(handler.getKeyManager().left) {
             direction += rotationSpeed * speedMultiplier;
-            rotate();
-            collision.rotate(direction);
+            rotateSprite();
+            collision.rotateSprite(direction);
         }
         if(handler.getKeyManager().right) {
             direction -= rotationSpeed * speedMultiplier;
-            rotate();
-            collision.rotate(direction);
+            rotateSprite();
+            collision.rotateSprite(direction);
         }
         if(handler.getKeyManager().spacebar && shoot_release) {
             EntityManager.get().subscribe(new BulletPlayer(handler,this));

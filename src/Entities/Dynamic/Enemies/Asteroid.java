@@ -9,8 +9,6 @@ import Entities.iVulnerable;
 import Game.Handler;
 import Game.Launcher;
 
-import java.util.Random;
-
 /**
  * Cameron Bell - 04/04/2018
  * Asteroid cEntity Class
@@ -53,7 +51,7 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
         xmove = (float)(moveSpeed * Math.cos(direction));
 
         // Rotate the sprite
-//        rotate();
+//        rotateSprite();
     }
 
 // METHODS //
@@ -61,7 +59,7 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
     public void update() {
         move();
         collision.update();
-        collision.rotate(direction);
+        collision.rotateSprite(direction);
 
         if(     xpos <= -OFFSCREEN_BOUNDARY ||
                 ypos <= -OFFSCREEN_BOUNDARY ||

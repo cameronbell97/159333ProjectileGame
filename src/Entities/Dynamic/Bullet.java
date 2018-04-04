@@ -1,13 +1,8 @@
 package Entities.Dynamic;
 
-import Entities.Entity;
 import Entities.EntityManager;
 import Game.Handler;
 import Game.Launcher;
-
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 
 public abstract class Bullet extends DynamicEntity{
 // VARIABLES //
@@ -35,7 +30,7 @@ public abstract class Bullet extends DynamicEntity{
         xmove = (float)(moveSpeed * Math.cos(direction));
 
         // Rotate the sprite
-        rotate();
+        rotateSprite();
     }
 
 // METHODS //
@@ -46,7 +41,7 @@ public abstract class Bullet extends DynamicEntity{
             destroy();
         }
         collision.update();
-        collision.rotate(direction);
+        collision.rotateSprite(direction);
     }
 
     protected void destroy() {
