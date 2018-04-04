@@ -18,8 +18,8 @@ public abstract class DynamicEntity extends Entity{
     protected double direction;
     protected double moveSpeed;
 
-    AffineTransform aTrans;
-    AffineTransformOp aTransOp;
+    protected AffineTransform aTrans;
+    protected AffineTransformOp aTransOp;
 
 // CONSTRUCTORS //
     public DynamicEntity(Handler handler, float x, float y, int w, int h) {

@@ -9,6 +9,9 @@ import Entities.iVulnerable;
 import Game.Handler;
 import Game.Launcher;
 
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+
 /**
  * Cameron Bell - 04/04/2018
  * Asteroid cEntity Class
@@ -19,14 +22,17 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
 // VARIABLES //
     private static final int OFFSCREEN_BOUNDARY = 96;
 
-    int level;
-    int hp;
+    private int level;
+    private int hp;
+    private double spriteDirection;
+    private double spriteRotation;
 
 // CONSTRUCTORS //
     public Asteroid(Handler handler, float x, float y, int level, double direction, double speed) {
         super(handler, x, y, 64, 64);
         this.level = level;
         this.direction = direction;
+        this.spriteDirection = direction;
         moveSpeed = speed;
 
         // Set depending on level
@@ -50,8 +56,11 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
         ymove = (float)(moveSpeed * -Math.sin(direction));
         xmove = (float)(moveSpeed * Math.cos(direction));
 
+        // Set Rotation
+        spriteRotation = Game.Game.getDoubleFromRange(-0.01*Math.PI, 0.01*Math.PI);
+
         // Rotate the sprite
-//        rotateSprite();
+        rotateSprite();
     }
 
 // METHODS //
@@ -59,7 +68,7 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
     public void update() {
         move();
         collision.update();
-        collision.rotateSprite(direction);
+        rotateSprite();
 
         if(     xpos <= -OFFSCREEN_BOUNDARY ||
                 ypos <= -OFFSCREEN_BOUNDARY ||
@@ -77,6 +86,15 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
         if(ec instanceof Entities.Dynamic.PlayerEntity) {
             setHP(0);
         }
+
+    }
+
+    @Override
+    public void rotateSprite() {
+        // TODO // Rotate Sprite Without Cutoffs
+        spriteDirection += spriteRotation;
+        aTrans = AffineTransform.getRotateInstance(-spriteDirection+(Math.PI/2), width/2, height/2);
+        aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
 
     }
 
@@ -98,12 +116,12 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
     @Override
     public void die() {
         if(level > 1) {
-            for(int i = 0; i < 2; i++) {
-                float newX = Game.Game.getFloatFromRange(xpos-width/4, xpos+width/4);
-                float newY = Game.Game.getFloatFromRange(ypos-height/4, ypos+height/4);
-                double newDir = Game.Game.getDoubleFromRange(0, 2 * Math.PI);
+            for(int i = -1; i < 2; i+=2) {
+                float newX = Game.Game.getFloatFromRange(xpos-width/8, xpos+width/8);
+                float newY = Game.Game.getFloatFromRange(ypos-height/8, ypos+height/8);
+                double newDir = Game.Game.getDoubleFromRange(direction + (i*(Math.PI/4)), direction + (i*(Math.PI/8)));
 
-                EntityManager.get().subscribe(new Asteroid(handler, newX, newY, level-1, newDir, moveSpeed));
+                EntityManager.get().subscribe(new Asteroid(handler, newX, newY, level-1, newDir, moveSpeed*1.2));
             }
         }
         EntityManager.get().unsubscribe(this);

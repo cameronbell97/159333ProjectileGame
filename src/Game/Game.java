@@ -112,6 +112,11 @@ public class Game implements Runnable{
     }
 
     public static double getDoubleFromRange(double min, double max) {
+        if(max < min) {
+            double temp = min;
+            min = max;
+            max = temp;
+        }
         Random generator = new Random();
         return min + generator.nextDouble() * (max - min);
     }
