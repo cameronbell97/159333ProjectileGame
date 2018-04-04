@@ -101,6 +101,12 @@ public class AssetManager {
                 return walls[1];
             case "BulletPlayer":
                 return bullet_sheet.getSprite(0, 0);
+            case "AstLarge":
+                return sheet1.getSprite(0,1);
+            case "AstMedium":
+                return sheet1.getSprite(1,1);
+            case "AstSmall":
+                return sheet1.getSprite(2,1);
             case "Coll":
                 return collColour;
         }

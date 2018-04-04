@@ -112,7 +112,8 @@ public class EntityManager implements iObserver {
         for(CollisionBox e : cols) {
             for(CollisionBox f : cols) {
                 if(
-                        e != f && // The entities are not the same entity
+                    (
+                        e != f || // The entities are not the same entity
                         ( // One of the entities's parent object is not the bullet of the other's (aka ignore player bullets colliding with player)
                           // And also check they're not both from the same entity (two bullets colliding both going in the same direction from the same entity)
                                 f.getParent() != null && // The first entity has a parent and
@@ -122,10 +123,13 @@ public class EntityManager implements iObserver {
                                 f.getParent().getParent() != e.getParent() && // The first entity's parent's parent is not the second entity's parent
                                 e.getParent().getParent() != f.getParent() &&// The second entity's parent's parent is not the first entity's parent
                                 f.getParent().getParent() != e.getParent().getParent() // The first and second entities' parents' parents are not the same
-                        ) &&
+                        )
+                    ) &&
                         SAT.isColliding(e, f) // The entities are colliding
                     ) {
                     System.out.println("C O L L I S I O N");
+                    e.getParent().collide(f.getParent()); // Call the collide function on e
+                    //f.getParent().collide(e.getParent()); // (CURRENTLY) no need to call collide() on f because f and e will switch places in a later check
                 }
             }
         }

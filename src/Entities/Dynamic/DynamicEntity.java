@@ -51,7 +51,7 @@ public abstract class DynamicEntity extends Entity{
     }
 
     // Method to rotate the image
-    protected void rotate(double dir) {
+    public void rotate(double dir) {
         // TODO // Rotate Sprite Without Cutoffs
         direction = dir;
         aTrans = AffineTransform.getRotateInstance(-direction+(Math.PI/2), width/2, height/2);
