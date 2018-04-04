@@ -101,6 +101,10 @@ public class Game implements Runnable{
         g.dispose();
     }
 
+    public static int secsToTicks(int seconds) {
+        return seconds * 60;
+    }
+
     // Threading Methods //
 
     public void run() {
