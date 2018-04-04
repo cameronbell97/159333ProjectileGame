@@ -47,7 +47,7 @@ public class GameScreen extends Screen {
     @Override
     public void draw(Graphics g) {
         // Draw Background
-        g.setColor(Color.black);
+        g.setColor(new Color(0, 0, 20));
         g.fillRect(0, 0, Launcher.DEF_GAME_WIDTH, Launcher.DEF_GAME_HEIGHT);
 
         // draw collision box for player // TODO // remove
