@@ -8,6 +8,7 @@ import Screens.ScreenManager;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
+import java.util.Random;
 
 /**
  * Cameron Bell - 20/03/2018
@@ -103,6 +104,16 @@ public class Game implements Runnable{
 
     public static int secsToTicks(int seconds) {
         return seconds * 60;
+    }
+
+    public static float getFloatFromRange(float min, float max) {
+        Random generator = new Random();
+        return min + generator.nextFloat() * (max - min);
+    }
+
+    public static double getDoubleFromRange(double min, double max) {
+        Random generator = new Random();
+        return min + generator.nextDouble() * (max - min);
     }
 
     // Threading Methods //

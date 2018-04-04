@@ -9,6 +9,14 @@ import Entities.iVulnerable;
 import Game.Handler;
 import Game.Launcher;
 
+import java.util.Random;
+
+/**
+ * Cameron Bell - 04/04/2018
+ * Asteroid cEntity Class
+ * An asteroid object
+ */
+
 public class Asteroid extends DynamicEntity implements iVulnerable {
 // VARIABLES //
     private static final int OFFSCREEN_BOUNDARY = 96;
@@ -91,9 +99,16 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
     }
     @Override
     public void die() {
-//        if(level<=1) {
-            EntityManager.get().unsubscribe(this);
-            EntityManager.get().unsubscribe(collision);
-//        }
+        if(level > 1) {
+            for(int i = 0; i < 2; i++) {
+                float newX = Game.Game.getFloatFromRange(xpos-width/4, xpos+width/4);
+                float newY = Game.Game.getFloatFromRange(ypos-height/4, ypos+height/4);
+                double newDir = Game.Game.getDoubleFromRange(0, 2 * Math.PI);
+
+                EntityManager.get().subscribe(new Asteroid(handler, newX, newY, level-1, newDir, moveSpeed));
+            }
+        }
+        EntityManager.get().unsubscribe(this);
+        EntityManager.get().unsubscribe(collision);
     }
 }

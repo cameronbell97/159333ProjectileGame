@@ -9,7 +9,7 @@ import Assets.AssetManager;
 
 /**
  * Cameron Bell - 27/03/2018
- * Player DynamicEntity Class
+ * Player Entity Class
  * The controllable player
  */
 
@@ -137,11 +137,11 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
         if(slowTimeStart <= 0) speedMultiplier = 1;
         else speedMultiplier = (double)slowTimeCurrent/slowTimeStart;
 
-        if((handler.getKeyManager().ctrl || handler.getKeyManager().shift) && slowTimeStart <= 0) {
+        if(handler.getKeyManager().shift && slowTimeStart <= 0) {
             if(slowTimeCurrent <= 0) speedMultiplier = 2;
             else speedMultiplier = (double)1 + ((double)((double)50 - slowTimeCurrent) / 50);
         }
-        if(handler.getKeyManager().alt) {
+        if(handler.getKeyManager().ctrl ) {
             speedMultiplier = (float)0.1;
         }
         if(handler.getKeyManager().forward) {
