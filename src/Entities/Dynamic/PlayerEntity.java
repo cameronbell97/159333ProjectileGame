@@ -1,14 +1,11 @@
 package Entities.Dynamic;
 import Entities.Collision.CollisionBox;
+import Entities.Entity;
 import Entities.EntityManager;
 import Entities.iVulnerable;
 import Game.Handler;
 
 import Assets.AssetManager;
-
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 
 /**
  * Cameron Bell - 27/03/2018
@@ -22,7 +19,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
     public static final int DEF_PLAYER_HEIGHT = 64;
     public static final double DEF_ROT_SPEED = 0.015*Math.PI;
     AssetManager assMan = AssetManager.get();
-    private int speedMultiplier;
+    private float speedMultiplier;
     private double rotationSpeed;
     private boolean reverseThrust; // If true, player can reverse
     private float decelerate;
@@ -49,7 +46,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
 //        img = assMan.getSprite(1, 2, 0);
         reverseThrust = true;
         decelerate = (float)0.06;
-        collision = new CollisionBox(xpos+18, ypos+18, 28, 28);
+        collision = new CollisionBox(handler, xpos+22, ypos+17, 20, 35, 22, 17, this);
         health = 10;
         shoot_release = true;
     }
@@ -64,10 +61,10 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
         // If moving right
         if(xmove > 0) {
             // If you would NOT move out of the screen
-            if(collision.getXpos() + 28/*CollisionBox Width*/ + xmove <= handler.getWidth())
+            if(collision.getXpos() + collision.getWidth()/*CollisionBox Width*/ + xmove <= handler.getWidth())
                 xpos += xmove;
             else {
-                xpos = handler.getWidth() - width + (collision.getXpos() - xpos);
+                xpos = handler.getWidth() - collision.getWidth() - collision.getXoff();
                 xmove = 0;
             }
         }
@@ -89,10 +86,11 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
         // If moving down
         if(ymove > 0) {
             // If you would NOT move out of the screen
-            if(collision.getYpos() + 28/*CollisionBox Width*/ + ymove <= handler.getHeight())
+            if(collision.getYpos() + collision.getHeight()/*CollisionBox Width*/ + ymove <= handler.getHeight())
                 ypos += ymove;
             else {
-                ypos = handler.getHeight() - height + (collision.getYpos() - ypos);
+//                ypos = handler.getHeight() - height + (collision.getYpos() - ypos);
+                ypos = handler.getHeight() - collision.getHeight() - collision.getYoff();
                 ymove = 0;
             }
         }
@@ -113,7 +111,12 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
     public void update() {
         getInput();
         move();
-        collision.update(this);
+        collision.update();
+    }
+
+    @Override
+    public void collide(Entity ec) {
+
     }
 
     private void getInput() {
@@ -128,6 +131,9 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
         if(handler.getKeyManager().ctrl || handler.getKeyManager().shift) {
             speedMultiplier = 2;
         }
+        if(handler.getKeyManager().alt) {
+            speedMultiplier = (float)0.1;
+        }
         if(handler.getKeyManager().forward) {
             ymove = (float)(moveSpeed * -Math.sin(direction)* speedMultiplier);
             xmove = (float)(moveSpeed * Math.cos(direction)* speedMultiplier);
@@ -139,10 +145,12 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
         if(handler.getKeyManager().left) {
             direction += rotationSpeed * speedMultiplier;
             rotate();
+            collision.rotate(direction);
         }
         if(handler.getKeyManager().right) {
             direction -= rotationSpeed * speedMultiplier;
             rotate();
+            collision.rotate(direction);
         }
         if(handler.getKeyManager().spacebar && shoot_release) {
             EntityManager.get().subscribe(new BulletPlayer(handler,this));

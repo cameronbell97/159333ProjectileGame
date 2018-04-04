@@ -1,5 +1,6 @@
 package Entities.Static;
 
+import Entities.Collision.CollisionBox;
 import Entities.Entity;
 import Game.Handler;
 
@@ -12,16 +13,18 @@ import java.awt.image.BufferedImage;
  * A simple class to be expanded on later
  */
 
-public class Wall extends Entity{
+public class WallTest extends Entity{
 // VARIABLES //
     public static final int DEF_WIDTH = 16;
     public static final int DEF_HEIGHT = 16;
     private BufferedImage sprite;
 
+
 // CONSTRUCTORS //
-    public Wall(Handler handler, BufferedImage img, int x, int y, int w, int h) {
+    public WallTest(Handler handler, BufferedImage img, int x, int y, int w, int h) {
         super(handler, x, y, w, h);
         sprite = img;
+        collision = new CollisionBox(handler, xpos, ypos, width, height, 0, 0, this);
     }
 
     @Override
@@ -36,7 +39,7 @@ public class Wall extends Entity{
 
     @Override
     public void collide(Entity ec) {
-        
+
     }
 
     public void setPos(int x, int y) {

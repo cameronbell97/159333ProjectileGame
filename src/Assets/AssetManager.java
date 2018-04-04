@@ -21,10 +21,11 @@ public class AssetManager {
     private SpriteSheet char_sheet = null;
     private BufferedImage walls[];
     private BufferedImage bulletplayer;
+    private BufferedImage collColour;
 
 // CONSTRUCTORS //
     public AssetManager() {
-        // Build Spritesheets //
+    // Build Spritesheets //
         // Sheet01
         try {
             sheet1 = new SpriteSheet(ImageLoader.load("../tile01.png")); // load the spritesheet
@@ -50,6 +51,7 @@ public class AssetManager {
             e.printStackTrace();
         }
 
+    // Individual Sprites //
         // Walls //
         walls = new BufferedImage[2];
         try {
@@ -63,8 +65,16 @@ public class AssetManager {
             e.printStackTrace();
         }
 
+        // Player's Bullet
         try {
             bulletplayer = ImageLoader.load("../bullet_player.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Collision Colour
+        try {
+            collColour = ImageLoader.load("../collision.png");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -92,6 +102,8 @@ public class AssetManager {
                 return walls[1];
             case "BulletPlayer":
                 return bulletplayer;
+            case "Coll":
+                return collColour;
         }
 
         return null; // If key is unknown, return null

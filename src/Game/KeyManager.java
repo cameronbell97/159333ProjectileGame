@@ -19,7 +19,8 @@ public class KeyManager implements KeyListener{
             back,
             shift,
             spacebar,
-            ctrl;
+            ctrl,
+            alt;
 
 // CONSTRUCTORS //
     public KeyManager() {
@@ -37,6 +38,7 @@ public class KeyManager implements KeyListener{
         ctrl = keys[KeyEvent.VK_CONTROL];
         shift = keys[KeyEvent.VK_SHIFT];
         spacebar = keys[KeyEvent.VK_SPACE];
+        alt = keys[KeyEvent.VK_ALT];
 
     }
 

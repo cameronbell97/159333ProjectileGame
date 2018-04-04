@@ -1,5 +1,6 @@
 package Entities.Dynamic;
 
+import Entities.Entity;
 import Entities.EntityManager;
 import Game.Handler;
 import Game.Launcher;
@@ -15,8 +16,8 @@ public abstract class Bullet extends DynamicEntity{
                 parent.getYpos() + (parent.getHeight() / 2) - (h / 2),
                 w, h)
         ;
-
-        direction = parent.getDirection();
+        this.parent = parent;
+        direction = parent.getDirection() - (Math.PI/2); // Get the direction
 
         // Move it to the nose of the ship
         ymove = (float)(20 * -Math.sin(direction));
@@ -36,12 +37,15 @@ public abstract class Bullet extends DynamicEntity{
     @Override
     public void update() {
         move();
-        if(xpos <= 32 || ypos <= 32 || xpos >= Launcher.DEF_GAME_WIDTH + 32 || ypos >= Launcher.DEF_GAME_HEIGHT + 32) {
+        if(xpos <= -32 || ypos <= -32 || xpos >= Launcher.DEF_GAME_WIDTH + 32 || ypos >= Launcher.DEF_GAME_HEIGHT + 32) {
             destroy();
         }
+        collision.update();
+        collision.rotate(direction);
     }
 
     private void destroy() {
+        EntityManager.get().unsubscribe(this.collision);
         EntityManager.get().unsubscribe(this);
     }
 }

@@ -1,52 +1,77 @@
 package Entities.Collision;
 
+import Assets.AssetManager;
 import Entities.Dynamic.DynamicEntity;
+import Entities.Entity;
+import Entities.EntityManager;
+import Game.Handler;
+import javafx.geometry.Point2D;
+import Game.SAT;
+import java.util.List;
+import java.awt.Graphics;
+import java.awt.Color;
 
-import java.awt.*;
-
-public class CollisionBox extends CollisionArea{
+public class CollisionBox extends DynamicEntity{
 // VARIABLES //
-    private int width, height;
+    private float xoff, yoff;
+    private Entity parent;
 
 // CONSTRUCTORS //
-    public CollisionBox() {
-        super();
-        width = 0;
-        height = 0;
-    }
-    public CollisionBox(float x, float y, int w, int h) {
-        super(x, y);
-        width = w;
-        height = h;
+    public CollisionBox(Handler handler, float x, float y, int w, int h, float xo, float yo, Entity parent) {
+        super(handler, x, y, w, h);
+        xoff = xo;
+        yoff = yo;
+        this.parent = parent;
+        img = AssetManager.get().getSprite("Coll");
+        EntityManager.get().subscribe(this);
     }
 
 // METHODS //
-    @Override
-    public void draw(Graphics g) {
-        g.setColor(Color.ORANGE);
-        g.fillRect((int)xpos, (int)ypos, width, height);
+
+    public void update() {
+        setXpos(parent.getXpos()+xoff);
+        setYpos(parent.getYpos()+yoff);
+        // TODO // Get min & max values to use for checking out of bounds / screen
+//        corners = SAT.getCorners(this);
+//        double min1 = corns1.stream().mapToDouble(p -> p.dotProduct(ax)).min().getAsDouble();
+//        double min2 = corns1.stream().mapToDouble(p -> p.dotProduct(ax)).min().getAsDouble();
+    }
+
+    // Get the position of the centre of the entity
+    public Point2D getCentre() {
+        return new Point2D(xpos + width / 2, ypos + height / 2);
+    }
+    private void destroy() {
+        EntityManager.get().unsubscribe(this);
     }
 
     @Override
-    public void update(DynamicEntity e) {
-        setXpos(e.getXpos()+18);
-        setYpos(e.getYpos()+18);
+    public void collide(Entity ec) {
+        if(ec.getParent() != null && parent != null) parent.collide(ec.getParent());
     }
+
 
 // GETTERS & SETTERS //
-    public int getWidth() {
-        return width;
-    }
 
-    public void setWidth(int width) {
-        this.width = width;
+    public float getXpos() {
+        return xpos;
     }
-
-    public int getHeight() {
-        return height;
+    public void setXpos(float xpos) {
+        this.xpos = xpos;
     }
-
-    public void setHeight(int height) {
-        this.height = height;
+    public float getYpos() {
+        return ypos;
+    }
+    public void setYpos(float ypos) {
+        this.ypos = ypos;
+    }
+    public float getXoff() {
+        return xoff;
+    }
+    public float getYoff() {
+        return yoff;
+    }
+    public Entity getParent() {
+        return parent;
     }
 }

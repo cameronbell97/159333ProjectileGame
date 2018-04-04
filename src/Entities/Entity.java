@@ -1,6 +1,6 @@
 package Entities;
 
-import Entities.Collision.CollisionArea;
+import Entities.Collision.CollisionBox;
 import Game.Handler;
 
 import java.awt.*;
@@ -16,8 +16,9 @@ public abstract class Entity {
     protected float xpos, ypos;
     protected int width, height;
     protected BufferedImage img;
-    protected CollisionArea collision;
+    protected CollisionBox collision;
     protected Handler handler;
+    protected Entity parent;
 
 // CONSTRUCTORS //
     public Entity(Handler handler, float x, float y, int w, int h) {
@@ -26,6 +27,7 @@ public abstract class Entity {
         this.width = w;
         this.height = h;
         this.handler = handler;
+        this.parent = null;
     }
 
 // METHODS //
@@ -33,7 +35,7 @@ public abstract class Entity {
     public abstract void draw(Graphics g);
 
 // GETTERS & SETTERS //
-    public CollisionArea getCollision() {
+    public CollisionBox getCollision() {
         return collision;
     }
     public float getXpos() {
@@ -54,4 +56,11 @@ public abstract class Entity {
     public void setHeight(int height) {
         this.height = height;
     }
+    public void setImg(BufferedImage img) {
+        this.img = img;
+    }
+    public Entity getParent() {
+        return parent;
+    }
+    public abstract void collide(Entity ec);
 }
