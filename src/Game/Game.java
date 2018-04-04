@@ -106,12 +106,30 @@ public class Game implements Runnable{
         return seconds * 60;
     }
 
+    public static int getIntFromRange(int min, int max) {
+        // Switch the values if needed
+        if(max < min) {
+            int temp = min;
+            min = max;
+            max = temp;
+        }
+        Random generator = new Random();
+        return min + generator.nextInt() * (max - min);
+    }
+
     public static float getFloatFromRange(float min, float max) {
+        // Switch the values if needed
+        if(max < min) {
+            float temp = min;
+            min = max;
+            max = temp;
+        }
         Random generator = new Random();
         return min + generator.nextFloat() * (max - min);
     }
 
     public static double getDoubleFromRange(double min, double max) {
+        // Switch the values if needed
         if(max < min) {
             double temp = min;
             min = max;

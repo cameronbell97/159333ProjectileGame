@@ -20,6 +20,7 @@ public class AssetManager {
     private SpriteSheet wall_sheet = null;
     private SpriteSheet char_sheet = null;
     private SpriteSheet bullet_sheet = null;
+    private SpriteSheet particles_sheet = null;
     private BufferedImage walls[];
     private BufferedImage collColour;
 
@@ -53,6 +54,12 @@ public class AssetManager {
         // Bullet Sheet
         try {
             bullet_sheet = new SpriteSheet(ImageLoader.load("../bullets.png"), 2, 2, 10, 10); // load the spritesheet
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Particle Sheet
+        try {
+            particles_sheet = new SpriteSheet(ImageLoader.load("../particles.png"), 4, 4, 8, 8); // load the spritesheet
         } catch (IOException e) {
             e.printStackTrace();
         }

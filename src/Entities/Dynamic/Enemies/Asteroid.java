@@ -111,7 +111,10 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
     @Override
     public void addHP(int hp) {
         this.hp += hp;
-        if(this.hp <= 0) die();
+        if(this.hp <= 0) {
+            // TODO // Drop Points
+            die();
+        }
     }
     @Override
     public void die() {
@@ -124,7 +127,13 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
                 EntityManager.get().subscribe(new Asteroid(handler, newX, newY, level-1, newDir, moveSpeed*1.2));
             }
         }
+        explode();
         EntityManager.get().unsubscribe(this);
         EntityManager.get().unsubscribe(collision);
+    }
+
+    // Method to explode rock particles
+    private void explode() {
+        int particNum = 3 + (2 * level);
     }
 }
