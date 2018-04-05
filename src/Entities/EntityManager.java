@@ -1,6 +1,7 @@
 package Entities;
 
 import Entities.Collision.CollisionBox;
+import Entities.Dynamic.Particles.Particle;
 import Entities.Dynamic.PlayerEntity;
 import Game.SAT;
 import Game.iObserver;
@@ -28,38 +29,49 @@ public class EntityManager implements iObserver {
     List<CollisionBox> cols; // A list of CollisionBoxes
     List<CollisionBox> sub_cueue; // A list of CollisionBoxes
     List<CollisionBox> unsub_cueue; // A list of CollisionBoxes
+    List<Particle> particles; // A list of CollisionBoxes
+    List<Particle> p_sub_queue; // A list of CollisionBoxes
+    List<Particle> p_unsub_queue; // A list of CollisionBoxes
 
 // CONSTRUCTORS //
     public EntityManager() {
         player = null;
+
         ents = new ArrayList<Entity>();
         sub_queue = new ArrayList<Entity>();
         unsub_queue = new ArrayList<Entity>();
+
         cols = new ArrayList<CollisionBox>();
         sub_cueue = new ArrayList<CollisionBox>();
         unsub_cueue = new ArrayList<CollisionBox>();
+
+        particles = new ArrayList<Particle>();
+        p_sub_queue = new ArrayList<Particle>();
+        p_unsub_queue = new ArrayList<Particle>();
     }
 
 // METHODS //
-    // Method that subscribes an entity to the entity manager
+    // Methods that subscribe Entities to this Entity Manager
+
+    public void subscribe(Particle p) {
+        p_sub_queue.add(p);
+    }
     public void subscribe(Entity e) {
         sub_queue.add(e);
     }
-    // Method that subscribes an collision box to the entity manager
     public void subscribe(CollisionBox e) {
         sub_cueue.add(e);
     }
-
     public void subPlayer(PlayerEntity p) {
         player = p;
         subscribe(p);
     }
 
-    public void unsubPlayer(PlayerEntity p) {
-        player = null;
-        unsubscribe(p);
-    }
+    // Methods that unsubscribe Entities from this Entity Manager
 
+    public void unsubscribe(Particle p) {
+        p_unsub_queue.add(p);
+    }
     @Override
     public void unsubscribe(Entity e) {
         unsub_queue.add(e);
@@ -67,47 +79,67 @@ public class EntityManager implements iObserver {
     public void unsubscribe(CollisionBox e) {
         unsub_cueue.add(e);
     }
+    public void unsubPlayer(PlayerEntity p) {
+        player = null;
+        unsubscribe(p);
+    }
 
     // Method that calls update() on every entity
     public void update() {
+        // ENTITIES //
         // Update Entities
         for(Entity e : ents) {
             e.update();
         }
-
         // Add Queued Entities
         for(Entity e : sub_queue) {
             ents.add(e);
         }
         sub_queue.clear(); // Clear the sub_queue
-
         // Remove Queued Entities
         for(Entity e : unsub_queue) {
             ents.remove(e);
         }
         unsub_queue.clear(); // Clear the unsub_queue
 
-
+        // COLLISION BOXES //
         // Check for collisions
         checkCollisions();
-
-        // Add Queued Entities
+        // Add Queued Collision Boxes
         for(CollisionBox e : sub_cueue) {
             cols.add(e);
         }
         sub_cueue.clear(); // Clear the sub_cueue
-
-        // Remove Queued Entities
+        // Remove Collision Boxes
         for(CollisionBox e : unsub_cueue) {
             cols.remove(e);
         }
         unsub_cueue.clear(); // Clear the unsub_cueue
+
+        // PARTICLES //
+        // Update Entities
+        for(Particle p : particles) {
+            p.update();
+        }
+        // Add Queued Entities
+        for(Particle p : p_sub_queue) {
+            particles.add(p);
+        }
+        p_sub_queue.clear(); // Clear the sub_queue
+        // Remove Queued Entities
+        for(Particle p : p_unsub_queue) {
+            particles.remove(p);
+        }
+        p_unsub_queue.clear(); // Clear the unsub_queue
     }
 
     // Method that calls draw() on every entity
     public void draw(Graphics g) {
         for(Entity e : ents) {
             e.draw(g);
+        }
+        for(Particle p : particles) {
+            p.draw(g);
         }
         // Draw Player on top of everything else
         if(player != null) player.draw(g);

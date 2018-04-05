@@ -6,8 +6,7 @@ import Entities.iVulnerable;
 import Game.Handler;
 
 import Assets.AssetManager;
-import Timer.Timer;
-import Timer.TimerManager;
+import Timer.*;
 
 /**
  * Cameron Bell - 27/03/2018
@@ -15,7 +14,7 @@ import Timer.TimerManager;
  * The controllable player
  */
 
-public class PlayerEntity extends DynamicEntity implements iVulnerable, Game.iCanHaveTimer {
+public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHaveTimer {
 // VARIABLES //
     public static final int DEF_PLAYER_WIDTH = 64;
     public static final int DEF_PLAYER_HEIGHT = 64;

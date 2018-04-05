@@ -1,7 +1,5 @@
 package Timer;
 
-import Game.iCanHaveTimer;
-
 /**
  * Cameron Bell - 05/04/2018
  * Timer  Class

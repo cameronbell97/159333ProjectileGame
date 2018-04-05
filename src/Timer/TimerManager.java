@@ -1,7 +1,5 @@
 package Timer;
 
-import Game.iCanHaveTimer;
-
 import java.util.ArrayList;
 import java.util.List;
 

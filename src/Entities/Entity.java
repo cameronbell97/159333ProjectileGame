@@ -44,6 +44,12 @@ public abstract class Entity {
     public float getYpos() {
         return ypos;
     }
+    protected void setXpos(float xpos) {
+        this.xpos = xpos;
+    }
+    protected void setYpos(float ypos) {
+        this.ypos = ypos;
+    }
     public int getWidth() {
         return width;
     }

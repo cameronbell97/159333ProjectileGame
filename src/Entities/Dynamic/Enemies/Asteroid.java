@@ -3,6 +3,7 @@ package Entities.Dynamic.Enemies;
 import Assets.AssetManager;
 import Entities.Collision.CollisionBox;
 import Entities.Dynamic.DynamicEntity;
+import Entities.Dynamic.Particles.AsteroidParticle;
 import Entities.Entity;
 import Entities.EntityManager;
 import Entities.iVulnerable;
@@ -135,5 +136,9 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
     // Method to explode rock particles
     private void explode() {
         int particNum = 3 + (2 * level);
+
+        for(int i = 0; i < particNum; i++) {
+            EntityManager.get().subscribe(new AsteroidParticle(handler, this, ((i * 2 * Math.PI) /(particNum))));
+        }
     }
 }

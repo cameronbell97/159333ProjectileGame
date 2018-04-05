@@ -119,7 +119,7 @@ public class Game implements Runnable{
             max = temp;
         }
         Random generator = new Random();
-        return min + generator.nextInt() * (max - min);
+        return min + generator.nextInt(max - min);
     }
 
     public static float getFloatFromRange(float min, float max) {

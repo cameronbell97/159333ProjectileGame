@@ -132,6 +132,10 @@ public class AssetManager {
         switch(s) {
             case 1:
                 return sheet1.getSprite(x, y);
+            case 2:
+                return sheet2.getSprite(x, y);
+            case 10:
+                return particles_sheet.getSprite(x, y);
         }
 
         return null;
