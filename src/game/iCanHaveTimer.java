@@ -1,5 +1,7 @@
 package Game;
 
+import Timer.Timer;
+
 /**
  * Created by Cameron on 5/04/2018.
  */

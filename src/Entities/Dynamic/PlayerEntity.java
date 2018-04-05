@@ -6,8 +6,8 @@ import Entities.iVulnerable;
 import Game.Handler;
 
 import Assets.AssetManager;
-import Game.Timer;
-import Game.TimerManager;
+import Timer.Timer;
+import Timer.TimerManager;
 
 /**
  * Cameron Bell - 27/03/2018

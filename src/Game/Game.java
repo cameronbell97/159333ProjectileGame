@@ -4,6 +4,7 @@ import Screens.GameScreen;
 import Screens.MainMenuScreen;
 import Screens.Screen;
 import Screens.ScreenManager;
+import Timer.TimerManager;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
