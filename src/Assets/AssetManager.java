@@ -18,7 +18,8 @@ public class AssetManager {
     private SpriteSheet sheet1 = null;
     private SpriteSheet sheet2 = null;
     private SpriteSheet wall_sheet = null;
-    private SpriteSheet char_sheet = null;
+    private SpriteSheet char_sheet_01 = null;
+    private SpriteSheet char_sheet_02 = null;
     private SpriteSheet bullet_sheet = null;
     private SpriteSheet particles_sheet = null;
     private BufferedImage walls[];
@@ -45,9 +46,15 @@ public class AssetManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // Characters sheet
+        // Characters sheet Roman
         try {
-            char_sheet = new SpriteSheet(ImageLoader.load("../characters01.png"), 10, 3, 5, 9); // load the spritesheet
+            char_sheet_01 = new SpriteSheet(ImageLoader.load("../characters01.png"), 10, 4, 5, 9); // load the spritesheet
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Characters sheet Alien
+        try {
+            char_sheet_01 = new SpriteSheet(ImageLoader.load("../characters02.png"), 10, 4, 5, 9); // load the spritesheet
         } catch (IOException e) {
             e.printStackTrace();
         }
