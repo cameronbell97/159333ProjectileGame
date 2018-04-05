@@ -40,6 +40,8 @@ public class Game implements Runnable{
 
     private Handler handler;
 
+    private TimerManager timerMan;
+
     // Screens
     private Screen mainMenuScreen;
     private Screen gameScreen;
@@ -61,6 +63,7 @@ public class Game implements Runnable{
         display.getFrame().addKeyListener(km);
         displayCanvas = display.getCanvas();
         handler = new Handler(this);
+        timerMan = TimerManager.get();
 
         // Initialise screens
         gameScreen = new GameScreen(handler);
@@ -75,6 +78,7 @@ public class Game implements Runnable{
     // Method to update the game state
     public void update() {
         km.update();
+        timerMan.update();
         if (ScreenManager.getScreen() != null) {
             ScreenManager.getScreen().update();
         }

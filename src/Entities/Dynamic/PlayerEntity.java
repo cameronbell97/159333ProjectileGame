@@ -6,6 +6,8 @@ import Entities.iVulnerable;
 import Game.Handler;
 
 import Assets.AssetManager;
+import Game.Timer;
+import Game.TimerManager;
 
 /**
  * Cameron Bell - 27/03/2018
@@ -13,10 +15,11 @@ import Assets.AssetManager;
  * The controllable player
  */
 
-public class PlayerEntity extends DynamicEntity implements iVulnerable {
+public class PlayerEntity extends DynamicEntity implements iVulnerable, Game.iCanHaveTimer {
 // VARIABLES //
     public static final int DEF_PLAYER_WIDTH = 64;
     public static final int DEF_PLAYER_HEIGHT = 64;
+    public static final int DEF_RELOAD_SPEED = 10; // 60 = 1 second
     public static final double DEF_ROT_SPEED = 0.015*Math.PI;
     AssetManager assMan = AssetManager.get();
     private double speedMultiplier;
@@ -25,6 +28,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
     private float decelerate;
     private int health;
     private boolean shoot_release;
+    private boolean shoot_reloaded;
     private int slowTimeStart;
     private int slowTimeCurrent;
 
@@ -32,10 +36,6 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
 // CONSTRUCTORS //
     public PlayerEntity(Handler handler, float x, float y) {
         super(handler, x, y, DEF_PLAYER_WIDTH, DEF_PLAYER_HEIGHT);
-        initialise();
-    }
-    public PlayerEntity(Handler handler, float x, float y, int w, int h) {
-        super(handler, x, y, w, h);
         initialise();
     }
 
@@ -50,6 +50,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
         collision = new CollisionBox(handler, xpos+22, ypos+17, 20, 35, 22, 17, this);
         health = 10;
         shoot_release = true;
+        shoot_reloaded = true;
         slowTimeStart = 0;
         slowTimeCurrent = 0;
         EntityManager.get().subPlayer(this);
@@ -162,11 +163,14 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
             rotateSprite();
             collision.rotateSprite(direction);
         }
-        if(handler.getKeyManager().spacebar && shoot_release) {
+        if(handler.getKeyManager().spacebar && shoot_release && shoot_reloaded) {
             EntityManager.get().subscribe(new BulletPlayer(handler,this));
             shoot_release = false;
+            shoot_reloaded = false;
+            TimerManager.get().newTimer(DEF_RELOAD_SPEED, this, "REL");
         }
         if(!handler.getKeyManager().spacebar) shoot_release = true;
+        // Slow/Speedup Mechanics for collision with asteroid
         if(slowTimeStart > 0) slowTimeCurrent++;
         if(slowTimeStart == slowTimeCurrent) slowTimeStart = 0;
         if(slowTimeStart == 0 && slowTimeCurrent > 0) slowTimeCurrent--;
@@ -189,6 +193,19 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
     private void slow(int ticks) {
         slowTimeStart = ticks;
         slowTimeCurrent = 0;
+    }
+
+    @Override
+    public void timerNotify(Timer t) {
+        String timerCode = t.getCode(); // Get timer code
+
+        switch (timerCode) {
+            case "REL":
+                shoot_reloaded = true;
+                break;
+
+        }
+        TimerManager.get().ubsubTimer(t); // Unsubscribe the timer
     }
 
 // GETTERS & SETTERS //
