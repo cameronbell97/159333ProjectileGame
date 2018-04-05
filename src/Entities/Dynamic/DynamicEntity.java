@@ -18,8 +18,8 @@ public abstract class DynamicEntity extends Entity{
     protected double direction;
     protected double moveSpeed;
 
-    AffineTransform aTrans;
-    AffineTransformOp aTransOp;
+    protected AffineTransform aTrans;
+    protected AffineTransformOp aTransOp;
 
 // CONSTRUCTORS //
     public DynamicEntity(Handler handler, float x, float y, int w, int h) {
@@ -42,16 +42,16 @@ public abstract class DynamicEntity extends Entity{
         ypos += ymove;
     }
 
-    // Method to rotate the image
-    protected void rotate() {
+    // Method to rotateSprite the image
+    protected void rotateSprite() {
         // TODO // Rotate Sprite Without Cutoffs
         aTrans = AffineTransform.getRotateInstance(-direction+(Math.PI/2), width/2, height/2);
         aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
 
     }
 
-    // Method to rotate the image
-    protected void rotate(double dir) {
+    // Method to rotateSprite the image
+    public void rotateSprite(double dir) {
         // TODO // Rotate Sprite Without Cutoffs
         direction = dir;
         aTrans = AffineTransform.getRotateInstance(-direction+(Math.PI/2), width/2, height/2);

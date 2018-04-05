@@ -19,8 +19,9 @@ public class AssetManager {
     private SpriteSheet sheet2 = null;
     private SpriteSheet wall_sheet = null;
     private SpriteSheet char_sheet = null;
+    private SpriteSheet bullet_sheet = null;
+    private SpriteSheet particles_sheet = null;
     private BufferedImage walls[];
-    private BufferedImage bulletplayer;
     private BufferedImage collColour;
 
 // CONSTRUCTORS //
@@ -50,6 +51,18 @@ public class AssetManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // Bullet Sheet
+        try {
+            bullet_sheet = new SpriteSheet(ImageLoader.load("../bullets.png"), 2, 2, 10, 10); // load the spritesheet
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // Particle Sheet
+        try {
+            particles_sheet = new SpriteSheet(ImageLoader.load("../particles.png"), 4, 4, 8, 8); // load the spritesheet
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     // Individual Sprites //
         // Walls //
@@ -61,13 +74,6 @@ public class AssetManager {
         }
         try {
             walls[1] = ImageLoader.load("../wall_v.png");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // Player's Bullet
-        try {
-            bulletplayer = ImageLoader.load("../bullet_player.png");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -101,7 +107,13 @@ public class AssetManager {
             case "VerWall":
                 return walls[1];
             case "BulletPlayer":
-                return bulletplayer;
+                return bullet_sheet.getSprite(0, 0);
+            case "AstLarge":
+                return sheet1.getSprite(0,1);
+            case "AstMedium":
+                return sheet1.getSprite(1,1);
+            case "AstSmall":
+                return sheet1.getSprite(2,1);
             case "Coll":
                 return collColour;
         }

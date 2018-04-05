@@ -27,10 +27,10 @@ public class SpriteSheet {
     }
 
     // Constructor overloaded for custom sheet dimensions
-    public SpriteSheet(BufferedImage img, int sheetx, int sheety, int w, int h){
+    public SpriteSheet(BufferedImage img, int sheetx, int sheety, int width, int height){
         sheet = img;
         imgArray = new BufferedImage[sheetx][sheety];
-        compile(sheetx, sheety, w, h); // Build the sheet
+        compile(sheetx, sheety, width, height); // Build the sheet
     }
 
     // TODO implement a constructor that defines sheetx and sheety,

@@ -9,7 +9,7 @@ import Assets.AssetManager;
 
 /**
  * Cameron Bell - 27/03/2018
- * Player DynamicEntity Class
+ * Player Entity Class
  * The controllable player
  */
 
@@ -19,12 +19,14 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
     public static final int DEF_PLAYER_HEIGHT = 64;
     public static final double DEF_ROT_SPEED = 0.015*Math.PI;
     AssetManager assMan = AssetManager.get();
-    private float speedMultiplier;
+    private double speedMultiplier;
     private double rotationSpeed;
     private boolean reverseThrust; // If true, player can reverse
     private float decelerate;
     private int health;
     private boolean shoot_release;
+    private int slowTimeStart;
+    private int slowTimeCurrent;
 
 
 // CONSTRUCTORS //
@@ -43,12 +45,14 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
         setSpeed(4);
         rotationSpeed = DEF_ROT_SPEED;
         img = assMan.getSprite("player");
-//        img = assMan.getSprite(1, 2, 0);
         reverseThrust = true;
         decelerate = (float)0.06;
         collision = new CollisionBox(handler, xpos+22, ypos+17, 20, 35, 22, 17, this);
         health = 10;
         shoot_release = true;
+        slowTimeStart = 0;
+        slowTimeCurrent = 0;
+        EntityManager.get().subPlayer(this);
     }
 
     public void move() {
@@ -116,7 +120,10 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
 
     @Override
     public void collide(Entity ec) {
-
+        if(ec instanceof Entities.Dynamic.Enemies.Asteroid) {
+            addHP(-1);
+            slow(50);
+        }
     }
 
     private void getInput() {
@@ -126,12 +133,15 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
         if(ymove > 0) ymove = Math.max(0, ymove - ymove*((float)0.01 + decelerate));
         if(ymove < 0) ymove = Math.min(0, ymove - ymove*((float)0.01 + decelerate));
 
-        speedMultiplier = 1;
+        // Slow (if you hit an enemy) mechanics
+        if(slowTimeStart <= 0) speedMultiplier = 1;
+        else speedMultiplier = (double)slowTimeCurrent/slowTimeStart;
 
-        if(handler.getKeyManager().ctrl || handler.getKeyManager().shift) {
-            speedMultiplier = 2;
+        if(handler.getKeyManager().shift && slowTimeStart <= 0) {
+            if(slowTimeCurrent <= 0) speedMultiplier = 2;
+            else speedMultiplier = (double)1 + ((double)((double)50 - slowTimeCurrent) / 50);
         }
-        if(handler.getKeyManager().alt) {
+        if(handler.getKeyManager().ctrl ) {
             speedMultiplier = (float)0.1;
         }
         if(handler.getKeyManager().forward) {
@@ -144,29 +154,41 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
         }
         if(handler.getKeyManager().left) {
             direction += rotationSpeed * speedMultiplier;
-            rotate();
-            collision.rotate(direction);
+            rotateSprite();
+            collision.rotateSprite(direction);
         }
         if(handler.getKeyManager().right) {
             direction -= rotationSpeed * speedMultiplier;
-            rotate();
-            collision.rotate(direction);
+            rotateSprite();
+            collision.rotateSprite(direction);
         }
         if(handler.getKeyManager().spacebar && shoot_release) {
             EntityManager.get().subscribe(new BulletPlayer(handler,this));
             shoot_release = false;
         }
         if(!handler.getKeyManager().spacebar) shoot_release = true;
+        if(slowTimeStart > 0) slowTimeCurrent++;
+        if(slowTimeStart == slowTimeCurrent) slowTimeStart = 0;
+        if(slowTimeStart == 0 && slowTimeCurrent > 0) slowTimeCurrent--;
     }
 
     @Override
     public void addHP(int hp) {
         health += hp;
+        if(health <= 0) die();
     }
 
+    // Method to destroy / delete entity
     @Override
     public void die() {
+        EntityManager.get().unsubPlayer(this);
+        EntityManager.get().unsubscribe(this.collision);
+    }
 
+    // Method to setup the slow mechanics
+    private void slow(int ticks) {
+        slowTimeStart = ticks;
+        slowTimeCurrent = 0;
     }
 
 // GETTERS & SETTERS //

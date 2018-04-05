@@ -1,13 +1,13 @@
 package Entities.Dynamic;
 
-import Entities.Entity;
 import Entities.EntityManager;
 import Game.Handler;
 import Game.Launcher;
 
-import java.awt.*;
-
 public abstract class Bullet extends DynamicEntity{
+// VARIABLES //
+    private static final int OFFSCREEN_BOUNDARY = 32;
+
 // CONSTRUCTORS //
     public Bullet(Handler handler, int w, int h, DynamicEntity parent) {
         super(
@@ -30,21 +30,21 @@ public abstract class Bullet extends DynamicEntity{
         xmove = (float)(moveSpeed * Math.cos(direction));
 
         // Rotate the sprite
-        rotate();
+        rotateSprite();
     }
 
 // METHODS //
     @Override
     public void update() {
         move();
-        if(xpos <= -32 || ypos <= -32 || xpos >= Launcher.DEF_GAME_WIDTH + 32 || ypos >= Launcher.DEF_GAME_HEIGHT + 32) {
+        if(xpos <= -OFFSCREEN_BOUNDARY || ypos <= -OFFSCREEN_BOUNDARY || xpos >= Launcher.DEF_GAME_WIDTH + OFFSCREEN_BOUNDARY || ypos >= Launcher.DEF_GAME_HEIGHT + OFFSCREEN_BOUNDARY) {
             destroy();
         }
         collision.update();
-        collision.rotate(direction);
+        collision.rotateSprite(direction);
     }
 
-    private void destroy() {
+    protected void destroy() {
         EntityManager.get().unsubscribe(this.collision);
         EntityManager.get().unsubscribe(this);
     }

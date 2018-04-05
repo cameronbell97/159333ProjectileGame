@@ -36,7 +36,7 @@ public class Wall extends Entity{
 
     @Override
     public void collide(Entity ec) {
-        
+
     }
 
     public void setPos(int x, int y) {
