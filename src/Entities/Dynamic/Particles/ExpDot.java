@@ -16,10 +16,10 @@ public class ExpDot extends Particle {
 
 // CONSTRUCTORS //
     public ExpDot(Handler handler, Entity parent) {
-        super(handler, parent.getXpos(), parent.getYpos(), 10, 10);
+        super(handler, parent.getXpos()+(parent.getWidth()/2-5), parent.getYpos()+(parent.getHeight()/2-5), 10, 10);
         this.parent = parent;
         collision = new CollisionBox(handler, xpos, ypos, width, height, 0, 0, this);
-        img = AssetManager.get().getSprite(10, 0, 1);
+        img = AssetManager.get().getSprite(10, Game.Game.getIntFromRange(0, 3), 1);
     }
 
 // METHODS //
