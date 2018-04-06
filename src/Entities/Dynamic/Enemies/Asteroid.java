@@ -4,6 +4,7 @@ import Assets.AssetManager;
 import Entities.Collision.CollisionBox;
 import Entities.Dynamic.DynamicEntity;
 import Entities.Dynamic.Particles.AsteroidParticle;
+import Entities.Dynamic.Particles.ExpDot;
 import Entities.Entity;
 import Entities.EntityManager;
 import Entities.iVulnerable;
@@ -127,6 +128,7 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
 
                 EntityManager.get().subscribe(new Asteroid(handler, newX, newY, level-1, newDir, moveSpeed*1.2));
             }
+            EntityManager.get().subscribe(new ExpDot(handler, this));
         }
         explode();
         EntityManager.get().unsubscribe(this);

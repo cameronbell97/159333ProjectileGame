@@ -24,7 +24,7 @@ public class AsteroidParticle extends Particle {
         setNewPosition();
         this.direction = direction;
         this.spriteDirection = direction;
-        moveSpeed = 0.3;
+        moveSpeed = 0.55;
         img = AssetManager.get().getSprite(10, Game.Game.getIntFromRange(0, 3), 0);
 
         // Set Move Speed

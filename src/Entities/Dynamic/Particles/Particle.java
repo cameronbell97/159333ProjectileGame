@@ -34,7 +34,7 @@ public abstract class Particle extends DynamicEntity implements iCanHaveTimer{
         }
     }
 
-    private void destroy() {
+    protected void destroy() {
         EntityManager.get().unsubscribe(this);
     }
 }
