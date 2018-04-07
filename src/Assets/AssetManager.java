@@ -66,7 +66,7 @@ public class AssetManager {
         }
         // Particle Sheet
         try {
-            particles_sheet = new SpriteSheet(ImageLoader.load("../particles.png"), 4, 4, 8, 8); // load the spritesheet
+            particles_sheet = new SpriteSheet(ImageLoader.load("../particles8.png"), 4, 4, 8, 8); // load the spritesheet
         } catch (IOException e) {
             e.printStackTrace();
         }
