@@ -16,8 +16,8 @@ public abstract class Particle extends DynamicEntity implements iCanHaveTimer{
     public static final int DEF_PARTICLE_HEIGHT = 8;
 
 // CONSTRUCTORS //
-    public Particle(Handler handler, float x, float y, int w, int h, double direction) {
-        super(handler, x, y, w, h, direction);
+    public Particle(float x, float y, int w, int h, double direction) {
+        super(x, y, w, h, direction);
     }
 
 // METHODS //

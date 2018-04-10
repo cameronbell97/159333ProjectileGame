@@ -21,10 +21,10 @@ public class WallTest extends Entity{
 
 
 // CONSTRUCTORS //
-    public WallTest(Handler handler, BufferedImage img, int x, int y, int w, int h) {
-        super(handler, x, y, w, h);
+    public WallTest(BufferedImage img, int x, int y, int w, int h) {
+        super(x, y, w, h);
         sprite = img;
-        collision = new CollisionBox(handler, xpos, ypos, width, height, 0, 0, this);
+        collision = new CollisionBox(xpos, ypos, width, height, 0, 0, this);
     }
 
     @Override

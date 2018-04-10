@@ -6,6 +6,7 @@ import Entities.iVulnerable;
 import Game.Handler;
 
 import Assets.AssetManager;
+import Game.Launcher;
 import Timer.*;
 
 /**
@@ -30,11 +31,13 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     private boolean shoot_reloaded;
     private int slowTimeStart;
     private int slowTimeCurrent;
+    Handler handler;
 
 
 // CONSTRUCTORS //
     public PlayerEntity(Handler handler, float x, float y) {
-        super(handler, x, y, DEF_PLAYER_WIDTH, DEF_PLAYER_HEIGHT, (Math.PI / 2));
+        super(x, y, DEF_PLAYER_WIDTH, DEF_PLAYER_HEIGHT, (Math.PI / 2));
+        this.handler = handler;
         initialise();
     }
 
@@ -46,7 +49,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         img = assMan.getSprite("player");
         reverseThrust = true;
         decelerate = (float)0.06;
-        collision = new CollisionBox(handler, xpos+22, ypos+17, 20, 35, 22, 17, this);
+        collision = new CollisionBox(xpos+22, ypos+17, 20, 35, 22, 17, this);
         health = 10;
         shoot_release = true;
         shoot_reloaded = true;
@@ -65,10 +68,10 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         // If moving right
         if(xmove > 0) {
             // If you would NOT move out of the screen
-            if(collision.getXpos() + collision.getWidth()/*CollisionBox Width*/ + xmove <= handler.getWidth())
+            if(collision.getXpos() + collision.getWidth()/*CollisionBox Width*/ + xmove <= Launcher.DEF_GAME_WIDTH)
                 xpos += xmove;
             else {
-                xpos = handler.getWidth() - collision.getWidth() - collision.getXoff();
+                xpos = Launcher.DEF_GAME_WIDTH - collision.getWidth() - collision.getXoff();
                 xmove = 0;
             }
         }
@@ -90,11 +93,11 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         // If moving down
         if(ymove > 0) {
             // If you would NOT move out of the screen
-            if(collision.getYpos() + collision.getHeight()/*CollisionBox Width*/ + ymove <= handler.getHeight())
+            if(collision.getYpos() + collision.getHeight()/*CollisionBox Width*/ + ymove <= Launcher.DEF_GAME_HEIGHT)
                 ypos += ymove;
             else {
 //                ypos = handler.getHeight() - height + (collision.getYpos() - ypos);
-                ypos = handler.getHeight() - collision.getHeight() - collision.getYoff();
+                ypos = Launcher.DEF_GAME_HEIGHT - collision.getHeight() - collision.getYoff();
                 ymove = 0;
             }
         }
@@ -163,7 +166,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             collision.rotateSprite(direction);
         }
         if(handler.getKeyManager().spacebar && shoot_release && shoot_reloaded) {
-            EntityManager.get().subscribe(new BulletPlayer(handler,this));
+            EntityManager.get().subscribe(new BulletPlayer(this));
             shoot_release = false;
             shoot_reloaded = false;
             TimerManager.get().newTimer(DEF_RELOAD_SPEED, this, "REL");

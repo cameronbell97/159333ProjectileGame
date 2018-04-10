@@ -13,34 +13,34 @@ import java.util.List;
  * Created by Cameron on 7/04/2018.
  */
 public class EnemyDirector implements iCanHaveTimer, iCanHaveEnemyTimer {
+// SINGLETON PATTERN //
+    private static EnemyDirector self = new EnemyDirector();
+    public static EnemyDirector get() { return self; }
+
 // VARIABLES //
     private static final int LEVEL_WAIT_TIME = 4*60;
     private static final int LEVEL_DURATION = 90*60;
     private static final int STAGE_1_START = 10;
     private int gameLevel;
     private CodeTimer currentTimer;
-    private Handler handler;
     private EntityManager entityManager;
     private TimerManager timerManager;
     private int limboEntities;
 
     // Enemies
     List<Enemy> remaining_queue; // A list of Enemies
-    List<Enemy> unsub_queue; // A list of Enemies
     List<Enemy> spawn_queue; // A list of Enemies
     List<Enemy> dead_queue; // A list of Enemies
 
 // CONSTRUCTORS //
-    public EnemyDirector(Handler handler) {
+    public EnemyDirector() {
         this.gameLevel = 0;
         limboEntities = 0;
         currentTimer = null;
-        this.handler = handler;
         entityManager = EntityManager.get();
         timerManager = TimerManager.get();
 
         remaining_queue = new ArrayList();
-        unsub_queue = new ArrayList();
         spawn_queue = new ArrayList();
         dead_queue = new ArrayList();
     }
@@ -86,8 +86,8 @@ public class EnemyDirector implements iCanHaveTimer, iCanHaveEnemyTimer {
         switch (gameLevel) {
             case 1:
                 for(int i = 0; i < 2; i++)
-                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(handler, 0, 0, 2, 0, 1)));
-                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(handler, 0, 0, 3, 0, 1)));
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 1)));
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 1)));
                 break;
         }
     }
@@ -164,7 +164,11 @@ public class EnemyDirector implements iCanHaveTimer, iCanHaveEnemyTimer {
     }
 
     public void unsubscribe(Enemy e) {
-        unsub_queue.add(e);
+        dead_queue.add(e);
+    }
+
+    public void subscribe(Enemy e) {
+        remaining_queue.add(e);
     }
 
     @Override

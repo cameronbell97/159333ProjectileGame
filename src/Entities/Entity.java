@@ -17,16 +17,14 @@ public abstract class Entity {
     protected int width, height;
     protected BufferedImage img;
     protected CollisionBox collision;
-    protected Handler handler;
     protected Entity parent;
 
 // CONSTRUCTORS //
-    public Entity(Handler handler, float x, float y, int w, int h) {
+    public Entity(float x, float y, int w, int h) {
         this.xpos = x;
         this.ypos = y;
         this.width = w;
         this.height = h;
-        this.handler = handler;
         this.parent = null;
     }
 

@@ -18,8 +18,8 @@ public class AsteroidParticle extends Particle {
     private double spriteRotation;
 
 // CONSTRUCTORS //
-    public AsteroidParticle(Handler handler, DynamicEntity parent, Double direction) {
-        super(handler, parent.getXpos(), parent.getYpos(), DEF_PARTICLE_WIDTH, DEF_PARTICLE_HEIGHT, direction);
+    public AsteroidParticle(DynamicEntity parent, Double direction) {
+        super(parent.getXpos(), parent.getYpos(), DEF_PARTICLE_WIDTH, DEF_PARTICLE_HEIGHT, direction);
         TimerManager.get().newTimer(100, this, "DIE");
         setNewPosition();
         this.spriteDirection = direction;

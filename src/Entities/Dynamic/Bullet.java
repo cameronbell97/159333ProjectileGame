@@ -9,9 +9,8 @@ public abstract class Bullet extends DynamicEntity{
     private static final int OFFSCREEN_BOUNDARY = 32;
 
 // CONSTRUCTORS //
-    public Bullet(Handler handler, int w, int h, DynamicEntity parent) {
+    public Bullet(int w, int h, DynamicEntity parent) {
         super(
-                handler,
                 parent.getXpos() + (parent.getWidth() / 2) - (w / 2),
                 parent.getYpos() + (parent.getHeight() / 2) - (h / 2),
                 w, h, (parent.getDirection() - (Math.PI/2)))

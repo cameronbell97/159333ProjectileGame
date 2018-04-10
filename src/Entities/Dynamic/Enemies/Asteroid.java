@@ -8,6 +8,7 @@ import Entities.Dynamic.Particles.ExpDot;
 import Entities.Entity;
 import Entities.EntityManager;
 import Entities.iVulnerable;
+import Game.EnemyDirector;
 import Game.Handler;
 import Game.Launcher;
 
@@ -30,8 +31,8 @@ public class Asteroid extends Enemy implements iVulnerable {
     private double spriteRotation;
 
 // CONSTRUCTORS //
-    public Asteroid(Handler handler, float x, float y, int level, double direction, double speed) {
-        super(handler, x, y, 64, 64, direction);
+    public Asteroid(float x, float y, int level, double direction, double speed) {
+        super(x, y, 64, 64, direction);
         this.level = level;
         this.spriteDirection = direction;
         moveSpeed = speed;
@@ -39,17 +40,17 @@ public class Asteroid extends Enemy implements iVulnerable {
         // Set depending on level
         if(level >=3) {
             hp = 5;
-            collision = new CollisionBox(handler, xpos+11, ypos+11, 42, 42, 11, 11, this);
+            collision = new CollisionBox(xpos+11, ypos+11, 42, 42, 11, 11, this);
             img = AssetManager.get().getSprite("AstLarge");
         }
         else if(level == 2) {
             hp = 3;
-            collision = new CollisionBox(handler, xpos+18, ypos+18, 28, 28, 18, 18, this);
+            collision = new CollisionBox(xpos+18, ypos+18, 28, 28, 18, 18, this);
             img = AssetManager.get().getSprite("AstMedium");
         }
         else {
             hp = 1;
-            collision = new CollisionBox(handler, xpos+26, ypos+26, 12, 12, 26, 26, this);
+            collision = new CollisionBox(xpos+26, ypos+26, 12, 12, 26, 26, this);
             img = AssetManager.get().getSprite("AstSmall");
         }
 
@@ -124,13 +125,16 @@ public class Asteroid extends Enemy implements iVulnerable {
                 float newY = Game.Game.getFloatFromRange(ypos-height/8, ypos+height/8);
                 double newDir = Game.Game.getDoubleFromRange(direction + (i*(Math.PI/4)), direction + (i*(Math.PI/8)));
 
-                EntityManager.get().subscribe(new Asteroid(handler, newX, newY, level-1, newDir, moveSpeed*1.2));
+                Asteroid ast = new Asteroid(newX, newY, level-1, newDir, moveSpeed*1.2);
+                EntityManager.get().subscribe(ast);
+                EnemyDirector.get().subscribe(ast);
             }
-            EntityManager.get().subscribe(new ExpDot(handler, this));
+            EntityManager.get().subscribe(new ExpDot(this));
         }
         explode();
         EntityManager.get().unsubscribe(this);
         EntityManager.get().unsubscribe(collision);
+        EnemyDirector.get().unsubscribe(this);
     }
 
     // Method to explode rock particles
@@ -138,7 +142,7 @@ public class Asteroid extends Enemy implements iVulnerable {
         int particNum = 3 + (2 * level);
 
         for(int i = 0; i < particNum; i++) {
-            EntityManager.get().subscribe(new AsteroidParticle(handler, this, ((i * 2 * Math.PI) /(particNum))));
+            EntityManager.get().subscribe(new AsteroidParticle(this, ((i * 2 * Math.PI) /(particNum))));
         }
     }
 }

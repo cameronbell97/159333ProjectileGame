@@ -19,8 +19,8 @@ public class Wall extends Entity{
     private BufferedImage sprite;
 
 // CONSTRUCTORS //
-    public Wall(Handler handler, BufferedImage img, int x, int y, int w, int h) {
-        super(handler, x, y, w, h);
+    public Wall(BufferedImage img, int x, int y, int w, int h) {
+        super(x, y, w, h);
         sprite = img;
     }
 

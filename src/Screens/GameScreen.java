@@ -32,7 +32,7 @@ public class GameScreen extends Screen {
         // Declarations
         entityManager = EntityManager.get();
         assMan = AssetManager.get();
-        enemyDirector = new EnemyDirector(handler);
+        enemyDirector = EnemyDirector.get();
         player = new PlayerEntity(
                 handler,
                 Launcher.DEF_GAME_WIDTH/2-player.DEF_PLAYER_WIDTH/2,
