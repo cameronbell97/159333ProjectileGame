@@ -55,6 +55,12 @@ public class TimerManager {
         return t;
     }
 
+    public Timer newTimer(int time, iCanHaveTimer notifiee, String code, int codenum) {
+        Timer t = new Timer(time, notifiee, code, codenum);
+        sub_queue.add(t);
+        return t;
+    }
+
     public void ubsubTimer(Timer t) {
         unsub_queue.add(t);
     }

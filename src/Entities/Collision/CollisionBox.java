@@ -15,7 +15,7 @@ public class CollisionBox extends DynamicEntity{
 
 // CONSTRUCTORS //
     public CollisionBox(Handler handler, float x, float y, int w, int h, float xo, float yo, Entity parent) {
-        super(handler, x, y, w, h);
+        super(handler, x, y, w, h, (Math.PI / 2));
         xoff = xo;
         yoff = yo;
         this.parent = parent;

@@ -34,7 +34,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 
 // CONSTRUCTORS //
     public PlayerEntity(Handler handler, float x, float y) {
-        super(handler, x, y, DEF_PLAYER_WIDTH, DEF_PLAYER_HEIGHT);
+        super(handler, x, y, DEF_PLAYER_WIDTH, DEF_PLAYER_HEIGHT, (Math.PI / 2));
         initialise();
     }
 

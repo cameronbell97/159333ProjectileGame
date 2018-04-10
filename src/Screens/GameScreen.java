@@ -4,6 +4,7 @@ import Assets.AssetManager;
 import Entities.Dynamic.Enemies.Asteroid;
 import Entities.EntityManager;
 import Entities.Dynamic.PlayerEntity;
+import Game.EnemyDirector;
 import Game.Handler;
 import Game.Launcher;
 
@@ -35,7 +36,9 @@ public class GameScreen extends Screen {
                 Launcher.DEF_GAME_HEIGHT/2-player.DEF_PLAYER_HEIGHT/2)
         ;
 
-        entityManager.subscribe(new Asteroid(handler, Launcher.DEF_GAME_WIDTH-64, 0, 3, (5 * Math.PI) / 4, 1));
+        for(int i = 0; i < 8; i++) {
+            entityManager.subscribe(EnemyDirector.generateEnemyPosition(new Asteroid(handler, 0, 0, 3, 0, 1)));
+        }
     }
 
 // METHODS //

@@ -31,9 +31,8 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
 
 // CONSTRUCTORS //
     public Asteroid(Handler handler, float x, float y, int level, double direction, double speed) {
-        super(handler, x, y, 64, 64);
+        super(handler, x, y, 64, 64, direction);
         this.level = level;
-        this.direction = direction;
         this.spriteDirection = direction;
         moveSpeed = speed;
 
@@ -54,9 +53,8 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
             img = AssetManager.get().getSprite("AstSmall");
         }
 
-        // Set Move Speed
-        ymove = (float)(moveSpeed * -Math.sin(direction));
-        xmove = (float)(moveSpeed * Math.cos(direction));
+        // Set Move Speeds
+        setMoveSpeeds();
 
         // Set Rotation
         spriteRotation = Game.Game.getDoubleFromRange(-0.01*Math.PI, 0.01*Math.PI);
@@ -65,7 +63,7 @@ public class Asteroid extends DynamicEntity implements iVulnerable {
         rotateSprite();
     }
 
-// METHODS //
+    // METHODS //
     @Override
     public void update() {
         move();

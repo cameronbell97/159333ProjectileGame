@@ -22,15 +22,21 @@ public abstract class DynamicEntity extends Entity{
     protected AffineTransformOp aTransOp;
 
 // CONSTRUCTORS //
-    public DynamicEntity(Handler handler, float x, float y, int w, int h) {
+    public DynamicEntity(Handler handler, float x, float y, int w, int h, double direction) {
         super(handler, x, y, w, h);
-        direction = 0.5*Math.PI; // direction = 90 degrees but in radians
+        this.direction = direction;
         moveSpeed = DEF_SPEED;
+        setMoveSpeeds();
         aTrans = AffineTransform.getRotateInstance(0, width/2, height/2);
         aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
     }
 
 // METHODS //
+    public void setMoveSpeeds() {
+        ymove = (float)(moveSpeed * -Math.sin(direction));
+        xmove = (float)(moveSpeed * Math.cos(direction));
+    }
+
     protected void move() {
         moveX();
         moveY();
@@ -70,5 +76,9 @@ public abstract class DynamicEntity extends Entity{
     public void setSpeed(double ms) { moveSpeed = ms; }
     public double getDirection() {
         return direction + (Math.PI / 2);
+    }
+
+    public void setDirection(double direction) {
+        this.direction = direction;
     }
 }

@@ -19,10 +19,9 @@ public class AsteroidParticle extends Particle {
 
 // CONSTRUCTORS //
     public AsteroidParticle(Handler handler, DynamicEntity parent, Double direction) {
-        super(handler, parent.getXpos(), parent.getYpos(), DEF_PARTICLE_WIDTH, DEF_PARTICLE_HEIGHT);
+        super(handler, parent.getXpos(), parent.getYpos(), DEF_PARTICLE_WIDTH, DEF_PARTICLE_HEIGHT, direction);
         TimerManager.get().newTimer(100, this, "DIE");
         setNewPosition();
-        this.direction = direction;
         this.spriteDirection = direction;
         moveSpeed = 0.55;
         img = AssetManager.get().getSprite(10, Game.Game.getIntFromRange(0, 3), 0);

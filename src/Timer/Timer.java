@@ -11,12 +11,21 @@ public class Timer {
     private iCanHaveTimer notifiee;
     private int ticktime;
     private String code;
+    private int codenum;
 
 // CONSTRUCTORS //
     public Timer(int time, iCanHaveTimer notifiee, String code) {
         ticktime = time;
         this.notifiee = notifiee;
         this.code = code;
+        this.codenum = codenum;
+    }
+
+    public Timer(int time, iCanHaveTimer notifiee, String code, int codenum) {
+        ticktime = time;
+        this.notifiee = notifiee;
+        this.code = code;
+        this.codenum = codenum;
     }
 
 // METHODS //
@@ -35,5 +44,9 @@ public class Timer {
 
     public String getCode() {
         return code;
+    }
+
+    public int getCodeNum() {
+        return codenum;
     }
 }
