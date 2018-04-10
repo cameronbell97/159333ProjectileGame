@@ -20,7 +20,7 @@ import java.awt.image.AffineTransformOp;
  * An asteroid object
  */
 
-public class Asteroid extends DynamicEntity implements iVulnerable {
+public class Asteroid extends Enemy implements iVulnerable {
 // VARIABLES //
     private static final int OFFSCREEN_BOUNDARY = 96;
 

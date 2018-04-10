@@ -195,7 +195,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     }
 
     @Override
-    public void timerNotify(Timer t) {
+    public void timerNotify(CodeTimer t) {
         String timerCode = t.getCode(); // Get timer code
 
         switch (timerCode) {

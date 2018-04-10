@@ -1,7 +1,6 @@
 package Entities.Dynamic.Particles;
 
 import Entities.Dynamic.DynamicEntity;
-import Entities.Entity;
 import Entities.EntityManager;
 import Game.Handler;
 import Timer.*;
@@ -23,7 +22,7 @@ public abstract class Particle extends DynamicEntity implements iCanHaveTimer{
 
 // METHODS //
     @Override
-    public void timerNotify(Timer t) {
+    public void timerNotify(CodeTimer t) {
         String timerCode = t.getCode(); // Get timer code
         TimerManager.get().ubsubTimer(t); // Unsubscribe the timer
 

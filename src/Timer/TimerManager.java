@@ -1,11 +1,13 @@
 package Timer;
 
+import Entities.Dynamic.Enemies.Enemy;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Cameron Bell - 05/04/2018
- * Timer Manager Class
+ * CodeTimer Manager Class
  * Manages Game Timers player
  */
 
@@ -49,14 +51,20 @@ public class TimerManager {
 
     }
 
-    public Timer newTimer(int time, iCanHaveTimer notifiee, String code) {
-        Timer t = new Timer(time, notifiee, code);
+    public CodeTimer newTimer(int time, iCanHaveTimer notifiee, String code) {
+        CodeTimer t = new CodeTimer(time, notifiee, code);
         sub_queue.add(t);
         return t;
     }
 
-    public Timer newTimer(int time, iCanHaveTimer notifiee, String code, int codenum) {
-        Timer t = new Timer(time, notifiee, code, codenum);
+    public CodeTimer newTimer(int time, iCanHaveTimer notifiee, String code, int codenum) {
+        CodeTimer t = new CodeTimer(time, notifiee, code, codenum);
+        sub_queue.add(t);
+        return t;
+    }
+
+    public EnemyTimer newEnemyTimer(int time, iCanHaveEnemyTimer notifiee, Enemy enemy) {
+        EnemyTimer t = new EnemyTimer(time, notifiee, enemy);
         sub_queue.add(t);
         return t;
     }

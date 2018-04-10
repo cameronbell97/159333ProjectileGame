@@ -22,6 +22,7 @@ public class GameScreen extends Screen {
     private AssetManager assMan;
     private PlayerEntity player;
     private EntityManager entityManager;
+    private EnemyDirector enemyDirector;
 
 // CONSTRUCTORS //
     public GameScreen(Handler handler) throws IOException {
@@ -31,15 +32,16 @@ public class GameScreen extends Screen {
         // Declarations
         entityManager = EntityManager.get();
         assMan = AssetManager.get();
+        enemyDirector = new EnemyDirector(handler);
         player = new PlayerEntity(
                 handler,
                 Launcher.DEF_GAME_WIDTH/2-player.DEF_PLAYER_WIDTH/2,
                 Launcher.DEF_GAME_HEIGHT/2-player.DEF_PLAYER_HEIGHT/2)
         ;
 
-        for(int i = 0; i < 8; i++) {
-            entityManager.subscribe(EnemyDirector.generateEnemyPosition(new Asteroid(handler, 0, 0, 3, 0, 1)));
-        }
+//        for(int i = 0; i < 8; i++) {
+//            entityManager.subscribe(EnemyDirector.generateEnemyPosition(new Asteroid(handler, 0, 0, 3, 0, 1)));
+//        }
 
     }
 
@@ -47,6 +49,7 @@ public class GameScreen extends Screen {
     @Override
     public void update() {
         entityManager.update();
+        enemyDirector.update();
     }
 
     @Override
