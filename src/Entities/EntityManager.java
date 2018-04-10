@@ -164,7 +164,7 @@ public class EntityManager implements iObserver {
                     ) &&
                         SAT.isColliding(e, f) // The entities are colliding
                     ) {
-                    System.out.println("C O L L I S I O N");
+//                    System.out.println("C O L L I S I O N");
                     e.getParent().collide(f.getParent()); // Call the collide function on e
                     //f.getParent().collide(e.getParent()); // (CURRENTLY) no need to call collide() on f because f and e will switch places in a later check
                 }

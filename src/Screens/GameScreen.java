@@ -7,6 +7,7 @@ import Entities.Dynamic.PlayerEntity;
 import Game.EnemyDirector;
 import Game.Handler;
 import Game.Launcher;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.awt.*;
 import java.io.IOException;
@@ -39,6 +40,7 @@ public class GameScreen extends Screen {
         for(int i = 0; i < 8; i++) {
             entityManager.subscribe(EnemyDirector.generateEnemyPosition(new Asteroid(handler, 0, 0, 3, 0, 1)));
         }
+
     }
 
 // METHODS //

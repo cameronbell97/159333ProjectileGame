@@ -118,6 +118,9 @@ public class Game implements Runnable{
             min = max;
             max = temp;
         }
+
+        max += 1;
+
         Random generator = new Random();
         return min + generator.nextInt(max - min);
     }

@@ -18,7 +18,7 @@ public class EnemyDirector implements iCanHaveTimer {
     private Handler handler;
 
 // CONSTRUCTORS //
-    public EnemyDirector(Handler handler) {
+    public EnemyDirector() {
         this.gameLevel = 0;
         currentTimer = null;
         this.handler = handler;
