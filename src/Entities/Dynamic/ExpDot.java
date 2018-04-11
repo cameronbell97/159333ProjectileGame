@@ -5,14 +5,20 @@ import Entities.Collision.CollisionBox;
 import Entities.Entity;
 import Entities.EntityManager;
 import Game.Launcher;
+import Timer.CodeTimer;
+import Timer.TimerManager;
+import Timer.iCanHaveCodeTimer;
 
 /**
  * Created by Cameron on 6/04/2018.
  */
-public class ExpDot extends DynamicEntity {
+public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
 // VARIABLES //
+    // Statics
     private static final int OFFSCREEN_BOUNDARY = 0;
     private static final int DEF_HEIGHT_WIDTH = 10;
+    private static final int DESPAWN_TIME = 10*60;
+
     private int value;
     private int yImg;
     private boolean merged = false;
@@ -54,6 +60,9 @@ public class ExpDot extends DynamicEntity {
         img = AssetManager
                 .get()
                 .getSprite(10, Game.Game.getIntFromRange(0, 3), yImg);
+
+        // Set Despawn Timer
+        TimerManager.get().newCodeTimer(DESPAWN_TIME + Game.Game.getIntFromRange(-30, 30), this, "DIE");
     }
 
     @Override
@@ -92,6 +101,19 @@ public class ExpDot extends DynamicEntity {
         EntityManager.get().unsubscribe(collision);
     }
 
+    @Override
+    public void timerNotify(CodeTimer t) {
+        // Get Code
+        String code = t.getCode();
+
+        // Do depending on code
+        switch (code) {
+            case "DIE":
+                destroy();
+                break;
+        }
+    }
+
 // GETTERS & SETTERS //
     public int getValue() {
         return value;
@@ -100,4 +122,5 @@ public class ExpDot extends DynamicEntity {
     public void setMerged(boolean merged) {
         this.merged = merged;
     }
+
 }

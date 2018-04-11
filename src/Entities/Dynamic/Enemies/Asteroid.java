@@ -21,7 +21,7 @@ import java.awt.image.AffineTransformOp;
 
 public class Asteroid extends Enemy implements iVulnerable {
 // VARIABLES //
-    private static final int OFFSCREEN_BOUNDARY = 96;
+    private static final int OFFSCREEN_BOUNDARY = 128;
     public static final int DEFAULT_SIZE = 64;
 
     private int level;
@@ -74,7 +74,7 @@ public class Asteroid extends Enemy implements iVulnerable {
                 ypos <= -OFFSCREEN_BOUNDARY ||
                 xpos >= Launcher.DEF_GAME_WIDTH + OFFSCREEN_BOUNDARY ||
                 ypos >= Launcher.DEF_GAME_HEIGHT + OFFSCREEN_BOUNDARY) {
-            die();
+            kill();
         }
     }
 
@@ -116,6 +116,7 @@ public class Asteroid extends Enemy implements iVulnerable {
             die();
         }
     }
+
     @Override
     public void die() {
         if(level > 1) {
@@ -131,6 +132,13 @@ public class Asteroid extends Enemy implements iVulnerable {
         }
         EntityManager.get().subscribe(new ExpDot(this, level*2));
         explode();
+        EntityManager.get().unsubscribe(this);
+        EntityManager.get().unsubscribe(collision);
+        EnemyDirector.get().unsubscribe(this);
+    }
+
+    // Hard die, just kills the object
+    public void kill() {
         EntityManager.get().unsubscribe(this);
         EntityManager.get().unsubscribe(collision);
         EnemyDirector.get().unsubscribe(this);

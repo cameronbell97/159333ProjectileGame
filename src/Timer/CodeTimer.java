@@ -8,19 +8,19 @@ package Timer;
 
 public class CodeTimer extends Timer {
 // VARIABLES //
-    private iCanHaveTimer notifiee;
+    private iCanHaveCodeTimer notifiee;
     private String code;
     private int codenum;
 
 // CONSTRUCTORS //
-    public CodeTimer(int time, iCanHaveTimer notifiee, String code) {
+    public CodeTimer(int time, iCanHaveCodeTimer notifiee, String code) {
         super(time);
         this.notifiee = notifiee;
         this.code = code;
         this.codenum = codenum;
     }
 
-    public CodeTimer(int time, iCanHaveTimer notifiee, String code, int codenum) {
+    public CodeTimer(int time, iCanHaveCodeTimer notifiee, String code, int codenum) {
         super(time);
         this.notifiee = notifiee;
         this.code = code;
@@ -35,7 +35,7 @@ public class CodeTimer extends Timer {
 
 // GETTERS & SETTERS //
 
-    public iCanHaveTimer getNotifiee() {
+    public iCanHaveCodeTimer getNotifiee() {
         return notifiee;
     }
 

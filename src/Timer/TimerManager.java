@@ -54,14 +54,14 @@ public class TimerManager {
     }
 
     // Method - Subscribe New CodeTimer
-    public CodeTimer newCodeTimer(int time, iCanHaveTimer notifiee, String code) {
+    public CodeTimer newCodeTimer(int time, iCanHaveCodeTimer notifiee, String code) {
         CodeTimer t = new CodeTimer(time, notifiee, code);
         sub_queue.add(t);
         return t;
     }
 
     // Method - Subscribe New CodeTimer
-    public CodeTimer newCodeTimer(int time, iCanHaveTimer notifiee, String code, int codenum) {
+    public CodeTimer newCodeTimer(int time, iCanHaveCodeTimer notifiee, String code, int codenum) {
         CodeTimer t = new CodeTimer(time, notifiee, code, codenum);
         sub_queue.add(t);
         return t;

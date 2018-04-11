@@ -15,7 +15,7 @@ import Timer.*;
  * The controllable player
  */
 
-public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHaveTimer {
+public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHaveCodeTimer {
 // VARIABLES //
     public static final int DEF_PLAYER_WIDTH = 64;
     public static final int DEF_PLAYER_HEIGHT = 64;

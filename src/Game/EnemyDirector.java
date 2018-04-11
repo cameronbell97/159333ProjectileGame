@@ -15,7 +15,7 @@ import java.util.List;
  * Generates and Manages all Enemies
  */
 
-public class EnemyDirector implements iCanHaveTimer, iCanHaveEnemyTimer {
+public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
 // SINGLETON PATTERN //
     private static EnemyDirector self = new EnemyDirector();
     public static EnemyDirector get() { return self; }

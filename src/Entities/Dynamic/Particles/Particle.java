@@ -9,7 +9,7 @@ import Timer.*;
  * Particle Abstract Class
  */
 
-public abstract class Particle extends DynamicEntity implements iCanHaveTimer{
+public abstract class Particle extends DynamicEntity implements iCanHaveCodeTimer {
 // VARIABLES //
     public static final int DEF_PARTICLE_WIDTH = 8;
     public static final int DEF_PARTICLE_HEIGHT = 8;
