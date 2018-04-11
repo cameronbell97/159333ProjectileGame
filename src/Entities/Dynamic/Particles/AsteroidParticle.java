@@ -3,7 +3,6 @@ package Entities.Dynamic.Particles;
 import Assets.AssetManager;
 import Entities.Dynamic.DynamicEntity;
 import Entities.Entity;
-import Game.Handler;
 import Timer.TimerManager;
 
 import java.awt.geom.AffineTransform;

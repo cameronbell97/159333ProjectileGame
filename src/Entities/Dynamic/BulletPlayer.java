@@ -3,7 +3,6 @@ package Entities.Dynamic;
 import Assets.AssetManager;
 import Entities.Collision.CollisionBox;
 import Entities.Entity;
-import Game.Handler;
 
 public class BulletPlayer extends Bullet {
 // VARIABLES //

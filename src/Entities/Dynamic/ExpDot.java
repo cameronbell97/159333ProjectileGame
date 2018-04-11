@@ -2,10 +2,8 @@ package Entities.Dynamic;
 
 import Assets.AssetManager;
 import Entities.Collision.CollisionBox;
-import Entities.Dynamic.DynamicEntity;
 import Entities.Entity;
 import Entities.EntityManager;
-import Game.Handler;
 import Game.Launcher;
 
 /**

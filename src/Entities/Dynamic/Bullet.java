@@ -1,7 +1,6 @@
 package Entities.Dynamic;
 
 import Entities.EntityManager;
-import Game.Handler;
 import Game.Launcher;
 
 public abstract class Bullet extends DynamicEntity{

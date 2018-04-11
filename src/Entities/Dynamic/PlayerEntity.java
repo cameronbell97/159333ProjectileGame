@@ -3,9 +3,9 @@ import Entities.Collision.CollisionBox;
 import Entities.Entity;
 import Entities.EntityManager;
 import Entities.iVulnerable;
-import Game.Handler;
 
 import Assets.AssetManager;
+import Game.KeyManager;
 import Game.Launcher;
 import Timer.*;
 
@@ -22,6 +22,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     public static final int DEF_RELOAD_SPEED = 10; // 60 = 1 second
     public static final double DEF_ROT_SPEED = 0.015*Math.PI;
     AssetManager assMan = AssetManager.get();
+    KeyManager km = KeyManager.get();
     private double speedMultiplier;
     private double rotationSpeed;
     private boolean reverseThrust; // If true, player can reverse
@@ -31,13 +32,11 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     private boolean shoot_reloaded;
     private int slowTimeStart;
     private int slowTimeCurrent;
-    Handler handler;
 
 
 // CONSTRUCTORS //
-    public PlayerEntity(Handler handler, float x, float y) {
+    public PlayerEntity(float x, float y) {
         super(x, y, DEF_PLAYER_WIDTH, DEF_PLAYER_HEIGHT, (Math.PI / 2));
-        this.handler = handler;
         initialise();
     }
 
@@ -140,38 +139,38 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         if(slowTimeStart <= 0) speedMultiplier = 1;
         else speedMultiplier = (double)slowTimeCurrent/slowTimeStart;
 
-        if(handler.getKeyManager().shift && slowTimeStart <= 0) {
+        if(km.shift && slowTimeStart <= 0) {
             if(slowTimeCurrent <= 0) speedMultiplier = 1.8;
             else speedMultiplier = (double)1 + ((double)((double)50 - slowTimeCurrent) / 50);
         }
-        if(handler.getKeyManager().ctrl ) {
-            speedMultiplier = (float)0.1;
+        if(km.ctrl ) {
+            speedMultiplier = (float)0.25;
         }
-        if(handler.getKeyManager().forward) {
+        if(km.forward) {
             ymove = (float)(moveSpeed * -Math.sin(direction)* speedMultiplier);
             xmove = (float)(moveSpeed * Math.cos(direction)* speedMultiplier);
         }
-        if(handler.getKeyManager().back && reverseThrust) {
+        if(km.back && reverseThrust) {
             ymove = (float)(moveSpeed * Math.sin(direction)* speedMultiplier);
             xmove = (float)(moveSpeed * -Math.cos(direction)* speedMultiplier);
         }
-        if(handler.getKeyManager().left) {
+        if(km.left) {
             direction += rotationSpeed * speedMultiplier;
             rotateSprite();
             collision.rotateSprite(direction);
         }
-        if(handler.getKeyManager().right) {
+        if(km.right) {
             direction -= rotationSpeed * speedMultiplier;
             rotateSprite();
             collision.rotateSprite(direction);
         }
-        if(handler.getKeyManager().spacebar && shoot_release && shoot_reloaded) {
+        if(km.spacebar && shoot_release && shoot_reloaded) {
             EntityManager.get().subscribe(new BulletPlayer(this));
             shoot_release = false;
             shoot_reloaded = false;
             TimerManager.get().newTimer(DEF_RELOAD_SPEED, this, "REL");
         }
-        if(!handler.getKeyManager().spacebar) shoot_release = true;
+        if(!km.spacebar) shoot_release = true;
         // Slow/Speedup Mechanics for collision with asteroid
         if(slowTimeStart > 0) slowTimeCurrent++;
         if(slowTimeStart == slowTimeCurrent) slowTimeStart = 0;

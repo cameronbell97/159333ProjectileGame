@@ -2,7 +2,6 @@ package Entities.Static;
 
 import Entities.Collision.CollisionBox;
 import Entities.Entity;
-import Game.Handler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

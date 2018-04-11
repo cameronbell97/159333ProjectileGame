@@ -1,7 +1,6 @@
 package Screens;
 import java.awt.*;
 import java.io.IOException;
-import Game.Handler;
 
 /**
  * Cameron Bell - 26/03/2018
@@ -12,8 +11,8 @@ public class MainMenuScreen extends Screen{
 // VARIABLES //
 
 // CONSTRUCTORS //
-    public MainMenuScreen(Handler handler) throws IOException {
-        super(handler);
+    public MainMenuScreen() throws IOException {
+        super();
     }
 
 // METHODS //

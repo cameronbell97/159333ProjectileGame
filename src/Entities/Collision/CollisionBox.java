@@ -5,7 +5,6 @@ import Entities.Dynamic.DynamicEntity;
 import Entities.Entity;
 import Entities.EntityManager;
 import Game.Game;
-import Game.Handler;
 import javafx.geometry.Point2D;
 
 public class CollisionBox extends DynamicEntity{

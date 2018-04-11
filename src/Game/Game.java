@@ -39,8 +39,6 @@ public class Game implements Runnable{
     private KeyManager km;
     private Save save;
 
-    private Handler handler;
-
     private TimerManager timerMan;
 
     // Screens
@@ -58,17 +56,19 @@ public class Game implements Runnable{
 // METHODS //
     // Method to initialise game window
     public void initialise() throws IOException {
-        // Initialise game function utilities
-        display = new DisplayWindow(gameTitle, gameWidth, gameHeight);
-        km = new KeyManager();
-        display.getFrame().addKeyListener(km);
-        displayCanvas = display.getCanvas();
-        handler = new Handler(this);
+        // Create Key Managers
+        km = KeyManager.get();
         timerMan = TimerManager.get();
 
+        // Create Window
+        display = new DisplayWindow(gameTitle, gameWidth, gameHeight);
+        display.getFrame().addKeyListener(km);
+        displayCanvas = display.getCanvas();
+
+
         // Initialise screens
-        gameScreen = new GameScreen(handler);
-        mainMenuScreen = new MainMenuScreen(handler);
+        gameScreen = new GameScreen();
+        mainMenuScreen = new MainMenuScreen();
         ScreenManager.setScreen(gameScreen);
 
         // Initialise save data

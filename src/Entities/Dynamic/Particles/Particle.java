@@ -2,7 +2,6 @@ package Entities.Dynamic.Particles;
 
 import Entities.Dynamic.DynamicEntity;
 import Entities.EntityManager;
-import Game.Handler;
 import Timer.*;
 
 /**

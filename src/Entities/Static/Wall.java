@@ -1,7 +1,6 @@
 package Entities.Static;
 
 import Entities.Entity;
-import Game.Handler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

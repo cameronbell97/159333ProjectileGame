@@ -1,7 +1,6 @@
 package Entities;
 
 import Entities.Collision.CollisionBox;
-import Game.Handler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

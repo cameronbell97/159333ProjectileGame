@@ -1,14 +1,10 @@
 package Screens;
 
 import Assets.AssetManager;
-import Entities.Dynamic.Enemies.Asteroid;
-import Entities.Dynamic.ExpDot;
 import Entities.EntityManager;
 import Entities.Dynamic.PlayerEntity;
 import Game.EnemyDirector;
-import Game.Handler;
 import Game.Launcher;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.awt.*;
 import java.io.IOException;
@@ -26,16 +22,15 @@ public class GameScreen extends Screen {
     private EnemyDirector enemyDirector;
 
 // CONSTRUCTORS //
-    public GameScreen(Handler handler) throws IOException {
+    public GameScreen() throws IOException {
         // Super Call
-        super(handler);
+        super();
 
         // Declarations
         entityManager = EntityManager.get();
         assMan = AssetManager.get();
         enemyDirector = EnemyDirector.get();
         player = new PlayerEntity(
-                handler,
                 Launcher.DEF_GAME_WIDTH/2 - player.DEF_PLAYER_WIDTH/2,
                 Launcher.DEF_GAME_HEIGHT/2 - player.DEF_PLAYER_HEIGHT/2)
         ;

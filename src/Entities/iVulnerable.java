@@ -1,7 +1,5 @@
 package Entities;
 
-import Game.Handler;
-
 /**
  * Cameron Bell - 02/04/2018
  * iVulnerable Entity Class
