@@ -44,7 +44,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 // METHODS //
     public void initialise() {
         speedMultiplier = 1;
-        setSpeed(4);
+        setSpeed(3.5);
         rotationSpeed = DEF_ROT_SPEED;
         img = assMan.getSprite("player");
         reverseThrust = true;
@@ -68,7 +68,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         // If moving right
         if(xmove > 0) {
             // If you would NOT move out of the screen
-            if(collision.getXpos() + collision.getWidth()/*CollisionBox Width*/ + xmove <= Launcher.DEF_GAME_WIDTH)
+            if(collision.getXpos() + collision.getWidth() + xmove <= Launcher.DEF_GAME_WIDTH)
                 xpos += xmove;
             else {
                 xpos = Launcher.DEF_GAME_WIDTH - collision.getWidth() - collision.getXoff();
@@ -141,7 +141,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         else speedMultiplier = (double)slowTimeCurrent/slowTimeStart;
 
         if(handler.getKeyManager().shift && slowTimeStart <= 0) {
-            if(slowTimeCurrent <= 0) speedMultiplier = 2;
+            if(slowTimeCurrent <= 0) speedMultiplier = 1.8;
             else speedMultiplier = (double)1 + ((double)((double)50 - slowTimeCurrent) / 50);
         }
         if(handler.getKeyManager().ctrl ) {

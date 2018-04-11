@@ -2,14 +2,12 @@ package Entities.Dynamic.Enemies;
 
 import Assets.AssetManager;
 import Entities.Collision.CollisionBox;
-import Entities.Dynamic.DynamicEntity;
 import Entities.Dynamic.Particles.AsteroidParticle;
-import Entities.Dynamic.Particles.ExpDot;
+import Entities.Dynamic.ExpDot;
 import Entities.Entity;
 import Entities.EntityManager;
 import Entities.iVulnerable;
 import Game.EnemyDirector;
-import Game.Handler;
 import Game.Launcher;
 
 import java.awt.geom.AffineTransform;
@@ -129,8 +127,8 @@ public class Asteroid extends Enemy implements iVulnerable {
                 EntityManager.get().subscribe(ast);
                 EnemyDirector.get().subscribe(ast);
             }
-            EntityManager.get().subscribe(new ExpDot(this));
         }
+        EntityManager.get().subscribe(new ExpDot(this, level*2));
         explode();
         EntityManager.get().unsubscribe(this);
         EntityManager.get().unsubscribe(collision);

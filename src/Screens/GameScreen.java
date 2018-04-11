@@ -2,6 +2,7 @@ package Screens;
 
 import Assets.AssetManager;
 import Entities.Dynamic.Enemies.Asteroid;
+import Entities.Dynamic.ExpDot;
 import Entities.EntityManager;
 import Entities.Dynamic.PlayerEntity;
 import Game.EnemyDirector;
@@ -35,9 +36,10 @@ public class GameScreen extends Screen {
         enemyDirector = EnemyDirector.get();
         player = new PlayerEntity(
                 handler,
-                Launcher.DEF_GAME_WIDTH/2-player.DEF_PLAYER_WIDTH/2,
-                Launcher.DEF_GAME_HEIGHT/2-player.DEF_PLAYER_HEIGHT/2)
+                Launcher.DEF_GAME_WIDTH/2 - player.DEF_PLAYER_WIDTH/2,
+                Launcher.DEF_GAME_HEIGHT/2 - player.DEF_PLAYER_HEIGHT/2)
         ;
+
 
 //        for(int i = 0; i < 8; i++) {
 //            entityManager.subscribe(EnemyDirector.generateEnemyPosition(new Asteroid(handler, 0, 0, 3, 0, 1)));
