@@ -5,7 +5,7 @@ import Game.Launcher;
 
 public abstract class Bullet extends DynamicEntity{
 // VARIABLES //
-    private static final int OFFSCREEN_BOUNDARY = 32;
+    private static final int OFFSCREEN_BOUNDARY = 8;
 
 // CONSTRUCTORS //
     public Bullet(int w, int h, DynamicEntity parent) {

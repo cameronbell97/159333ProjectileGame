@@ -21,7 +21,7 @@ import java.awt.image.AffineTransformOp;
 
 public class Asteroid extends Enemy implements iVulnerable {
 // VARIABLES //
-    private static final int OFFSCREEN_BOUNDARY = 128;
+    private static final int OFFSCREEN_BOUNDARY = 96;
     public static final int DEFAULT_SIZE = 64;
 
     private int level;
@@ -70,11 +70,18 @@ public class Asteroid extends Enemy implements iVulnerable {
         collision.update();
         rotateSprite();
 
+        // If asteroid goes out of bounds
         if(     xpos <= -OFFSCREEN_BOUNDARY ||
                 ypos <= -OFFSCREEN_BOUNDARY ||
                 xpos >= Launcher.DEF_GAME_WIDTH + OFFSCREEN_BOUNDARY ||
                 ypos >= Launcher.DEF_GAME_HEIGHT + OFFSCREEN_BOUNDARY) {
-            kill();
+            // 1 in 3 chance to bounce back
+            if(Game.Game.getIntFromRange(0, 2) == 2) {
+                direction += Math.PI;
+                moveSpeed += 0.2;
+                setMoveSpeeds();
+                move();
+            } else kill();
         }
     }
 
@@ -112,13 +119,13 @@ public class Asteroid extends Enemy implements iVulnerable {
     public void addHP(int hp) {
         this.hp += hp;
         if(this.hp <= 0) {
-            // TODO // Drop Points
             die();
         }
     }
 
     @Override
     public void die() {
+        // Create 2 child asteroids if big enough to do so
         if(level > 1) {
             for(int i = -1; i < 2; i+=2) {
                 float newX = Game.Game.getFloatFromRange(xpos-width/8, xpos+width/8);
@@ -129,6 +136,15 @@ public class Asteroid extends Enemy implements iVulnerable {
                 EntityManager.get().subscribe(ast);
                 EnemyDirector.get().subscribe(ast);
             }
+        }
+        // 1 in 5 chance to generate a third asteroid child upon death of lvl 3 asteroid
+        if(level == 3 && Game.Game.getIntFromRange(0, 4) == 4) {
+            float newX = Game.Game.getFloatFromRange(xpos-width/8, xpos+width/8);
+            float newY = Game.Game.getFloatFromRange(ypos-height/8, ypos+height/8);
+
+            Asteroid ast = new Asteroid(newX, newY, level-1, direction, moveSpeed*1.2);
+            EntityManager.get().subscribe(ast);
+            EnemyDirector.get().subscribe(ast);
         }
         EntityManager.get().subscribe(new ExpDot(this, level*2));
         explode();

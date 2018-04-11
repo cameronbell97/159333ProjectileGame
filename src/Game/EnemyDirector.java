@@ -7,6 +7,7 @@ import Entities.EntityManager;
 import Timer.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -32,6 +33,8 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
     private int gameLevel;
     private CodeTimer currentTimer;
     private int limboEntities;
+    private int spawn_queue_minsec;
+    private int spawn_queue_maxsec;
 
     // Enemy Lists
     List<Enemy> remaining_queue; // A list of Enemies
@@ -46,6 +49,8 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
         this.currentTimer = null;
         this.entityManager = EntityManager.get();
         this.timerManager = TimerManager.get();
+        this.spawn_queue_minsec = 0;
+        this.spawn_queue_maxsec = 0;
 
         // Instantiate Enemy Lists
         this.remaining_queue = new ArrayList();
@@ -56,7 +61,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
 // METHODS //
     public void update() {
         // Generate time new enemy will wait to spawn
-        int nextEnemyTime = Game.getIntFromRange(1*60, 4*60);
+        int nextEnemyTime = Game.getIntFromRange(spawn_queue_minsec, spawn_queue_maxsec);
 
         // Create Enemy "to-be-spawned" Timers
         for(Enemy e : spawn_queue) {
@@ -123,13 +128,30 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
                 for(int i = 0; i < 2; i++)
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 1), Asteroid.DEFAULT_SIZE));
                 spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 1), Asteroid.DEFAULT_SIZE));
+
+                spawn_queue_minsec = 60;
+                spawn_queue_maxsec = 4*60;
                 break;
-            case 2: // Level 2 // TODO //
+
+            case 2: // Level 2 //
+                for(int i = 0; i < 2; i++) {
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 1), Asteroid.DEFAULT_SIZE));
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 1), Asteroid.DEFAULT_SIZE));
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 1.5), Asteroid.DEFAULT_SIZE));
+                }
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 1), Asteroid.DEFAULT_SIZE));
+                Collections.shuffle(spawn_queue);
+
+                spawn_queue_minsec = 45;
+                spawn_queue_maxsec = 3*60+30;
                 break;
+
             case 3: // Level 3 // TODO //
                 break;
+
             case 4: // Level 4 // TODO //
                 break;
+
             default: // TODO // DYNAMIC LEVEL GENERATION
                 break;
         }

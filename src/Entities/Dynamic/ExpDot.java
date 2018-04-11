@@ -17,8 +17,8 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
     // Statics
     private static final int OFFSCREEN_BOUNDARY = 0;
     private static final int DEF_HEIGHT_WIDTH = 10;
-    private static final int DESPAWN_TIME = 10*60;
-    private static final int DEF_PICKUP_DISTANCE = 48;
+    private static final int DESPAWN_TIME = 18*60;
+    private static final int DEF_PICKUP_DISTANCE = 52;
     private static final int DEF_MOVE_SPEED = 2;
 
     private int value;
