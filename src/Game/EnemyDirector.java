@@ -187,7 +187,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
         }
 
         // tan(theta) = (ty / tx), so theta = inversetan(ty / tx)
-        double theta = Math.atan(triangleY /triangleX);
+        double theta = Math.atan(triangleY / triangleX);
 
         // Determine direction depending on P1's location
         if(P1x > P2x && P1y < P2y) { // Quadrant 1

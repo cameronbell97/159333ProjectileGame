@@ -18,10 +18,14 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
     private static final int OFFSCREEN_BOUNDARY = 0;
     private static final int DEF_HEIGHT_WIDTH = 10;
     private static final int DESPAWN_TIME = 10*60;
+    private static final int DEF_PICKUP_DISTANCE = 48;
+    private static final int DEF_MOVE_SPEED = 2;
 
     private int value;
     private int yImg;
     private boolean merged = false;
+    private float distanceFromPlayer;
+    private int pickupDistance;
 
 // CONSTRUCTORS //
     public ExpDot(Entity parent, int value) {
@@ -63,11 +67,15 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
 
         // Set Despawn Timer
         TimerManager.get().newCodeTimer(DESPAWN_TIME + Game.Game.getIntFromRange(-30, 30), this, "DIE");
+
+        // Set Variables
+        moveSpeed = DEF_MOVE_SPEED;
+        pickupDistance = DEF_PICKUP_DISTANCE;
     }
 
     @Override
     public void update() {
-
+        // Check for out-of-screen
         if(     xpos <= -OFFSCREEN_BOUNDARY ||
                 ypos <= -OFFSCREEN_BOUNDARY ||
                 xpos >= Launcher.DEF_GAME_WIDTH + width + OFFSCREEN_BOUNDARY ||
@@ -75,6 +83,70 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
             destroy();
         }
 
+        // Check proximity to player
+        calcDistanceFromPlayer();
+        if(distanceFromPlayer <= pickupDistance) {
+            setMoveSpeeds();
+            move();
+            collision.update();
+        }
+
+    }
+
+    // Method - Determine the distance from the Player
+    private void calcDistanceFromPlayer() {
+        float distance;
+        double newDir = 0;
+
+        // Define point variables for easier function designing
+        float P1x = this.getXpos();
+        float P1y = this.getYpos();
+        float P2x = EntityManager.get().getPlayer().getXpos() + EntityManager.get().getPlayer().getWidth() / 2;
+        float P2y = EntityManager.get().getPlayer().getYpos() + EntityManager.get().getPlayer().getHeight() / 2;
+
+        // Determine right-angled-triangle's opposite and adjacent lengths
+        float triangleX = Math.abs(P2x - P1x);
+        float triangleY = Math.abs(P2y - P1y);
+
+        // Calculate Hypotenuse (Distance from Player)
+        distance = (float) Math.sqrt((triangleX*triangleX)+(triangleY*triangleY));
+
+        // Set Distance
+        this.distanceFromPlayer = distance;
+
+        // Calculate Direction // --------------------------------------------------- //
+
+        // In the event tx = 0, don't do calculations
+        if(triangleX == 0) {
+            if(P1y > P2y) {
+                this.direction = Math.PI / 2;
+                return;
+            }
+            else {
+                this.direction = (3*Math.PI) / 2;
+                return;
+            }
+        }
+
+        // tan(theta) = (ty / tx), so theta = inversetan(ty / tx)
+        double theta = Math.atan(triangleY / triangleX);
+
+        // Determine direction depending on P1's location
+        if(P1x > P2x && P1y < P2y) { // Quadrant 1
+            newDir = Math.PI + theta;
+        }
+        else if(P1x < P2x && P1y < P2y) { // Quadrant 2
+            newDir = -theta;
+        }
+        else if(P1x < P2x && P1y > P2y) { // Quadrant 3
+            newDir = theta;
+        }
+        else if(P1x > P2x && P1y > P2y) { // Quadrant 4
+            newDir = Math.PI - theta;
+        }
+
+        // Set Direction
+        this.direction = newDir;
     }
 
     @Override

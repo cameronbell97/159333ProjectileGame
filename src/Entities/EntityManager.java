@@ -177,4 +177,9 @@ public class EntityManager implements iObserver {
             c.draw(g);
         }
     }
+
+// GETTERS & SETTERS //
+    public PlayerEntity getPlayer() {
+        return player;
+    }
 }
