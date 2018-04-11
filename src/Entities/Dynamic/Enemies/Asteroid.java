@@ -22,6 +22,7 @@ import java.awt.image.AffineTransformOp;
 public class Asteroid extends Enemy implements iVulnerable {
 // VARIABLES //
     private static final int OFFSCREEN_BOUNDARY = 96;
+    public static final int DEFAULT_SIZE = 64;
 
     private int level;
     private int hp;
@@ -30,7 +31,7 @@ public class Asteroid extends Enemy implements iVulnerable {
 
 // CONSTRUCTORS //
     public Asteroid(float x, float y, int level, double direction, double speed) {
-        super(x, y, 64, 64, direction);
+        super(x, y, DEFAULT_SIZE, DEFAULT_SIZE, direction);
         this.level = level;
         this.spriteDirection = direction;
         moveSpeed = speed;

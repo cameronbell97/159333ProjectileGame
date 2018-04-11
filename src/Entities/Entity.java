@@ -60,4 +60,7 @@ public abstract class Entity {
         return parent;
     }
     public abstract void collide(Entity ec);
+    public int getMaxSize() {
+        return Math.max(width, height);
+    }
 }

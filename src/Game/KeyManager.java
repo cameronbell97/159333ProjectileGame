@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 /**
  * Cameron Bell - 27/03/2018
  * Key Manager Class
- * A class that records key presses for gameplay
+ * Class Object to Record Key Presses
  */
 
 public class KeyManager implements KeyListener{
@@ -15,7 +15,10 @@ public class KeyManager implements KeyListener{
     public static KeyManager get() { return self; }
 
 // VARIABLES //
+    // All Keys
     private boolean[] keys;
+
+    // Key Shortcuts
     public boolean
             left,
             right,
@@ -32,9 +35,9 @@ public class KeyManager implements KeyListener{
     }
 
 // METHODS //
-    // Updates variables
+    // Method - Update Shortcuts
     public void update() {
-        // Update the key shortcut booleans
+        // Update the Key Shortcut Booleans
         left = keys[KeyEvent.VK_A];
         right = keys[KeyEvent.VK_D];
         forward = keys[KeyEvent.VK_W];
@@ -43,7 +46,6 @@ public class KeyManager implements KeyListener{
         shift = keys[KeyEvent.VK_SHIFT];
         spacebar = keys[KeyEvent.VK_SPACE];
         alt = keys[KeyEvent.VK_ALT];
-
     }
 
     @Override
@@ -51,17 +53,17 @@ public class KeyManager implements KeyListener{
 
     }
 
+    // Method - Update Keys[] Entry on Key Press
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         keys[key] = true;
-        System.out.println("Key " + key + " pressed"); // DEBUG // Prints what key was pressed
     }
 
+    // Method - Update Keys[] Entry on Key Release
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
         keys[key] = false;
-        System.out.println("Key " + key + " released"); // DEBUG // Prints what key was pressed
     }
 }

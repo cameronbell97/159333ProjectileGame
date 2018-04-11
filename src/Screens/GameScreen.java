@@ -11,51 +11,43 @@ import java.io.IOException;
 
 /**
  * Cameron Bell - 26/03/2018
- * Game.Game Screens.Screen Class
+ * Game Screen Class
  */
 
 public class GameScreen extends Screen {
 // VARIABLES //
-    private AssetManager assMan;
+    // Managers
     private PlayerEntity player;
     private EntityManager entityManager;
     private EnemyDirector enemyDirector;
 
 // CONSTRUCTORS //
     public GameScreen() throws IOException {
-        // Super Call
         super();
 
         // Declarations
         entityManager = EntityManager.get();
-        assMan = AssetManager.get();
         enemyDirector = EnemyDirector.get();
         player = new PlayerEntity(
                 Launcher.DEF_GAME_WIDTH/2 - player.DEF_PLAYER_WIDTH/2,
                 Launcher.DEF_GAME_HEIGHT/2 - player.DEF_PLAYER_HEIGHT/2)
         ;
-
-
-//        for(int i = 0; i < 8; i++) {
-//            entityManager.subscribe(EnemyDirector.generateEnemyPosition(new Asteroid(handler, 0, 0, 3, 0, 1)));
-//        }
-
     }
 
 // METHODS //
+    // Method - Update Managers
     @Override
     public void update() {
         entityManager.update();
         enemyDirector.update();
     }
 
+    // Method - Draw Everything in the Screen
     @Override
     public void draw(Graphics g) {
         // Draw Background
         g.setColor(new Color(0, 0, 20));
         g.fillRect(0, 0, Launcher.DEF_GAME_WIDTH, Launcher.DEF_GAME_HEIGHT);
-
-        // draw collision box for player // TODO // remove
 
         // Draw All Entities
         entityManager.draw(g);

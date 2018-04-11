@@ -168,7 +168,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             EntityManager.get().subscribe(new BulletPlayer(this));
             shoot_release = false;
             shoot_reloaded = false;
-            TimerManager.get().newTimer(DEF_RELOAD_SPEED, this, "REL");
+            TimerManager.get().newCodeTimer(DEF_RELOAD_SPEED, this, "REL");
         }
         if(!km.spacebar) shoot_release = true;
         // Slow/Speedup Mechanics for collision with asteroid
@@ -206,7 +206,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
                 break;
 
         }
-        TimerManager.get().ubsubTimer(t); // Unsubscribe the timer
+        TimerManager.get().unsubTimer(t); // Unsubscribe the timer
     }
 
 // GETTERS & SETTERS //

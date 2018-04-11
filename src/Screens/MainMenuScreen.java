@@ -4,7 +4,7 @@ import java.io.IOException;
 
 /**
  * Cameron Bell - 26/03/2018
- * Main Menu Screens.Screen Class
+ * Main Menu Screen Class
  */
 
 public class MainMenuScreen extends Screen{

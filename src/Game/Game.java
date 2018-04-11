@@ -13,37 +13,41 @@ import java.util.Random;
 
 /**
  * Cameron Bell - 20/03/2018
- * Game.Game Class
- * High level class used to instantiate game and encompass a lot of classes and entities
+ * Game Class
+ * High-Level Class Used to Instantiate Game and Encompass Many Entities
  */
 
 public class Game implements Runnable{
 // VARIABLES //
+    // Statics
     private static final int FPS = 60;
     public static final boolean DRAW_COLLISIONS = false;
 
+    // Basic Game Parameters / Settings
     private String gameTitle;
-
     private int gameHeight;
     private int gameWidth;
 
-    private boolean isRunning;
-
+    // Window / Display variables
     private DisplayWindow display;
     private Canvas displayCanvas;
-    private Thread thread;
-
-    private BufferStrategy bufferStrategy;
     private Graphics g;
+    private BufferStrategy bufferStrategy;
 
+    // Background Program Mechanics
+    private Thread thread;
+    private boolean isRunning;
+
+    // Managers
     private KeyManager km;
-    private Save save;
-
     private TimerManager timerMan;
 
     // Screens
     private Screen mainMenuScreen;
     private Screen gameScreen;
+
+    // Miscellaneous
+    private Save save;
 
 // CONSTRUCTORS //
     public Game(String title, int height, int width) {
@@ -54,9 +58,9 @@ public class Game implements Runnable{
     }
 
 // METHODS //
-    // Method to initialise game window
+    // Method - Initialise Game
     public void initialise() throws IOException {
-        // Create Key Managers
+        // Create Managers
         km = KeyManager.get();
         timerMan = TimerManager.get();
 
@@ -65,28 +69,31 @@ public class Game implements Runnable{
         display.getFrame().addKeyListener(km);
         displayCanvas = display.getCanvas();
 
-
-        // Initialise screens
+        // Initialise Screens
         gameScreen = new GameScreen();
         mainMenuScreen = new MainMenuScreen();
         ScreenManager.setScreen(gameScreen);
 
-        // Initialise save data
+        // Initialise Save Data
         save = new Save();
         if(!save.load()) save.create(); // If load fails, create a blank save
     }
 
-    // Method to update the game state
+    // Method - Updates Everything in the Game
     public void update() {
+        // Update Managers
         km.update();
         timerMan.update();
+
+        // Update Current Screen
         if (ScreenManager.getScreen() != null) {
             ScreenManager.getScreen().update();
         }
     }
 
-    // Method to render the graphics on the screen
+    // Method - Render the Graphics on the Screen
     public void draw() throws IOException {
+        // Set-Up
         bufferStrategy = displayCanvas.getBufferStrategy();
         if(bufferStrategy == null) {
             displayCanvas.createBufferStrategy(3);
@@ -94,23 +101,18 @@ public class Game implements Runnable{
         }
         g = bufferStrategy.getDrawGraphics();
 
-        // Draw to the screen // ---------
+        // Draw to the Screen
         g.clearRect(0, 0, gameWidth, gameHeight); // Clear the screen before drawing
         if (ScreenManager.getScreen() != null) {
             ScreenManager.getScreen().draw(g);
         }
 
-
-        // Finish
-
+        // Display the new drawn-to Screen
         bufferStrategy.show();
         g.dispose();
     }
 
-    public static int secsToTicks(int seconds) {
-        return seconds * 60;
-    }
-
+    // Method - Generate a Random Integer in a Range
     public static int getIntFromRange(int min, int max) {
         // Switch the values if needed
         if(max < min) {
@@ -125,6 +127,7 @@ public class Game implements Runnable{
         return min + generator.nextInt(max - min);
     }
 
+    // Method - Generate a Random Float in a Range
     public static float getFloatFromRange(float min, float max) {
         // Switch the values if needed
         if(max < min) {
@@ -136,6 +139,7 @@ public class Game implements Runnable{
         return min + generator.nextFloat() * (max - min);
     }
 
+    // Method - Generate a Random Double in a Range
     public static double getDoubleFromRange(double min, double max) {
         // Switch the values if needed
         if(max < min) {
@@ -147,17 +151,31 @@ public class Game implements Runnable{
         return min + generator.nextDouble() * (max - min);
     }
 
-    // Threading Methods //
+    // Method - Convert Seconds to Ticks / Frames
+    public static int secsToTicks(int seconds) {
+        return seconds * 60;
+    }
 
+    // -------------------------------------------- // Threading Methods // --------------------------------------------
+
+    // Method - Start the Game
+    public synchronized void start() {
+        if(isRunning) return; // Safeguard in case start() is called a second time
+        isRunning = true;
+        thread = new Thread(this); // Start new thread of this class
+        thread.start(); // Calls run() on Game object in the thread
+    }
+
+    // Method - Main Game Thread Method
     public void run() {
-        try {
-            initialise();
-        } catch (IOException e) {
+        // Initialise Game
+        try { initialise(); }
+        catch (IOException e) {
             e.printStackTrace();
             System.exit(5);
         }
 
-        // FPS/Gamestate Limiting code
+        // FPS / Gamestate Limiting Code
         double timepertick = 1000000000 / FPS; // Max time (in nanoseconds) that the game loop needs to be run by
         double delta = 0; // Time (nanoseconds) till next game loop cycle
         long now; // Current computer time
@@ -165,63 +183,53 @@ public class Game implements Runnable{
         long timer = 0;
         long ticks = 0;
 
-        // The Game.Game Loop // -- Start --
+        // The Main Game Loop // ----- Start -----
         while(isRunning) {
+            // FPS / Gamestate Limiting Code
             now = System.nanoTime();
             delta += (now - lasttime) / timepertick; // Delta += time until next we run the game loop next
             timer += now - lasttime;
             lasttime = now;
 
+            // Time for another frame
             if (delta >= 1) {
-                update(); // Update game state
-                try {
-                    draw(); // Render the graphics on the screen
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                // Update Game State
+                update();
+
+                // Draw Game State to Screen
+                try { draw(); }
+                catch (IOException e) { e.printStackTrace(); }
+
+                // FPS / Gamestate Limiting Code
                 delta--;
                 ticks++;
             }
 
-            // FPS counter
+            // FPS Counter
             if (timer >= 1000000000) {
             System.out.println("FPS = " + ticks);   // DEBUG // Print FPS here to get one every second
                 ticks = 0;
                 timer = 0;
             }
         }
-        // The Game.Game Loop // -- End --
+        // The Main Game Loop // ----- End -----
     }
 
-    // Method executed on game start
-    public synchronized void start() {
-        if(isRunning) return; // Safeguard in case start() is called a second time
-        isRunning = true;
-        thread = new Thread(this); // Start new thread of this class
-        thread.start(); // Calls run() on Game.Game object in thread
-    }
-
-    // Method executed on game stop
+    // Method - Executed on Game Stop
     public synchronized void stop() {
         if (!isRunning) return; // Safeguard in case stop() is called a second time
+
         isRunning = false;
-        try {
-            thread.join(); // Kills thread
-        }
-        catch (java.lang.InterruptedException e) {
-            //!// Do something
-        }
+
+        // Kill Thread
+        try { thread.join(); }
+        catch (java.lang.InterruptedException e) { e.printStackTrace(); }
     }
 
 // GETTERS & SETTERS //
-    public KeyManager getKeyManager() {
-        return km;
-    }
-
     public int getGameHeight() {
         return gameHeight;
     }
-
     public int getGameWidth() {
         return gameWidth;
     }

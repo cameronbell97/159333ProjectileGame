@@ -23,7 +23,7 @@ public abstract class Particle extends DynamicEntity implements iCanHaveTimer{
     @Override
     public void timerNotify(CodeTimer t) {
         String timerCode = t.getCode(); // Get timer code
-        TimerManager.get().ubsubTimer(t); // Unsubscribe the timer
+        TimerManager.get().unsubTimer(t); // Unsubscribe the timer
 
         switch (timerCode) {
             case "DIE":
