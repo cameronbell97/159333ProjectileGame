@@ -23,8 +23,6 @@ public class EnemyDirector implements iCanHaveTimer, iCanHaveEnemyTimer {
 // VARIABLES //
     // Statics
     private static final int LEVEL_WAIT_TIME = 4*60;
-    private static final int LEVEL_DURATION = 90*60;
-    private static final int STAGE_1_START = 10;
 
     // Managers
     private EntityManager entityManager;
@@ -205,7 +203,8 @@ public class EnemyDirector implements iCanHaveTimer, iCanHaveEnemyTimer {
             newDir = Math.PI - theta;
         }
 
-        // TODO // Maybe do some math here to vary the direction
+        // Add small variation to direction
+        newDir += Game.getDoubleFromRange(-(Math.PI / 8), Math.PI / 8);
 
         return newDir;
     }
