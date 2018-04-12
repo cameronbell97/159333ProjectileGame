@@ -32,6 +32,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     private boolean shoot_reloaded;
     private int slowTimeStart;
     private int slowTimeCurrent;
+    private int timeMoving;
 
 
 // CONSTRUCTORS //
@@ -55,6 +56,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         slowTimeStart = 0;
         slowTimeCurrent = 0;
         EntityManager.get().subPlayer(this);
+        timeMoving = 0;
     }
 
     public void move() {
@@ -142,6 +144,12 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         if(km.shift && slowTimeStart <= 0) {
             if(slowTimeCurrent <= 0) speedMultiplier = 1.8;
             else speedMultiplier = (double)1 + ((double)((double)50 - slowTimeCurrent) / 50);
+
+            // Thrust Animation Code
+            if(km.forward) {
+                setImg(assMan.getAnimPThrust(3));
+                timeMoving = 45;
+            }
         }
         if(km.ctrl ) {
             speedMultiplier = (float)0.25;
@@ -149,7 +157,23 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         if(km.forward) {
             ymove = (float)(moveSpeed * -Math.sin(direction)* speedMultiplier);
             xmove = (float)(moveSpeed * Math.cos(direction)* speedMultiplier);
+
+        // Thrust Animation Code
+            if (timeMoving < 35) {
+                timeMoving++;
+                if(timeMoving == 5) setImg(assMan.getAnimPThrust(1));
+                else if(timeMoving == 35) setImg(assMan.getAnimPThrust(2));
+            }
         }
+        else {
+            if (timeMoving != 0) {
+                timeMoving--;
+                if(timeMoving == 5) setImg(assMan.getAnimPThrust(0));
+                else if(timeMoving == 34) setImg(assMan.getAnimPThrust(1));
+                else if(timeMoving == 44) setImg(assMan.getAnimPThrust(2));
+            }
+        }
+
         if(km.back && reverseThrust) {
             ymove = (float)(moveSpeed * Math.sin(direction)* speedMultiplier);
             xmove = (float)(moveSpeed * -Math.cos(direction)* speedMultiplier);

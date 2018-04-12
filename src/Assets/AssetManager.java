@@ -15,6 +15,7 @@ public class AssetManager {
     public static AssetManager get() { return self; }
 
 // VARIABLES //
+    // Sprites
     private SpriteSheet sheet1 = null;
     private SpriteSheet sheet2 = null;
     private SpriteSheet wall_sheet = null;
@@ -24,6 +25,9 @@ public class AssetManager {
     private SpriteSheet particles_sheet = null;
     private BufferedImage walls[];
     private BufferedImage collColour;
+
+    // Animations
+    private BufferedImage[] player_thrust_anim;
 
 // CONSTRUCTORS //
     public AssetManager() {
@@ -91,6 +95,11 @@ public class AssetManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    // Animations //
+        player_thrust_anim = new BufferedImage[4];
+        for(int i = 0; i < 4; i++)
+            player_thrust_anim[i] = getSprite(1, i, 0);
     }
 
 // METHODS //
@@ -139,5 +148,10 @@ public class AssetManager {
         }
 
         return null;
+    }
+
+    public BufferedImage getAnimPThrust(int frame) {
+        if (frame >= 4) frame = 0;
+        return player_thrust_anim[frame];
     }
 }
