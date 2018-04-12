@@ -34,7 +34,7 @@ public class EntityManager implements iObserver {
     List<Particle> p_unsub_queue; // A list of CollisionBoxes
 
 // CONSTRUCTORS //
-    public EntityManager() {
+    private EntityManager() {
         player = null;
 
         ents = new ArrayList<Entity>();
@@ -145,7 +145,7 @@ public class EntityManager implements iObserver {
         if(player != null) player.draw(g);
     }
 
-    public void checkCollisions() {
+    private void checkCollisions() {
         for(CollisionBox e : cols) {
             for(CollisionBox f : cols) {
                 if(

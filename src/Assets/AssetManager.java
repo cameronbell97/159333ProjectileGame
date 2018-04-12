@@ -31,14 +31,14 @@ public class AssetManager {
     private BufferedImage collColour;
 
     // Maps / Dictionaries
-    private Map<String, BufferedImage> charset_1;
-    private Map<String, BufferedImage> charset_2;
+    private HashMap<String, BufferedImage> charset_1;
+    private HashMap<String, BufferedImage> charset_2;
 
     // Animations
     private BufferedImage[] player_thrust_anim;
 
 // CONSTRUCTORS //
-    public AssetManager() {
+    private AssetManager() {
         buildSpritesheets();
         buildMaps();
 
@@ -175,7 +175,7 @@ public class AssetManager {
         return player_thrust_anim[frame];
     }
 
-    public Map<String, BufferedImage> getMap(String mapName) {
+    public HashMap<String, BufferedImage> getMap(String mapName) {
         switch (mapName) {
             case "charset_1":
                 if(charset_1 != null) return charset_1;

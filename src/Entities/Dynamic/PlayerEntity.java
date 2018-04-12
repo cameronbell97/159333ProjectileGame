@@ -5,6 +5,7 @@ import Entities.EntityManager;
 import Entities.iVulnerable;
 
 import Assets.AssetManager;
+import Game.GameDataManager;
 import Game.KeyManager;
 import Game.Launcher;
 import Timer.*;
@@ -26,9 +27,9 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     private static final int THRUST_FRAME_TIME_2 = 25;
     private static final int THRUST_FRAME_TIME_3 = 40;
 
-
     AssetManager assMan = AssetManager.get();
     KeyManager km = KeyManager.get();
+    GameDataManager gdm = GameDataManager.get();
     private double speedMultiplier;
     private double rotationSpeed;
     private boolean reverseThrust; // If true, player can reverse
@@ -133,6 +134,9 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         if(ec instanceof Entities.Dynamic.Enemies.Asteroid) {
             addHP(-1);
             slow(50);
+        }
+        else if(ec instanceof Entities.Dynamic.ExpDot) {
+            gdm.addScore(((ExpDot) ec).getValue());
         }
     }
 

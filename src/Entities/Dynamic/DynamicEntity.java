@@ -66,6 +66,7 @@ public abstract class DynamicEntity extends Entity{
 
     @Override
     public void draw(Graphics g) {
+//        if(img == null) return;
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(aTransOp.filter(img, null), (int)xpos, (int)ypos,  null);
     }

@@ -42,7 +42,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
     List<Enemy> dead_queue; // A list of Enemies
 
 // CONSTRUCTORS //
-    public EnemyDirector() {
+    private EnemyDirector() {
         // Set Variables
         this.gameLevel = 0;
         this.limboEntities = 0;
@@ -239,5 +239,14 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
     // Method - Add Enemy to Remaining Queue for tracking
     public void subscribe(Enemy e) {
         remaining_queue.add(e);
+    }
+
+// GETTERS & SETTERS //
+    public int getRemainingEnemies() {
+        return remaining_queue.size() + limboEntities;
+    }
+
+    public int getGameLevel() {
+        return gameLevel;
     }
 }

@@ -23,7 +23,7 @@ public class TimerManager {
     List<Timer> unsub_queue;
 
 // CONSTRUCTORS //
-    public TimerManager() {
+    private TimerManager() {
         // Instantiate Timer Lists
         timers = new ArrayList();
         sub_queue = new ArrayList();
