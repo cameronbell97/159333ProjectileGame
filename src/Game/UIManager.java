@@ -75,8 +75,15 @@ public class UIManager {
                 null
         );
         else {
+            int numlength = 0;
             for (int i = 1; score / i != 0; i = i * 10) {
-                int currentChar = score % (i * 10);
+                numlength++;
+            }
+            xoffset = LEFT_BOUNDARY + (CHARACTER_WIDTH * CHARACTER_SIZE + 4) * (numlength - 1);
+            for(int i = 0; i < numlength; i++) {
+                int currentChar = score % (int)Math.pow((double)10, (double)i+1);
+                if(i != 0) currentChar = currentChar / (int)Math.pow((double)10, (double)i);
+
                 g.drawImage(
                         charset_1.get(Integer.toString(currentChar)),
                         xoffset,
@@ -85,7 +92,7 @@ public class UIManager {
                         CHARACTER_HEIGHT * CHARACTER_SIZE,
                         null
                 );
-                xoffset += CHARACTER_HEIGHT * CHARACTER_SIZE + 4;
+                xoffset -= CHARACTER_WIDTH * CHARACTER_SIZE + 4;
             }
         }
     }
