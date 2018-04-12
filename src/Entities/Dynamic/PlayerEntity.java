@@ -17,10 +17,16 @@ import Timer.*;
 
 public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHaveCodeTimer {
 // VARIABLES //
+    // Statics
     public static final int DEF_PLAYER_WIDTH = 64;
     public static final int DEF_PLAYER_HEIGHT = 64;
     public static final int DEF_RELOAD_SPEED = 10; // 60 = 1 second
     public static final double DEF_ROT_SPEED = 0.015*Math.PI;
+    private static final int THRUST_FRAME_TIME_1 = 5;
+    private static final int THRUST_FRAME_TIME_2 = 25;
+    private static final int THRUST_FRAME_TIME_3 = 40;
+
+
     AssetManager assMan = AssetManager.get();
     KeyManager km = KeyManager.get();
     private double speedMultiplier;
@@ -148,7 +154,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             // Thrust Animation Code
             if(km.forward) {
                 setImg(assMan.getAnimPThrust(3));
-                timeMoving = 45;
+                timeMoving = THRUST_FRAME_TIME_3;
             }
         }
         if(km.ctrl ) {
@@ -159,18 +165,18 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             xmove = (float)(moveSpeed * Math.cos(direction)* speedMultiplier);
 
         // Thrust Animation Code
-            if (timeMoving < 35) {
+            if (timeMoving < THRUST_FRAME_TIME_2) {
                 timeMoving++;
-                if(timeMoving == 5) setImg(assMan.getAnimPThrust(1));
-                else if(timeMoving == 35) setImg(assMan.getAnimPThrust(2));
+                if(timeMoving == THRUST_FRAME_TIME_1) setImg(assMan.getAnimPThrust(1));
+                else if(timeMoving == THRUST_FRAME_TIME_2) setImg(assMan.getAnimPThrust(2));
             }
         }
         else {
             if (timeMoving != 0) {
                 timeMoving--;
-                if(timeMoving == 5) setImg(assMan.getAnimPThrust(0));
-                else if(timeMoving == 34) setImg(assMan.getAnimPThrust(1));
-                else if(timeMoving == 44) setImg(assMan.getAnimPThrust(2));
+                if(timeMoving == THRUST_FRAME_TIME_1) setImg(assMan.getAnimPThrust(0));
+                else if(timeMoving == THRUST_FRAME_TIME_2 - 1) setImg(assMan.getAnimPThrust(1));
+                else if(timeMoving == THRUST_FRAME_TIME_3 - 1) setImg(assMan.getAnimPThrust(2));
             }
         }
 
