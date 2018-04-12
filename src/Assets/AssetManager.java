@@ -2,6 +2,10 @@ package Assets;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Cameron Bell - 27/03/2018
@@ -15,7 +19,7 @@ public class AssetManager {
     public static AssetManager get() { return self; }
 
 // VARIABLES //
-    // Sprites
+    // Spritesheets
     private SpriteSheet sheet1 = null;
     private SpriteSheet sheet2 = null;
     private SpriteSheet wall_sheet = null;
@@ -26,54 +30,17 @@ public class AssetManager {
     private BufferedImage walls[];
     private BufferedImage collColour;
 
+    // Maps / Dictionaries
+    private Map<String, BufferedImage> charset_1;
+    private Map<String, BufferedImage> charset_2;
+
     // Animations
     private BufferedImage[] player_thrust_anim;
 
 // CONSTRUCTORS //
     public AssetManager() {
-    // Build Spritesheets //
-        // Sheet01
-        try {
-            sheet1 = new SpriteSheet(ImageLoader.load("../tile01.png")); // load the spritesheet
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // Sheet02
-        try {
-            sheet2 = new SpriteSheet(ImageLoader.load("../tile02.png"), 4, 4, 32, 32); // load the spritesheet
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // Walls sheet
-        try {
-            wall_sheet = new SpriteSheet(ImageLoader.load("../walls.png"), 2, 2, 16, 16); // load the spritesheet
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // Characters sheet Roman
-        try {
-            char_sheet_01 = new SpriteSheet(ImageLoader.load("../characters01.png"), 10, 4, 5, 9); // load the spritesheet
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // Characters sheet Alien
-        try {
-            char_sheet_01 = new SpriteSheet(ImageLoader.load("../characters02.png"), 10, 4, 5, 9); // load the spritesheet
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // Bullet Sheet
-        try {
-            bullet_sheet = new SpriteSheet(ImageLoader.load("../bullets.png"), 2, 2, 10, 10); // load the spritesheet
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // Particle Sheet
-        try {
-            particles_sheet = new SpriteSheet(ImageLoader.load("../particles8.png"), 4, 4, 8, 8); // load the spritesheet
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        buildSpritesheets();
+        buildMaps();
 
     // Individual Sprites //
         // Walls //
@@ -150,8 +117,73 @@ public class AssetManager {
         return null;
     }
 
+    private void buildSpritesheets() {
+        // Sheet01
+        try { sheet1 = new SpriteSheet(ImageLoader.load("../tile01.png")); // load the spritesheet
+        } catch (IOException e) { e.printStackTrace(); }
+
+        // Sheet02
+        try { sheet2 = new SpriteSheet(ImageLoader.load("../tile02.png"), 4, 4, 32, 32); // load the spritesheet
+        } catch (IOException e) { e.printStackTrace(); }
+
+        // Walls sheet
+        try { wall_sheet = new SpriteSheet(ImageLoader.load("../walls.png"), 2, 2, 16, 16); // load the spritesheet
+        } catch (IOException e) { e.printStackTrace(); }
+
+        // Characters sheet Roman
+        try { char_sheet_01 = new SpriteSheet(ImageLoader.load("../characters01.png"), 10, 4, 5, 9); // load the spritesheet
+        } catch (IOException e) { e.printStackTrace(); }
+
+        // Characters sheet Alien
+        try { char_sheet_02 = new SpriteSheet(ImageLoader.load("../characters02.png"), 10, 4, 5, 9); // load the spritesheet
+        } catch (IOException e) { e.printStackTrace(); }
+
+        // Bullet Sheet
+        try { bullet_sheet = new SpriteSheet(ImageLoader.load("../bullets.png"), 2, 2, 10, 10); // load the spritesheet
+        } catch (IOException e) { e.printStackTrace(); }
+
+        // Particle Sheet
+        try { particles_sheet = new SpriteSheet(ImageLoader.load("../particles8.png"), 4, 4, 8, 8); // load the spritesheet
+        } catch (IOException e) { e.printStackTrace(); }
+    }
+
+    private void buildMaps() {
+        // Character Sets
+        String[][] letters = {
+                {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"},
+                {"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T"},
+                {"U", "V", "W", "X", "Y", "Z", ",", ".", "!", "?"},
+                {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
+        };
+        charset_1 = new HashMap<>();
+        charset_2 = new HashMap<>();
+        for(int y = 0; y < 4; y++) {
+            for(int x = 0; x < 10; x++) {
+                if (!charset_1.containsKey(letters[y][x])) {
+                     charset_1.put(letters[y][x], char_sheet_01.getSprite(x, y));
+                }
+                if (!charset_2.containsKey(letters[y][x])) {
+                     charset_2.put(letters[y][x], char_sheet_02.getSprite(x, y));
+                }
+            }
+        }
+    }
+
+// GETTERS & SETTERS //
     public BufferedImage getAnimPThrust(int frame) {
         if (frame >= 4) frame = 0;
         return player_thrust_anim[frame];
+    }
+
+    public Map<String, BufferedImage> getMap(String mapName) {
+        switch (mapName) {
+            case "charset_1":
+                if(charset_1 != null) return charset_1;
+                break;
+            case "charset_2":
+                if(charset_2 != null) return charset_2;
+                break;
+        }
+        return null;
     }
 }
