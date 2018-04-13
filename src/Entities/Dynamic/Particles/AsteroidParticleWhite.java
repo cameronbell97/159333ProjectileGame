@@ -6,8 +6,8 @@ import Entities.Dynamic.DynamicEntity;
 import java.awt.image.BufferedImage;
 
 public class AsteroidParticleWhite extends AsteroidParticle{
-    public AsteroidParticleWhite(DynamicEntity parent, Double direction) {
-        super(parent, direction);
+    public AsteroidParticleWhite(DynamicEntity parent, Double direction, int level) {
+        super(parent, direction, level);
     }
 
     @Override

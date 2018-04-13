@@ -17,13 +17,15 @@ public class AsteroidParticle extends Particle {
 // VARIABLES //
     private double spriteDirection;
     private double spriteRotation;
+    private int level;
 
 // CONSTRUCTORS //
-    public AsteroidParticle(DynamicEntity parent, Double direction) {
+    public AsteroidParticle(DynamicEntity parent, Double direction, int level) {
         super(parent.getXpos(), parent.getYpos(), DEF_PARTICLE_WIDTH, DEF_PARTICLE_HEIGHT, direction);
         TimerManager.get().newCodeTimer(100, this, "DIE");
         setNewPosition();
         this.spriteDirection = direction;
+        this.level = level;
         moveSpeed = 0.55;
         img = getSprite();
 
@@ -49,7 +51,8 @@ public class AsteroidParticle extends Particle {
     }
 
     protected BufferedImage getSprite() {
-        return AssetManager.get().getSprite(10, Game.Game.getIntFromRange(0, 3), 0);
+        if(level < 3) return AssetManager.get().getSprite(10, Game.Game.getIntFromRange(0, 3), 0);
+        else return AssetManager.get().getSprite(11, Game.Game.getIntFromRange(0, 3), 3);
     }
 
     @Override

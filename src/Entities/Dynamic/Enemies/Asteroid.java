@@ -146,8 +146,8 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
         int particNum = 3 + (2 * level);
 
         for(int i = 0; i < particNum; i++) {
-            if(!white) EntityManager.get().subscribe(new AsteroidParticle(this, ((i * 2 * Math.PI) /(particNum))));
-            else EntityManager.get().subscribe(new AsteroidParticleWhite(this, ((i * 2 * Math.PI) /(particNum))));
+            if(!white) EntityManager.get().subscribe(new AsteroidParticle(this, ((i * 2 * Math.PI) /(particNum)), level));
+            else EntityManager.get().subscribe(new AsteroidParticleWhite(this, ((i * 2 * Math.PI) /(particNum)), level));
         }
     }
     @Override
