@@ -1,4 +1,6 @@
 package Screens;
+import Game.UIManager;
+
 import java.awt.*;
 import java.io.IOException;
 
@@ -9,6 +11,7 @@ import java.io.IOException;
 
 public class MainMenuScreen extends Screen{
 // VARIABLES //
+
 
 // CONSTRUCTORS //
     public MainMenuScreen() throws IOException {

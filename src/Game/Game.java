@@ -41,6 +41,7 @@ public class Game implements Runnable{
     // Managers
     private KeyManager km;
     private TimerManager timerMan;
+    private MouseManager mouseMan;
 
     // Screens
     private Screen mainMenuScreen;
@@ -63,10 +64,18 @@ public class Game implements Runnable{
         // Create Managers
         km = KeyManager.get();
         timerMan = TimerManager.get();
+        mouseMan = MouseManager.get();
 
         // Create Window
         display = new DisplayWindow(gameTitle, gameWidth, gameHeight);
+
+        // Set Listeners
         display.getFrame().addKeyListener(km);
+        display.getFrame().addMouseListener(mouseMan);
+        display.getFrame().addMouseMotionListener(mouseMan);
+        display.getCanvas().addMouseListener(mouseMan);
+        display.getCanvas().addMouseMotionListener(mouseMan);
+
         displayCanvas = display.getCanvas();
 
         // Initialise Screens
