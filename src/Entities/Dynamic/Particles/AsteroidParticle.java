@@ -7,6 +7,8 @@ import Timer.TimerManager;
 
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 
 /**
  * Created by Cameron on 5/04/2018.
@@ -23,7 +25,7 @@ public class AsteroidParticle extends Particle {
         setNewPosition();
         this.spriteDirection = direction;
         moveSpeed = 0.55;
-        img = AssetManager.get().getSprite(10, Game.Game.getIntFromRange(0, 3), 0);
+        img = getSprite();
 
         // Set Move Speed
         ymove = (float)(moveSpeed * -Math.sin(direction));
@@ -44,6 +46,10 @@ public class AsteroidParticle extends Particle {
     @Override
     public void collide(Entity ec) {
 
+    }
+
+    protected BufferedImage getSprite() {
+        return AssetManager.get().getSprite(10, Game.Game.getIntFromRange(0, 3), 0);
     }
 
     @Override

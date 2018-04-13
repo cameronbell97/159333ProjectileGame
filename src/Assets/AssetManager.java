@@ -97,6 +97,12 @@ public class AssetManager {
                 return sheet1.getSprite(1,1);
             case "AstSmall":
                 return sheet1.getSprite(2,1);
+            case "AstLargeWhite":
+                return sheet1.getSprite(0,2);
+            case "AstMediumWhite":
+                return sheet1.getSprite(1,2);
+            case "AstSmallWhite":
+                return sheet1.getSprite(2,2);
             case "Coll":
                 return collColour;
         }

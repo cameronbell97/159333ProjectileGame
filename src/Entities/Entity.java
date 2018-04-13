@@ -1,6 +1,7 @@
 package Entities;
 
 import Entities.Collision.CollisionBox;
+import Game.Launcher;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -30,6 +31,16 @@ public abstract class Entity {
 // METHODS //
     public abstract void update();
     public abstract void draw(Graphics g);
+    public float getOverlapX() {
+        int w = Launcher.DEF_GAME_WIDTH / 2;
+        if(xpos > w) return w - (xpos - w);
+        else return w + (w - xpos);
+    }
+    public float getOverlapY() {
+        int h = Launcher.DEF_GAME_HEIGHT / 2;
+        if(ypos > h) return h - (ypos - h);
+        else return h + (h - ypos);
+    }
 
 // GETTERS & SETTERS //
     public CollisionBox getCollision() {
