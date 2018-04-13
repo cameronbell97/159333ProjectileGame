@@ -111,8 +111,16 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         // Define point variables for easier function designing
         float P1x = this.getXpos();
         float P1y = this.getYpos();
-        float P2x = EntityManager.get().getPlayer().getXpos() + EntityManager.get().getPlayer().getWidth() / 2;
-        float P2y = EntityManager.get().getPlayer().getYpos() + EntityManager.get().getPlayer().getHeight() / 2;
+        float P2x = 0;
+        float P2y = 0;
+
+        if(EntityManager.get().getPlayer() != null) {
+            P2x = EntityManager.get().getPlayer().getXpos() + EntityManager.get().getPlayer().getWidth() / 2;
+            P2y = EntityManager.get().getPlayer().getYpos() + EntityManager.get().getPlayer().getHeight() / 2;
+        } else {
+            this.distanceFromPlayer = 1000;
+            return;
+        }
 
         // Determine right-angled-triangle's opposite and adjacent lengths
         float triangleX = Math.abs(P2x - P1x);

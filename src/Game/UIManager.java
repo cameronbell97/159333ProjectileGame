@@ -95,7 +95,19 @@ public class UIManager {
     }
 
     private void drawPlayerHP(Graphics g) {
+        // Get Parameters
+        int xoffset = LEFT_BOUNDARY;
+        int yoffset = (Launcher.DEF_GAME_HEIGHT - LOWER_BOUNDARY) - (CHARACTER_HEIGHT * CHARACTER_SIZE) * 2 - 4;
         int hp = gameDataManager.getPlayer_hp();
+
+        // Draw HP Word
+        drawString(g, new String[] {"H", "P"}, "left", xoffset, yoffset);
+
+        // Reset offsets for next line
+        yoffset += CHARACTER_HEIGHT * CHARACTER_SIZE + 4;
+
+        // Draw HP Number
+        drawString(g, Integer.toString(hp).split(""), "left", xoffset, yoffset);
     }
 
     private void drawString(Graphics g, String[] word, String alignment, int xpos, int ypos) {
@@ -107,51 +119,34 @@ public class UIManager {
         int xIncrement = character_width_final + CHARACTER_SIZE;
 
         switch (alignment) {
-            case "left":
-                for(int i = 0; i < word.length; i++) {
-                    g.drawImage(
-                            charset_1.get(word[i]),
-                            xPencil,
-                            yPencil,
-                            character_width_final,
-                            character_height_final,
-                            null
-                    );
-                    xPencil += xIncrement;
-                }
-                break;
-
-            case "right":
-                Collections.reverse(Arrays.asList(word));
-                for(int i = 0; i < word.length; i++) {
-                    g.drawImage(
-                            charset_1.get(word[i]),
-                            xPencil,
-                            yPencil,
-                            character_width_final,
-                            character_height_final,
-                            null
-                    );
-                    xPencil -= xIncrement;
-                }
-                break;
-
             case "center":
                 xPencil -= ((word.length * xIncrement) - CHARACTER_SIZE) / 2;
-                for(int i = 0; i < word.length; i++) {
-                    g.drawImage(
-                            charset_1.get(word[i]),
-                            xPencil,
-                            yPencil,
-                            character_width_final,
-                            character_height_final,
-                            null
-                    );
-                    xPencil += xIncrement;
-                }
+                break;
+            case "right":
+                Collections.reverse(Arrays.asList(word));
                 break;
         }
 
+        if(alignment.equals("left") || alignment.equals("right") || alignment.equals("center")) {
+            for(int i = 0; i < word.length; i++) {
+                g.drawImage(
+                        charset_1.get(word[i]),
+                        xPencil,
+                        yPencil,
+                        character_width_final,
+                        character_height_final,
+                        null
+                );
+                switch (alignment) {
+                    case "right":
+                        xPencil -= xIncrement;
+                        break;
+                    default:
+                        xPencil += xIncrement;
+                        break;
+                }
+            }
+        }
     }
 
 // GETTERS & SETTERS //

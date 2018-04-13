@@ -31,7 +31,8 @@ public class GameDataManager {
 
 // METHODS //
     public void update() {
-        player_hp = em.getPlayer().getHP();
+        if(em.getPlayer() != null) player_hp = em.getPlayer().getHP();
+        else player_hp = 0;
         enemies_remaining = ed.getRemainingEnemies();
         current_level = ed.getGameLevel();
     }
