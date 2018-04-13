@@ -30,33 +30,33 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
     private int hp;
     private double spriteDirection;
     private double spriteRotation;
-    private boolean wraps;
+    private boolean white;
 
 // CONSTRUCTORS //
-    public Asteroid(float x, float y, int level, double direction, double speed, boolean wraps) {
+    public Asteroid(float x, float y, int level, double direction, double speed, boolean white) {
         super(x, y, DEFAULT_SIZE, DEFAULT_SIZE, direction);
         this.level = level;
         this.spriteDirection = direction;
         moveSpeed = speed;
-        this.wraps = wraps;
+        this.white = white;
 
         // Set depending on level
         if(level >=3) {
             hp = 5;
             collision = new CollisionBox(xpos+11, ypos+11, 42, 42, 11, 11, this);
-            if(!wraps) img = AssetManager.get().getSprite("AstLarge");
+            if(!white) img = AssetManager.get().getSprite("AstLarge");
             else img = AssetManager.get().getSprite("AstLargeWhite");
         }
         else if(level == 2) {
             hp = 3;
             collision = new CollisionBox(xpos+18, ypos+18, 28, 28, 18, 18, this);
-            if(!wraps) img = AssetManager.get().getSprite("AstMedium");
+            if(!white) img = AssetManager.get().getSprite("AstMedium");
             else img = AssetManager.get().getSprite("AstMediumWhite");
         }
         else {
             hp = 1;
             collision = new CollisionBox(xpos+26, ypos+26, 12, 12, 26, 26, this);
-            if(!wraps) img = AssetManager.get().getSprite("AstSmall");
+            if(!white) img = AssetManager.get().getSprite("AstSmall");
             else img = AssetManager.get().getSprite("AstSmallWhite");
         }
 
@@ -112,7 +112,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
                 float newY = Game.Game.getFloatFromRange(ypos-height/8, ypos+height/8);
                 double newDir = Game.Game.getDoubleFromRange(direction + (i*(Math.PI/4)), direction + (i*(Math.PI/8)));
 
-                Asteroid ast = new Asteroid(newX, newY, level-1, newDir, moveSpeed*1.2, wraps);
+                Asteroid ast = new Asteroid(newX, newY, level-1, newDir, moveSpeed*1.2, white);
                 EntityManager.get().subscribe(ast);
                 EnemyDirector.get().subscribe(ast);
             }
@@ -122,11 +122,11 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
             float newX = Game.Game.getFloatFromRange(xpos-width/8, xpos+width/8);
             float newY = Game.Game.getFloatFromRange(ypos-height/8, ypos+height/8);
 
-            Asteroid ast = new Asteroid(newX, newY, level-1, direction, moveSpeed*1.2, wraps);
+            Asteroid ast = new Asteroid(newX, newY, level-1, direction, moveSpeed*1.2, white);
             EntityManager.get().subscribe(ast);
             EnemyDirector.get().subscribe(ast);
         }
-        EntityManager.get().subscribe(new ExpDot(this, level*2));
+        EntityManager.get().subscribe(new ExpDot(this, level+1));
         explode();
         EntityManager.get().unsubscribe(this);
         EntityManager.get().unsubscribe(collision);
@@ -146,7 +146,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
         int particNum = 3 + (2 * level);
 
         for(int i = 0; i < particNum; i++) {
-            if(!wraps) EntityManager.get().subscribe(new AsteroidParticle(this, ((i * 2 * Math.PI) /(particNum))));
+            if(!white) EntityManager.get().subscribe(new AsteroidParticle(this, ((i * 2 * Math.PI) /(particNum))));
             else EntityManager.get().subscribe(new AsteroidParticleWhite(this, ((i * 2 * Math.PI) /(particNum))));
         }
     }
@@ -166,7 +166,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
     public void doWhenOutOfBounds() {
 
         // 1 in 3 chance to bounce back
-        if(wraps) {
+        if(white) {
             xpos = getOverlapX();
             ypos = getOverlapY();
             move();

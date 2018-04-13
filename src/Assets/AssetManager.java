@@ -2,10 +2,7 @@ package Assets;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Cameron Bell - 27/03/2018
@@ -26,7 +23,8 @@ public class AssetManager {
     private SpriteSheet char_sheet_01 = null;
     private SpriteSheet char_sheet_02 = null;
     private SpriteSheet bullet_sheet = null;
-    private SpriteSheet particles_sheet = null;
+    private SpriteSheet particles_sheet_8 = null;
+    private SpriteSheet particles_sheet_16 = null;
     private BufferedImage walls[];
     private BufferedImage collColour;
 
@@ -117,7 +115,9 @@ public class AssetManager {
             case 2:
                 return sheet2.getSprite(x, y);
             case 10:
-                return particles_sheet.getSprite(x, y);
+                return particles_sheet_8.getSprite(x, y);
+            case 11:
+                return particles_sheet_16.getSprite(x, y);
         }
 
         return null;
@@ -148,8 +148,12 @@ public class AssetManager {
         try { bullet_sheet = new SpriteSheet(ImageLoader.load("../bullets.png"), 2, 2, 10, 10); // load the spritesheet
         } catch (IOException e) { e.printStackTrace(); }
 
-        // Particle Sheet
-        try { particles_sheet = new SpriteSheet(ImageLoader.load("../particles8.png"), 4, 4, 8, 8); // load the spritesheet
+        // Particle Sheet 8x8
+        try { particles_sheet_8 = new SpriteSheet(ImageLoader.load("../particles8.png"), 4, 4, 8, 8); // load the spritesheet
+        } catch (IOException e) { e.printStackTrace(); }
+
+        // Particle Sheet 16x16
+        try { particles_sheet_16 = new SpriteSheet(ImageLoader.load("../particles16.png"), 4, 4, 16, 16); // load the spritesheet
         } catch (IOException e) { e.printStackTrace(); }
     }
 

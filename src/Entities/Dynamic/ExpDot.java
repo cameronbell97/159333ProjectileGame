@@ -16,7 +16,7 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
 // VARIABLES //
     // Statics
     private static final int OFFSCREEN_BOUNDARY = 0;
-    private static final int DEF_HEIGHT_WIDTH = 10;
+    private static final int DEF_HEIGHT_WIDTH = 16;
     private static final int DESPAWN_TIME = 18*60;
     private static final int DEF_PICKUP_DISTANCE = 52;
     private static final int DEF_MOVE_SPEED = 2;
@@ -30,8 +30,8 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
 
 // CONSTRUCTORS //
     public ExpDot(Entity parent, int value) {
-        super(parent.getXpos()+(parent.getWidth()/2-5),
-                parent.getYpos()+(parent.getHeight()/2-5),
+        super(parent.getXpos()+(parent.getWidth() / 2) - DEF_HEIGHT_WIDTH,
+                parent.getYpos()+(parent.getHeight() / 2) - DEF_HEIGHT_WIDTH,
                 DEF_HEIGHT_WIDTH,
                 DEF_HEIGHT_WIDTH,
                 (Math.PI / 2))
@@ -55,16 +55,23 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
 
 // METHODS //
     private void initialise() {
-        // Collision Box
-        collision = new CollisionBox(xpos, ypos, width, height, 0, 0, this);
 
-        //Set Img
-        if(this.value < 10) yImg = 1;
-        else if(this.value < 25) yImg = 2;
-        else yImg = 3;
+        //Set Img & Collision Box
+        if(this.value < 10) {
+            collision = new CollisionBox(xpos+5, ypos+5, 6, 6, 5, 5, this);
+            yImg = 0;
+        }
+        else if(this.value < 25) {
+            collision = new CollisionBox(xpos+4, ypos+4, 8, 8, 4, 4, this);
+            yImg = 1;
+        }
+        else {
+            collision = new CollisionBox(xpos+1, ypos+1, 14, 14, 1, 1, this);
+            yImg = 2;
+        }
         img = AssetManager
                 .get()
-                .getSprite(10, Game.Game.getIntFromRange(0, 3), yImg);
+                .getSprite(11, Game.Game.getIntFromRange(0, 3), yImg);
 
         // Set Despawn Timer
         TimerManager.get().newCodeTimer(DESPAWN_TIME + Game.Game.getIntFromRange(-30, 30), this, "DIE");
