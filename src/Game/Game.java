@@ -236,10 +236,10 @@ public class Game implements Runnable{
     }
 
 // GETTERS & SETTERS //
-    public int getGameHeight() {
+    public int getHeight() {
         return gameHeight;
     }
-    public int getGameWidth() {
+    public int getWidth() {
         return gameWidth;
     }
 }
