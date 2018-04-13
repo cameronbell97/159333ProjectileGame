@@ -4,6 +4,8 @@ import Assets.AssetManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class UIManager {
@@ -54,7 +56,6 @@ public class UIManager {
         drawString(g, scoreLetter, "left", xoffset, yoffset);
 
         // Reset offsets for next line
-        xoffset = LEFT_BOUNDARY;
         yoffset += CHARACTER_HEIGHT * CHARACTER_SIZE + 4;
 
         // Draw Score Number
@@ -62,16 +63,35 @@ public class UIManager {
     }
 
     private void drawGameLevel(Graphics g) {
+        // Get Parameters
+        int xoffset = Launcher.DEF_GAME_WIDTH / 2;
+        int yoffset = UPPER_BOUNDARY;
         int level = gameDataManager.getCurrent_level();
 
         // Draw Level Word
+        drawString(g, new String[] { "L", "E", "V", "E", "L"}, "center", xoffset, yoffset);
+
+        // Reset offsets for next line
+        yoffset += CHARACTER_HEIGHT * CHARACTER_SIZE + 4;
 
         // Draw Level Number
-
+        drawString(g, Integer.toString(level).split(""), "center", xoffset, yoffset);
     }
 
     private void drawRemainingEnemies(Graphics g) {
+        // Get Parameters
+        int xoffset = Launcher.DEF_GAME_WIDTH - RIGHT_BOUNDARY - CHARACTER_WIDTH;
+        int yoffset = UPPER_BOUNDARY;
         int remaining = gameDataManager.getEnemies_remaining();
+
+        // Draw Remaining Enemies Word
+        drawString(g, "ENEMIES".split(""), "right", xoffset, yoffset);
+
+        // Reset offsets for next line
+        yoffset += CHARACTER_HEIGHT * CHARACTER_SIZE + 4;
+
+        // Draw Level Number
+        drawString(g, Integer.toString(remaining).split(""), "right", xoffset, yoffset);
     }
 
     private void drawPlayerHP(Graphics g) {
@@ -102,9 +122,33 @@ public class UIManager {
                 break;
 
             case "right":
+                Collections.reverse(Arrays.asList(word));
+                for(int i = 0; i < word.length; i++) {
+                    g.drawImage(
+                            charset_1.get(word[i]),
+                            xPencil,
+                            yPencil,
+                            character_width_final,
+                            character_height_final,
+                            null
+                    );
+                    xPencil -= xIncrement;
+                }
                 break;
 
-            case "centre":
+            case "center":
+                xPencil -= ((word.length * xIncrement) - CHARACTER_SIZE) / 2;
+                for(int i = 0; i < word.length; i++) {
+                    g.drawImage(
+                            charset_1.get(word[i]),
+                            xPencil,
+                            yPencil,
+                            character_width_final,
+                            character_height_final,
+                            null
+                    );
+                    xPencil += xIncrement;
+                }
                 break;
         }
 
