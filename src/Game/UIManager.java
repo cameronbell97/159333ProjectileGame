@@ -51,54 +51,23 @@ public class UIManager {
 
         // Draw Score Word
         String[] scoreLetter = { "S", "C", "O", "R", "E" };
-        for(int i = 0; i < 5; i++) {
-            g.drawImage(
-                    charset_1.get(scoreLetter[i]),
-                    xoffset,
-                    yoffset,
-                    CHARACTER_WIDTH * CHARACTER_SIZE,
-                    CHARACTER_HEIGHT * CHARACTER_SIZE,
-                    null
-            );
-            xoffset += CHARACTER_WIDTH * CHARACTER_SIZE + CHARACTER_SIZE;
-        }
+        drawString(g, scoreLetter, "left", xoffset, yoffset);
+
+        // Reset offsets for next line
         xoffset = LEFT_BOUNDARY;
         yoffset += CHARACTER_HEIGHT * CHARACTER_SIZE + 4;
 
         // Draw Score Number
-        if (score == 0) g.drawImage(
-                charset_1.get("0"),
-                xoffset,
-                yoffset,
-                CHARACTER_WIDTH * CHARACTER_SIZE,
-                CHARACTER_HEIGHT * CHARACTER_SIZE,
-                null
-        );
-        else {
-            int numlength = 0;
-            for (int i = 1; score / i != 0; i = i * 10) {
-                numlength++;
-            }
-            xoffset = LEFT_BOUNDARY + (CHARACTER_WIDTH * CHARACTER_SIZE + 4) * (numlength - 1);
-            for(int i = 0; i < numlength; i++) {
-                int currentChar = score % (int)Math.pow((double)10, (double)i+1);
-                if(i != 0) currentChar = currentChar / (int)Math.pow((double)10, (double)i);
-
-                g.drawImage(
-                        charset_1.get(Integer.toString(currentChar)),
-                        xoffset,
-                        yoffset,
-                        CHARACTER_WIDTH * CHARACTER_SIZE,
-                        CHARACTER_HEIGHT * CHARACTER_SIZE,
-                        null
-                );
-                xoffset -= CHARACTER_WIDTH * CHARACTER_SIZE + 4;
-            }
-        }
+        drawString(g, Integer.toString(score).split(""), "left", xoffset, yoffset);
     }
 
     private void drawGameLevel(Graphics g) {
         int level = gameDataManager.getCurrent_level();
+
+        // Draw Level Word
+
+        // Draw Level Number
+
     }
 
     private void drawRemainingEnemies(Graphics g) {
@@ -107,6 +76,38 @@ public class UIManager {
 
     private void drawPlayerHP(Graphics g) {
         int hp = gameDataManager.getPlayer_hp();
+    }
+
+    private void drawString(Graphics g, String[] word, String alignment, int xpos, int ypos) {
+        // Get Parameters
+        int character_width_final = CHARACTER_WIDTH * CHARACTER_SIZE;
+        int character_height_final = CHARACTER_HEIGHT * CHARACTER_SIZE;
+        int xPencil = xpos;
+        int yPencil = ypos;
+        int xIncrement = character_width_final + CHARACTER_SIZE;
+
+        switch (alignment) {
+            case "left":
+                for(int i = 0; i < word.length; i++) {
+                    g.drawImage(
+                            charset_1.get(word[i]),
+                            xPencil,
+                            yPencil,
+                            character_width_final,
+                            character_height_final,
+                            null
+                    );
+                    xPencil += xIncrement;
+                }
+                break;
+
+            case "right":
+                break;
+
+            case "centre":
+                break;
+        }
+
     }
 
 // GETTERS & SETTERS //
