@@ -97,6 +97,7 @@ public class Save {
     public void create() {
         File file = new File(DEF_SAVE_PATH);
         try {
+            file.getParentFile().mkdirs();
             file.createNewFile();
             BufferedWriter br = new BufferedWriter(new FileWriter(file));
             br.write(DEF_SCORES_FORMAT);
