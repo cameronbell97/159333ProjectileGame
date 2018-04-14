@@ -12,6 +12,7 @@ public class AsteroidParticleWhite extends AsteroidParticle{
 
     @Override
     protected BufferedImage getSprite() {
-        return AssetManager.get().getSprite(10, Game.Game.getIntFromRange(0, 3), 1);
+        if(level < 3) return AssetManager.get().getSprite(11, Game.Game.getIntFromRange(0, 3), 5);
+        else  return AssetManager.get().getSprite(11, Game.Game.getIntFromRange(0, 3), 6);
     }
 }

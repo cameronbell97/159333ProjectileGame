@@ -17,7 +17,7 @@ public class AsteroidParticle extends Particle {
 // VARIABLES //
     private double spriteDirection;
     private double spriteRotation;
-    private int level;
+    protected int level;
 
 // CONSTRUCTORS //
     public AsteroidParticle(DynamicEntity parent, Double direction, int level) {
