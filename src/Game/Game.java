@@ -81,7 +81,7 @@ public class Game implements Runnable{
         // Initialise Screens
         gameScreen = new GameScreen();
         mainMenuScreen = new MainMenuScreen();
-        ScreenManager.setScreen(gameScreen);
+        ScreenManager.setScreen(mainMenuScreen);
 
         // Initialise Save Data
         save = new Save();

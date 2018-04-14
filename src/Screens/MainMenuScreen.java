@@ -1,5 +1,6 @@
 package Screens;
 import Game.Launcher;
+import Game.MouseManager;
 import MainMenu.MenuManager;
 
 import java.awt.*;
@@ -13,17 +14,24 @@ import java.io.IOException;
 public class MainMenuScreen extends Screen{
 // VARIABLES //
     MenuManager menuManager;
+    MouseManager mouseManager;
 
 // CONSTRUCTORS //
     public MainMenuScreen() throws IOException {
         super();
         menuManager = new MenuManager();
+        mouseManager = MouseManager.get();
     }
 
 // METHODS //
     @Override
     public void update() {
         menuManager.update();
+        if (mouseManager.checkLeftMouse() && mouseManager.checkRightMouse()) try {
+            ScreenManager.setScreen(new GameScreen());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
