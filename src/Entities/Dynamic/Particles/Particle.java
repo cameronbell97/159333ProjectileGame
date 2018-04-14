@@ -11,8 +11,8 @@ import Timer.*;
 
 public abstract class Particle extends DynamicEntity implements iCanHaveCodeTimer {
 // VARIABLES //
-    public static final int DEF_PARTICLE_WIDTH = 8;
-    public static final int DEF_PARTICLE_HEIGHT = 8;
+    public static final int DEF_PARTICLE_WIDTH = 16;
+    public static final int DEF_PARTICLE_HEIGHT = 16;
 
 // CONSTRUCTORS //
     public Particle(float x, float y, int w, int h, double direction) {

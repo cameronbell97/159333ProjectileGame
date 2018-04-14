@@ -51,8 +51,8 @@ public class AsteroidParticle extends Particle {
     }
 
     protected BufferedImage getSprite() {
-        if(level < 3) return AssetManager.get().getSprite(10, Game.Game.getIntFromRange(0, 3), 0);
-        else return AssetManager.get().getSprite(11, Game.Game.getIntFromRange(0, 3), 3);
+        if(level < 3) return AssetManager.get().getSprite(11, Game.Game.getIntFromRange(0, 3), 3);
+        else return AssetManager.get().getSprite(11, Game.Game.getIntFromRange(0, 3), 4);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class AsteroidParticle extends Particle {
     // Method that sets a new position at a random point up to
     // 4 pixels away from the current position in every direction
     private void setNewPosition() {
-        setXpos(Game.Game.getFloatFromRange(xpos-4+22, xpos+4+22));
-        setYpos(Game.Game.getFloatFromRange(ypos-4+22, ypos+4+22));
+        setXpos(Game.Game.getFloatFromRange(xpos-(width/2/2)+22, xpos+(width/2/2)+22));
+        setYpos(Game.Game.getFloatFromRange(ypos-(height/2/2)+22, ypos+(height/2/2)+22));
     }
 }
