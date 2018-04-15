@@ -3,6 +3,7 @@ import Game.MouseManager;
 import Game.Settings;
 import MainMenu.Buttons.Button;
 import MainMenu.Buttons.DummyButton;
+import MainMenu.Buttons.QuitButton;
 import MainMenu.MenuManager;
 import MainMenu.Buttons.PlayButton;
 
@@ -50,6 +51,9 @@ public class MainMenuScreen extends Screen{
             switch(n) {
                 case "PLAY":
                     menuManager.addButton(new PlayButton(n,x,y));
+                    break;
+                case "QUIT":
+                    menuManager.addButton(new QuitButton(n,x,y));
                     break;
                 default:
                     menuManager.addButton(new DummyButton(n,x,y));
