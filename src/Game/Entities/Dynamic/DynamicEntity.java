@@ -48,6 +48,31 @@ public abstract class DynamicEntity extends Entity{
         ypos += ymove;
     }
 
+    protected void strafeLeft(double speed) {
+        float oldymove = ymove;
+        float oldxmove = xmove;
+
+        ymove = (float)(speed * -Math.sin(direction+(Math.PI/2)));
+        xmove = (float)(speed * Math.cos(direction+(Math.PI/2)));
+        move();
+
+        ymove = oldymove;
+        xmove = oldxmove;
+    }
+
+    protected void strafeRight(double speed) {
+        float oldymove = ymove;
+        float oldxmove = xmove;
+
+        ymove = (float)(speed * -Math.sin(direction-(Math.PI/2)));
+        xmove = (float)(speed * Math.cos(direction-(Math.PI/2)));
+        move();
+
+        ymove = oldymove;
+        xmove = oldxmove;
+
+    }
+
     // Method to rotateSprite the image
     protected void rotateSprite() {
         // TODO // Rotate Sprite Without Cutoffs

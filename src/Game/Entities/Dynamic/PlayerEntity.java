@@ -27,6 +27,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     private static final int THRUST_FRAME_TIME_1 = 5;
     private static final int THRUST_FRAME_TIME_2 = 25;
     private static final int THRUST_FRAME_TIME_3 = 40;
+    private static final boolean PLAYER_STRAFE_ENABLED = false;
 
     AssetManager assMan = AssetManager.get();
     KeyManager km = KeyManager.get();
@@ -192,14 +193,22 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             xmove = (float)(moveSpeed * -Math.cos(direction)* speedMultiplier);
         }
         if(km.left) {
-            direction += rotationSpeed * speedMultiplier;
-            rotateSprite();
-            collision.rotateSprite(direction);
+            if (km.ctrl && PLAYER_STRAFE_ENABLED) {
+                strafeLeft(moveSpeed / 2);
+            } else {
+                direction += rotationSpeed * speedMultiplier;
+                rotateSprite();
+                collision.rotateSprite(direction);
+            }
         }
         if(km.right) {
-            direction -= rotationSpeed * speedMultiplier;
-            rotateSprite();
-            collision.rotateSprite(direction);
+            if (km.ctrl && PLAYER_STRAFE_ENABLED) {
+                strafeRight(moveSpeed / 2);
+            } else {
+                direction -= rotationSpeed * speedMultiplier;
+                rotateSprite();
+                collision.rotateSprite(direction);
+            }
         }
         if(km.spacebar && shoot_release && shoot_reloaded) {
             EntityManager.get().subscribe(new BulletPlayer(this));

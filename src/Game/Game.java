@@ -23,7 +23,7 @@ import java.util.Random;
 
 public class Game implements Runnable{
 // VARIABLES //
-    // Statics
+    // Staticsa
     private static final int FPS = 60;
     public static final boolean DRAW_COLLISIONS = false;
 
