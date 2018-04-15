@@ -11,7 +11,7 @@ public class GoblinPawn extends TargetingEnemy implements iOutOfBounds {
 // VARIABLES //
     private static final int PLAYER_STOP_DISTANCE = 500;
     private static final int GOBLIN_PAWN_MOVE_SPEED = 2;
-    private static final int OFFSCREEN_BOUNDARY = -64;
+    private static final int OFFSCREEN_BOUNDARY = -32;
 
 // CONSTRUCTORS //
     public GoblinPawn(float x, float y, double direction) {
@@ -24,7 +24,9 @@ public class GoblinPawn extends TargetingEnemy implements iOutOfBounds {
     @Override
     public void update() {
         super.update();
-        if((distanceFromPlayer > PLAYER_STOP_DISTANCE || checkOOB()) && checkMovingIsWorth()) move();
+        if((distanceFromPlayer > PLAYER_STOP_DISTANCE || checkOOB()) && checkMovingIsWorth()) setMoveSpeeds();
+
+        move();
     }
 
     @Override

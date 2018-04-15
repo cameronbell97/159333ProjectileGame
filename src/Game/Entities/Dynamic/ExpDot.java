@@ -98,7 +98,6 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         calcDistanceFromPlayer();
         if(distanceFromPlayer <= pickupDistance) {
             setMoveSpeeds();
-            collision.update();
         }
 
         // Deceleration mechanics
@@ -107,6 +106,7 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         if(ymove > 0) ymove = Math.max(0, ymove - ymove*((float)0.01 + deceleration));
         if(ymove < 0) ymove = Math.min(0, ymove - ymove*((float)0.01 + deceleration));
 
+        collision.update();
         move();
     }
 

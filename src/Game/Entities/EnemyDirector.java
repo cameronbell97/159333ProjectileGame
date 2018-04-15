@@ -102,7 +102,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
         switch (code) {
             // LVL+ is the code for Start Next Level
             case "LVL+":
-                gameLevel+=5; // Increment Level
+                gameLevel+=1; // Increment Level
                 populateEnemies(); // Spawn Enemies
                 break;
         }

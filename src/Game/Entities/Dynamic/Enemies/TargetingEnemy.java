@@ -6,10 +6,12 @@ import Game.Entities.EntityManager;
 public abstract class TargetingEnemy extends Enemy {
 // VARIABLES //
     private static final double DEF_ROTATE_SPEED = 0.005 * Math.PI;
+    private static final float DEF_DECELERATION = (float)0.03;
 
     protected double rotationSpeed;
     protected float distanceFromPlayer;
     protected double directionToPlayer;
+    protected float deceleration;
 
 
 // CONSTRUCTORS //
@@ -17,12 +19,16 @@ public abstract class TargetingEnemy extends Enemy {
         super(x, y, w, h, direction);
         calcPlayerDistanceAndDirection();
         rotationSpeed = DEF_ROTATE_SPEED;
+        deceleration = DEF_DECELERATION;
+        setMoveSpeeds();
     }
 
     public TargetingEnemy(float x, float y, int w, int h, double direction, double rotateSpeed) {
         super(x, y, w, h, direction);
         calcPlayerDistanceAndDirection();
         rotationSpeed = rotateSpeed;
+        deceleration = DEF_DECELERATION;
+        setMoveSpeeds();
     }
 
 // METHODS //
@@ -30,8 +36,13 @@ public abstract class TargetingEnemy extends Enemy {
     public void update() {
         calcPlayerDistanceAndDirection();
         rotateToPlayer();
-        setMoveSpeeds();
         rotateSprite();
+
+        // Deceleration mechanics
+        if(xmove > 0) xmove = Math.max(0, xmove - xmove*((float)0.01 + deceleration));
+        if(xmove < 0) xmove = Math.min(0, xmove - xmove*((float)0.01 + deceleration));
+        if(ymove > 0) ymove = Math.max(0, ymove - ymove*((float)0.01 + deceleration));
+        if(ymove < 0) ymove = Math.min(0, ymove - ymove*((float)0.01 + deceleration));
     }
 
     @Override
