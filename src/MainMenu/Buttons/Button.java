@@ -16,7 +16,7 @@ public abstract class Button {
     private boolean left, right;
     private int xpos, ypos, height, width;
     private String text;
-    private boolean isHovered;
+    private boolean isHovered, wasJustClicked, isClicked;
 
 
 // CONSTRUCTORS //
@@ -51,6 +51,8 @@ public abstract class Button {
         left = false;
         right = false;
         isHovered = false;
+        wasJustClicked = false;
+        isClicked = false;
     }
 
     public void update() {
@@ -68,11 +70,26 @@ public abstract class Button {
         } else isHovered = false;
 
         // Check for click
-        if(isHovered && left) onClick();
+        if(isHovered && left) {
+            wasJustClicked = true;
+            isClicked = true;
+        }
+        if(!isHovered && !left) {
+            isClicked = false;
+        }
+        if(!isHovered && !isClicked && wasJustClicked) {
+            wasJustClicked = false;
+        }
+        if(isHovered && !left) {
+            isClicked = false;
+        }
+        if(isHovered && !isClicked && wasJustClicked) {
+            onClick();
+        }
     }
 
     public void draw(Graphics g) {
-        if(isHovered) {
+        if(isHovered || isClicked) {
             g.setColor(new Color(46, 47, 120));
             g.fillRect(xpos, ypos, width, height);
         }

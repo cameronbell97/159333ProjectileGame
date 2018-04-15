@@ -27,12 +27,15 @@ public class MainMenuScreen extends Screen{
         menuManager = new MenuManager();
         mouseManager = MouseManager.get();
 
-        // TODO // Add Buttons //
+        // MAKE BUTTONS //
+
+        // Button Names
         ArrayList<String> buttonNames = new ArrayList<>();
         buttonNames.add("PLAY");
         buttonNames.add("OPTIONS");
         buttonNames.add("QUIT");
 
+        // Button Positioning Variables
         int buttonCount = buttonNames.size();
         int buttonSpacing = Settings.menu_button_spacing;
         int buttonIncrement = Button.getButtonHeight() + buttonSpacing;
@@ -44,6 +47,7 @@ public class MainMenuScreen extends Screen{
                     ) / 2
                 );
 
+        // Button Creation
         for(int i = 0; i < buttonCount; i++) {
             String n = buttonNames.get(i);
             int x = Settings.game_width / 2;
