@@ -165,6 +165,10 @@ public class Game implements Runnable{
         return seconds * 60;
     }
 
+    public static void end() {
+        System.exit(0);
+    }
+
     // -------------------------------------------- // Threading Methods // --------------------------------------------
 
     // Method - Start the Game

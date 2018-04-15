@@ -1,9 +1,5 @@
 package MainMenu.Buttons;
 
-import Screens.GameScreen;
-import Screens.ScreenManager;
-
-import java.io.IOException;
 
 public class QuitButton extends Button {
 // CONSTRUCTORS //
@@ -14,6 +10,6 @@ public class QuitButton extends Button {
 // METHODS //
     @Override
     protected void onClick() {
-        System.exit(0);
+        Game.Game.end();
     }
 }
