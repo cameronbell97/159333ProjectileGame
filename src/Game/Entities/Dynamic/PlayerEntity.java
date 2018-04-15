@@ -65,6 +65,8 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         slowTimeCurrent = 0;
         EntityManager.get().subPlayer(this);
         timeMoving = 0;
+        xmove = 0;
+        ymove = 0;
     }
 
     public void move() {
