@@ -4,7 +4,7 @@ import Game.Data.Settings;
 
 /**
  * Cameron Bell - 20/03/2018
- * Game.Launcher Class
+ * Launcher Class
  * Launches the game
  */
 
