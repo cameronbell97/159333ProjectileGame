@@ -40,7 +40,9 @@ public abstract class TargetingEnemy extends Enemy {
     }
 
     private void rotateToPlayer() {
+        // Keep the entity's direction in the range 0 < x < 2(PI)
         if(this.direction > (2 * Math.PI)) this.direction -= (2 * Math.PI);
+        if(this.direction < 0) this.direction += (2 * Math.PI);
 
         // Don't need to do calculations if neither entities have moved
         if(directionToPlayer == this.direction) return;
@@ -51,20 +53,52 @@ public abstract class TargetingEnemy extends Enemy {
             }
             else this.direction += rotationSpeed;
         } else {
-            if (this.direction - rotationSpeed < directionToPlayer) {
+            if (this.direction - rotationSpeed < directionToPlayer && directionToPlayer - this.direction < (Math.PI / 2)) {
                 this.direction = directionToPlayer;
             }
             else this.direction -= rotationSpeed;
         }
     }
 
-    private void calcPlayerDistanceAndDirection() {
+    protected float getFutureDistanceFromPlayer(float futureX, float futureY) {
+        float distance;
+
+        // Define point variables for easier function designing
+        float P1x = futureX + width / 2;
+        float P1y = futureY + height / 2;
+        float P2x = 0;
+        float P2y = 0;
+
+        if (EntityManager.get().getPlayer() != null) {
+            P2x = EntityManager.get().getPlayer().getXpos() + EntityManager.get().getPlayer().getWidth() / 2;
+            P2y = EntityManager.get().getPlayer().getYpos() + EntityManager.get().getPlayer().getHeight() / 2;
+        } else {
+            return 1000;
+        }
+
+        // Determine right-angled-triangle's opposite and adjacent lengths
+        float triangleX = Math.abs(P2x - P1x);
+        float triangleY = Math.abs(P2y - P1y);
+
+        // Calculate Hypotenuse (Distance from Player)
+        distance = (float) Math.sqrt((triangleX * triangleX) + (triangleY * triangleY));
+
+        // Set Distance
+        return distance;
+    }
+
+    protected boolean checkMovingIsWorth() {
+        if(getFutureDistanceFromPlayer(xpos + xmove, ypos + ymove) < distanceFromPlayer) return true;
+        return false;
+    }
+
+    protected void calcPlayerDistanceAndDirection() {
         float distance;
         double newDir = 0;
 
         // Define point variables for easier function designing
-        float P1x = this.getXpos();
-        float P1y = this.getYpos();
+        float P1x = this.getXpos() + width / 2;
+        float P1y = this.getYpos() + height / 2;
         float P2x = 0;
         float P2y = 0;
 

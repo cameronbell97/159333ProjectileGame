@@ -116,8 +116,8 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         double newDir = 0;
 
         // Define point variables for easier function designing
-        float P1x = this.getXpos();
-        float P1y = this.getYpos();
+        float P1x = this.getXpos() + width / 2;
+        float P1y = this.getYpos() + height / 2;
         float P2x = 0;
         float P2y = 0;
 

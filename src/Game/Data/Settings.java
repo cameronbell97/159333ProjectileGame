@@ -4,6 +4,10 @@ import Game.Game;
 
 public class Settings {
 // DEFAULT VALUES //
+    // Debug Tools
+    public static final boolean DEBUG_GOBLIN_DRAW_LINE_TO_PLAYER = true;
+    public static final boolean DEBUG_GOBLIN_DRAW_FACING_DIRECTION_LINE = true;
+
     // Game
     private static final int DEF_GAME_WIDTH = 875;
     private static final int DEF_GAME_HEIGHT = 700;

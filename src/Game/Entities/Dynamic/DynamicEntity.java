@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import Game.Entities.Entity;
+import Game.Entities.EntityManager;
 
 /**
  * Cameron Bell - 27/03/2018
