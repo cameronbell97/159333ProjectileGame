@@ -1,4 +1,4 @@
-package MainMenu;
+package MainMenu.Buttons;
 
 import Game.MouseManager;
 import Game.Settings;
@@ -9,13 +9,14 @@ import java.awt.*;
 /**
  * Created by Cameron on 13/04/2018.
  */
-public class Button {
+public abstract class Button {
 // VARIABLES //
     MouseManager mouseManager;
     TextManager textManager;
     private boolean left, right;
     private int xpos, ypos, height, width;
     private String text;
+    private boolean isHovered;
 
 
 // CONSTRUCTORS //
@@ -49,22 +50,38 @@ public class Button {
         mouseManager = MouseManager.get();
         left = false;
         right = false;
+        isHovered = false;
     }
 
     public void update() {
         left = mouseManager.checkLeftMouse();
         right = mouseManager.checkRightMouse();
+
+        // Check if the mouse is hovering over the button
+        if(
+                mouseManager.getMouseX() > xpos &&
+                mouseManager.getMouseX() < xpos + width &&
+                mouseManager.getMouseY() > ypos &&
+                mouseManager.getMouseY() < ypos + height
+            ) {
+            isHovered = true;
+        } else isHovered = false;
+
+        // Check for click
+        if(isHovered && left) onClick();
     }
 
     public void draw(Graphics g) {
-        g.setColor(Color.BLUE);
+        if(isHovered) {
+            g.setColor(new Color(46, 47, 120));
+            g.fillRect(xpos, ypos, width, height);
+        }
+        g.setColor(new Color(129,130,174));
         g.drawRect(xpos, ypos, width, height);
         textManager.drawString(g, text, "left", xpos + Settings.button_border_width + Settings.button_inner_padding, ypos + Settings.button_border_width + Settings.button_inner_padding);
     }
 
-    private void onClick() {
-
-    }
+    protected abstract void onClick();
 
     public static int getButtonHeight() {
         return TextManager.getCharacterHeight() + (Settings.button_inner_padding * 2) + (Settings.button_border_width * 2);

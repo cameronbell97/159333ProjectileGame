@@ -1,11 +1,9 @@
 package MainMenu;
 
-import Game.MouseManager;
 import Game.Settings;
-import Game.TextManager;
+import MainMenu.Buttons.Button;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
@@ -13,7 +11,7 @@ import java.util.ArrayList;
  */
 public class MenuManager {
 // VARIABLES //
-    private ArrayList<Button> buttons;
+    private ArrayList<MainMenu.Buttons.Button> buttons;
     private int screenMiddleX, screenMiddleY;
 
 // CONSTRUCTORS //
@@ -27,14 +25,14 @@ public class MenuManager {
         updateVariables();
 
         // Update Buttons
-        for(Button b : buttons) {
+        for(MainMenu.Buttons.Button b : buttons) {
             b.update();
         }
     }
 
     public void draw(Graphics g) {
         // Draw Buttons
-        for(Button b : buttons) {
+        for(MainMenu.Buttons.Button b : buttons) {
             b.draw(g);
         }
     }
