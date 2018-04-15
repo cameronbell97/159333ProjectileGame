@@ -151,6 +151,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
             else EntityManager.get().subscribe(new AsteroidParticleWhite(this, ((i * 2 * Math.PI) /(particNum)), level));
         }
     }
+
     @Override
     public boolean checkOOB() {
         if(     xpos <= -OFFSCREEN_BOUNDARY ||

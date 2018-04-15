@@ -3,6 +3,7 @@ package Game.Entities;
 import Game.Entities.Dynamic.DynamicEntity;
 import Game.Entities.Dynamic.Enemies.Asteroid;
 import Game.Entities.Dynamic.Enemies.Enemy;
+import Game.Entities.Dynamic.Enemies.GoblinPawn;
 import Game.Game;
 import Game.Data.Settings;
 import Game.Timer.*;
@@ -101,7 +102,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
         switch (code) {
             // LVL+ is the code for Start Next Level
             case "LVL+":
-                gameLevel++; // Increment Level
+                gameLevel+=5; // Increment Level
                 populateEnemies(); // Spawn Enemies
                 break;
         }
@@ -166,6 +167,16 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 2, true), Asteroid.DEFAULT_SIZE));
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 2, true), Asteroid.DEFAULT_SIZE));
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 3, true), Asteroid.DEFAULT_SIZE));
+                }
+                Collections.shuffle(spawn_queue);
+
+                spawn_queue_minsec = 45;
+                spawn_queue_maxsec = 3*60+30;
+                break;
+
+            case 5: // Level 5 //
+                for(int i = 0; i < 1; i++) {
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinPawn(0, 0, 2), 64));
                 }
                 Collections.shuffle(spawn_queue);
 
