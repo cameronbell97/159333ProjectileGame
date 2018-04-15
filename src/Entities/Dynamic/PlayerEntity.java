@@ -8,6 +8,7 @@ import Assets.AssetManager;
 import Game.GameDataManager;
 import Game.KeyManager;
 import Game.Launcher;
+import Game.Settings;
 import Timer.*;
 
 /**
@@ -76,10 +77,10 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         // If moving right
         if(xmove > 0) {
             // If you would NOT move out of the screen
-            if(collision.getXpos() + collision.getWidth() + xmove <= Launcher.DEF_GAME_WIDTH)
+            if(collision.getXpos() + collision.getWidth() + xmove <= Settings.game_width)
                 xpos += xmove;
             else {
-                xpos = Launcher.DEF_GAME_WIDTH - collision.getWidth() - collision.getXoff();
+                xpos = Settings.game_width - collision.getWidth() - collision.getXoff();
                 xmove = 0;
             }
         }
@@ -101,11 +102,11 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         // If moving down
         if(ymove > 0) {
             // If you would NOT move out of the screen
-            if(collision.getYpos() + collision.getHeight()/*CollisionBox Width*/ + ymove <= Launcher.DEF_GAME_HEIGHT)
+            if(collision.getYpos() + collision.getHeight()/*CollisionBox Width*/ + ymove <= Settings.game_height)
                 ypos += ymove;
             else {
 //                ypos = handler.getHeight() - height + (collision.getYpos() - ypos);
-                ypos = Launcher.DEF_GAME_HEIGHT - collision.getHeight() - collision.getYoff();
+                ypos = Settings.game_height - collision.getHeight() - collision.getYoff();
                 ymove = 0;
             }
         }

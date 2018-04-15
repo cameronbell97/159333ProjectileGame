@@ -7,14 +7,13 @@ package Game;
  */
 
 public class Launcher {
-// VARIABLES //
-    public static final int DEF_GAME_WIDTH = 875;
-    public static final int DEF_GAME_HEIGHT = 700;
-
-// CONSTRUCTORS //
+// MAIN //
     public static void main(String[] args) {
+        // Initialise Settings
+        new Settings();
+        
         // Launch Game
-        Game game = new Game("PROJECTILE", DEF_GAME_HEIGHT, DEF_GAME_WIDTH);
+        Game game = new Game("PROJECTILE", Settings.game_height, Settings.game_width);
         game.start();
     }
 }

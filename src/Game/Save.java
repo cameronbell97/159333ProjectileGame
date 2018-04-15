@@ -12,9 +12,12 @@ public class Save {
 
     private ScoreBoard scoreBoard;
 
+    private Settings settings;
+
 // CONSTRUCTORS //
     public Save() {
         scoreBoard = new ScoreBoard();
+        settings = new Settings();
     }
 
 // METHODS //
@@ -29,6 +32,8 @@ public class Save {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // TODO // Implement Saved Settings
+        settings = new Settings();
     }
 
     public boolean load() {

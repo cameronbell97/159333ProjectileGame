@@ -5,6 +5,7 @@ import Entities.EntityManager;
 import Entities.Dynamic.PlayerEntity;
 import Game.EnemyDirector;
 import Game.Launcher;
+import Game.Settings;
 import Game.UIManager;
 
 import java.awt.*;
@@ -32,8 +33,8 @@ public class GameScreen extends Screen {
         enemyDirector = EnemyDirector.get();
         UIManager = new UIManager();
         player = new PlayerEntity(
-                Launcher.DEF_GAME_WIDTH/2 - player.DEF_PLAYER_WIDTH/2,
-                Launcher.DEF_GAME_HEIGHT/2 - player.DEF_PLAYER_HEIGHT/2)
+                Settings.game_width/2 - player.DEF_PLAYER_WIDTH/2,
+                Settings.game_height/2 - player.DEF_PLAYER_HEIGHT/2)
         ;
     }
 
@@ -51,7 +52,7 @@ public class GameScreen extends Screen {
     public void draw(Graphics g) {
         // Draw Background
         g.setColor(new Color(0, 0, 20));
-        g.fillRect(0, 0, Launcher.DEF_GAME_WIDTH, Launcher.DEF_GAME_HEIGHT);
+        g.fillRect(0, 0, Settings.game_width, Settings.game_height);
 
         // Draw All Entities
         entityManager.draw(g);

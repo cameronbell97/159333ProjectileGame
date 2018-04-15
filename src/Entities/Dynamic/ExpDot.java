@@ -5,6 +5,7 @@ import Entities.Collision.CollisionBox;
 import Entities.Entity;
 import Entities.EntityManager;
 import Game.Launcher;
+import Game.Settings;
 import Timer.CodeTimer;
 import Timer.TimerManager;
 import Timer.iCanHaveCodeTimer;
@@ -89,8 +90,8 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         // Check for out-of-screen
         if(     xpos <= -OFFSCREEN_BOUNDARY ||
                 ypos <= -OFFSCREEN_BOUNDARY ||
-                xpos >= Launcher.DEF_GAME_WIDTH + width + OFFSCREEN_BOUNDARY ||
-                ypos >= Launcher.DEF_GAME_HEIGHT + height + OFFSCREEN_BOUNDARY) {
+                xpos >= Settings.game_width + width + OFFSCREEN_BOUNDARY ||
+                ypos >= Settings.game_height + height + OFFSCREEN_BOUNDARY) {
             destroy();
         }
 

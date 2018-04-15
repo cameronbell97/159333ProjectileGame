@@ -13,10 +13,6 @@ import java.util.HashMap;
  */
 public class TextManager {
 // VARIABLES //
-    private static final int CHARACTER_HEIGHT = 9;
-    private static final int CHARACTER_WIDTH = 5;
-    private static final int CHARACTER_SIZE = 3;
-
     private AssetManager assMan;
     private HashMap<String, BufferedImage> charset_1;
     private HashMap<String, BufferedImage> charset_2;
@@ -36,12 +32,12 @@ public class TextManager {
         int character_height_final = getCharacterHeight();
         int xPencil = xpos;
         int yPencil = ypos;
-        int xIncrement = character_width_final + CHARACTER_SIZE;
+        int xIncrement = character_width_final + Settings.character_size;
         String[] wordArray = word.split("");
 
         switch (alignment) {
             case "center":
-                xPencil -= ((wordArray.length * xIncrement) - CHARACTER_SIZE) / 2;
+                xPencil -= ((wordArray.length * xIncrement) - Settings.character_size) / 2;
                 break;
             case "right":
                 Collections.reverse(Arrays.asList(wordArray));
@@ -74,10 +70,10 @@ public class TextManager {
 // GETTERS & SETTERS //
 
     public static int getCharacterHeight() {
-        return CHARACTER_HEIGHT * CHARACTER_SIZE;
+        return Settings.character_height * Settings.character_size;
     }
 
     public static int getCharacterWidth() {
-        return CHARACTER_WIDTH * CHARACTER_SIZE;
+        return Settings.character_width * Settings.character_size;
     }
 }

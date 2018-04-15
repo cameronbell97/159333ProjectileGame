@@ -2,6 +2,7 @@ package Entities.Dynamic;
 
 import Entities.EntityManager;
 import Game.Launcher;
+import Game.Settings;
 
 public abstract class Bullet extends DynamicEntity{
 // VARIABLES //
@@ -33,7 +34,7 @@ public abstract class Bullet extends DynamicEntity{
     @Override
     public void update() {
         move();
-        if(xpos <= -OFFSCREEN_BOUNDARY || ypos <= -OFFSCREEN_BOUNDARY || xpos >= Launcher.DEF_GAME_WIDTH + OFFSCREEN_BOUNDARY || ypos >= Launcher.DEF_GAME_HEIGHT + OFFSCREEN_BOUNDARY) {
+        if(xpos <= -OFFSCREEN_BOUNDARY || ypos <= -OFFSCREEN_BOUNDARY || xpos >= Settings.game_width + OFFSCREEN_BOUNDARY || ypos >= Settings.game_height + OFFSCREEN_BOUNDARY) {
             destroy();
         }
         collision.update();

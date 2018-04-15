@@ -11,6 +11,7 @@ import Entities.iOutOfBounds;
 import Entities.iVulnerable;
 import Game.EnemyDirector;
 import Game.Launcher;
+import Game.Settings;
 
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -154,8 +155,8 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
     public boolean checkOOB() {
         if(     xpos <= -OFFSCREEN_BOUNDARY ||
                 ypos <= -OFFSCREEN_BOUNDARY ||
-                xpos >= Launcher.DEF_GAME_WIDTH + OFFSCREEN_BOUNDARY ||
-                ypos >= Launcher.DEF_GAME_HEIGHT + OFFSCREEN_BOUNDARY) {
+                xpos >= Settings.game_width + OFFSCREEN_BOUNDARY ||
+                ypos >= Settings.game_height + OFFSCREEN_BOUNDARY) {
             return true;
         }
 

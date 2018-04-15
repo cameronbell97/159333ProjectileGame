@@ -180,18 +180,18 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
     // Method - Dynamically Generate A New Position & Direction for the Enemy
     private static Enemy generateEnemyPosition(Enemy e, int enemySize) {
         // Generate new (x,y) Co-ordinates
-        float newXpos = Game.getFloatFromRange(-enemySize, Launcher.DEF_GAME_WIDTH);
-        float newYpos = Game.getFloatFromRange(-enemySize, Launcher.DEF_GAME_HEIGHT);
+        float newXpos = Game.getFloatFromRange(-enemySize, Settings.game_width);
+        float newYpos = Game.getFloatFromRange(-enemySize, Settings.game_height);
 
         // Randomly choose one wall to move behind (so the enemy spawns off-screen)
         switch (Game.getIntFromRange(0, 1)) {
             case 0:
-                if(newXpos < (Launcher.DEF_GAME_WIDTH + enemySize) / 2) newXpos = -enemySize;
-                else newXpos = Launcher.DEF_GAME_WIDTH;
+                if(newXpos < (Settings.game_width + enemySize) / 2) newXpos = -enemySize;
+                else newXpos = Settings.game_width;
                 break;
             case 1:
-                if(newYpos < (Launcher.DEF_GAME_HEIGHT + enemySize) / 2) newXpos = -enemySize;
-                else newYpos = Launcher.DEF_GAME_HEIGHT;
+                if(newYpos < (Settings.game_height + enemySize) / 2) newXpos = -enemySize;
+                else newYpos = Settings.game_height;
                 break;
         }
 
@@ -215,8 +215,8 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
         // Define point variables for easier function designing
         float P1x = e.getXpos();
         float P1y = e.getYpos();
-        float P2x = Launcher.DEF_GAME_WIDTH/2;
-        float P2y = Launcher.DEF_GAME_HEIGHT/2;
+        float P2x = Settings.game_width/2;
+        float P2y = Settings.game_height/2;
 
         // Determine right-angled-triangle's opposite and adjacent lengths
         float triangleX = Math.abs(P2x - P1x);

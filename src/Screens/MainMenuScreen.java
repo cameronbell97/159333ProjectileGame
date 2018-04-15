@@ -1,6 +1,7 @@
 package Screens;
 import Game.Launcher;
 import Game.MouseManager;
+import Game.Settings;
 import MainMenu.MenuManager;
 
 import java.awt.*;
@@ -38,7 +39,7 @@ public class MainMenuScreen extends Screen{
     public void draw(Graphics g) {
         // Draw Background
         g.setColor(new Color(0, 0, 20));
-        g.fillRect(0, 0, Launcher.DEF_GAME_WIDTH, Launcher.DEF_GAME_HEIGHT);
+        g.fillRect(0, 0, Settings.game_width, Settings.game_height);
 
         // Draw Menu Buttons
         menuManager.draw(g);

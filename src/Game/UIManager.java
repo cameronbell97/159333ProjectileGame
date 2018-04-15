@@ -10,12 +10,6 @@ import java.util.HashMap;
 
 public class UIManager {
 // VARIABLES //
-    // Statics
-    private static final int LEFT_BOUNDARY = 24;
-    private static final int RIGHT_BOUNDARY = 24;
-    private static final int UPPER_BOUNDARY = 24;
-    private static final int LOWER_BOUNDARY = 24;
-
     GameDataManager gameDataManager;
     TextManager textManager;
 
@@ -39,8 +33,8 @@ public class UIManager {
 
     private void drawScore(Graphics g) {
         // Get Parameters
-        int xoffset = LEFT_BOUNDARY;
-        int yoffset = UPPER_BOUNDARY;
+        int xoffset = Settings.ui_left_boundary;
+        int yoffset = Settings.ui_upper_boundary;
         int score = gameDataManager.getScore();
 
         // Draw Score Word
@@ -55,8 +49,8 @@ public class UIManager {
 
     private void drawGameLevel(Graphics g) {
         // Get Parameters
-        int xoffset = Launcher.DEF_GAME_WIDTH / 2;
-        int yoffset = UPPER_BOUNDARY;
+        int xoffset = Settings.game_width / 2;
+        int yoffset = Settings.ui_upper_boundary;
         int level = gameDataManager.getCurrent_level();
 
         // Draw Level Word
@@ -71,8 +65,8 @@ public class UIManager {
 
     private void drawRemainingEnemies(Graphics g) {
         // Get Parameters
-        int xoffset = Launcher.DEF_GAME_WIDTH - RIGHT_BOUNDARY - textManager.getCharacterWidth();
-        int yoffset = UPPER_BOUNDARY;
+        int xoffset = Settings.game_width - Settings.ui_right_boundary - textManager.getCharacterWidth();
+        int yoffset = Settings.ui_upper_boundary;
         int remaining = gameDataManager.getEnemies_remaining();
 
         // Draw Remaining Enemies Word
@@ -87,8 +81,8 @@ public class UIManager {
 
     private void drawPlayerHP(Graphics g) {
         // Get Parameters
-        int xoffset = LEFT_BOUNDARY;
-        int yoffset = (Launcher.DEF_GAME_HEIGHT - LOWER_BOUNDARY) - (textManager.getCharacterHeight()) * 2 - 4;
+        int xoffset = Settings.ui_left_boundary;
+        int yoffset = (Settings.game_height - Settings.ui_lower_boundary) - (textManager.getCharacterHeight()) * 2 - 4;
         int hp = gameDataManager.getPlayer_hp();
 
         // Draw HP Word
