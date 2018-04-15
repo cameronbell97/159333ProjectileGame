@@ -1,6 +1,7 @@
 package MainMenu;
 
 import Game.MouseManager;
+import Game.Settings;
 import Game.TextManager;
 
 import java.awt.*;
@@ -10,8 +11,6 @@ import java.awt.*;
  */
 public class Button {
 // VARIABLES //
-    private static final int BORDER_WIDTH = 4;
-    private static final int INNER_PADDING = 8;
     MouseManager mouseManager;
     TextManager textManager;
     private boolean left, right;
@@ -20,14 +19,16 @@ public class Button {
 
 
 // CONSTRUCTORS //
-    public Button(String text, int xpos, int ypos) {
+    public Button(String text, int middleXpos, int middleYpos) {
         this.text = text;
-        this.xpos = xpos;
-        this.ypos = ypos;
+
+        this.height = textManager.getCharacterHeight() + (Settings.button_inner_padding * 2) + (Settings.button_border_width * 2);
+        this.width = (textManager.getCharacterWidth() * text.length() + Settings.character_size * (text.length() - 1)) + (Settings.button_inner_padding * 2) + (Settings.button_border_width * 2);
+
+        this.xpos = middleXpos-width/2;
+        this.ypos = middleYpos-height/2;
 
         textManager = new TextManager();
-        this.height = textManager.getCharacterHeight() + (INNER_PADDING * 2) + (BORDER_WIDTH * 2);
-        this.width = textManager.getCharacterWidth() + (INNER_PADDING * 2) + (BORDER_WIDTH * 2);
 
         initialise();
     }
@@ -56,10 +57,16 @@ public class Button {
     }
 
     public void draw(Graphics g) {
-
+        g.setColor(Color.BLUE);
+        g.drawRect(xpos, ypos, width, height);
+        textManager.drawString(g, text, "left", xpos + Settings.button_border_width + Settings.button_inner_padding, ypos + Settings.button_border_width + Settings.button_inner_padding);
     }
 
     private void onClick() {
 
+    }
+
+    public static int getButtonHeight() {
+        return TextManager.getCharacterHeight() + (Settings.button_inner_padding * 2) + (Settings.button_border_width * 2);
     }
 }

@@ -1,11 +1,12 @@
 package Screens;
-import Game.Launcher;
 import Game.MouseManager;
 import Game.Settings;
+import MainMenu.Button;
 import MainMenu.MenuManager;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Cameron Bell - 26/03/2018
@@ -22,6 +23,52 @@ public class MainMenuScreen extends Screen{
         super();
         menuManager = new MenuManager();
         mouseManager = MouseManager.get();
+
+        // TODO // Add Buttons //
+        ArrayList<String> buttonNames = new ArrayList<>();
+        buttonNames.add("PLAY");
+        buttonNames.add("OPTIONS");
+        buttonNames.add("QUIT");
+
+        int buttonCount = buttonNames.size();
+        int buttonSpacing = Settings.menu_button_spacing;
+        int buttonIncrement = Button.getButtonHeight() + buttonSpacing;
+        int topButtonY =
+                (Settings.game_height / 2) - (
+                    (
+                        (Button.getButtonHeight() * buttonCount) +
+                        (buttonSpacing * (buttonCount - 1))
+                    ) / 2
+                );
+
+        for(int i = 0; i < buttonCount; i++) {
+            menuManager.addButton(new Button(
+                    buttonNames.get(i),
+                    Settings.game_width / 2,
+                    topButtonY + (buttonIncrement * i)
+            ));
+        }
+
+//        ArrayList<Button> buttonList = new ArrayList<>();
+
+//        buttonList.add(new Button(
+//                "PLAY",
+//                Settings.game_width/2,
+//                topButtonY + (buttonIncrement * 0)
+//        ));
+//        buttonList.add(new Button(
+//                "OPTIONS",
+//                Settings.game_width/2,
+//                topButtonY + (buttonIncrement * 1)
+//        ));
+//        buttonList.add(new Button(
+//                "QUIT",
+//                Settings.game_width/2,
+//                topButtonY + (buttonIncrement * 2)
+//        ));
+//
+//        menuManager.addButton(
+//        );
     }
 
 // METHODS //

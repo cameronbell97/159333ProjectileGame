@@ -15,6 +15,11 @@ public class Settings {
     private static final int DEF_UI_UPPER_BOUNDARY = 24;
     private static final int DEF_UI_LOWER_BOUNDARY = 24;
 
+    // Menus
+    private static final int DEF_BUTTON_BORDER_WIDTH = 4;
+    private static final int DEF_BUTTON_INNER_PADDING = 8;
+    private static final int DEF_MENU_BUTTON_SPACING = 8;
+
 // SETTINGS //
     // Game
     public static int game_width;
@@ -28,6 +33,11 @@ public class Settings {
     public static int ui_right_boundary;
     public static int ui_upper_boundary;
     public static int ui_lower_boundary;
+
+    // Menus
+    public static int button_border_width;
+    public static int button_inner_padding;
+    public static int menu_button_spacing;
 
 // CONSTRUCTORS //
     // Default Values Constructor
@@ -44,5 +54,10 @@ public class Settings {
         ui_right_boundary = DEF_UI_RIGHT_BOUNDARY;
         ui_upper_boundary = DEF_UI_UPPER_BOUNDARY;
         ui_lower_boundary = DEF_UI_LOWER_BOUNDARY;
+
+        // Menus
+        button_border_width = DEF_BUTTON_BORDER_WIDTH;
+        button_inner_padding = DEF_BUTTON_INNER_PADDING;
+        menu_button_spacing = DEF_MENU_BUTTON_SPACING;
     }
 }

@@ -1,6 +1,7 @@
 package MainMenu;
 
 import Game.MouseManager;
+import Game.Settings;
 import Game.TextManager;
 
 import java.awt.*;
@@ -12,17 +13,19 @@ import java.util.ArrayList;
  */
 public class MenuManager {
 // VARIABLES //
-    ArrayList<Button> buttons;
+    private ArrayList<Button> buttons;
+    private int screenMiddleX, screenMiddleY;
 
 // CONSTRUCTORS //
     public MenuManager() {
         buttons = new ArrayList<>();
-
-        // TODO // Add Buttons
+        updateVariables();
     }
 
 // METHODS //
     public void update() {
+        updateVariables();
+
         // Update Buttons
         for(Button b : buttons) {
             b.update();
@@ -34,5 +37,15 @@ public class MenuManager {
         for(Button b : buttons) {
             b.draw(g);
         }
+    }
+
+    private void updateVariables() {
+        // Calculate Middle of the screen
+        screenMiddleX = Settings.game_width / 2;
+        screenMiddleY = Settings.game_height / 2;
+    }
+
+    public void addButton(Button b) {
+        buttons.add(b);
     }
 }

@@ -11,7 +11,7 @@ public class Launcher {
     public static void main(String[] args) {
         // Initialise Settings
         new Settings();
-        
+
         // Launch Game
         Game game = new Game("PROJECTILE", Settings.game_height, Settings.game_width);
         game.start();
