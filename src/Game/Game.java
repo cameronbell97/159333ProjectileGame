@@ -1,10 +1,14 @@
 package Game;
 
-import Screens.GameScreen;
-import Screens.MainMenuScreen;
-import Screens.Screen;
-import Screens.ScreenManager;
-import Timer.TimerManager;
+import Game.Data.KeyManager;
+import Game.Data.MouseManager;
+import Game.Data.Save;
+import Game.Display.DisplayWindow;
+import Game.Screens.GameScreen;
+import Game.Screens.MainMenuScreen;
+import Game.Screens.Screen;
+import Game.Screens.ScreenManager;
+import Game.Timer.TimerManager;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -14,7 +18,7 @@ import java.util.Random;
 /**
  * Cameron Bell - 20/03/2018
  * Game Class
- * High-Level Class Used to Instantiate Game and Encompass Many Entities
+ * High-Level Class Used to Instantiate Game and Encompass Many Game.Entities
  */
 
 public class Game implements Runnable{
@@ -28,7 +32,7 @@ public class Game implements Runnable{
     private int gameHeight;
     private int gameWidth;
 
-    // Window / Display variables
+    // Window / Game.Display variables
     private DisplayWindow display;
     private Canvas displayCanvas;
     private Graphics g;
@@ -43,7 +47,7 @@ public class Game implements Runnable{
     private TimerManager timerMan;
     private MouseManager mouseMan;
 
-    // Screens
+    // Game.Screens
     private Screen mainMenuScreen;
     private Screen gameScreen;
 
@@ -78,7 +82,7 @@ public class Game implements Runnable{
 
         displayCanvas = display.getCanvas();
 
-        // Initialise Screens
+        // Initialise Game.Screens
         gameScreen = new GameScreen();
         mainMenuScreen = new MainMenuScreen();
         ScreenManager.setScreen(mainMenuScreen);
@@ -116,7 +120,7 @@ public class Game implements Runnable{
             ScreenManager.getScreen().draw(g);
         }
 
-        // Display the new drawn-to Screen
+        // Game.Display the new drawn-to Screen
         bufferStrategy.show();
         g.dispose();
     }

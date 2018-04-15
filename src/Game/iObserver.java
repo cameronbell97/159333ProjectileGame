@@ -1,6 +1,6 @@
 package Game;
 
-import Entities.Entity;
+import Game.Entities.Entity;
 
 /**
  * Cameron Bell - 02/04/2018

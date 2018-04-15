@@ -1,8 +1,6 @@
 package Game;
 
-import Entities.Collision.CollisionBox;
-import Entities.Dynamic.DynamicEntity;
-import Entities.Entity;
+import Game.Entities.Collision.CollisionBox;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;

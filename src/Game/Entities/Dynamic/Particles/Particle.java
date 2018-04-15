@@ -1,0 +1,38 @@
+package Game.Entities.Dynamic.Particles;
+
+import Game.Entities.Dynamic.DynamicEntity;
+import Game.Entities.EntityManager;
+import Game.Timer.*;
+
+/**
+ * Cameron Bell - 05/04/2018
+ * Particle Abstract Class
+ */
+
+public abstract class Particle extends DynamicEntity implements iCanHaveCodeTimer {
+// VARIABLES //
+    public static final int DEF_PARTICLE_WIDTH = 16;
+    public static final int DEF_PARTICLE_HEIGHT = 16;
+
+// CONSTRUCTORS //
+    public Particle(float x, float y, int w, int h, double direction) {
+        super(x, y, w, h, direction);
+    }
+
+// METHODS //
+    @Override
+    public void timerNotify(CodeTimer t) {
+        String timerCode = t.getCode(); // Get timer code
+        TimerManager.get().unsubTimer(t); // Unsubscribe the timer
+
+        switch (timerCode) {
+            case "DIE":
+                destroy();
+                break;
+        }
+    }
+
+    protected void destroy() {
+        EntityManager.get().unsubscribe(this);
+    }
+}
