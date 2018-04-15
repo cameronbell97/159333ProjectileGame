@@ -6,7 +6,7 @@ public class Settings {
     private static final int DEF_GAME_WIDTH = 875;
     private static final int DEF_GAME_HEIGHT = 700;
 
-    // UI
+    // UserInterface
     private static final int DEF_CHARACTER_HEIGHT = 9;
     private static final int DEF_CHARACTER_WIDTH = 5;
     private static final int DEF_CHARACTER_SIZE = 2;
@@ -25,7 +25,7 @@ public class Settings {
     public static int game_width;
     public static int game_height;
 
-    // UI
+    // UserInterface
     public static int character_height;
     public static int character_width;
     public static int character_size;
@@ -46,7 +46,7 @@ public class Settings {
         game_width = DEF_GAME_WIDTH;
         game_height = DEF_GAME_HEIGHT;
 
-        // UI
+        // UserInterface
         character_height = DEF_CHARACTER_HEIGHT;
         character_width = DEF_CHARACTER_WIDTH;
         character_size = DEF_CHARACTER_SIZE;

@@ -1,20 +1,18 @@
-package Game;
+package UserInterface;
 
-import Assets.AssetManager;
+import Game.GameDataManager;
+import Game.Settings;
+import UserInterface.TextManager;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 
-public class UIManager {
+public class GameUIManager {
 // VARIABLES //
     GameDataManager gameDataManager;
     TextManager textManager;
 
 // CONSTRUCTORS //
-    public UIManager() {
+    public GameUIManager() {
         gameDataManager = GameDataManager.get();
         textManager = new TextManager();
     }

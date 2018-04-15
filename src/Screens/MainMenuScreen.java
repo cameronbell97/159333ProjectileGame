@@ -1,11 +1,11 @@
 package Screens;
 import Game.MouseManager;
 import Game.Settings;
-import MainMenu.Buttons.Button;
-import MainMenu.Buttons.DummyButton;
-import MainMenu.Buttons.QuitButton;
+import UserInterface.Buttons.Button;
+import UserInterface.Buttons.DummyButton;
+import UserInterface.Buttons.QuitButton;
 import MainMenu.MenuManager;
-import MainMenu.Buttons.PlayButton;
+import UserInterface.Buttons.PlayButton;
 
 import java.awt.*;
 import java.io.IOException;

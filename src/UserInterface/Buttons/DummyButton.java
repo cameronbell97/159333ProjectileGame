@@ -1,4 +1,4 @@
-package MainMenu.Buttons;
+package UserInterface.Buttons;
 
 public class DummyButton extends Button {
     public DummyButton(String text, int middleXpos, int middleYpos) {

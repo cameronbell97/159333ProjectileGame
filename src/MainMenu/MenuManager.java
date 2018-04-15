@@ -1,7 +1,7 @@
 package MainMenu;
 
 import Game.Settings;
-import MainMenu.Buttons.Button;
+import UserInterface.Buttons.Button;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class MenuManager {
 // VARIABLES //
-    private ArrayList<MainMenu.Buttons.Button> buttons;
+    private ArrayList<UserInterface.Buttons.Button> buttons;
     private int screenMiddleX, screenMiddleY;
 
 // CONSTRUCTORS //
@@ -25,14 +25,14 @@ public class MenuManager {
         updateVariables();
 
         // Update Buttons
-        for(MainMenu.Buttons.Button b : buttons) {
+        for(UserInterface.Buttons.Button b : buttons) {
             b.update();
         }
     }
 
     public void draw(Graphics g) {
         // Draw Buttons
-        for(MainMenu.Buttons.Button b : buttons) {
+        for(UserInterface.Buttons.Button b : buttons) {
             b.draw(g);
         }
     }

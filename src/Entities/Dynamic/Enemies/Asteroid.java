@@ -9,8 +9,7 @@ import Entities.Entity;
 import Entities.EntityManager;
 import Entities.iOutOfBounds;
 import Entities.iVulnerable;
-import Game.EnemyDirector;
-import Game.Launcher;
+import Entities.EnemyDirector;
 import Game.Settings;
 
 import java.awt.geom.AffineTransform;

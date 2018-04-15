@@ -1,8 +1,8 @@
-package MainMenu.Buttons;
+package UserInterface.Buttons;
 
 import Game.MouseManager;
 import Game.Settings;
-import Game.TextManager;
+import UserInterface.TextManager;
 
 import java.awt.*;
 

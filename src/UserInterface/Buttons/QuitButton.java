@@ -1,4 +1,4 @@
-package MainMenu.Buttons;
+package UserInterface.Buttons;
 
 
 public class QuitButton extends Button {

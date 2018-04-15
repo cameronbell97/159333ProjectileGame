@@ -1,9 +1,10 @@
-package Game;
+package Entities;
 
 import Entities.Dynamic.DynamicEntity;
 import Entities.Dynamic.Enemies.Asteroid;
 import Entities.Dynamic.Enemies.Enemy;
-import Entities.EntityManager;
+import Game.Game;
+import Game.Settings;
 import Timer.*;
 
 import java.util.ArrayList;

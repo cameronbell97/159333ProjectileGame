@@ -1,6 +1,7 @@
-package Game;
+package UserInterface;
 
 import Assets.AssetManager;
+import Game.Settings;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

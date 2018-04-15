@@ -1,5 +1,6 @@
 package Game;
 
+import Entities.EnemyDirector;
 import Entities.EntityManager;
 
 public class GameDataManager {

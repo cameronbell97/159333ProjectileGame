@@ -1,12 +1,10 @@
 package Screens;
 
-import Assets.AssetManager;
 import Entities.EntityManager;
 import Entities.Dynamic.PlayerEntity;
-import Game.EnemyDirector;
-import Game.Launcher;
+import Entities.EnemyDirector;
 import Game.Settings;
-import Game.UIManager;
+import UserInterface.GameUIManager;
 
 import java.awt.*;
 import java.io.IOException;
@@ -22,7 +20,7 @@ public class GameScreen extends Screen {
     private PlayerEntity player;
     private EntityManager entityManager;
     private EnemyDirector enemyDirector;
-    private UIManager UIManager;
+    private GameUIManager UIManager;
 
 // CONSTRUCTORS //
     public GameScreen() throws IOException {
@@ -31,7 +29,7 @@ public class GameScreen extends Screen {
         // Declarations
         entityManager = EntityManager.get();
         enemyDirector = EnemyDirector.get();
-        UIManager = new UIManager();
+        UIManager = new GameUIManager();
         player = new PlayerEntity(
                 Settings.game_width/2 - player.DEF_PLAYER_WIDTH/2,
                 Settings.game_height/2 - player.DEF_PLAYER_HEIGHT/2)
@@ -60,7 +58,7 @@ public class GameScreen extends Screen {
         // If DRAW_COLLISIONS = true, draw all subscribed collision boxes
         if(Game.Game.DRAW_COLLISIONS) entityManager.drawCollisionBoxes(g);
 
-        // Draw UI Last // So it appears over everything else
+        // Draw UserInterface Last // So it appears over everything else
         UIManager.draw(g);
     }
 }

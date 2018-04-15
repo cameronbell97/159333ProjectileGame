@@ -1,4 +1,4 @@
-package MainMenu.Buttons;
+package UserInterface.Buttons;
 
 import Screens.GameScreen;
 import Screens.ScreenManager;
