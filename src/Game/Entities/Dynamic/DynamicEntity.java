@@ -29,6 +29,7 @@ public abstract class DynamicEntity extends Entity{
         setMoveSpeeds();
         aTrans = AffineTransform.getRotateInstance(0, width/2, height/2);
         aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
+        setMoveSpeeds();
     }
 
 // METHODS //

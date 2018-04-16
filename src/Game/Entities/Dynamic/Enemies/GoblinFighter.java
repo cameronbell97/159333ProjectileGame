@@ -14,7 +14,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     private static final int INITIAL_TIME_BEFORE_SHOOTING = 3*60;
     private static final int TIME_BETWEEN_SHOTS = 25;
     private static final int TIME_BETWEEN_SHOOT_PHASES = 3*60;
-    private static final int SHOOT_PHASE_BULLET_NUMBER = 4;
+    private static final int DEF_SHOOT_PHASE_BULLET_NUMBER = 4;
     private static final int DEF_HP = 1;
     private static final int DEF_EXP = 8;
 
@@ -23,6 +23,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     protected int phaseBullet;
     protected int hp;
     protected int exp_value;
+    protected int phaseBulletsNumber = 4;
 
 // CONSTRUCTORS //
     public GoblinFighter(float x, float y, double direction) {
@@ -33,6 +34,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
         phaseBullet = 0;
         hp = DEF_HP;
         exp_value = DEF_EXP;
+        phaseBulletsNumber = DEF_SHOOT_PHASE_BULLET_NUMBER;
     }
 
 // METHODS //
@@ -50,6 +52,9 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     public void collide(Entity ec) {
         if(ec instanceof Game.Entities.Dynamic.Bullets.BulletPlayer) {
             addHP(-2);
+        }
+        else if(ec instanceof Game.Entities.Dynamic.PlayerEntity) {
+            die();
         }
     }
 
@@ -82,7 +87,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     }
 
     private void tryShoot() {
-        if(phaseBullet < SHOOT_PHASE_BULLET_NUMBER) {
+        if(phaseBullet < phaseBulletsNumber) {
             if (shootTimer == 0 || shootTimer == TIME_BETWEEN_SHOTS) {
                 if (shootTimer == 0) shootPhase = 0;
                 else shootPhase = 1;

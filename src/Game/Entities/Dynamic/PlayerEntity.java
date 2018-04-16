@@ -1,7 +1,9 @@
 package Game.Entities.Dynamic;
 import Game.Entities.Collision.CollisionBox;
 import Game.Entities.Dynamic.Bullets.BulletPlayer;
+import Game.Entities.Dynamic.Bullets.GoblinBulletLarge;
 import Game.Entities.Dynamic.Bullets.GoblinBulletSmall;
+import Game.Entities.Dynamic.Enemies.GoblinFighter;
 import Game.Entities.Entity;
 import Game.Entities.EntityManager;
 import Game.Entities.iVulnerable;
@@ -152,6 +154,12 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         }
         else if(ec instanceof GoblinBulletSmall) {
             addHP(-1);
+        }
+        else if(ec instanceof GoblinBulletLarge) {
+            addHP(-2);
+        }
+        else if(ec instanceof GoblinFighter) {
+            addHP(-5);
         }
     }
 

@@ -127,11 +127,10 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
             EntityManager.get().subscribe(ast);
             EnemyDirector.get().subscribe(ast);
         }
+
         EntityManager.get().subscribe(new ExpDot(this, level+1));
         explode();
-        EntityManager.get().unsubscribe(this);
-        EntityManager.get().unsubscribe(collision);
-        EnemyDirector.get().unsubscribe(this);
+        kill();
     }
 
     // Hard die, just kills the object
