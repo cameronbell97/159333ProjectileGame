@@ -28,8 +28,8 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     private static final int THRUST_FRAME_TIME_2 = 25;
     private static final int THRUST_FRAME_TIME_3 = 40;
     private static final boolean PLAYER_STRAFE_ENABLED = false;
-    private static final boolean PLAYER_DECELERATION_ENABLED = true;
-    private static final boolean PLAYER_ACCELERATION_ENABLED = false;
+    private static final boolean PLAYER_DECELERATION_ENABLED = false;
+    private static final boolean PLAYER_ACCELERATION_ENABLED = true;
     private static final boolean PLAYER_SPEED_LIMIT_ENABLED = true;
 
     AssetManager assMan = AssetManager.get();
@@ -45,6 +45,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     private int slowTimeStart;
     private int slowTimeCurrent;
     private int timeMoving;
+    private int acceleration;
 
 
 // CONSTRUCTORS //
@@ -71,6 +72,8 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         timeMoving = 0;
         xmove = 0;
         ymove = 0;
+        acceleration = 0;
+        acceleration = 60;
     }
 
     public void move() {
@@ -171,8 +174,17 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             speedMultiplier = (float)0.25;
         }
         if(km.forward) {
-            ymove = (float)(moveSpeed * -Math.sin(direction)* speedMultiplier);
-            xmove = (float)(moveSpeed * Math.cos(direction)* speedMultiplier);
+            if(!PLAYER_ACCELERATION_ENABLED) {
+                ymove = (float) (moveSpeed * -Math.sin(direction) * speedMultiplier);
+                xmove = (float) (moveSpeed * Math.cos(direction) * speedMultiplier);
+            } else {
+                float newMoveSpeed = ((float)1 / (float) acceleration) * (float)moveSpeed;
+
+                ymove += (float) (newMoveSpeed * -Math.sin(direction) * speedMultiplier);
+                xmove += (float) (newMoveSpeed * Math.cos(direction) * speedMultiplier);
+
+//                acceleration++;
+            }
 
         // Thrust Animation Code
             if (timeMoving < THRUST_FRAME_TIME_2) {
@@ -223,6 +235,11 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         if(slowTimeStart > 0) slowTimeCurrent++;
         if(slowTimeStart == slowTimeCurrent) slowTimeStart = 0;
         if(slowTimeStart == 0 && slowTimeCurrent > 0) slowTimeCurrent--;
+
+        if(slowTimeCurrent == 1 && PLAYER_ACCELERATION_ENABLED) {
+            ymove = ymove / 3;
+            xmove = xmove / 3;
+        }
     }
 
     @Override
