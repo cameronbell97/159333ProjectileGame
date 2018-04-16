@@ -5,7 +5,7 @@ import Game.Entities.Collision.CollisionBox;
 import Game.Entities.Dynamic.Bullets.GoblinBulletLarge;
 import Game.Entities.EntityManager;
 
-public class s extends GoblinFighter {
+public class GoblinFighterLarge extends GoblinFighter {
 // VARIABLES //
     private static final int GOBLIN_FIGHTER_LARGE_DEF_HP = 6;
 
