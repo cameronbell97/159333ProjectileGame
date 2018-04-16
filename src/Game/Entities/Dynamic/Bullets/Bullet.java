@@ -16,18 +16,7 @@ public abstract class Bullet extends DynamicEntity {
                 w, h, (parent.getDirection() - (Math.PI/2)))
         ;
         this.parent = parent;
-
-        // Move it to the nose of the ship
-        ymove = (float)(20 * -Math.sin(direction));
-        xmove = (float)(20 * Math.cos(direction));
-        move();
-
-        // Reset move speed
-        moveSpeed = 12;
         setMoveSpeeds();
-
-        // Rotate the sprite
-        rotateSprite();
     }
 
 // METHODS //

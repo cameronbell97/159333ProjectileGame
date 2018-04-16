@@ -24,13 +24,14 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     public static final int DEF_PLAYER_HEIGHT = 64;
     public static final int DEF_RELOAD_SPEED = 10; // 60 = 1 second
     public static final double DEF_ROT_SPEED = 0.015*Math.PI;
+    public static final int DEF_HEALTH = 20;
     private static final int THRUST_FRAME_TIME_1 = 5;
     private static final int THRUST_FRAME_TIME_2 = 25;
     private static final int THRUST_FRAME_TIME_3 = 40;
     private static final boolean PLAYER_STRAFE_ENABLED = false;
-    private static final boolean PLAYER_DECELERATION_ENABLED = false;
-    private static final boolean PLAYER_ACCELERATION_ENABLED = true;
-    private static final boolean PLAYER_SPEED_LIMIT_ENABLED = true;
+    private static final boolean PLAYER_DECELERATION_ENABLED = true;
+    private static final boolean PLAYER_ACCELERATION_ENABLED = false;
+    private static final boolean PLAYER_SPEED_LIMIT_ENABLED = false;
 
     AssetManager assMan = AssetManager.get();
     KeyManager km = KeyManager.get();
@@ -63,7 +64,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         reverseThrust = true;
         decelerate = (float)0.06;
         collision = new CollisionBox(xpos+22, ypos+17, 20, 35, 22, 17, this);
-        health = 10;
+        health = DEF_HEALTH;
         shoot_release = true;
         shoot_reloaded = true;
         slowTimeStart = 0;
@@ -142,11 +143,14 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     @Override
     public void collide(Entity ec) {
         if(ec instanceof Game.Entities.Dynamic.Enemies.Asteroid) {
-            addHP(-1);
+            addHP(-2);
             slow(50);
         }
         else if(ec instanceof Game.Entities.Dynamic.ExpDot) {
             gdm.addScore(((ExpDot) ec).getValue());
+        }
+        else if(ec instanceof Game.Entities.Dynamic.Bullets.EnemyBulletSmall) {
+            addHP(-1);
         }
     }
 

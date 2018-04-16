@@ -49,7 +49,6 @@ public class Game implements Runnable{
 
     // Game.Screens
     private Screen mainMenuScreen;
-    private Screen gameScreen;
 
     // Miscellaneous
     private Save save;
@@ -83,7 +82,6 @@ public class Game implements Runnable{
         displayCanvas = display.getCanvas();
 
         // Initialise Game.Screens
-        gameScreen = new GameScreen();
         mainMenuScreen = new MainMenuScreen();
         ScreenManager.setScreen(mainMenuScreen);
 

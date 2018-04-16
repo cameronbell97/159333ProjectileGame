@@ -135,7 +135,6 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
     }
 
     // Hard die, just kills the object
-
     public void kill() {
         EntityManager.get().unsubscribe(this);
         EntityManager.get().unsubscribe(collision);

@@ -3,7 +3,7 @@ package Game.Entities.Dynamic.Enemies;
 import Game.Entities.Entity;
 import Game.Entities.EntityManager;
 
-public abstract class TargetingEnemy extends Enemy {
+public abstract class TargetingEnemy extends Enemy{
 // VARIABLES //
     private static final double DEF_ROTATE_SPEED = 0.005 * Math.PI;
     private static final float DEF_DECELERATION = (float)0.03;
@@ -43,9 +43,7 @@ public abstract class TargetingEnemy extends Enemy {
     }
 
     @Override
-    public void collide(Entity ec) {
-
-    }
+    public abstract void collide(Entity ec);
 
     private void rotateToPlayer() {
         // Keep the entity's direction in the range 0 < x < 2(PI)
