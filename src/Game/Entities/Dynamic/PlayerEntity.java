@@ -1,6 +1,7 @@
 package Game.Entities.Dynamic;
 import Game.Entities.Collision.CollisionBox;
 import Game.Entities.Dynamic.Bullets.BulletPlayer;
+import Game.Entities.Dynamic.Bullets.GoblinBulletSmall;
 import Game.Entities.Entity;
 import Game.Entities.EntityManager;
 import Game.Entities.iVulnerable;
@@ -22,7 +23,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     // Statics
     public static final int DEF_PLAYER_WIDTH = 64;
     public static final int DEF_PLAYER_HEIGHT = 64;
-    public static final int DEF_RELOAD_SPEED = 10; // 60 = 1 second
+    public static final int DEF_RELOAD_SPEED = 1; // 60 = 1 second
     public static final double DEF_ROT_SPEED = 0.015*Math.PI;
     public static final int DEF_HEALTH = 20;
     private static final int THRUST_FRAME_TIME_1 = 5;
@@ -149,7 +150,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         else if(ec instanceof Game.Entities.Dynamic.ExpDot) {
             gdm.addScore(((ExpDot) ec).getValue());
         }
-        else if(ec instanceof Game.Entities.Dynamic.Bullets.EnemyBulletSmall) {
+        else if(ec instanceof GoblinBulletSmall) {
             addHP(-1);
         }
     }

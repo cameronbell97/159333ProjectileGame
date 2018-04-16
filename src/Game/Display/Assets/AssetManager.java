@@ -122,6 +122,8 @@ public class AssetManager {
                 return particles_sheet_8.getSprite(x, y);
             case 11:
                 return particles_sheet_16.getSprite(x, y);
+            case 20:
+                return bullet_sheet.getSprite(x, y);
         }
 
         return null;

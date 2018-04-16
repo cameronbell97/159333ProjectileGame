@@ -82,11 +82,6 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
         if(checkOOB()) {
             doWhenOutOfBounds();
         }
-
-        // DEBUG //
-        if(collision == null) {
-            System.out.println();
-        }
     }
 
     @Override

@@ -1,42 +1,38 @@
 package Game.Entities.Dynamic.Enemies;
 
 import Game.Data.Settings;
-import Game.Display.Assets.AssetManager;
 import Game.Entities.*;
-import Game.Entities.Collision.CollisionBox;
-import Game.Entities.Dynamic.Bullets.EnemyBulletSmall;
 import Game.Entities.Dynamic.ExpDot;
 
 import java.awt.*;
 
-public class GoblinPawn extends TargetingEnemy implements iOutOfBounds, iVulnerable {
+public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBounds, iVulnerable {
 // VARIABLES //
     private static final int PLAYER_STOP_DISTANCE = 500;
-    private static final int GOBLIN_PAWN_MOVE_SPEED = 2;
+    private static final int GOBLIN_FIGHTER_MOVE_SPEED = 2;
     private static final int OFFSCREEN_BOUNDARY = -32;
     private static final int INITIAL_TIME_BEFORE_SHOOTING = 3*60;
     private static final int TIME_BETWEEN_SHOTS = 25;
     private static final int TIME_BETWEEN_SHOOT_PHASES = 3*60;
     private static final int SHOOT_PHASE_BULLET_NUMBER = 4;
-    private static final int DEF_HP = 4;
+    private static final int DEF_HP = 1;
     private static final int DEF_EXP = 8;
 
-    private int shootTimer;
-    private int shootPhase;
-    private int phaseBullet;
-    private int hp;
+    protected int shootTimer;
+    protected int shootPhase;
+    protected int phaseBullet;
+    protected int hp;
+    protected int exp_value;
 
 // CONSTRUCTORS //
-    public GoblinPawn(float x, float y, double direction) {
+    public GoblinFighter(float x, float y, double direction) {
         super(x, y, 64, 64, direction);
-        img = AssetManager.get().getSprite(1, 0, 3);
-        moveSpeed = GOBLIN_PAWN_MOVE_SPEED;
+        moveSpeed = GOBLIN_FIGHTER_MOVE_SPEED;
         shootTimer = INITIAL_TIME_BEFORE_SHOOTING;
         shootPhase = 1;
         phaseBullet = 0;
         hp = DEF_HP;
-
-        collision = new CollisionBox(x+21, y+17, 22, 30, 21, 17, this);
+        exp_value = DEF_EXP;
     }
 
 // METHODS //
@@ -104,9 +100,7 @@ public class GoblinPawn extends TargetingEnemy implements iOutOfBounds, iVulnera
         }
     }
 
-    private void shoot() {
-        EntityManager.get().subscribe(new EnemyBulletSmall(this));
-    }
+    protected abstract void shoot();
 
     @Override
     public boolean checkOOB() {
@@ -149,7 +143,7 @@ public class GoblinPawn extends TargetingEnemy implements iOutOfBounds, iVulnera
 
     @Override
     public void die() {
-        EntityManager.get().subscribe(new ExpDot(this, DEF_EXP));
+        EntityManager.get().subscribe(new ExpDot(this, exp_value));
         explode();
         EntityManager.get().unsubscribe(this);
         EntityManager.get().unsubscribe(collision);

@@ -6,35 +6,37 @@ import Game.Entities.Dynamic.DynamicEntity;
 import Game.Entities.Dynamic.Enemies.GoblinFighter;
 import Game.Entities.Entity;
 
-public class BulletPlayer extends Bullet {
+/**
+ * Created by Cameron on 16/04/2018.
+ */
+public class GoblinBulletLarge extends Bullet {
 // VARIABLES //
     protected static final int IMG_X_OFFSET = 3;
 
 // CONSTRUCTORS //
-    public BulletPlayer(DynamicEntity parent) {
-        super(10, 10, parent);
-        img = AssetManager.get().getSprite("BulletPlayer");
+    public GoblinBulletLarge(GoblinFighter parent) {
+        super(10, 10, (DynamicEntity) parent);
+        img = AssetManager.get().getSprite(20, 1, 1);
         collision = new CollisionBox(xpos+IMG_X_OFFSET, ypos, 4, 10, IMG_X_OFFSET, 0, this);
 
-        // Move bullet to nose of Player ship
-        ymove = (float)(20 * -Math.sin(direction));
-        xmove = (float)(20 * Math.cos(direction));
+        // Move to correct position
+        this.moveSpeed = 22;
+        setMoveSpeeds();
         move();
 
-        // Reset move speed
-        moveSpeed = 12;
-        setMoveSpeeds();
+        if(parent.getShootPhase() == 0) strafeLeft(11);
+        else strafeRight(11);
 
-        // Rotate the sprite
+        // Reset to correct speeds
+        this.moveSpeed = 2;
+        setMoveSpeeds();
         rotateSprite();
     }
 
 // METHODS //
     @Override
     public void collide(Entity ec) {
-        if(ec instanceof Game.Entities.Dynamic.Enemies.Asteroid) {
-            destroy();
-        } else if(ec instanceof GoblinFighter) {
+        if(ec instanceof Game.Entities.Dynamic.PlayerEntity) {
             destroy();
         }
     }

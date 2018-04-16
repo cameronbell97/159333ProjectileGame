@@ -1,9 +1,7 @@
 package Game.Entities;
 
 import Game.Entities.Dynamic.DynamicEntity;
-import Game.Entities.Dynamic.Enemies.Asteroid;
-import Game.Entities.Dynamic.Enemies.Enemy;
-import Game.Entities.Dynamic.Enemies.GoblinPawn;
+import Game.Entities.Dynamic.Enemies.*;
 import Game.Game;
 import Game.Data.Settings;
 import Game.Timer.*;
@@ -151,7 +149,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
             case 3: // Level 3 //
                 for(int i = 0; i < 2; i++) {
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 1, false), Asteroid.DEFAULT_SIZE));
-                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinPawn(0, 0, 2), 64));
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterLarge(0, 0, 2), 64));
                 }
                 Collections.shuffle(spawn_queue);
 
@@ -163,9 +161,9 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
                 for(int i = 0; i < 2; i++) {
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 1, false), Asteroid.DEFAULT_SIZE));
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 1, false), Asteroid.DEFAULT_SIZE));
-                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinPawn(0, 0, 2), 64));
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterLarge(0, 0, 2), 64));
                 }
-                spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinPawn(0, 0, 2), 64));
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterLarge(0, 0, 2), 64));
                 Collections.shuffle(spawn_queue);
                 spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 1, true), Asteroid.DEFAULT_SIZE));
 
