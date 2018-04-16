@@ -2,13 +2,10 @@ package Game.Entities.Dynamic.Enemies;
 
 import Game.Data.Settings;
 import Game.Display.Assets.AssetManager;
+import Game.Entities.*;
 import Game.Entities.Collision.CollisionBox;
 import Game.Entities.Dynamic.Bullets.EnemyBulletSmall;
 import Game.Entities.Dynamic.ExpDot;
-import Game.Entities.Entity;
-import Game.Entities.EntityManager;
-import Game.Entities.iOutOfBounds;
-import Game.Entities.iVulnerable;
 
 import java.awt.*;
 
@@ -156,6 +153,7 @@ public class GoblinPawn extends TargetingEnemy implements iOutOfBounds, iVulnera
         explode();
         EntityManager.get().unsubscribe(this);
         EntityManager.get().unsubscribe(collision);
+        EnemyDirector.get().unsubscribe(this);
     }
 
     // Death animation
