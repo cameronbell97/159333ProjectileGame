@@ -30,7 +30,7 @@ public class CodeTimer extends Timer {
 // METHODS //
     @Override
     protected void notifyFinished() {
-        notifiee.timerNotify(this);
+        if(notifiee != null) notifiee.timerNotify(this);
     }
 
 // GETTERS & SETTERS //

@@ -1,5 +1,6 @@
 package Game.Entities;
 
+import Game.Data.Settings;
 import Game.Entities.Collision.CollisionBox;
 import Game.Entities.Dynamic.Particles.Particle;
 import Game.Entities.Dynamic.PlayerEntity;
@@ -117,6 +118,12 @@ public class EntityManager implements iObserver {
         unsub_cueue.clear(); // Clear the unsub_cueue
 
         // PARTICLES //
+        // Limit Particles
+        while(particles.size() > Settings.max_particles) {
+            Particle particleToRemove = particles.get(0);
+            particles.remove(particleToRemove);
+        }
+
         // Update Game.Entities
         for(Particle p : particles) {
             p.update();

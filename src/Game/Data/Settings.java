@@ -13,7 +13,7 @@ public class Settings {
     private static final int DEF_GAME_WIDTH = 875;
     private static final int DEF_GAME_HEIGHT = 700;
 
-    // Game.Display.UserInterface
+    // User Interface
     private static final int DEF_CHARACTER_HEIGHT = 9;
     private static final int DEF_CHARACTER_WIDTH = 5;
     private static final int DEF_CHARACTER_SIZE = 2;
@@ -26,6 +26,9 @@ public class Settings {
     private static final int DEF_BUTTON_BORDER_WIDTH = 4;
     private static final int DEF_BUTTON_INNER_PADDING = 8;
     private static final int DEF_MENU_BUTTON_SPACING = 8;
+
+    // Graphics
+    private static final int DEF_MAX_PARTICLES = 50;
 
 // SETTINGS //
     // Game
@@ -45,6 +48,9 @@ public class Settings {
     public static int button_border_width;
     public static int button_inner_padding;
     public static int menu_button_spacing;
+
+    // Graphics
+    public static int max_particles;
 
 // CONSTRUCTORS //
     // Default Values Constructor
@@ -66,5 +72,8 @@ public class Settings {
         button_border_width = DEF_BUTTON_BORDER_WIDTH;
         button_inner_padding = DEF_BUTTON_INNER_PADDING;
         menu_button_spacing = DEF_MENU_BUTTON_SPACING;
+
+        // Graphics
+        max_particles = DEF_MAX_PARTICLES;
     }
 }
