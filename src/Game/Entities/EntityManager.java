@@ -99,7 +99,9 @@ public class EntityManager implements iObserver {
         sub_queue.clear(); // Clear the sub_queue
         // Remove Queued Game.Entities
         for(Entity e : unsub_queue) {
-            ents.remove(e);
+            if(!ents.remove(e)) {
+                System.out.println("ERROR: Could Not Remove: " + e.toString());
+            }
         }
         unsub_queue.clear(); // Clear the unsub_queue
 
@@ -113,7 +115,9 @@ public class EntityManager implements iObserver {
         sub_cueue.clear(); // Clear the sub_cueue
         // Remove Collision Boxes
         for(CollisionBox e : unsub_cueue) {
-            cols.remove(e);
+            if(!cols.remove(e)) {
+                System.out.println("ERROR: Could Not Remove: " + e.toString());
+            }
         }
         unsub_cueue.clear(); // Clear the unsub_cueue
 

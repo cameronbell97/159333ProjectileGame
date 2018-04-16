@@ -206,6 +206,8 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
                 destroy();
                 break;
         }
+
+        TimerManager.get().unsubTimer(t);
     }
 
 // GETTERS & SETTERS //
