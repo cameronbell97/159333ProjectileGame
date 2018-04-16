@@ -48,6 +48,15 @@ public abstract class DynamicEntity extends Entity{
         ypos += ymove;
     }
 
+    // Deceleration mechanics
+    protected void decelerate(float decelRate) {
+        if (xmove > 0) xmove = Math.max(0, xmove - xmove * ((float) 0.01 + decelRate));
+        if (xmove < 0) xmove = Math.min(0, xmove - xmove * ((float) 0.01 + decelRate));
+        if (ymove > 0) ymove = Math.max(0, ymove - ymove * ((float) 0.01 + decelRate));
+        if (ymove < 0) ymove = Math.min(0, ymove - ymove * ((float) 0.01 + decelRate));
+
+    }
+
     protected void strafeLeft(double speed) {
         float oldymove = ymove;
         float oldxmove = xmove;

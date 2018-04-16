@@ -28,6 +28,9 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     private static final int THRUST_FRAME_TIME_2 = 25;
     private static final int THRUST_FRAME_TIME_3 = 40;
     private static final boolean PLAYER_STRAFE_ENABLED = false;
+    private static final boolean PLAYER_DECELERATION_ENABLED = true;
+    private static final boolean PLAYER_ACCELERATION_ENABLED = false;
+    private static final boolean PLAYER_SPEED_LIMIT_ENABLED = true;
 
     AssetManager assMan = AssetManager.get();
     KeyManager km = KeyManager.get();
@@ -146,10 +149,9 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 
     private void getInput() {
         // Deceleration mechanics
-        if(xmove > 0) xmove = Math.max(0, xmove - xmove*((float)0.01 + decelerate));
-        if(xmove < 0) xmove = Math.min(0, xmove - xmove*((float)0.01 + decelerate));
-        if(ymove > 0) ymove = Math.max(0, ymove - ymove*((float)0.01 + decelerate));
-        if(ymove < 0) ymove = Math.min(0, ymove - ymove*((float)0.01 + decelerate));
+        if (PLAYER_DECELERATION_ENABLED) {
+            decelerate(decelerate);
+        }
 
         // Slow (if you hit an enemy) mechanics
         if(slowTimeStart <= 0) speedMultiplier = 1;

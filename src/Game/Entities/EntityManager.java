@@ -136,7 +136,8 @@ public class EntityManager implements iObserver {
     // Method that calls draw() on every entity
     public void draw(Graphics g) {
         for(Entity e : ents) {
-            e.draw(g);
+            if(!(e instanceof Game.Entities.Dynamic.PlayerEntity)) // Don't draw player yet because it will be drawn later
+                e.draw(g);
         }
         for(Particle p : particles) {
             p.draw(g);

@@ -101,10 +101,7 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         }
 
         // Deceleration mechanics
-        if(xmove > 0) xmove = Math.max(0, xmove - xmove*((float)0.01 + deceleration));
-        if(xmove < 0) xmove = Math.min(0, xmove - xmove*((float)0.01 + deceleration));
-        if(ymove > 0) ymove = Math.max(0, ymove - ymove*((float)0.01 + deceleration));
-        if(ymove < 0) ymove = Math.min(0, ymove - ymove*((float)0.01 + deceleration));
+        decelerate(deceleration);
 
         collision.update();
         move();
