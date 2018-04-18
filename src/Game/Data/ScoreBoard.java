@@ -1,7 +1,5 @@
 package Game.Data;
 
-import Game.Game;
-
 /**
  * Created by Cameron on 13/04/2018.
  */
@@ -73,5 +71,14 @@ public class ScoreBoard {
 // GETTERS & SETTERS //
     public int[] getScores() {
         return scores;
+    }
+    public int getBiggestScore() {
+        int biggest = 0;
+
+        for(int i = 0; i < scores.length; i++) {
+            if(biggest < scores[i]) biggest = scores[i];
+        }
+
+        return biggest;
     }
 }

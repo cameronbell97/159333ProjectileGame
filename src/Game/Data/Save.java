@@ -91,4 +91,9 @@ public class Save {
             e.printStackTrace();
         }
     }
+
+// GETTERS & SETTERS //
+    public ScoreBoard getScoreBoard() {
+        return scoreBoard;
+    }
 }

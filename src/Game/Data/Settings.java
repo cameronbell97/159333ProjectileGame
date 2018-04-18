@@ -23,8 +23,8 @@ public class Settings {
     private static final int DEF_UI_LOWER_BOUNDARY = 24;
 
     // Menus
-    private static final int DEF_BUTTON_BORDER_WIDTH = 4;
-    private static final int DEF_BUTTON_INNER_PADDING = 8;
+    private static final int DEF_BUTTON_BORDER_WIDTH = 1;
+    private static final int DEF_BUTTON_INNER_PADDING = 11;
     private static final int DEF_MENU_BUTTON_SPACING = 8;
 
     // Graphics

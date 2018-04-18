@@ -12,6 +12,7 @@ public class GameDataManager {
     // Sources
     private EntityManager em;
     private EnemyDirector ed;
+    private Save save;
 
     // Shortcuts
     private int player_hp;

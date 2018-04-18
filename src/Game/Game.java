@@ -3,6 +3,7 @@ package Game;
 import Game.Data.KeyManager;
 import Game.Data.MouseManager;
 import Game.Data.Save;
+import Game.Data.SaveManager;
 import Game.Display.DisplayWindow;
 import Game.Screens.GameScreen;
 import Game.Screens.MainMenuScreen;
@@ -46,6 +47,7 @@ public class Game implements Runnable{
     private KeyManager km;
     private TimerManager timerMan;
     private MouseManager mouseMan;
+    private SaveManager saveMan;
 
     // Game.Screens
     private Screen mainMenuScreen;
@@ -68,6 +70,7 @@ public class Game implements Runnable{
         km = KeyManager.get();
         timerMan = TimerManager.get();
         mouseMan = MouseManager.get();
+        saveMan = SaveManager.get();
 
         // Create Window
         display = new DisplayWindow(gameTitle, gameWidth, gameHeight);
@@ -84,10 +87,6 @@ public class Game implements Runnable{
         // Initialise Game.Screens
         mainMenuScreen = new MainMenuScreen();
         ScreenManager.setScreen(mainMenuScreen);
-
-        // Initialise Save Data
-        save = new Save();
-        if(!save.load()) save.create(); // If load fails, create a blank save
     }
 
     // Method - Updates Everything in the Game

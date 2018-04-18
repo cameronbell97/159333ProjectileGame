@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class MenuManager {
 // VARIABLES //
-    private ArrayList<Game.Display.UserInterface.Buttons.Button> buttons;
+    private ArrayList<Button> buttons;
     private int screenMiddleX, screenMiddleY;
 
 // CONSTRUCTORS //

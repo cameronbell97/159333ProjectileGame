@@ -1,11 +1,9 @@
 package Game.Screens;
 import Game.Data.MouseManager;
 import Game.Data.Settings;
+import Game.Display.UserInterface.Buttons.*;
 import Game.Display.UserInterface.Buttons.Button;
-import Game.Display.UserInterface.Buttons.DummyButton;
-import Game.Display.UserInterface.Buttons.QuitButton;
 import Game.MainMenu.MenuManager;
-import Game.Display.UserInterface.Buttons.PlayButton;
 
 import java.awt.*;
 import java.io.IOException;
@@ -32,6 +30,7 @@ public class MainMenuScreen extends Screen{
         // Button Names
         ArrayList<String> buttonNames = new ArrayList<>();
         buttonNames.add("PLAY");
+        buttonNames.add("HIGH SCORES");
         buttonNames.add("OPTIONS");
         buttonNames.add("QUIT");
 
@@ -55,6 +54,12 @@ public class MainMenuScreen extends Screen{
             switch(n) {
                 case "PLAY":
                     menuManager.addButton(new PlayButton(n,x,y));
+                    break;
+                case "HIGH SCORES":
+                    menuManager.addButton(new ScoresButton(n,x,y, this));
+                    break;
+                case "OPTIONS":
+                    menuManager.addButton(new DummyButton(n,x,y));
                     break;
                 case "QUIT":
                     menuManager.addButton(new QuitButton(n,x,y));
