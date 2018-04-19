@@ -12,6 +12,9 @@ import Game.Display.Assets.AssetManager;
 import Game.Data.GameDataManager;
 import Game.Data.KeyManager;
 import Game.Data.Settings;
+import Game.Screens.GameScreen;
+import Game.Screens.Screen;
+import Game.Screens.ScreenManager;
 import Game.Timer.*;
 
 /**
@@ -266,6 +269,15 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     public void die() {
         EntityManager.get().unsubPlayer(this);
         EntityManager.get().unsubscribe(this.collision);
+        explode();
+
+        Screen screen = ScreenManager.getScreen();
+        if(screen instanceof GameScreen) {
+            ((GameScreen) screen).end();
+        }
+    }
+
+    private void explode() {
     }
 
     // Method to setup the slow mechanics

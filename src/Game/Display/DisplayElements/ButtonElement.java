@@ -41,8 +41,8 @@ public abstract class ButtonElement extends PaddedElement {
 
     @Override
     public void draw(Graphics g, int xStart, int yStart) {
-        xpos = xStart;
-        ypos = yStart;
+        this.xpos = xStart;
+        this.ypos = yStart;
 
         if(isHovered || isClicked) {
             fillColour = activeColour;
@@ -62,10 +62,10 @@ public abstract class ButtonElement extends PaddedElement {
 
         // Check if the mouse is hovering over the button
         if(
-                mouseManager.getMouseX() > xpos &&
-                        mouseManager.getMouseX() < xpos + width &&
-                        mouseManager.getMouseY() > ypos &&
-                        mouseManager.getMouseY() < ypos + height
+                mouseManager.getMouseX() > this.xpos &&
+                        mouseManager.getMouseX() < this.xpos + width &&
+                        mouseManager.getMouseY() > this.ypos &&
+                        mouseManager.getMouseY() < this.ypos + height
                 ) {
             isHovered = true;
         } else isHovered = false;

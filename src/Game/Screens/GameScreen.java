@@ -5,6 +5,9 @@ import Game.Entities.Dynamic.PlayerEntity;
 import Game.Entities.EnemyDirector;
 import Game.Data.Settings;
 import Game.Display.UserInterface.GameUIManager;
+import Game.Timer.CodeTimer;
+import Game.Timer.TimerManager;
+import Game.Timer.iCanHaveCodeTimer;
 
 import java.awt.*;
 import java.io.IOException;
@@ -14,7 +17,7 @@ import java.io.IOException;
  * Game Screen Class
  */
 
-public class GameScreen extends Screen {
+public class GameScreen extends Screen implements iCanHaveCodeTimer {
 // VARIABLES //
     // Managers
     private PlayerEntity player;
@@ -60,5 +63,22 @@ public class GameScreen extends Screen {
 
         // Draw Game.Display.UserInterface Last // So it appears over everything else
         UIManager.draw(g);
+    }
+
+    public void end() {
+        TimerManager.get().newCodeTimer(120, this, "END");
+    }
+
+    private void endGame() {
+        ScreenManager.setScreen(new ScoresScreen(this));
+    }
+
+    @Override
+    public void timerNotify(CodeTimer t) {
+        switch (t.getCode()) {
+            case "END":
+                endGame();
+                break;
+        }
     }
 }
