@@ -1,20 +1,20 @@
 package Game.Screens;
 
 import Game.Data.Settings;
-import Game.Display.DisplayElements.DummyElement;
+import Game.Display.DisplayElements.HorizontalListElement;
+import Game.Display.DisplayElements.PaddedElement;
 import Game.Display.DisplayElements.TextElement;
 import Game.Display.DisplayElements.VerticalListElement;
-import Game.Display.UserInterface.TextManager;
 
 import java.awt.*;
 
 public class TestScreen extends Screen {
 // VARIABLES //
-    DummyElement testElement;
+    PaddedElement testElement;
 
 // CONSTRUCTORS //
     public TestScreen() {
-        testElement = new DummyElement(1, Color.red, Color.black, 16);
+        testElement = new PaddedElement(1, Color.red, Color.black, 16);
 
         TextElement t1 = new TextElement("SCORE 1");
         TextElement t2 = new TextElement("SCORE 2");
@@ -23,8 +23,11 @@ public class TestScreen extends Screen {
         v.addChild(t2);
         v.addChild(t1);
         v.addChild(t2);
+        HorizontalListElement hz = new HorizontalListElement(16);
+        hz.addChild(v);
+        hz.addChild(v);
 
-        testElement.setChildElement(v);
+        testElement.setChildElement(hz);
     }
 
 // METHODS //

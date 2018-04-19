@@ -18,6 +18,6 @@ public class ScoresButton extends Button {
 //        ScreenManager.setScreen(new ScoresScreen(parentScreen));
 //    }
     protected void onClick() {
-        ScreenManager.setScreen(new TestScreen());
+        ScreenManager.setScreen(new ScoresScreen(parentScreen));
     }
 }

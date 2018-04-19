@@ -2,7 +2,7 @@ package Game.Display.DisplayElements;
 
 import java.awt.*;
 
-public abstract class PaddedElement extends Element {
+public class PaddedElement extends Element {
 // VARIABLES //
     protected int padding; // Inner Padding of Element
     protected Element childElement;
@@ -32,7 +32,12 @@ public abstract class PaddedElement extends Element {
         childElement = null;
     }
 
-// METHODS //
+    @Override
+    public void update() {
+
+    }
+
+    // METHODS //
     @Override
     public void draw(Graphics g, int xStart, int yStart) {
         // Draw Element Border & Fill
