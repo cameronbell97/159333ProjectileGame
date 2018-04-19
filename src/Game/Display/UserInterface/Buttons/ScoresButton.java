@@ -3,6 +3,7 @@ package Game.Display.UserInterface.Buttons;
 import Game.Screens.ScoresScreen;
 import Game.Screens.Screen;
 import Game.Screens.ScreenManager;
+import Game.Screens.TestScreen;
 
 public class ScoresButton extends Button {
     Screen parentScreen;
@@ -13,7 +14,10 @@ public class ScoresButton extends Button {
     }
 
     @Override
+//    protected void onClick() {
+//        ScreenManager.setScreen(new ScoresScreen(parentScreen));
+//    }
     protected void onClick() {
-        ScreenManager.setScreen(new ScoresScreen(parentScreen));
+        ScreenManager.setScreen(new TestScreen());
     }
 }

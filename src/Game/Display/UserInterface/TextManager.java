@@ -27,14 +27,14 @@ public class TextManager {
     }
 
 // METHODS //
-    public void drawString(Graphics g, String word, String alignment, int xpos, int ypos) {
+    public void drawString(Graphics g, String text, String alignment, int xpos, int ypos) {
         // Get Parameters
         int character_width_final = getCharacterWidth();
         int character_height_final = getCharacterHeight();
         int xPencil = xpos;
         int yPencil = ypos;
         int xIncrement = character_width_final + Settings.character_size;
-        String[] wordArray = word.split("");
+        String[] wordArray = text.split("");
 
         switch (alignment) {
             case "center":
@@ -69,6 +69,9 @@ public class TextManager {
 
 
 // GETTERS & SETTERS //
+    public static int getWordWidth(String word) {
+        return (word.length() * getCharacterWidth()) + ((word.length() - 1) * Settings.character_size);
+    }
 
     public static int getCharacterHeight() {
         return Settings.character_height * Settings.character_size;
