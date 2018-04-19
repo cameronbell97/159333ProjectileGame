@@ -1,12 +1,8 @@
 package Game.Screens;
-import Game.Data.MouseManager;
 import Game.Data.Settings;
 import Game.Display.DisplayElements.ButtonElement;
 import Game.Display.DisplayElements.PaddedElement;
 import Game.Display.DisplayElements.VerticalListElement;
-import Game.Display.UserInterface.Buttons.*;
-import Game.Display.UserInterface.Buttons.Button;
-import Game.MainMenu.MenuManager;
 
 import java.awt.*;
 import java.io.IOException;
