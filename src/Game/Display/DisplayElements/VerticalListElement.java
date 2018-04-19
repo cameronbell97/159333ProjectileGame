@@ -7,18 +7,22 @@ public class VerticalListElement extends Element {
 // VARIABLES //
     private ArrayList<Element> children;
     private int distanceBetweenElements;
+    private boolean centerAlign;
 
 // CONSTRUCTORS //
     public VerticalListElement(int distanceApart) {
         super(0, 0);
         children = new ArrayList<>();
         distanceBetweenElements = distanceApart;
+        centerAlign = false;
     }
 
 // METHODS //
     @Override
     public void update() {
-
+        for(Element e : children) {
+            e.update();
+        }
     }
 
     @Override
@@ -27,6 +31,7 @@ public class VerticalListElement extends Element {
         int yPencil = yStart;
 
         for(Element e : children) {
+            if(centerAlign) xPencil = xStart + (width / 2 - e.getWidth() / 2);
             e.draw(g, xPencil, yPencil);
             yPencil += e.getHeight() + distanceBetweenElements;
         }
@@ -63,5 +68,10 @@ public class VerticalListElement extends Element {
         if(newHeight != 0) newHeight -= distanceBetweenElements;
 
         return newHeight;
+    }
+
+// GETTERS & SETTERS //
+    public void setCenterAlign(boolean centerAlign) {
+        this.centerAlign = centerAlign;
     }
 }

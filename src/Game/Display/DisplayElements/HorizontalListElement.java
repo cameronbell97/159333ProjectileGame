@@ -18,7 +18,9 @@ public class HorizontalListElement extends Element {
 // METHODS //
     @Override
     public void update() {
-
+        for(Element e : children) {
+            e.update();
+        }
     }
 
     @Override

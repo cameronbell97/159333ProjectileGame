@@ -1,6 +1,9 @@
 package Game.Screens;
 import Game.Data.MouseManager;
 import Game.Data.Settings;
+import Game.Display.DisplayElements.ButtonElement;
+import Game.Display.DisplayElements.PaddedElement;
+import Game.Display.DisplayElements.VerticalListElement;
 import Game.Display.UserInterface.Buttons.*;
 import Game.Display.UserInterface.Buttons.Button;
 import Game.MainMenu.MenuManager;
@@ -16,14 +19,25 @@ import java.util.ArrayList;
 
 public class MainMenuScreen extends Screen{
 // VARIABLES //
-    MenuManager menuManager;
+    private static final int SPACE_BETWEEN_ROWS = 8;
+    private static final int BORDER_WIDTH = 1;
+    private static final int OUTER_PADDING = 32;
+
+    Color backgroundColor;
+    Color borderColor;
+    Color fillColour;
+
+    // Elements
+    PaddedElement mainElement;
+    VerticalListElement buttonList;
 
 // CONSTRUCTORS //
     public MainMenuScreen() throws IOException {
         super();
-        menuManager = new MenuManager();
 
-        // MAKE BUTTONS //
+        borderColor = new Color(129,130,174);
+        fillColour = new Color(78, 78, 122, 0);
+        backgroundColor = new Color(0, 0, 20);
 
         // Button Names
         ArrayList<String> buttonNames = new ArrayList<>();
@@ -32,56 +46,63 @@ public class MainMenuScreen extends Screen{
         buttonNames.add("OPTIONS");
         buttonNames.add("QUIT");
 
-        // Button Positioning Variables
-        int buttonCount = buttonNames.size();
-        int buttonSpacing = Settings.menu_button_spacing;
-        int buttonIncrement = Button.getButtonHeight() + buttonSpacing;
-        int topButtonY =
-                (Settings.game_height / 2) - (
-                    (
-                        (Button.getButtonHeight() * buttonCount) +
-                        (buttonSpacing * (buttonCount - 1))
-                    ) / 2
-                );
-
-        // Button Creation
-        for(int i = 0; i < buttonCount; i++) {
-            String n = buttonNames.get(i);
-            int x = Settings.game_width / 2;
-            int y = topButtonY + (buttonIncrement * i);
-            switch(n) {
-                case "PLAY":
-                    menuManager.addButton(new PlayButton(n,x,y));
-                    break;
-                case "HIGH SCORES":
-                    menuManager.addButton(new ScoresButton(n,x,y, this));
-                    break;
-                case "OPTIONS":
-                    menuManager.addButton(new DummyButton(n,x,y));
-                    break;
-                case "QUIT":
-                    menuManager.addButton(new QuitButton(n,x,y));
-                    break;
-                default:
-                    menuManager.addButton(new DummyButton(n,x,y));
-                    break;
-            }
-        }
+        fillElements();
     }
 
-// METHODS //
+    // METHODS //
     @Override
     public void update() {
-        menuManager.update();
+        buttonList.update();
     }
 
     @Override
     public void draw(Graphics g) {
         // Draw Background
-        g.setColor(new Color(0, 0, 20));
+        g.setColor(backgroundColor);
         g.fillRect(0, 0, Settings.game_width, Settings.game_height);
 
-        // Draw Menu Buttons
-        menuManager.draw(g);
+        // Draw Menu
+        int xStart = (Settings.game_width / 2) - (mainElement.getWidth() / 2);
+        int yStart = (Settings.game_height / 2) - (mainElement.getHeight() / 2);
+
+        mainElement.draw(g, xStart, yStart);
+    }
+
+    private void fillElements() {
+        mainElement = new PaddedElement(OUTER_PADDING);
+        buttonList = new VerticalListElement(SPACE_BETWEEN_ROWS);
+
+        buttonList.addChild(new ButtonElement("PLAY", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
+            @Override
+            protected void onClick() {
+                try {
+                    ScreenManager.setScreen(new GameScreen());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        buttonList.addChild(new ButtonElement("HIGH SCORES", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
+            @Override
+            protected void onClick() {
+                ScreenManager.setScreen(new ScoresScreen(ScreenManager.getScreen()));
+            }
+        });
+        buttonList.addChild(new ButtonElement("OPTIONS", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
+            @Override
+            protected void onClick() {
+
+            }
+        });
+        buttonList.addChild(new ButtonElement("QUIT", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
+            @Override
+            protected void onClick() {
+                Game.Game.end();
+            }
+        });
+
+        buttonList.setCenterAlign(true);
+
+        mainElement.setChildElement(buttonList);
     }
 }

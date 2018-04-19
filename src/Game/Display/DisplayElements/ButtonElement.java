@@ -100,9 +100,8 @@ public abstract class ButtonElement extends PaddedElement {
         wasJustClicked = false;
         isClicked = false;
 
-        inactiveColour = new Color(129,130,174);
+        inactiveColour = fillColour;
         activeColour = new Color(46, 47, 120);
-//        borderColor = new Color(129,130,174);
     }
 
     private void setButtonText() {

@@ -24,7 +24,6 @@ public class ScoresScreen extends Screen {
 
     private ScoreBoard scoreBoard;
     private Screen lastScreen;
-    private TextManager textManager;
 
     Color backgroundColor;
     Color borderColor;
@@ -101,7 +100,7 @@ public class ScoresScreen extends Screen {
         mainElement.setChildElement(columnsContainer);
 
         // Back Button
-        backButton = new BackButton("B", 1, borderColor, fillColour, Settings.button_padding, lastScreen);
+        backButton = new BackButton("B", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding, lastScreen);
         backButton.setInactiveColour(fillColour);
     }
 }
