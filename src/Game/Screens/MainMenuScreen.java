@@ -17,13 +17,11 @@ import java.util.ArrayList;
 public class MainMenuScreen extends Screen{
 // VARIABLES //
     MenuManager menuManager;
-    MouseManager mouseManager;
 
 // CONSTRUCTORS //
     public MainMenuScreen() throws IOException {
         super();
         menuManager = new MenuManager();
-        mouseManager = MouseManager.get();
 
         // MAKE BUTTONS //
 

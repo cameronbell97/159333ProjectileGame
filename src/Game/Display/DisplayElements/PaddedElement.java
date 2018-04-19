@@ -42,6 +42,7 @@ public class PaddedElement extends Element {
     public void draw(Graphics g, int xStart, int yStart) {
         // Draw Element Border & Fill
         super.draw(g, xStart, yStart);
+
         if(childElement != null) {
             childElement.draw(g, xStart + padding, yStart + padding);
         }

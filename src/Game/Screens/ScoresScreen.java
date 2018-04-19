@@ -3,6 +3,7 @@ package Game.Screens;
 import Game.Data.SaveManager;
 import Game.Data.ScoreBoard;
 import Game.Data.Settings;
+import Game.Display.DisplayElements.Buttons.BackButton;
 import Game.Display.DisplayElements.HorizontalListElement;
 import Game.Display.DisplayElements.PaddedElement;
 import Game.Display.DisplayElements.TextElement;
@@ -34,6 +35,7 @@ public class ScoresScreen extends Screen {
     HorizontalListElement columnsContainer;
     VerticalListElement nameColumn;
     VerticalListElement scoreColumn;
+    BackButton backButton;
 
 // CONSTRUCTORS //
     public ScoresScreen(Screen lastScreen) {
@@ -54,6 +56,7 @@ public class ScoresScreen extends Screen {
 // METHODS //
     @Override
     public void update() {
+        backButton.update();
     }
 
     @Override
@@ -70,6 +73,9 @@ public class ScoresScreen extends Screen {
         int yStart = (Settings.game_height / 2) - (mainElement.getHeight() / 2);
 
         mainElement.draw(g, xStart, yStart);
+
+        // Draw Back Button
+        backButton.draw(g, xStart - backButton.getWidth() + 1, yStart);
     }
 
     private void fillElements() {
@@ -93,5 +99,9 @@ public class ScoresScreen extends Screen {
         columnsContainer.addChild(nameColumn);
         columnsContainer.addChild(scoreColumn);
         mainElement.setChildElement(columnsContainer);
+
+        // Back Button
+        backButton = new BackButton("B", 1, borderColor, fillColour, Settings.button_padding, lastScreen);
+        backButton.setInactiveColour(fillColour);
     }
 }

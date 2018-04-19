@@ -1,7 +1,5 @@
 package Game.Data;
 
-import Game.Game;
-
 public class Settings {
 // DEFAULT VALUES //
     // Debug Tools
@@ -46,7 +44,7 @@ public class Settings {
 
     // Menus
     public static int button_border_width;
-    public static int button_inner_padding;
+    public static int button_padding;
     public static int menu_button_spacing;
 
     // Graphics
@@ -70,7 +68,7 @@ public class Settings {
 
         // Menus
         button_border_width = DEF_BUTTON_BORDER_WIDTH;
-        button_inner_padding = DEF_BUTTON_INNER_PADDING;
+        button_padding = DEF_BUTTON_INNER_PADDING;
         menu_button_spacing = DEF_MENU_BUTTON_SPACING;
 
         // Graphics

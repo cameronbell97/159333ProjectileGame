@@ -23,8 +23,8 @@ public abstract class Button {
     public Button(String text, int middleXpos, int middleYpos) {
         this.text = text;
 
-        this.height = textManager.getCharacterHeight() + (Settings.button_inner_padding * 2) + (Settings.button_border_width * 2);
-        this.width = (textManager.getCharacterWidth() * text.length() + Settings.character_size * (text.length() - 1)) + (Settings.button_inner_padding * 2) + (Settings.button_border_width * 2);
+        this.height = textManager.getCharacterHeight() + (Settings.button_padding * 2) + (Settings.button_border_width * 2);
+        this.width = (textManager.getCharacterWidth() * text.length() + Settings.character_size * (text.length() - 1)) + (Settings.button_padding * 2) + (Settings.button_border_width * 2);
 
         this.xpos = middleXpos-width/2;
         this.ypos = middleYpos-height/2;
@@ -95,12 +95,13 @@ public abstract class Button {
         }
         g.setColor(new Color(129,130,174));
         g.drawRect(xpos, ypos, width, height);
-        textManager.drawString(g, text, "left", xpos + Settings.button_border_width + Settings.button_inner_padding, ypos + Settings.button_border_width + Settings.button_inner_padding);
+
+        textManager.drawString(g, text, "left", xpos + Settings.button_border_width + Settings.button_padding, ypos + Settings.button_border_width + Settings.button_padding);
     }
 
     protected abstract void onClick();
 
     public static int getButtonHeight() {
-        return TextManager.getCharacterHeight() + (Settings.button_inner_padding * 2) + (Settings.button_border_width * 2);
+        return TextManager.getCharacterHeight() + (Settings.button_padding * 2) + (Settings.button_border_width * 2);
     }
 }
