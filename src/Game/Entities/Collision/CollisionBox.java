@@ -8,10 +8,12 @@ import Game.Entities.EntityManager;
 import Game.Game;
 import javafx.geometry.Point2D;
 
+import java.awt.*;
+
 public class CollisionBox extends DynamicEntity{
 // VARIABLES //
     private float xoff, yoff;
-    private Entity parent;
+    protected Entity parent;
 
 // CONSTRUCTORS //
     public CollisionBox(float x, float y, int w, int h, float xo, float yo, Entity parent) {
@@ -31,6 +33,16 @@ public class CollisionBox extends DynamicEntity{
 //        corners = SAT.getCorners(this);
 //        double min1 = corns1.stream().mapToDouble(p -> p.dotProduct(ax)).min().getAsDouble();
 //        double min2 = corns1.stream().mapToDouble(p -> p.dotProduct(ax)).min().getAsDouble();
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.yellow);
+        Rectangle rect = new Rectangle((int)xpos, (int)ypos, width-1, height-1);
+        g2d.rotate(direction, xpos + width/2, ypos + height/2);
+        g2d.draw(rect);
+        g2d.rotate(-direction, xpos + width/2, ypos + height/2);
     }
 
     // Get the position of the centre of the entity
