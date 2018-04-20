@@ -3,16 +3,9 @@ package Game.Screens;
 import Game.Data.SaveManager;
 import Game.Data.ScoreBoard;
 import Game.Data.Settings;
-import Game.Display.DisplayElements.Buttons.BackButton;
-import Game.Display.DisplayElements.HorizontalListElement;
-import Game.Display.DisplayElements.PaddedElement;
-import Game.Display.DisplayElements.TextElement;
-import Game.Display.DisplayElements.VerticalListElement;
-import Game.Display.UserInterface.GameUIManager;
-import Game.Display.UserInterface.TextManager;
+import Game.Display.DisplayElements.*;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class ScoresScreen extends Screen {
 // VARIABLES //
@@ -23,7 +16,8 @@ public class ScoresScreen extends Screen {
     private static final int OUTER_PADDING = 32;
 
     private ScoreBoard scoreBoard;
-    private Screen lastScreen;
+    private Screen returnScreen;
+    private Screen drawScreen;
 
     Color backgroundColor;
     Color borderColor;
@@ -34,11 +28,12 @@ public class ScoresScreen extends Screen {
     HorizontalListElement columnsContainer;
     VerticalListElement nameColumn;
     VerticalListElement scoreColumn;
-    BackButton backButton;
+    ButtonElement backButton;
 
 // CONSTRUCTORS //
-    public ScoresScreen(Screen lastScreen) {
-        this.lastScreen = lastScreen;
+    public ScoresScreen(Screen returnScreen, Screen drawScreen) {
+        this.returnScreen = returnScreen;
+        this.drawScreen = drawScreen;
         scoreBoard =
                 SaveManager
                 .get()
@@ -61,7 +56,7 @@ public class ScoresScreen extends Screen {
     @Override
     public void draw(Graphics g) {
         // Draw Background
-        if(lastScreen instanceof GameScreen) lastScreen.draw(g);
+        if(drawScreen instanceof GameScreen) drawScreen.draw(g);
         else {
             g.setColor(backgroundColor);
             g.fillRect(0, 0, Settings.game_width, Settings.game_height);
@@ -100,7 +95,12 @@ public class ScoresScreen extends Screen {
         mainElement.setChildElement(columnsContainer);
 
         // Back Button
-        backButton = new BackButton("B", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding, lastScreen);
-        backButton.setInactiveColour(fillColour);
+        backButton = new ButtonElement("B", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
+            @Override
+            protected void onClick() {
+                ScreenManager.setScreen(returnScreen);
+            }
+        };
+//        backButton.setInactiveColour(fillColour);
     }
 }

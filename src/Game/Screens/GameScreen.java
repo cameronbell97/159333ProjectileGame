@@ -24,10 +24,13 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
     private EntityManager entityManager;
     private EnemyDirector enemyDirector;
     private GameUIManager UIManager;
+    private Screen lastScreen;
 
 // CONSTRUCTORS //
-    public GameScreen() throws IOException {
+    public GameScreen(Screen lastScreen) throws IOException {
         super();
+
+        this.lastScreen = lastScreen;
 
         // Declarations
         entityManager = EntityManager.get();
@@ -70,7 +73,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
     }
 
     private void endGame() {
-        ScreenManager.setScreen(new ScoresScreen(this));
+        ScreenManager.setScreen(new ScoresScreen(lastScreen, this));
     }
 
     @Override
@@ -80,5 +83,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
                 endGame();
                 break;
         }
+
+        TimerManager.get().unsubTimer(t);
     }
 }

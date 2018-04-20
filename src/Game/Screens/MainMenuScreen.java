@@ -35,13 +35,6 @@ public class MainMenuScreen extends Screen{
         fillColour = new Color(78, 78, 122, 0);
         backgroundColor = new Color(0, 0, 20);
 
-        // Button Names
-        ArrayList<String> buttonNames = new ArrayList<>();
-        buttonNames.add("PLAY");
-        buttonNames.add("HIGH SCORES");
-        buttonNames.add("OPTIONS");
-        buttonNames.add("QUIT");
-
         fillElements();
     }
 
@@ -72,7 +65,7 @@ public class MainMenuScreen extends Screen{
             @Override
             protected void onClick() {
                 try {
-                    ScreenManager.setScreen(new GameScreen());
+                    ScreenManager.setScreen(new GameScreen(ScreenManager.getScreen()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -81,7 +74,7 @@ public class MainMenuScreen extends Screen{
         buttonList.addChild(new ButtonElement("HIGH SCORES", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
             @Override
             protected void onClick() {
-                ScreenManager.setScreen(new ScoresScreen(ScreenManager.getScreen()));
+                ScreenManager.setScreen(new ScoresScreen(ScreenManager.getScreen(), ScreenManager.getScreen()));
             }
         });
         buttonList.addChild(new ButtonElement("OPTIONS", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
