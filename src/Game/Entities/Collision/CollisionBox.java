@@ -40,9 +40,9 @@ public class CollisionBox extends DynamicEntity{
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.yellow);
         Rectangle rect = new Rectangle((int)xpos, (int)ypos, width-1, height-1);
-        g2d.rotate(direction, xpos + width/2, ypos + height/2);
+        g2d.rotate(direction+Math.PI/2, xpos + width/2, ypos + height/2);
         g2d.draw(rect);
-        g2d.rotate(-direction, xpos + width/2, ypos + height/2);
+        g2d.rotate(-direction-Math.PI/2, xpos + width/2, ypos + height/2);
     }
 
     // Get the position of the centre of the entity

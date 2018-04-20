@@ -279,6 +279,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     public void die() {
         EntityManager.get().unsubPlayer(this);
         EntityManager.get().unsubscribe(this.collision);
+        EntityManager.get().unsubscribe(this.headCollision);
         explode();
 
         Screen screen = ScreenManager.getScreen();

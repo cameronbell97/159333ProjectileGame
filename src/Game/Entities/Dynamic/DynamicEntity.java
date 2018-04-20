@@ -98,8 +98,8 @@ public abstract class DynamicEntity extends Entity{
     // Method to rotateSprite the image
     public void rotateSprite(double dir) {
         // TODO // Rotate Sprite Without Cutoffs
-        direction = dir;
-        aTrans = AffineTransform.getRotateInstance(-direction+(Math.PI/2), anchorx, anchory);
+        direction = -dir;
+        aTrans = AffineTransform.getRotateInstance(direction+(Math.PI/2), anchorx, anchory);
         aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
 
     }
@@ -116,6 +116,9 @@ public abstract class DynamicEntity extends Entity{
     public void setSpeed(double ms) { moveSpeed = ms; }
     public double getDirection() {
         return direction + (Math.PI / 2);
+    }
+    public double getRealDirection() {
+        return direction;
     }
     public void setDirection(double direction) {
         this.direction = direction;
