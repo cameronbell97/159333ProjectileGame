@@ -26,7 +26,6 @@ public class Game implements Runnable{
 // VARIABLES //
     // Staticsa
     private static final int FPS = 60;
-    public static final boolean DRAW_COLLISIONS = false;
 
     // Basic Game Parameters / Settings
     private String gameTitle;

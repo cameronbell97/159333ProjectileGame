@@ -17,6 +17,8 @@ public abstract class DynamicEntity extends Entity{
     protected float xmove, ymove;
     protected double direction;
     protected double moveSpeed;
+    protected double anchorx;
+    protected double anchory;
 
     protected AffineTransform aTrans;
     protected AffineTransformOp aTransOp;
@@ -30,6 +32,8 @@ public abstract class DynamicEntity extends Entity{
         aTrans = AffineTransform.getRotateInstance(0, width/2, height/2);
         aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
         setMoveSpeeds();
+        anchorx = width/2;
+        anchory = height/2;
     }
 
 // METHODS //
@@ -86,7 +90,7 @@ public abstract class DynamicEntity extends Entity{
     // Method to rotateSprite the image
     protected void rotateSprite() {
         // TODO // Rotate Sprite Without Cutoffs
-        aTrans = AffineTransform.getRotateInstance(-direction+(Math.PI/2), width/2, height/2);
+        aTrans = AffineTransform.getRotateInstance(-direction+(Math.PI/2), anchorx, anchorx);
         aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
 
     }
@@ -95,7 +99,7 @@ public abstract class DynamicEntity extends Entity{
     public void rotateSprite(double dir) {
         // TODO // Rotate Sprite Without Cutoffs
         direction = dir;
-        aTrans = AffineTransform.getRotateInstance(-direction+(Math.PI/2), width/2, height/2);
+        aTrans = AffineTransform.getRotateInstance(-direction+(Math.PI/2), anchorx, anchory);
         aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
 
     }
@@ -113,8 +117,8 @@ public abstract class DynamicEntity extends Entity{
     public double getDirection() {
         return direction + (Math.PI / 2);
     }
-
     public void setDirection(double direction) {
         this.direction = direction;
     }
+
 }

@@ -1,5 +1,6 @@
 package Game.Entities.Collision;
 
+import Game.Data.Settings;
 import Game.Display.Assets.AssetManager;
 import Game.Entities.Dynamic.DynamicEntity;
 import Game.Entities.Entity;
@@ -18,12 +19,11 @@ public class CollisionBox extends DynamicEntity{
         xoff = xo;
         yoff = yo;
         this.parent = parent;
-        if(Game.DRAW_COLLISIONS) img = AssetManager.get().getSprite("Coll");
+        if(Settings.DRAW_COLLISIONS) img = AssetManager.get().getSprite("Coll");
         EntityManager.get().subscribe(this);
     }
 
 // METHODS //
-
     public void update() {
         setXpos(parent.getXpos()+xoff);
         setYpos(parent.getYpos()+yoff);
@@ -69,5 +69,9 @@ public class CollisionBox extends DynamicEntity{
     }
     public Entity getParent() {
         return parent;
+    }
+    public void setAnchor(int x, int y) {
+        anchorx = x;
+        anchory = y;
     }
 }
