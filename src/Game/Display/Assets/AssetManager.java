@@ -143,11 +143,11 @@ public class AssetManager {
         } catch (IOException e) { e.printStackTrace(); }
 
         // Characters sheet Roman
-        try { char_sheet_01 = new SpriteSheet(ImageLoader.load(imagePath + "characters01.png"), 10, 4, 5, 9); // load the spritesheet
+        try { char_sheet_01 = new SpriteSheet(ImageLoader.load(imagePath + "characters01.png"), 10, 5, 5, 9); // load the spritesheet
         } catch (IOException e) { e.printStackTrace(); }
 
         // Characters sheet Alien
-        try { char_sheet_02 = new SpriteSheet(ImageLoader.load(imagePath + "characters02.png"), 10, 4, 5, 9); // load the spritesheet
+        try { char_sheet_02 = new SpriteSheet(ImageLoader.load(imagePath + "characters02.png"), 10, 5, 5, 9); // load the spritesheet
         } catch (IOException e) { e.printStackTrace(); }
 
         // Bullet Sheet
@@ -169,11 +169,12 @@ public class AssetManager {
                 {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"},
                 {"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T"},
                 {"U", "V", "W", "X", "Y", "Z", ",", ".", "!", "?"},
-                {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"}
+                {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"},
+                {" ", "<", ">", "-", "_", "\"", "\'", "/", "\\", "*"}
         };
         charset_1 = new HashMap<>();
         charset_2 = new HashMap<>();
-        for(int y = 0; y < 4; y++) {
+        for(int y = 0; y < 5; y++) {
             for(int x = 0; x < 10; x++) {
                 if (!charset_1.containsKey(letters[y][x])) {
                      charset_1.put(letters[y][x], char_sheet_01.getSprite(x, y));

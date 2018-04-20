@@ -95,7 +95,7 @@ public class ScoresScreen extends Screen {
         mainElement.setChildElement(columnsContainer);
 
         // Back Button
-        backButton = new ButtonElement("B", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
+        backButton = new ButtonElement("<", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
             @Override
             protected void onClick() {
                 ScreenManager.setScreen(returnScreen);
