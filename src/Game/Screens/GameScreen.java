@@ -1,5 +1,7 @@
 package Game.Screens;
 
+import Game.Data.GameDataManager;
+import Game.Data.SaveManager;
 import Game.Entities.EntityManager;
 import Game.Entities.Dynamic.PlayerEntity;
 import Game.Entities.EnemyDirector;
@@ -24,6 +26,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
     private EntityManager entityManager;
     private EnemyDirector enemyDirector;
     private GameUIManager UIManager;
+    private GameDataManager GDataMananger;
     private Screen lastScreen;
 
 // CONSTRUCTORS //
@@ -36,6 +39,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
         entityManager = EntityManager.get();
         enemyDirector = EnemyDirector.get();
         UIManager = new GameUIManager();
+        GDataMananger = GameDataManager.get();
         player = new PlayerEntity(
                 Settings.game_width/2 - player.DEF_PLAYER_WIDTH/2,
                 Settings.game_height/2 - player.DEF_PLAYER_HEIGHT/2)
@@ -73,7 +77,11 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
     }
 
     private void endGame() {
-        ScreenManager.setScreen(new ScoresScreen(lastScreen, this));
+        if(SaveManager.get().getSave().getScoreBoard().isHighScore(GDataMananger.getScore())) {
+            ScreenManager.setScreen(new AddScoreScreen(lastScreen, this, GDataMananger.getScore()));
+        } else {
+            ScreenManager.setScreen(new ScoresScreen(lastScreen, this));
+        }
     }
 
     @Override

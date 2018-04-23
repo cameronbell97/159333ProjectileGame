@@ -51,9 +51,6 @@ public class Game implements Runnable{
     // Game.Screens
     private Screen mainMenuScreen;
 
-    // Miscellaneous
-    private Save save;
-
 // CONSTRUCTORS //
     public Game(String title, int height, int width) {
         // Set variables
