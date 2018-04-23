@@ -30,16 +30,12 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     // Statics
     public static final int DEF_PLAYER_WIDTH = 64;
     public static final int DEF_PLAYER_HEIGHT = 64;
-    public static final int DEF_RELOAD_SPEED = 1; // 60 = 1 second
+    public static final int DEF_RELOAD_SPEED = 10; // 60 = 1 second
     public static final double DEF_ROT_SPEED = 0.015*Math.PI;
     public static final int DEF_HEALTH = 20;
     private static final int THRUST_FRAME_TIME_1 = 5;
     private static final int THRUST_FRAME_TIME_2 = 25;
     private static final int THRUST_FRAME_TIME_3 = 40;
-    private static final boolean PLAYER_STRAFE_ENABLED = false;
-    private static final boolean PLAYER_DECELERATION_ENABLED = true;
-    private static final boolean PLAYER_ACCELERATION_ENABLED = false;
-    private static final boolean PLAYER_SPEED_LIMIT_ENABLED = false;
 
     AssetManager assMan = AssetManager.get();
     KeyManager km = KeyManager.get();
@@ -181,7 +177,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 
     private void getInput() {
         // Deceleration mechanics
-        if (PLAYER_DECELERATION_ENABLED) {
+        if (Settings.player_deceleration) {
             decelerate(decelerate);
         }
 
@@ -203,7 +199,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             speedMultiplier = (float)0.25;
         }
         if(km.forward) {
-            if(!PLAYER_ACCELERATION_ENABLED) {
+            if(!Settings.player_acceleration) {
                 ymove = (float) (moveSpeed * -Math.sin(direction) * speedMultiplier);
                 xmove = (float) (moveSpeed * Math.cos(direction) * speedMultiplier);
             } else {
@@ -236,7 +232,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             xmove = (float)(moveSpeed * -Math.cos(direction)* speedMultiplier);
         }
         if(km.left) {
-            if (km.ctrl && PLAYER_STRAFE_ENABLED) {
+            if (km.ctrl && Settings.player_strafe) {
                 strafeLeft(moveSpeed / 2);
             } else {
                 direction += rotationSpeed * speedMultiplier;
@@ -246,7 +242,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             }
         }
         if(km.right) {
-            if (km.ctrl && PLAYER_STRAFE_ENABLED) {
+            if (km.ctrl && Settings.player_strafe) {
                 strafeRight(moveSpeed / 2);
             } else {
                 direction -= rotationSpeed * speedMultiplier;
@@ -256,10 +252,12 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             }
         }
         if(km.spacebar && shoot_release && shoot_reloaded) {
-            EntityManager.get().subscribe(new BulletPlayer(this));
-            shoot_release = false;
-            shoot_reloaded = false;
-            TimerManager.get().newCodeTimer(DEF_RELOAD_SPEED, this, "REL");
+            if(Settings.player_gun_main) {
+                EntityManager.get().subscribe(new BulletPlayer(this));
+                if(Settings.player_gun_lock) shoot_release = false;
+                shoot_reloaded = false;
+                TimerManager.get().newCodeTimer(DEF_RELOAD_SPEED, this, "REL");
+            }
         }
         if(!km.spacebar) shoot_release = true;
         // Slow/Speedup Mechanics for collision with asteroid
@@ -267,7 +265,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         if(slowTimeStart == slowTimeCurrent) slowTimeStart = 0;
         if(slowTimeStart == 0 && slowTimeCurrent > 0) slowTimeCurrent--;
 
-        if(slowTimeCurrent == 1 && PLAYER_ACCELERATION_ENABLED) {
+        if(slowTimeCurrent == 1 && Settings.player_acceleration) {
             ymove = ymove / 3;
             xmove = xmove / 3;
         }

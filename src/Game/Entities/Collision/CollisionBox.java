@@ -5,7 +5,6 @@ import Game.Display.Assets.AssetManager;
 import Game.Entities.Dynamic.DynamicEntity;
 import Game.Entities.Entity;
 import Game.Entities.EntityManager;
-import Game.Game;
 import javafx.geometry.Point2D;
 
 import java.awt.*;
@@ -21,7 +20,7 @@ public class CollisionBox extends DynamicEntity{
         xoff = xo;
         yoff = yo;
         this.parent = parent;
-        if(Settings.DRAW_COLLISIONS) img = AssetManager.get().getSprite("Coll");
+        if(Settings.DEBUG_DRAW_COLLISIONS) img = AssetManager.get().getSprite("Coll");
         EntityManager.get().subscribe(this);
     }
 

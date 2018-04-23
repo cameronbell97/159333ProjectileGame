@@ -6,9 +6,9 @@ public class Settings {
     public static final boolean DEBUG_MODE = false;
     public static final boolean DEBUG_GOBLIN_DRAW_LINE_TO_PLAYER = DEBUG_MODE;
     public static final boolean DEBUG_GOBLIN_DRAW_FACING_DIRECTION_LINE = DEBUG_MODE;
-    public static final boolean DRAW_COLLISIONS = false;
+    public static final boolean DEBUG_DRAW_COLLISIONS = DEBUG_MODE;
 
-    // Game
+    // Game Settings
     private static final int DEF_GAME_WIDTH = 875;
     private static final int DEF_GAME_HEIGHT = 700;
 
@@ -28,6 +28,15 @@ public class Settings {
 
     // Graphics
     private static final int DEF_MAX_PARTICLES = 50;
+
+    // Gameplay
+    private static final boolean DEF_PLAYER_STRAFE = false;
+    private static final boolean DEF_PLAYER_DECELERATION = true;
+    private static final boolean DEF_PLAYER_ACCELERATION = false;
+    private static final boolean DEF_PLAYER_SPEED_LIMIT = false;
+    private static final boolean DEF_PLAYER_GUN_LOCK = true;
+    private static final boolean DEF_PLAYER_GUN_MAIN = true;
+    private static final int DEF_EXP_PICKUP_DISTANCE = 52;
 
 // SETTINGS //
     // Game
@@ -50,6 +59,15 @@ public class Settings {
 
     // Graphics
     public static int max_particles;
+
+    // Gameplay
+    public static int exp_pickup_distance;
+    public static boolean player_strafe;
+    public static boolean player_deceleration;
+    public static boolean player_acceleration;
+    public static boolean player_speed_limit;
+    public static boolean player_gun_lock;
+    public static boolean player_gun_main;
 
 // CONSTRUCTORS //
     // Default Values Constructor
@@ -74,5 +92,14 @@ public class Settings {
 
         // Graphics
         max_particles = DEF_MAX_PARTICLES;
+
+        // Gameplay
+        exp_pickup_distance = DEF_EXP_PICKUP_DISTANCE;
+        player_strafe = DEF_PLAYER_STRAFE;
+        player_deceleration = DEF_PLAYER_DECELERATION;
+        player_acceleration = DEF_PLAYER_ACCELERATION;
+        player_speed_limit = DEF_PLAYER_SPEED_LIMIT;
+        player_gun_lock = DEF_PLAYER_GUN_LOCK;
+        player_gun_main = DEF_PLAYER_GUN_MAIN;
     }
 }

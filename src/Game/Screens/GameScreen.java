@@ -61,8 +61,8 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
         // Draw All Game.Entities
         entityManager.draw(g);
 
-        // If DRAW_COLLISIONS = true, draw all subscribed collision boxes
-        if(Settings.DRAW_COLLISIONS) entityManager.drawCollisionBoxes(g);
+        // If DEBUG_DRAW_COLLISIONS = true, draw all subscribed collision boxes
+        if(Settings.DEBUG_DRAW_COLLISIONS) entityManager.drawCollisionBoxes(g);
 
         // Draw Game.Display.UserInterface Last // So it appears over everything else
         UIManager.draw(g);
