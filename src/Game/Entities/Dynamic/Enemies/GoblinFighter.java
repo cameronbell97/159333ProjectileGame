@@ -46,6 +46,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
         move();
         tryShoot();
         collision.update();
+        collision.rotateSprite(direction);
     }
 
     @Override

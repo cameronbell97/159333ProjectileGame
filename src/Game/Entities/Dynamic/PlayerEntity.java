@@ -55,7 +55,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     private int slowTimeCurrent;
     private int timeMoving;
     private int acceleration;
-    private PlayerCollisionBoxHead headCollision;
+//    private PlayerCollisionBoxHead headCollision;
 
 
 // CONSTRUCTORS //
@@ -72,10 +72,10 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         img = assMan.getSprite("player");
         reverseThrust = true;
         decelerate = (float)0.06;
-//        collision = new CollisionBox(xpos+22, ypos+17, 20, 35, 22, 17, this);
-        collision = new PlayerCollisionBoxBody(xpos+17, ypos+26, 30, 30, 17, 26, this);
+        collision = new CollisionBox(xpos+22, ypos+17, 20, 35, 22, 17, this);
+//        collision = new PlayerCollisionBoxBody(xpos+17, ypos+26, 30, 30, 17, 26, this);
 //        collision.setAnchor(15, 6);
-        headCollision = new PlayerCollisionBoxHead(xpos+27, ypos+7, 10, 18, 27, 7, this);
+//        headCollision = new PlayerCollisionBoxHead(xpos+27, ypos+7, 10, 18, 27, 7, this);
 //        headCollision.setAnchor(5, 25);
         health = DEF_HEALTH;
         shoot_release = true;
@@ -151,7 +151,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         getInput();
         move();
         collision.update();
-        headCollision.update();
+//        headCollision.update();
     }
 
     @Override
@@ -237,7 +237,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
                 direction += rotationSpeed * speedMultiplier;
                 rotateSprite();
                 collision.rotateSprite(direction);
-                headCollision.rotateSprite(direction);
+//                headCollision.rotateSprite(direction);
             }
         }
         if(km.right) {
@@ -247,7 +247,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
                 direction -= rotationSpeed * speedMultiplier;
                 rotateSprite();
                 collision.rotateSprite(direction);
-                headCollision.rotateSprite(direction);
+//                headCollision.rotateSprite(direction);
             }
         }
         if(km.spacebar && shoot_release && shoot_reloaded) {
@@ -279,7 +279,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     public void die() {
         EntityManager.get().unsubPlayer(this);
         EntityManager.get().unsubscribe(this.collision);
-        EntityManager.get().unsubscribe(this.headCollision);
+//        EntityManager.get().unsubscribe(this.headCollision);
         explode();
 
         Screen screen = ScreenManager.getScreen();

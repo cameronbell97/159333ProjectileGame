@@ -8,16 +8,16 @@ public class PlayerCollisionBoxBody extends CollisionBox {
         super(xpos, ypos, width, height, xoff, yoff, playerEntity);
     }
 
-//    @Override
-//    public void update() {
-//        setXpos(parent.getXpos() + (parent.getWidth() / 2));
-//        setYpos(parent.getYpos() + (parent.getHeight() / 2));
-//        direction = ((PlayerEntity)parent).getRealDirection();
-//        strafeLeft(15);
-//        setSpeed(6);
-//        setMoveSpeeds();
-//        move();
-//        setSpeed(0);
-//        setMoveSpeeds();
-//    }
+    @Override
+    public void update() {
+        setXpos(parent.getXpos() + (parent.getWidth() / 2));
+        setYpos(parent.getYpos() + (parent.getHeight() / 2));
+        direction = -((PlayerEntity)parent).getRealDirection();
+        strafeRight(15);
+        setSpeed(-6);
+        setMoveSpeeds();
+        move();
+        setSpeed(0);
+        setMoveSpeeds();
+    }
 }
