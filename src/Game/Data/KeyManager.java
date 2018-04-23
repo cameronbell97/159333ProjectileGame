@@ -66,4 +66,8 @@ public class KeyManager implements KeyListener{
         int key = e.getKeyCode();
         keys[key] = false;
     }
+
+    public boolean checkKey(int KeyEventCode) {
+        return keys[KeyEventCode];
+    }
 }

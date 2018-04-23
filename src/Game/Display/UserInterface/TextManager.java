@@ -73,6 +73,10 @@ public class TextManager {
         return (word.length() * getCharacterWidth()) + ((word.length() - 1) * Settings.character_size);
     }
 
+    public static int getWordWidth(int wordSize) {
+        return (wordSize * getCharacterWidth()) + ((wordSize - 1) * Settings.character_size);
+    }
+
     public static int getCharacterHeight() {
         return Settings.character_height * Settings.character_size;
     }
