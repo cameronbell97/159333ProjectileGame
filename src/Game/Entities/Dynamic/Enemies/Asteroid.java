@@ -44,19 +44,16 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
         // Set depending on level
         if(level >=3) {
             hp = 5;
-            collision = new CollisionBox(xpos+11, ypos+11, 42, 42, 11, 11, this);
             if(!white) img = AssetManager.get().getSprite("AstLarge");
             else img = AssetManager.get().getSprite("AstLargeWhite");
         }
         else if(level == 2) {
             hp = 3;
-            collision = new CollisionBox(xpos+18, ypos+18, 28, 28, 18, 18, this);
             if(!white) img = AssetManager.get().getSprite("AstMedium");
             else img = AssetManager.get().getSprite("AstMediumWhite");
         }
         else {
             hp = 1;
-            collision = new CollisionBox(xpos+26, ypos+26, 12, 12, 26, 26, this);
             if(!white) img = AssetManager.get().getSprite("AstSmall");
             else img = AssetManager.get().getSprite("AstSmallWhite");
         }
@@ -75,7 +72,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
     @Override
     public void update() {
         move();
-        collision.update();
+        if(collision != null) collision.update();
         rotateSprite();
 
         // If asteroid goes out of bounds
@@ -93,6 +90,19 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
             setHP(0);
         }
 
+    }
+
+    @Override
+    public void setCollisionBox() {
+        if(level >=3) {
+            collision = new CollisionBox(xpos+11, ypos+11, 42, 42, 11, 11, this);
+        }
+        else if(level == 2) {
+            collision = new CollisionBox(xpos+18, ypos+18, 28, 28, 18, 18, this);
+        }
+        else {
+            collision = new CollisionBox(xpos+26, ypos+26, 12, 12, 26, 26, this);
+        }
     }
 
     @Override
@@ -114,6 +124,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
                 double newDir = Game.Game.getDoubleFromRange(direction + (i*(Math.PI/4)), direction + (i*(Math.PI/8)));
 
                 Asteroid ast = new Asteroid(newX, newY, level-1, newDir, moveSpeed*1.2, white);
+                ast.setCollisionBox();
                 EntityManager.get().subscribe(ast);
                 EnemyDirector.get().subscribe(ast);
             }
@@ -124,6 +135,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
             float newY = Game.Game.getFloatFromRange(ypos-height/8, ypos+height/8);
 
             Asteroid ast = new Asteroid(newX, newY, level-1, direction, moveSpeed*1.2, white);
+            ast.setCollisionBox();
             EntityManager.get().subscribe(ast);
             EnemyDirector.get().subscribe(ast);
         }

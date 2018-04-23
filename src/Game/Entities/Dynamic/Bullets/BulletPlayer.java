@@ -14,7 +14,7 @@ public class BulletPlayer extends Bullet {
     public BulletPlayer(DynamicEntity parent) {
         super(10, 10, parent);
         img = AssetManager.get().getSprite("BulletPlayer");
-        collision = new CollisionBox(xpos+IMG_X_OFFSET, ypos, 4, 10, IMG_X_OFFSET, 0, this);
+        setCollisionBox();
 
         // Move bullet to nose of Player ship
         ymove = (float)(20 * -Math.sin(direction));
@@ -37,5 +37,10 @@ public class BulletPlayer extends Bullet {
         } else if(ec instanceof GoblinFighter) {
             destroy();
         }
+    }
+
+    @Override
+    public void setCollisionBox() {
+        collision = new CollisionBox(xpos+IMG_X_OFFSET, ypos, 4, 10, IMG_X_OFFSET, 0, this);
     }
 }

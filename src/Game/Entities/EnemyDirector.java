@@ -114,6 +114,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
 
         // Give new position and direction to enemy, ready for spawning
         Enemy enem = generateEnemyPosition(t.getEnemy(), t.getEnemy().getMaxSize());
+        enem.setCollisionBox();
 
         limboEntities--; // Decrement Limbo Game.Entities Counter
         entityManager.subscribe(enem); // // Subscribe Enemy to EntityManager for Managing (Updating and Drawing)

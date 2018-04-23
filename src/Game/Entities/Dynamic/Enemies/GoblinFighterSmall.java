@@ -16,10 +16,15 @@ public class GoblinFighterSmall extends GoblinFighter {
         this.hp = GOBLIN_FIGHTER_SMALL_DEF_HP;
         this.exp_value = 10;
 
-        collision = new CollisionBox(x+21, y+17, 22, 30, 21, 17, this);
     }
 
     public void shoot() {
         EntityManager.get().subscribe(new GoblinBulletSmall(this));
+    }
+
+    @Override
+    public void setCollisionBox() {
+
+        collision = new CollisionBox(xpos+21, ypos+17, 22, 30, 21, 17, this);
     }
 }

@@ -35,4 +35,9 @@ public abstract class Particle extends DynamicEntity implements iCanHaveCodeTime
     protected void destroy() {
         EntityManager.get().unsubscribe(this);
     }
+
+    @Override
+    public void setCollisionBox() {
+
+    }
 }

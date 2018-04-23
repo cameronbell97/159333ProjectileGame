@@ -6,7 +6,7 @@ public class Settings {
     public static final boolean DEBUG_MODE = false;
     public static final boolean DEBUG_GOBLIN_DRAW_LINE_TO_PLAYER = DEBUG_MODE;
     public static final boolean DEBUG_GOBLIN_DRAW_FACING_DIRECTION_LINE = DEBUG_MODE;
-    public static final boolean DRAW_COLLISIONS = true;
+    public static final boolean DRAW_COLLISIONS = false;
 
     // Game
     private static final int DEF_GAME_WIDTH = 875;

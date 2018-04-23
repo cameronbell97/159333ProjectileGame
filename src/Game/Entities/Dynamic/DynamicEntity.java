@@ -37,6 +37,8 @@ public abstract class DynamicEntity extends Entity{
     }
 
 // METHODS //
+    public abstract void setCollisionBox();
+
     public void setMoveSpeeds() {
         ymove = (float)(moveSpeed * -Math.sin(direction));
         xmove = (float)(moveSpeed * Math.cos(direction));

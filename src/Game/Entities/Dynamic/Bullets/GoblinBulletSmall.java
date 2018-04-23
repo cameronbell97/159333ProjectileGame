@@ -17,7 +17,7 @@ public class GoblinBulletSmall extends Bullet {
     public GoblinBulletSmall(GoblinFighter parent) {
         super(10, 10, (DynamicEntity) parent);
         img = AssetManager.get().getSprite("BulletEnemy");
-        collision = new CollisionBox(xpos+IMG_X_OFFSET, ypos, 2, 10, IMG_X_OFFSET, 0, this);
+        setCollisionBox();
 
         // Move to correct position
         this.moveSpeed = 18;
@@ -39,5 +39,11 @@ public class GoblinBulletSmall extends Bullet {
         if(ec instanceof Game.Entities.Dynamic.PlayerEntity) {
             destroy();
         }
+    }
+
+    @Override
+    public void setCollisionBox() {
+
+        collision = new CollisionBox(xpos+IMG_X_OFFSET, ypos, 2, 10, IMG_X_OFFSET, 0, this);
     }
 }

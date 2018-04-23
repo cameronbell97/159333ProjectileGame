@@ -36,6 +36,11 @@ public class CollisionBox extends DynamicEntity{
     }
 
     @Override
+    public void setCollisionBox() {
+
+    }
+
+    @Override
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.yellow);

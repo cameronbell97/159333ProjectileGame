@@ -18,10 +18,14 @@ public class GoblinFighterLarge extends GoblinFighter {
         this.exp_value = 8;
         phaseBulletsNumber = DEF_SHOOT_PHASE_BULLET_NUMBER;
 
-        collision = new CollisionBox(x+15, y+9, 34, 45, 15, 9, this);
     }
 
     public void shoot() {
         EntityManager.get().subscribe(new GoblinBulletLarge(this));
+    }
+
+    @Override
+    public void setCollisionBox() {
+        collision = new CollisionBox(xpos+15, ypos+9, 34, 45, 15, 9, this);
     }
 }

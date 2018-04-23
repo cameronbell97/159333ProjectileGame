@@ -56,22 +56,21 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
 // METHODS //
     private void initialise() {
 
-        //Set Img & Collision Box
+        //Set Img
         if(this.value < 10) {
-            collision = new CollisionBox(xpos+5, ypos+5, 6, 6, 5, 5, this);
             yImg = 0;
         }
         else if(this.value < 25) {
-            collision = new CollisionBox(xpos+4, ypos+4, 8, 8, 4, 4, this);
             yImg = 1;
         }
         else {
-            collision = new CollisionBox(xpos+1, ypos+1, 14, 14, 1, 1, this);
             yImg = 2;
         }
         img = AssetManager
                 .get()
                 .getSprite(11, Game.Game.getIntFromRange(0, 3), yImg);
+
+        setCollisionBox();
 
         // Set Despawn Game.Timer
         TimerManager.get().newCodeTimer(DESPAWN_TIME + Game.Game.getIntFromRange(-30, 30), this, "DIE");
@@ -219,4 +218,18 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         this.merged = merged;
     }
 
+    @Override
+    public void setCollisionBox() {
+
+        //Set Collision Box
+        if(this.value < 10) {
+            collision = new CollisionBox(xpos+5, ypos+5, 6, 6, 5, 5, this);
+        }
+        else if(this.value < 25) {
+            collision = new CollisionBox(xpos+4, ypos+4, 8, 8, 4, 4, this);
+        }
+        else {
+            collision = new CollisionBox(xpos+1, ypos+1, 14, 14, 1, 1, this);
+        }
+    }
 }
