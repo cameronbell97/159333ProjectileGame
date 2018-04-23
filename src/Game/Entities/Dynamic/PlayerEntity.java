@@ -254,10 +254,11 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         if(km.spacebar && shoot_release && shoot_reloaded) {
             if(Settings.player_gun_main) {
                 EntityManager.get().subscribe(new BulletPlayer(this));
-                if(Settings.player_gun_lock) shoot_release = false;
-                shoot_reloaded = false;
                 TimerManager.get().newCodeTimer(DEF_RELOAD_SPEED, this, "REL");
             }
+            
+            shoot_reloaded = false;
+            if(Settings.player_gun_lock) shoot_release = false;
         }
         if(!km.spacebar) shoot_release = true;
         // Slow/Speedup Mechanics for collision with asteroid
