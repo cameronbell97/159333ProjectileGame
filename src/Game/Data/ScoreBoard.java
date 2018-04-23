@@ -5,25 +5,43 @@ package Game.Data;
  */
 public class ScoreBoard {
 // VARIABLES //
+    public static final String DEF_SCORES_FORMAT = "0 0 1 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 9 0 ";
+    public static final String DEF_SCORE_NAMES_FORMAT = "--- --- --- --- --- --- --- --- --- --- ";
+    public static final String DEF_SCORE_NAME_FORMAT = "---";
+
     public static final int DEF_SCORES_NUM = 10;
     private int scores[];
+    private String scoreNames[];
 
 // CONSTRUCTORS //
     public ScoreBoard() {
         scores = new int[DEF_SCORES_NUM];
-
+        scoreNames = new String[DEF_SCORES_NUM];
     }
 
 // METHODS //
-    public void load(int[] scores) {
+    public boolean load(int[] scores, String[] scoreNames) {
         if(this.scores.length == scores.length) this.scores = scores;
+        else return false;
+
+        if(this.scoreNames.length == scoreNames.length) this.scoreNames = scoreNames;
+        else return false;
+
+        return true;
     }
 
     public String saveScoresAsString() {
         StringBuilder builder = new StringBuilder();
+
         for(int i = 0; i < DEF_SCORES_NUM; i++) {
             builder.append(parseString(i) + " " + parseString(scores[i]) + " ");
         }
+
+        for(int i = 0; i < DEF_SCORES_NUM; i++) {
+            if(scoreNames[i] != null) builder.append(scoreNames[i] + " ");
+            else builder.append(DEF_SCORE_NAME_FORMAT + " ");
+        }
+
         return builder.toString();
     }
 
@@ -45,13 +63,21 @@ public class ScoreBoard {
     public void addNewScore(int score, String name) {
         if(isHighScore(score)) {
             int currentIndex = 0;
+
             int scoreHolder1 = 0;
             int scoreHolder2 = 0;
+
+            String scoreNameHolder1 = "---";
+            String scoreNameHolder2 = "---";
 
             for(int i = currentIndex; i < DEF_SCORES_NUM; i++) {
                 if(score > scores[i]) {
                     scoreHolder1 = scores[i];
                     scores[i] = score;
+
+                    scoreNameHolder1 = scoreNames[i];
+                    scoreNames[i] = name;
+
                     currentIndex++;
                     break;
                 }
@@ -63,6 +89,10 @@ public class ScoreBoard {
                 scores[i] = scoreHolder1;
                 scoreHolder1 = scoreHolder2;
 
+                scoreNameHolder2 = scoreNames[i];
+                scoreNames[i] = scoreNameHolder1;
+                scoreNameHolder1 = scoreNameHolder2;
+
                 currentIndex++;
             }
         }
@@ -71,6 +101,9 @@ public class ScoreBoard {
 // GETTERS & SETTERS //
     public int[] getScores() {
         return scores;
+    }
+    public String[] getScoreNames() {
+        return scoreNames;
     }
     public int getBiggestScore() {
         int biggest = 0;

@@ -12,7 +12,12 @@ public class SaveManager {
     public SaveManager() {
         // Initialise Save Data
         save = new Save();
-        if(!save.load()) save.create(); // If load fails, create a blank save
+        if(!save.load()) {
+            save.create(); // If load fails, create a blank save
+            if(!save.load()) {
+                Game.Game.end(); // If load fails a second time, kill the program
+            }
+        }
 
     }
 

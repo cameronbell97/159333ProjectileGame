@@ -5,7 +5,6 @@ import java.io.*;
 public class Save {
 // VARIABLES //
     private static final String DEF_SAVE_PATH = "data/save.txt";
-    private static final String DEF_SCORES_FORMAT = "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ";
 
     private ScoreBoard scoreBoard;
 
@@ -15,6 +14,7 @@ public class Save {
     public Save() {
         scoreBoard = new ScoreBoard();
         settings = new Settings();
+        //save();
     }
 
 // METHODS //
@@ -40,14 +40,28 @@ public class Save {
         String file = filepathToString(DEF_SAVE_PATH);
         String[] elements = file.split("\\s+"); // Regex expression '\s' means whitespace and '+' means 1 or more
 
-        int[] scores = new int[scoreBoard.DEF_SCORES_NUM];
-        for(int elem = 0; elem < scoreBoard.DEF_SCORES_NUM * 2; elem += 2) {
-            if(elements[elem] == null) break; // To avoid an out of bounds exception
-            scores[parseInt(elements[elem])] = parseInt(elements[elem+1]);
-        }
-        scoreBoard.load(scores);
+        // Create Data Structures
+        int[] scores = new int[ScoreBoard.DEF_SCORES_NUM];
+        String[] scoreNames = new String[ScoreBoard.DEF_SCORES_NUM];
 
-        return true;
+        // Load Scores
+        int elementCount = 0;
+        int countStart = elementCount;
+
+        for(; elementCount < ScoreBoard.DEF_SCORES_NUM * 2; elementCount += 2) {
+            if(elements[elementCount] == null) break; // To avoid an out of bounds exception
+            scores[parseInt(elements[elementCount])] = parseInt(elements[elementCount+1]);
+        }
+
+        countStart = elementCount;
+        for(; elementCount < ScoreBoard.DEF_SCORES_NUM + countStart; elementCount++) {
+            if(elements[elementCount] == null) break; // To avoid an out of bounds exception
+            scoreNames[elementCount-countStart] = elements[elementCount];
+        }
+
+        if(scoreBoard.load(scores, scoreNames))
+            return true;
+        else return false;
     }
 
     // Method to turn a file to a string
@@ -85,7 +99,7 @@ public class Save {
             file.getParentFile().mkdirs();
             file.createNewFile();
             BufferedWriter br = new BufferedWriter(new FileWriter(file));
-            br.write(DEF_SCORES_FORMAT);
+            br.write(ScoreBoard.DEF_SCORES_FORMAT + ScoreBoard.DEF_SCORE_NAMES_FORMAT);
             br.close();
         } catch (IOException e) {
             e.printStackTrace();

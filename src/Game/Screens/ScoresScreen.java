@@ -80,8 +80,8 @@ public class ScoresScreen extends Screen {
         scoreColumn = new VerticalListElement(SPACE_BETWEEN_ROWS);
 
         // Add Names
-        for(int i : new int[]{0,1,2,3,4,5,6,7,8,9}) {
-            nameColumn.addChild(new TextElement("AHH"));
+        for(String name : scoreBoard.getScoreNames()) {
+            nameColumn.addChild(new TextElement(name));
         }
 
         // Add Scores

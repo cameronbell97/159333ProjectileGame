@@ -1,6 +1,7 @@
 package Game.Screens;
 
 import Game.Data.SaveManager;
+import Game.Data.ScoreBoard;
 import Game.Data.Settings;
 import Game.Display.DisplayElements.*;
 
@@ -86,7 +87,7 @@ public class AddScoreScreen extends Screen {
             @Override
             protected void onClick() {
                 SaveManager sm = SaveManager.get();
-                sm.getSave().getScoreBoard().addNewScore(score, "");
+                sm.getSave().getScoreBoard().addNewScore(score, "CAM");
                 sm.getSave().save();
                 ScreenManager.setScreen(new ScoresScreen(returnScreen, drawScreen));
             }
