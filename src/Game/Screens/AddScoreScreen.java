@@ -30,6 +30,7 @@ public class AddScoreScreen extends Screen {
     VerticalListElement nameColumn;
     VerticalListElement scoreColumn;
     ButtonElement submitButton;
+    TypeTextElement nameTyper;
 
     private int score;
 
@@ -51,6 +52,7 @@ public class AddScoreScreen extends Screen {
     @Override
     public void update() {
         submitButton.update();
+        nameTyper.update();
     }
 
     @Override
@@ -76,18 +78,20 @@ public class AddScoreScreen extends Screen {
         nameColumn = new VerticalListElement(SPACE_BETWEEN_ROWS);
         scoreColumn = new VerticalListElement(SPACE_BETWEEN_ROWS);
 
+        nameTyper = new TypeTextElement(3);
+
         // Add Text Elements
         nameColumn.addChild(new TextElement("NAME"));
         scoreColumn.addChild(new TextElement("SCORE"));
         scoreColumn.addChild(new TextElement(Integer.toString(score)));
 
-        nameColumn.addChild(new TextElement("---"));
+        nameColumn.addChild(nameTyper);
 
         submitButton = new ButtonElement("SUBMIT") {
             @Override
             protected void onClick() {
                 SaveManager sm = SaveManager.get();
-                sm.getSave().getScoreBoard().addNewScore(score, "CAM");
+                sm.getSave().getScoreBoard().addNewScore(score, nameTyper.getText());
                 sm.getSave().save();
                 ScreenManager.setScreen(new ScoresScreen(returnScreen, drawScreen));
             }

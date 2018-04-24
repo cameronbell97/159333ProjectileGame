@@ -270,6 +270,8 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             ymove = ymove / 3;
             xmove = xmove / 3;
         }
+
+        if(km.delete) addHP(-20);
     }
 
     @Override
