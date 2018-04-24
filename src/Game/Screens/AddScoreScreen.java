@@ -1,5 +1,6 @@
 package Game.Screens;
 
+import Game.Data.KeyManager;
 import Game.Data.SaveManager;
 import Game.Data.ScoreBoard;
 import Game.Data.Settings;
@@ -94,6 +95,11 @@ public class AddScoreScreen extends Screen {
                 sm.getSave().getScoreBoard().addNewScore(score, nameTyper.getText());
                 sm.getSave().save();
                 ScreenManager.setScreen(new ScoresScreen(returnScreen, drawScreen));
+            }
+
+            @Override
+            protected void additionalActions() {
+                if(KeyManager.get().enter) onClick();
             }
         };
 

@@ -57,6 +57,8 @@ public abstract class ButtonElement extends PaddedElement {
 
     @Override
     public void update() {
+        additionalActions();
+
         leftMouse = mouseManager.checkLeftMouse();
         rightMouse = mouseManager.checkRightMouse();
 
@@ -87,6 +89,10 @@ public abstract class ButtonElement extends PaddedElement {
         if(isHovered && !isClicked && wasJustClicked) {
             onClick();
         }
+    }
+
+    protected void additionalActions() {
+
     }
 
     private void initialise() {
