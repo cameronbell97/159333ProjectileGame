@@ -14,6 +14,7 @@ import java.util.HashMap;
  */
 public class TextManager {
 // VARIABLES //
+    private static final float MAX_ALPHA = 1;
     private AssetManager assMan;
     private HashMap<String, BufferedImage> charset_1;
     private HashMap<String, BufferedImage> charset_2;
@@ -28,6 +29,9 @@ public class TextManager {
 
 // METHODS //
     public void drawString(Graphics g, String text, String alignment, int xpos, int ypos) {
+        drawString(g, text, alignment, xpos, ypos, MAX_ALPHA);
+    }
+    public void drawString(Graphics g, String text, String alignment, int xpos, int ypos, float alpha) {
         if(text.length() == 0) return;
 
         // Get Parameters
@@ -47,9 +51,14 @@ public class TextManager {
                 break;
         }
 
+        Graphics2D g2d = (Graphics2D) g;
+
         if(alignment.equals("left") || alignment.equals("right") || alignment.equals("center")) {
             for(int i = 0; i < wordArray.length; i++) {
-                g.drawImage(
+                // Set Alpha
+                AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
+                g2d.setComposite(ac);
+                g2d.drawImage(
                         charset_1.get(wordArray[i]),
                         xPencil,
                         yPencil,

@@ -1,5 +1,6 @@
 package Game.Entities;
 
+import Game.Display.UserInterface.GameUIManager;
 import Game.Entities.Dynamic.DynamicEntity;
 import Game.Entities.Dynamic.Enemies.*;
 import Game.Game;
@@ -187,6 +188,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
             break;
 
             case 6: // Level 6 // Asteroid Belt
+                GameUIManager.get().setFlashAlert("! ASTEROID BELT !", 2);
                 for(int i = 0; i < 3; i++) {
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 2, true), Asteroid.DEFAULT_SIZE));
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 2, true), Asteroid.DEFAULT_SIZE));

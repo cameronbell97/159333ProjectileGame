@@ -38,7 +38,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
         // Declarations
         entityManager = EntityManager.get();
         enemyDirector = EnemyDirector.get();
-        UIManager = new GameUIManager();
+        UIManager = GameUIManager.get();
         GDataMananger = GameDataManager.get();
         player = new PlayerEntity(
                 Settings.game_width/2 - player.DEF_PLAYER_WIDTH/2,
