@@ -14,7 +14,7 @@ public class AddScoreScreen extends Screen {
     private static final int SPACE_BETWEEN_COLUMNS = 24;
     private static final int SPACE_BETWEEN_ROWS = 16;
     private static final int BORDER_WIDTH = 1;
-    private static final int OUTER_PADDING = 32;
+    private static final int OUTER_PADDING = 24;
 
     // Screens
     private Screen returnScreen;
@@ -27,6 +27,7 @@ public class AddScoreScreen extends Screen {
 
     // Elements
     PaddedElement mainElement;
+    VerticalListElement titleWrapper;
     HorizontalListElement columnsContainer;
     VerticalListElement nameColumn;
     VerticalListElement scoreColumn;
@@ -74,6 +75,7 @@ public class AddScoreScreen extends Screen {
 
     private void fillElements() {
         mainElement = new PaddedElement(1, borderColor, fillColour, OUTER_PADDING);
+        titleWrapper = new VerticalListElement((int)(SPACE_BETWEEN_ROWS*1.5));
         columnsContainer = new HorizontalListElement(SPACE_BETWEEN_COLUMNS);
 
         nameColumn = new VerticalListElement(SPACE_BETWEEN_ROWS);
@@ -109,7 +111,11 @@ public class AddScoreScreen extends Screen {
         columnsContainer.addChild(submitButton);
         columnsContainer.setCenterAlign(true);
 
+        titleWrapper.addChild(new TextElement("NEW HIGH SCORE"));
+        titleWrapper.addChild(columnsContainer);
+        titleWrapper.setCenterAlign(true);
+
         // Put Into Main
-        mainElement.setChildElement(columnsContainer);
+        mainElement.setChildElement(titleWrapper);
     }
 }

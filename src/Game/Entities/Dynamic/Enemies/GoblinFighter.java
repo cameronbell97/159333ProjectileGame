@@ -9,7 +9,7 @@ import java.awt.*;
 public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBounds, iVulnerable {
 // VARIABLES //
     private static final int PLAYER_STOP_DISTANCE = 500;
-    private static final int GOBLIN_FIGHTER_MOVE_SPEED = 2;
+    private static final double GOBLIN_FIGHTER_MOVE_SPEED = 1.4;
     private static final int OFFSCREEN_BOUNDARY = -32;
     private static final int INITIAL_TIME_BEFORE_SHOOTING = 3*60;
     private static final int TIME_BETWEEN_SHOTS = 25;
