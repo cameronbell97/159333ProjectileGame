@@ -7,12 +7,14 @@ public class HorizontalListElement extends Element {
 // VARIABLES //
     private ArrayList<Element> children;
     private int distanceBetweenElements;
+    private boolean centerAlign;
 
 // CONSTRUCTORS //
     public HorizontalListElement(int distanceApart) {
         super(0, 0);
         children = new ArrayList<>();
         distanceBetweenElements = distanceApart;
+        centerAlign = false;
     }
 
 // METHODS //
@@ -29,6 +31,7 @@ public class HorizontalListElement extends Element {
         int yPencil = yStart;
 
         for(Element e : children) {
+            if(centerAlign) yPencil = yStart + (height / 2 - e.getHeight() / 2);
             e.draw(g, xPencil, yPencil);
             xPencil += e.getWidth() + distanceBetweenElements;
         }
@@ -65,5 +68,10 @@ public class HorizontalListElement extends Element {
         }
 
         return newHeight;
+    }
+
+// GETTERS & SETTERS //
+    public void setCenterAlign(boolean centerAlign) {
+        this.centerAlign = centerAlign;
     }
 }

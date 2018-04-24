@@ -107,6 +107,7 @@ public class AddScoreScreen extends Screen {
         columnsContainer.addChild(nameColumn);
         columnsContainer.addChild(scoreColumn);
         columnsContainer.addChild(submitButton);
+        columnsContainer.setCenterAlign(true);
 
         // Put Into Main
         mainElement.setChildElement(columnsContainer);
