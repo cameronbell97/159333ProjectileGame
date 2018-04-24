@@ -61,14 +61,18 @@ public class ScoreBoard {
     }
 
     public void addNewScore(int score, String name) {
+        // Remove Whitespace From String & Check if it's blank (if it is and it is left alone, it will mess with the save
+        name = name.replaceAll("\\s", "");
+        if(name.length() == 0) name = DEF_SCORE_NAME_FORMAT;
+
         if(isHighScore(score)) {
             int currentIndex = 0;
 
             int scoreHolder1 = 0;
             int scoreHolder2 = 0;
 
-            String scoreNameHolder1 = "---";
-            String scoreNameHolder2 = "---";
+            String scoreNameHolder1 = DEF_SCORE_NAME_FORMAT;
+            String scoreNameHolder2 = DEF_SCORE_NAME_FORMAT;
 
             for(int i = currentIndex; i < DEF_SCORES_NUM; i++) {
                 if(score > scores[i]) {
