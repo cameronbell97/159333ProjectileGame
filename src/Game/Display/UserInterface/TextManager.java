@@ -28,6 +28,8 @@ public class TextManager {
 
 // METHODS //
     public void drawString(Graphics g, String text, String alignment, int xpos, int ypos) {
+        if(text.length() == 0) return;
+
         // Get Parameters
         int character_width_final = getCharacterWidth();
         int character_height_final = getCharacterHeight();

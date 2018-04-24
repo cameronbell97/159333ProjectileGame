@@ -2,13 +2,18 @@ package Game.Display.DisplayElements;
 
 import Game.Data.KeyManager;
 import Game.Display.UserInterface.TextManager;
+import Game.Timer.CodeTimer;
+import Game.Timer.TimerManager;
+import Game.Timer.iCanHaveCodeTimer;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
 
-public class TypeTextElement extends Element {
+public class TypeTextElement extends Element implements iCanHaveCodeTimer {
 // VARIABLES //
+    private static final int UNDERSCORE_FLASH_TIME = 30;
+
     TextManager textManager;
     int maxLength;
     int activeIndex;
@@ -18,6 +23,7 @@ public class TypeTextElement extends Element {
     boolean backTyped;
     String text;
     KeyManager km;
+    boolean underscoreFlash;
 
 // CONSTRUCTORS //
     public TypeTextElement(int maxLength) {
@@ -50,6 +56,9 @@ public class TypeTextElement extends Element {
                 letterCodes[i][j] = KeyEvent.getExtendedKeyCodeForChar(letters[i][j].charAt(0));
             }
         }
+
+        underscoreFlash = false;
+        TimerManager.get().newCodeTimer(UNDERSCORE_FLASH_TIME, this, "_");
     }
 
 // METHODS //
@@ -79,7 +88,11 @@ public class TypeTextElement extends Element {
 
     @Override
     public void draw(Graphics g, int xStart, int yStart) {
-        if(text.length() > 0) textManager.drawString(g, text, "left", xStart, yStart);
+        if(underscoreFlash) {
+            textManager.drawString(g, setUnderscore(text), "left", xStart, yStart);
+        } else {
+            textManager.drawString(g, text, "left", xStart, yStart);
+        }
     }
 
     private void keyTyped(String key) {
@@ -96,5 +109,28 @@ public class TypeTextElement extends Element {
 
     public String getText() {
         return text;
+    }
+
+    @Override
+    public void timerNotify(CodeTimer t) {
+        String code = t.getCode();
+
+        if(code.equals("_")) {
+            underscoreFlash = true;
+            TimerManager.get().newCodeTimer(UNDERSCORE_FLASH_TIME, this, " ");
+        } else if(code.equals(" ")) {
+            underscoreFlash = false;
+            TimerManager.get().newCodeTimer(UNDERSCORE_FLASH_TIME, this, "_");
+        }
+
+        TimerManager.get().unsubTimer(t);
+    }
+
+    private String setUnderscore(String t) {
+        if(t.length() == 0) {
+            return "_";
+        } else if(t.length() != maxLength) {
+            return t + "_";
+        } else return t;
     }
 }

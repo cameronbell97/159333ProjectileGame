@@ -49,14 +49,20 @@ public class Save {
         int countStart = elementCount;
 
         for(; elementCount < ScoreBoard.DEF_SCORES_NUM * 2; elementCount += 2) {
-            if(elements[elementCount] == null) break; // To avoid an out of bounds exception
-            scores[parseInt(elements[elementCount])] = parseInt(elements[elementCount+1]);
+            if(elements[elementCount] == null) {
+                scores[parseInt(elements[elementCount])] = 0;
+            } else {
+                scores[parseInt(elements[elementCount])] = parseInt(elements[elementCount + 1]);
+            }
         }
 
         countStart = elementCount;
         for(; elementCount < ScoreBoard.DEF_SCORES_NUM + countStart; elementCount++) {
-            if(elements[elementCount] == null) break; // To avoid an out of bounds exception
-            scoreNames[elementCount-countStart] = elements[elementCount];
+            if(elements.length < elementCount+1) {
+                scoreNames[elementCount - countStart] = "---";
+            } else {
+                scoreNames[elementCount - countStart] = elements[elementCount];
+            }
         }
 
         if(scoreBoard.load(scores, scoreNames))
