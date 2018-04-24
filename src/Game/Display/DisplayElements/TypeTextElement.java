@@ -38,9 +38,9 @@ public class TypeTextElement extends Element implements iCanHaveCodeTimer {
         letters = new String[][] {
                 {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"},
                 {"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T"},
-                {"U", "V", "W", "X", "Y", "Z", ",", ".", " ", "?"}, //[2][8] = !
+                {"U", "V", "W", "X", "Y", "Z", ",", ".", "[", "?"}, //[2][8] = !
                 {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"},
-                {" ", "<", ">", "-", " ", "\"", "\'", "/", "\\", "*"} // [4][4] = _
+                {"]", "<", ">", "-", "=", "\"", "\'", "/", "\\", "*"} // [4][4] = _
         };
         isTyped = new boolean[5][10];
         for (boolean[] array : isTyped) {
