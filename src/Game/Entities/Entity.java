@@ -42,6 +42,11 @@ public abstract class Entity {
         else return h + (h - ypos);
     }
 
+    public void clearData() {
+        parent = null;
+        collision = null;
+    }
+
 // GETTERS & SETTERS //
     public CollisionBox getCollision() {
         return collision;

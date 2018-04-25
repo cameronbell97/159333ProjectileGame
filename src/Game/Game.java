@@ -24,7 +24,7 @@ import java.util.Random;
 
 public class Game implements Runnable{
 // VARIABLES //
-    // Staticsa
+    // Statics
     private static final int FPS = 60;
 
     // Basic Game Parameters / Settings
@@ -88,6 +88,9 @@ public class Game implements Runnable{
     // Method - Updates Everything in the Game
     public void update() {
         // Update Managers
+        if(!timerMan.isAlive())
+            timerMan = TimerManager.get();
+
         km.update();
         timerMan.update();
 

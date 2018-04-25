@@ -23,6 +23,7 @@ public class EntityManager implements iObserver {
     public static EntityManager get() { return self; }
 
 // VARIABLES //
+    boolean alive = true;
     PlayerEntity player;
     List<Entity> ents; // A list of Game.Entities
     List<Entity> sub_queue; // A list of Game.Entities
@@ -190,8 +191,30 @@ public class EntityManager implements iObserver {
         }
     }
 
+    // Clear Data //
+    public void clear() {
+        for (Entity entity : ents) {
+            entity.clearData();
+            unsubscribe(entity);
+        }
+        for (CollisionBox col : cols) {
+            unsubscribe(col);
+        }
+        for (Particle particle : particles) {
+            unsubscribe(particle);
+        }
+        player = null;
+        this.update();
+        alive = false;
+        self = new EntityManager();
+    }
+
 // GETTERS & SETTERS //
     public PlayerEntity getPlayer() {
         return player;
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 }

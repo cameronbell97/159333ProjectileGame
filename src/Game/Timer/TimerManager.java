@@ -17,6 +17,8 @@ public class TimerManager {
     public static TimerManager get() { return self; }
 
 // VARIABLES //
+    boolean alive = true;
+
     // Lists of Timers
     List<Timer> timers;
     List<Timer> sub_queue;
@@ -77,5 +79,17 @@ public class TimerManager {
     // Method - Unsubscribe Game.Timer
     public void unsubTimer(Timer t) {
         unsub_queue.add(t);
+    }
+
+    public void clear() {
+        for (Timer timer : timers) {
+            unsubTimer(timer);
+        }
+        alive = false;
+        self = new TimerManager();
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 }

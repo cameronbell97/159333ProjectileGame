@@ -106,6 +106,7 @@ public class ScoresScreen extends Screen {
             @Override
             protected void onClick() {
                 ScreenManager.setScreen(returnScreen);
+                if(drawScreen instanceof GameScreen) ((GameScreen)drawScreen).clearUIManager();
             }
         };
 //        backButton.setInactiveColour(fillColour);

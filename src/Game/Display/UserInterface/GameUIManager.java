@@ -143,6 +143,11 @@ public class GameUIManager implements iCanHaveCodeTimer {
         }
     }
 
+    public void clear() {
+        gameDataManager = null;
+        self = new GameUIManager();
+    }
+
 
 
 // GETTERS & SETTERS //

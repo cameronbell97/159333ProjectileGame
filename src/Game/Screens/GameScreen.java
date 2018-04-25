@@ -38,6 +38,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
         // Declarations
         entityManager = EntityManager.get();
         enemyDirector = EnemyDirector.get();
+        enemyDirector.startGame();
         UIManager = GameUIManager.get();
         GDataMananger = GameDataManager.get();
         player = new PlayerEntity(
@@ -77,21 +78,28 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
     }
 
     private void endGame() {
-        if(SaveManager.get().getSave().getScoreBoard().isHighScore(GDataMananger.getScore())) {
-            ScreenManager.setScreen(new AddScoreScreen(lastScreen, this, GDataMananger.getScore()));
+        int score = GDataMananger.getScore();
+
+        if(SaveManager.get().getSave().getScoreBoard().isHighScore(score)) {
+            ScreenManager.setScreen(new AddScoreScreen(lastScreen, this, score));
         } else {
             ScreenManager.setScreen(new ScoresScreen(lastScreen, this));
         }
+
+        GameDataManager.get().clearData();
+    }
+
+    public void clearUIManager() {
+        GameUIManager.get().clear();
     }
 
     @Override
     public void timerNotify(CodeTimer t) {
+        TimerManager.get().unsubTimer(t);
         switch (t.getCode()) {
             case "END":
                 endGame();
                 break;
         }
-
-        TimerManager.get().unsubTimer(t);
     }
 }

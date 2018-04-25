@@ -8,7 +8,7 @@ import java.awt.*;
 
 public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBounds, iVulnerable {
 // VARIABLES //
-    private static final int PLAYER_STOP_DISTANCE = 500;
+    private static final int DEF_PLAYER_STOP_DISTANCE = 500;
     private static final double GOBLIN_FIGHTER_MOVE_SPEED = 1.4;
     private static final int OFFSCREEN_BOUNDARY = -32;
     private static final int INITIAL_TIME_BEFORE_SHOOTING = 3*60;
@@ -24,6 +24,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     protected int hp;
     protected int exp_value;
     protected int phaseBulletsNumber = 4;
+    protected int playerStopDistance;
 
 // CONSTRUCTORS //
     public GoblinFighter(float x, float y, double direction) {
@@ -35,13 +36,14 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
         hp = DEF_HP;
         exp_value = DEF_EXP;
         phaseBulletsNumber = DEF_SHOOT_PHASE_BULLET_NUMBER;
+        playerStopDistance = DEF_PLAYER_STOP_DISTANCE;
     }
 
 // METHODS //
     @Override
     public void update() {
         super.update();
-        if((distanceFromPlayer > PLAYER_STOP_DISTANCE || checkOOB()) && checkMovingIsWorth()) setMoveSpeeds();
+        if((distanceFromPlayer > playerStopDistance || checkOOB()) && checkMovingIsWorth()) setMoveSpeeds();
 
         move();
         tryShoot();
@@ -67,7 +69,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
 
         // Debug Tool // Draw Line to Player
         if(Settings.DEBUG_GOBLIN_DRAW_LINE_TO_PLAYER) {
-            if(distanceFromPlayer > PLAYER_STOP_DISTANCE) {
+            if(distanceFromPlayer > playerStopDistance) {
                 g.setColor(Color.ORANGE);
             } else g.setColor(Color.RED);
             g.drawLine(

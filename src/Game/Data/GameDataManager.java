@@ -1,7 +1,9 @@
 package Game.Data;
 
+import Game.Display.UserInterface.GameUIManager;
 import Game.Entities.EnemyDirector;
 import Game.Entities.EntityManager;
+import Game.Timer.TimerManager;
 
 public class GameDataManager {
 // SINGLETON PATTERN //
@@ -9,6 +11,8 @@ public class GameDataManager {
     public static GameDataManager get() { return self; }
 
 // VARIABLES //
+    boolean alive = true;
+
     // Sources
     private EntityManager em;
     private EnemyDirector ed;
@@ -39,6 +43,18 @@ public class GameDataManager {
         current_level = ed.getGameLevel();
     }
 
+    public void clearData() {
+        em.clear();
+        ed.clear();
+        TimerManager.get().clear();
+//        GameUIManager.get().clear();
+        alive = false;
+        em = null;
+        ed = null;
+
+        self = new GameDataManager();
+    }
+
 // GETTERS & SETTERS //
     public void addScore(int score) {
         this.score += score;
@@ -54,5 +70,9 @@ public class GameDataManager {
     }
     public int getScore() {
         return score;
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 }
