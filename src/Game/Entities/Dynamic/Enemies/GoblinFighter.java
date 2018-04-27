@@ -12,8 +12,8 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     private static final double GOBLIN_FIGHTER_MOVE_SPEED = 1.4;
     private static final int OFFSCREEN_BOUNDARY = -32;
     private static final int INITIAL_TIME_BEFORE_SHOOTING = 3*60;
-    private static final int TIME_BETWEEN_SHOTS = 25;
     private static final int TIME_BETWEEN_SHOOT_PHASES = 3*60;
+    private static final int TIME_BETWEEN_SHOTS = 25;
     private static final int DEF_SHOOT_PHASE_BULLET_NUMBER = 4;
     private static final int DEF_HP = 1;
     private static final int DEF_EXP = 8;
@@ -25,6 +25,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     protected int exp_value;
     protected int phaseBulletsNumber = 4;
     protected int playerStopDistance;
+    protected int timeBetweenPhases;
 
 // CONSTRUCTORS //
     public GoblinFighter(float x, float y, double direction) {
@@ -37,13 +38,20 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
         exp_value = DEF_EXP;
         phaseBulletsNumber = DEF_SHOOT_PHASE_BULLET_NUMBER;
         playerStopDistance = DEF_PLAYER_STOP_DISTANCE;
+        currentRotateWaitTime = timeBeforeRotating;
+        timeBetweenPhases = TIME_BETWEEN_SHOOT_PHASES;
     }
 
 // METHODS //
     @Override
     public void update() {
         super.update();
-        if((distanceFromPlayer > playerStopDistance || checkOOB()) && checkMovingIsWorth()) setMoveSpeeds();
+        if((distanceFromPlayer > playerStopDistance || checkOOB()) && checkMovingIsWorth()) {
+            setMoveSpeeds();
+        }
+        if(directionToPlayer == this.direction) {
+            currentRotateWaitTime = timeBeforeRotating;
+        }
 
         move();
         tryShoot();
@@ -97,7 +105,12 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
                 if (shootTimer == 0) shootPhase = 0;
                 else shootPhase = 1;
 
-                if (directionToPlayer == this.direction) shoot();
+                double directionUpperBound = directionToPlayer + (Math.PI / (double)12);
+                double directionLowerBound = directionToPlayer - (Math.PI / (double)12);
+
+                if (this.direction <= directionUpperBound && this.direction >= directionLowerBound) {
+                    shoot();
+                }
 
                 phaseBullet++;
             }
@@ -105,7 +118,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
             else if (shootPhase == 1 && shootTimer > 0) shootTimer--;
         } else {
             phaseBullet = 0;
-            shootTimer = TIME_BETWEEN_SHOOT_PHASES;
+            shootTimer = timeBetweenPhases;
             shootPhase = 1;
         }
     }

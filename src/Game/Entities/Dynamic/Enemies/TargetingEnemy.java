@@ -5,13 +5,16 @@ import Game.Entities.EntityManager;
 
 public abstract class TargetingEnemy extends Enemy{
 // VARIABLES //
-    private static final double DEF_ROTATE_SPEED = 0.005 * Math.PI;
+    private static final double DEF_ROTATE_SPEED = 0.003 * Math.PI;
     private static final float DEF_DECELERATION = (float)0.03;
+    private static final int DEF_TIME_BEFORE_ROTATING = 30;
 
     protected double rotationSpeed;
     protected float distanceFromPlayer;
     protected double directionToPlayer;
     protected float deceleration;
+    protected int timeBeforeRotating;
+    protected int currentRotateWaitTime;
 
 
 // CONSTRUCTORS //
@@ -21,6 +24,7 @@ public abstract class TargetingEnemy extends Enemy{
         rotationSpeed = DEF_ROTATE_SPEED;
         deceleration = DEF_DECELERATION;
         setMoveSpeeds();
+        timeBeforeRotating = DEF_TIME_BEFORE_ROTATING;
     }
 
     public TargetingEnemy(float x, float y, int w, int h, double direction, double rotateSpeed) {
@@ -29,13 +33,19 @@ public abstract class TargetingEnemy extends Enemy{
         rotationSpeed = rotateSpeed;
         deceleration = DEF_DECELERATION;
         setMoveSpeeds();
+        timeBeforeRotating = DEF_TIME_BEFORE_ROTATING;
     }
 
 // METHODS //
     @Override
     public void update() {
         calcPlayerDistanceAndDirection();
-        rotateToPlayer();
+        if(directionToPlayer != this.direction && currentRotateWaitTime <= 0) {
+            rotateToPlayer();
+        } else if(currentRotateWaitTime > 0) {
+            currentRotateWaitTime--;
+        }
+
         rotateSprite();
 
         // Deceleration mechanics
