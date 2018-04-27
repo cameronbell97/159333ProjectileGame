@@ -172,6 +172,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         }
         else if(ec instanceof GoblinFighter) {
             addHP(-5);
+            slow(80);
         }
     }
 
@@ -299,7 +300,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 
     // Method to setup the slow mechanics
     private void slow(int ticks) {
-        slowTimeStart = ticks;
+        slowTimeStart = slowTimeStart - slowTimeCurrent + ticks;
         slowTimeCurrent = 0;
     }
 
