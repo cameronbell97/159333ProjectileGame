@@ -26,8 +26,10 @@ public abstract class Bullet extends DynamicEntity {
         if(xpos <= -OFFSCREEN_BOUNDARY || ypos <= -OFFSCREEN_BOUNDARY || xpos >= Settings.game_width + OFFSCREEN_BOUNDARY || ypos >= Settings.game_height + OFFSCREEN_BOUNDARY) {
             destroy();
         }
-        collision.update();
-        collision.rotateSprite(direction);
+        if(collision != null) {
+            collision.update();
+            collision.rotateSprite(direction);
+        }
     }
 
     protected void destroy() {
