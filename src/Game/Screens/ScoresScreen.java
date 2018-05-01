@@ -1,5 +1,6 @@
 package Game.Screens;
 
+import Game.Data.GameDataManager;
 import Game.Data.SaveManager;
 import Game.Data.ScoreBoard;
 import Game.Data.Settings;
@@ -105,8 +106,12 @@ public class ScoresScreen extends Screen {
         backButton = new ButtonElement("<", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
             @Override
             protected void onClick() {
+
                 ScreenManager.setScreen(returnScreen);
-                if(drawScreen instanceof GameScreen) ((GameScreen)drawScreen).clearUIManager();
+                if(drawScreen instanceof GameScreen) {
+                    ((GameScreen) drawScreen).clearUIManager();
+                    GameDataManager.get().clearData();
+                }
             }
         };
 //        backButton.setInactiveColour(fillColour);

@@ -20,16 +20,17 @@ public class KeyManager implements KeyListener{
 
     // Key Shortcuts
     public boolean
-            left,
-            right,
-            forward,
-            back,
-            shift,
-            spacebar,
-            ctrl,
-            alt,
-            delete,
-            enter;
+        left,
+        right,
+        forward,
+        back,
+        shift,
+        spacebar,
+        ctrl,
+        alt,
+        delete,
+        enter,
+        insert;
 
 // CONSTRUCTORS //
     public KeyManager() {
@@ -50,6 +51,7 @@ public class KeyManager implements KeyListener{
         alt = keys[KeyEvent.VK_ALT];
         delete = keys[KeyEvent.VK_DELETE];
         enter = keys[KeyEvent.VK_ENTER];
+        insert = keys[KeyEvent.VK_INSERT];
     }
 
     @Override

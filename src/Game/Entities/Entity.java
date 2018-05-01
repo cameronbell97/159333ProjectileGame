@@ -47,6 +47,10 @@ public abstract class Entity {
         collision = null;
     }
 
+    public void nullParent() {
+        if(parent != null) parent = null;
+    }
+
 // GETTERS & SETTERS //
     public CollisionBox getCollision() {
         return collision;

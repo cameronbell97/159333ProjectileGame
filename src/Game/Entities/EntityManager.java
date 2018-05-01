@@ -116,8 +116,13 @@ public class EntityManager implements iObserver {
         sub_cueue.clear(); // Clear the sub_cueue
         // Remove Collision Boxes
         for(CollisionBox e : unsub_cueue) {
+            if(e == null) continue;
             if(!cols.remove(e)) {
-                System.out.println("ERROR: Could Not Remove: " + e.toString());
+                try {
+                    System.out.println("ERROR: Could Not Remove: " + e.toString());
+                } catch (NullPointerException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
         unsub_cueue.clear(); // Clear the unsub_cueue

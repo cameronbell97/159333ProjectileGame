@@ -35,5 +35,7 @@ public abstract class Bullet extends DynamicEntity {
     protected void destroy() {
         EntityManager.get().unsubscribe(this.collision);
         EntityManager.get().unsubscribe(this);
+        if(this.collision != null) this.collision.nullParent();
+        this.collision = null;
     }
 }
