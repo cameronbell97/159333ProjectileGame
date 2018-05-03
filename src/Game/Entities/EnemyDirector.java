@@ -140,8 +140,8 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
             case 2: // Level 2 //
                 for(int i = 0; i < 2; i++) {
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 1, false), Asteroid.DEFAULT_SIZE));
-                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 1, false), Asteroid.DEFAULT_SIZE));
-                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 2, false), Asteroid.DEFAULT_SIZE));
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 1.3, false), Asteroid.DEFAULT_SIZE));
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 1.5, false), Asteroid.DEFAULT_SIZE));
                 }
                 spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 1, false), Asteroid.DEFAULT_SIZE));
                 Collections.shuffle(spawn_queue);
@@ -151,24 +151,26 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
                 break;
 
             case 3: // Level 3 //
-                spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterLarge(0, 0, 2), 64));
-
                 for(int i = 0; i < 2; i++) {
-                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 1, false), Asteroid.DEFAULT_SIZE));
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 1.2, false), Asteroid.DEFAULT_SIZE));
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 1.3, true), Asteroid.DEFAULT_SIZE));
                 }
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 1.4, false), Asteroid.DEFAULT_SIZE));
+                Collections.shuffle(spawn_queue);
 
                 spawn_queue_minsec = 45;
                 spawn_queue_maxsec = 3*60+30;
                 break;
 
             case 4: // Level 4 //
-                spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterLarge(0, 0, 0), 64));
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 1.5, false), Asteroid.DEFAULT_SIZE));
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 1.2, false), Asteroid.DEFAULT_SIZE));
                 for(int i = 0; i < 2; i++) {
-                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 1, false), Asteroid.DEFAULT_SIZE));
-                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 1, false), Asteroid.DEFAULT_SIZE));
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 1, true), Asteroid.DEFAULT_SIZE));
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 1, true), Asteroid.DEFAULT_SIZE));
                 }
-                spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterLarge(0, 0, 0), 64));
-                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 1, true), Asteroid.DEFAULT_SIZE));
+                Collections.shuffle(spawn_queue);
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 1.2, true), Asteroid.DEFAULT_SIZE));
 
                 spawn_queue_minsec = 45;
                 spawn_queue_maxsec = 3*60+30;
@@ -176,19 +178,19 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
 
             case 5: // Level 5 //
                 for(int i = 0; i < 2; i++) {
-                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 2, false), Asteroid.DEFAULT_SIZE));
-                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 2, false), Asteroid.DEFAULT_SIZE));
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 2, true), Asteroid.DEFAULT_SIZE));
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 2, true), Asteroid.DEFAULT_SIZE));
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 2, true), Asteroid.DEFAULT_SIZE));
                 }
-            spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 2, true), Asteroid.DEFAULT_SIZE));
-            spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 2, true), Asteroid.DEFAULT_SIZE));
-            spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 2, true), Asteroid.DEFAULT_SIZE));
-                spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterLarge(0, 0, 0), 64));
-            Collections.shuffle(spawn_queue);
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 2, true), Asteroid.DEFAULT_SIZE));
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 2, false), Asteroid.DEFAULT_SIZE));
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 2, false), Asteroid.DEFAULT_SIZE));
+                Collections.shuffle(spawn_queue);
 
-            spawn_queue_minsec = 35;
-            spawn_queue_maxsec = 3*60;
+                spawn_queue_minsec = 35;
+                spawn_queue_maxsec = 3*60;
 
-            break;
+                break;
 
             case 6: // Level 6 // Asteroid Belt
                 GameUIManager.get().setFlashAlert("! ASTEROID BELT !", 2);
@@ -198,7 +200,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 3, true), Asteroid.DEFAULT_SIZE));
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 3, false), Asteroid.DEFAULT_SIZE));
                 }
-                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 2, true), Asteroid.DEFAULT_SIZE));
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 2, true), Asteroid.DEFAULT_SIZE));
                 Collections.shuffle(spawn_queue);
 
                 spawn_queue_minsec = 45;
@@ -209,11 +211,9 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
                 for(int i = 0; i < 2; i++) {
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 1, true), Asteroid.DEFAULT_SIZE));
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 1.5, false), Asteroid.DEFAULT_SIZE));
-                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterSmall(0, 0, 0), 64));
                 }
-                spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterLarge(0, 0, 0), 64));
                 Collections.shuffle(spawn_queue);
-                spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterSmall(0, 0, 0), 64));
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterLarge(0, 0, 0), 64));
 
 
                 spawn_queue_minsec = 45;
@@ -221,12 +221,13 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
                 break;
 
             case 8:
-                for(int i = 0; i < 3; i++) {
+                for(int i = 0; i < 2; i++) {
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 2, true), Asteroid.DEFAULT_SIZE));
-                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 3, true), Asteroid.DEFAULT_SIZE));
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 2.5, true), Asteroid.DEFAULT_SIZE));
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterLarge(0, 0, 0), 64));
-                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterSmall(0, 0, 0), 64));
                 }
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 3, false), Asteroid.DEFAULT_SIZE));
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 2, false), Asteroid.DEFAULT_SIZE));
                 Collections.shuffle(spawn_queue);
 
                 spawn_queue_minsec = 35;
@@ -234,14 +235,16 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
                 break;
 
             case 9:
-                for(int i = 0; i < 3; i++) {
+                for(int i = 0; i < 2; i++) {
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 2, true), Asteroid.DEFAULT_SIZE));
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 2, false), Asteroid.DEFAULT_SIZE));
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterSmall(0, 0, 0), 64));
                 }
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 2, false), Asteroid.DEFAULT_SIZE));
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 2, true), Asteroid.DEFAULT_SIZE));
                 spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 4, false), Asteroid.DEFAULT_SIZE));
-                spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterSmall(0, 0, 0), 64));
-                spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterSmall(0, 0, 0), 64));
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 4, true), Asteroid.DEFAULT_SIZE));
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterLarge(0, 0, 0), 64));
                 Collections.shuffle(spawn_queue);
 
                 spawn_queue_minsec = 35;
@@ -250,16 +253,16 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
                 break;
 
             case 10:
-                for(int i = 0; i < 4; i++) {
-                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 2, true), Asteroid.DEFAULT_SIZE));
+                for(int i = 0; i < 2; i++) {
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 2, false), Asteroid.DEFAULT_SIZE));
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 2, true), Asteroid.DEFAULT_SIZE));
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 3, false), Asteroid.DEFAULT_SIZE));
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 3, true), Asteroid.DEFAULT_SIZE));
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterSmall(0, 0, 0), 64));
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterLarge(0, 0, 0), 64));
                 }
                 spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 2, false), Asteroid.DEFAULT_SIZE));
-                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 2, false), Asteroid.DEFAULT_SIZE));
-                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 3, false), Asteroid.DEFAULT_SIZE));
-                spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterSmall(0, 0, 0), 64));
+                spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 2, true), Asteroid.DEFAULT_SIZE));
                 Collections.shuffle(spawn_queue);
 
                 spawn_queue_minsec = 35;
@@ -267,7 +270,45 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
 
                 break;
 
-            default: // TODO // DYNAMIC LEVEL GENERATION
+            default: // DYNAMIC LEVEL GENERATION
+                if(gameLevel <= 10) break;
+
+                int X = gameLevel - 10;
+                GameUIManager.get().setFlashAlert(("X" + Integer.toString(X)), 1);
+
+                // Grey Asteroid Small
+                if(X%2==1)
+                    for(int i = 0; i < (X+3)/3; i++)
+                        spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 2.6, false), Asteroid.DEFAULT_SIZE));
+
+                // Grey Asteroid Medium
+                for(int i = 0; i < (X+4)/3; i++)
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 2.3, false), Asteroid.DEFAULT_SIZE));
+
+                // Grey Asteroid Large
+                for(int i = 0; i < (X+1)/4; i++)
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 2.1, false), Asteroid.DEFAULT_SIZE));
+
+                // White Asteroid Small
+                if(X%2==0)
+                    for(int i = 0; i < (X+3)/3; i++)
+                        spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 1, 0, 2.6, true), Asteroid.DEFAULT_SIZE));
+
+                // White Asteroid Medium
+                for(int i = 0; i < (X+2)/3; i++)
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 2.3, true), Asteroid.DEFAULT_SIZE));
+
+                // White Asteroid Large
+                for(int i = 0; i < X/4; i++)
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 2.1, true), Asteroid.DEFAULT_SIZE));
+
+                // Goblin Fighter Large
+                for(int i = 0; i < (X+1)/5; i++)
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterLarge(0, 0, 0), 64));
+
+                // Goblin Fighter Small
+                for(int i = 0; i < X/6; i++)
+                    spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterSmall(0, 0, 0), 64));
 
                 break;
         }
