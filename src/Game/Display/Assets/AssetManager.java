@@ -159,7 +159,7 @@ public class AssetManager {
         } catch (IOException e) { e.printStackTrace(); }
 
         // Particle Sheet 16x16
-        try { particles_sheet_16 = new SpriteSheet(ImageLoader.load(imagePath + "particles16.png"), 4, 7, 16, 16); // load the spritesheet
+        try { particles_sheet_16 = new SpriteSheet(ImageLoader.load(imagePath + "particles16.png"), 4, 11, 16, 16); // load the spritesheet
         } catch (IOException e) { e.printStackTrace(); }
     }
 
