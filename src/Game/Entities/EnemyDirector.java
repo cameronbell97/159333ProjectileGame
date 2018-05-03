@@ -310,6 +310,8 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
                 for(int i = 0; i < X/6; i++)
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new GoblinFighterSmall(0, 0, 0), 64));
 
+                
+                Collections.shuffle(spawn_queue);
                 break;
         }
     }
