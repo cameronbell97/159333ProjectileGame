@@ -17,8 +17,8 @@ public class BulletPlayer extends Bullet {
         setCollisionBox();
 
         // Move bullet to nose of Player ship
-        ymove = (float)(20 * -Math.sin(direction));
-        xmove = (float)(20 * Math.cos(direction));
+        moveSpeed = 20;
+        setMoveSpeeds();
         move();
 
         // Reset move speed

@@ -6,6 +6,7 @@ import Game.Entities.Dynamic.Bullets.BulletPlayer;
 import Game.Entities.Dynamic.Bullets.GoblinBulletLarge;
 import Game.Entities.Dynamic.Bullets.GoblinBulletSmall;
 import Game.Entities.Dynamic.Enemies.GoblinFighter;
+import Game.Entities.Dynamic.Particles.DebrisParticle;
 import Game.Entities.Entity;
 import Game.Entities.EntityManager;
 import Game.Entities.iVulnerable;
@@ -297,6 +298,121 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     }
 
     private void explode() {
+        EntityManager em = EntityManager.get();
+
+        // Head of Ship
+        em.subscribe(new DebrisParticle(this, assMan.getSprite(11, 0, 7)) {
+            @Override
+            protected void setPosAndDir() {
+                double saveSpeed = moveSpeed;
+
+                moveSpeed = 18;
+                setMoveSpeeds();
+                move();
+
+                moveSpeed = saveSpeed;
+            }
+        });
+
+        // Tails of Ship
+        em.subscribe(new DebrisParticle(this, assMan.getSprite(11, 0, 8)) {
+            @Override
+            protected void setPosAndDir() {
+                double saveSpeed = moveSpeed;
+
+                moveSpeed = -18;
+                setMoveSpeeds();
+                move();
+
+                strafeLeft(9);
+
+                direction += Math.PI - (Math.PI / 8);
+
+                moveSpeed = saveSpeed;
+            }
+        });
+        em.subscribe(new DebrisParticle(this, assMan.getSprite(11, 1, 8)) {
+            @Override
+            protected void setPosAndDir() {
+                double saveSpeed = moveSpeed;
+
+                moveSpeed = -18;
+                setMoveSpeeds();
+                move();
+
+                strafeRight(9);
+
+                direction += Math.PI + (Math.PI / 8);
+
+                moveSpeed = saveSpeed;
+            }
+        });
+
+        // Wings of Ship
+        em.subscribe(new DebrisParticle(this, assMan.getSprite(11, 2, 8)) {
+            @Override
+            protected void setPosAndDir() {
+                double saveSpeed = moveSpeed;
+
+                moveSpeed = 9;
+                setMoveSpeeds();
+                move();
+
+                strafeLeft(7);
+
+                direction += Math.PI/2 - (Math.PI / 8);
+
+                moveSpeed = saveSpeed;
+            }
+        });
+        em.subscribe(new DebrisParticle(this, assMan.getSprite(11, 2, 8)) {
+            @Override
+            protected void setPosAndDir() {
+                double saveSpeed = moveSpeed;
+
+                moveSpeed = -2;
+                setMoveSpeeds();
+                move();
+
+                strafeLeft(13);
+
+                direction += Math.PI/2;
+
+                moveSpeed = saveSpeed;
+            }
+        });
+        em.subscribe(new DebrisParticle(this, assMan.getSprite(11, 3, 8)) {
+            @Override
+            protected void setPosAndDir() {
+                double saveSpeed = moveSpeed;
+
+                moveSpeed = 9;
+                setMoveSpeeds();
+                move();
+
+                strafeRight(7);
+
+                direction -= ((3 * Math.PI)/8);
+
+                moveSpeed = saveSpeed;
+            }
+        });
+        em.subscribe(new DebrisParticle(this, assMan.getSprite(11, 3, 8)) {
+            @Override
+            protected void setPosAndDir() {
+                double saveSpeed = moveSpeed;
+
+                moveSpeed = -2;
+                setMoveSpeeds();
+                move();
+
+                strafeRight(13);
+
+                direction -= Math.PI/2;
+
+                moveSpeed = saveSpeed;
+            }
+        });
     }
 
     // Method to setup the slow mechanics
