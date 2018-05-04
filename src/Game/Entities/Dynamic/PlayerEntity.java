@@ -7,6 +7,7 @@ import Game.Entities.Dynamic.Bullets.GoblinBulletLarge;
 import Game.Entities.Dynamic.Bullets.GoblinBulletSmall;
 import Game.Entities.Dynamic.Enemies.GoblinFighter;
 import Game.Entities.Dynamic.Particles.DebrisParticle;
+import Game.Entities.Dynamic.Particles.EnergyExplParticle;
 import Game.Entities.Entity;
 import Game.Entities.EntityManager;
 import Game.Entities.iVulnerable;
@@ -299,6 +300,9 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 
     private void explode() {
         EntityManager em = EntityManager.get();
+
+        // Explosion
+        em.subscribe(new EnergyExplParticle(this));
 
         // Head of Ship
         em.subscribe(new DebrisParticle(this, assMan.getSprite(11, 0, 7)) {
