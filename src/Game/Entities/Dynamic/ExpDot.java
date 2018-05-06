@@ -26,6 +26,7 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
     private float distanceFromPlayer;
     private int pickupDistance;
     private float deceleration;
+    private boolean active;
 
 // CONSTRUCTORS //
     public ExpDot(Entity parent, int value) {
@@ -54,6 +55,7 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
 
 // METHODS //
     private void initialise() {
+        active = true;
 
         //Set Img
         if(this.value < 10) {
@@ -189,8 +191,8 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
     }
 
     public void destroy() {
-        EntityManager.get().unsubscribe(this);
-        EntityManager.get().unsubscribe(collision);
+            EntityManager.get().unsubscribe(this);
+            EntityManager.get().unsubscribe(collision);
     }
 
     @Override
@@ -201,7 +203,10 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         // Do depending on code
         switch (code) {
             case "DIE":
-                destroy();
+                if(active) {
+                    destroy();
+                    active = false;
+                }
                 break;
         }
 

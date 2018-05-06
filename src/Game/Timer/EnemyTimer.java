@@ -17,7 +17,8 @@ public class EnemyTimer extends Timer {
 // METHODS //
     @Override
     protected void notifyFinished() {
-        notifiee.timerNotify(this);
+        if(notifiee != null) notifiee.timerNotify(this);
+        else TimerManager.get().unsubTimer(this);
     }
 
 // GETTERS & SETTERS //

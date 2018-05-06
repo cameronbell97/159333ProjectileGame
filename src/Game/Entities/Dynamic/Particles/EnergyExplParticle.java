@@ -25,6 +25,22 @@ public class EnergyExplParticle extends Particle {
         img = AssetManager.get().getSprite(11, 3, 7);
         ticksLeft = DEF_LINGER_TIME;
     }
+    public EnergyExplParticle(DynamicEntity parent, int ticks) {
+        super(  parent.getXpos() + (parent.getWidth() / 2) - (DEF_PARTICLE_WIDTH / 2),
+                parent.getYpos() + (parent.getHeight() / 2) - (DEF_PARTICLE_HEIGHT / 2),
+                DEF_PARTICLE_WIDTH,
+                DEF_PARTICLE_HEIGHT,
+                0
+        );
+        if(ticks <= DEF_LINGER_TIME/3)
+            AssetManager.get().getSprite(11, 1, 7);
+        else if(ticks <= 2*(DEF_LINGER_TIME/3))
+            AssetManager.get().getSprite(11, 2, 7);
+        else
+            img = AssetManager.get().getSprite(11, 3, 7);
+
+        ticksLeft = ticks;
+    }
 
 // METHODS //
     @Override

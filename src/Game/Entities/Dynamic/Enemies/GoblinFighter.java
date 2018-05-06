@@ -174,7 +174,5 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     }
 
     // Death animation
-    private void explode() {
-
-    }
+    protected abstract void explode();
 }

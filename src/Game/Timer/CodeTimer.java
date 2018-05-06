@@ -31,6 +31,7 @@ public class CodeTimer extends Timer {
     @Override
     protected void notifyFinished() {
         if(notifiee != null) notifiee.timerNotify(this);
+        else TimerManager.get().unsubTimer(this);
     }
 
 // GETTERS & SETTERS //
