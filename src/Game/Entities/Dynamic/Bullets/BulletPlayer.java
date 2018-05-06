@@ -4,7 +4,9 @@ import Game.Display.Assets.AssetManager;
 import Game.Entities.Collision.CollisionBox;
 import Game.Entities.Dynamic.DynamicEntity;
 import Game.Entities.Dynamic.Enemies.GoblinFighter;
+import Game.Entities.Dynamic.Particles.PlayerBulletParticle;
 import Game.Entities.Entity;
+import Game.Entities.EntityManager;
 
 public class BulletPlayer extends Bullet {
 // VARIABLES //
@@ -34,6 +36,7 @@ public class BulletPlayer extends Bullet {
     public void collide(Entity ec) {
         if(ec instanceof Game.Entities.Dynamic.Enemies.Asteroid) {
             destroy();
+            EntityManager.get().subscribe(new PlayerBulletParticle(this));
         } else if(ec instanceof GoblinFighter) {
             destroy();
         }
