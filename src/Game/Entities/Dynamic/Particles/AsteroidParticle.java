@@ -40,6 +40,7 @@ public class AsteroidParticle extends Particle {
 // METHODS //
     @Override
     public void update() {
+        super.update();
         move();
         rotateSprite();
     }

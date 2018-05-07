@@ -47,6 +47,7 @@ public abstract class DebrisParticle extends Particle {
 // METHODS //
     @Override
     public void update() {
+        super.update();
         move();
         rotateSprite();
     }
