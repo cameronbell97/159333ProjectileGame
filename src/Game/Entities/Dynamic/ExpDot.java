@@ -137,6 +137,8 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
 
     // Method - Determine the distance from the Player
     private void calcDistanceFromPlayer() {
+        EntityManager em = handler.getEntityManager();
+
         float distance;
         double newDir = 0;
 
@@ -146,9 +148,9 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         float P2x = 0;
         float P2y = 0;
 
-        if(EntityManager.get().getPlayer() != null) {
-            P2x = EntityManager.get().getPlayer().getXpos() + EntityManager.get().getPlayer().getWidth() / 2;
-            P2y = EntityManager.get().getPlayer().getYpos() + EntityManager.get().getPlayer().getHeight() / 2;
+        if(em.getPlayer() != null) {
+            P2x = em.getPlayer().getXpos() + em.getPlayer().getWidth() / 2;
+            P2y = em.getPlayer().getYpos() + em.getPlayer().getHeight() / 2;
         } else {
             this.distanceFromPlayer = 1000;
             return;
@@ -204,8 +206,7 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         if(ec instanceof Game.Entities.Dynamic.PlayerEntity) {
             destroy();
         } else if (ec instanceof Game.Entities.Dynamic.ExpDot && !merged) {
-            EntityManager
-                    .get()
+            handler.getEntityManager()
                     .subscribe(new ExpDot(
                             this,
                             (this.getXpos() + ec.getXpos()) / 2,
@@ -219,8 +220,9 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
     }
 
     public void destroy() {
-            EntityManager.get().unsubscribe(this);
-            EntityManager.get().unsubscribe(collision);
+        EntityManager em = handler.getEntityManager();
+        em.unsubscribe(this);
+        em.unsubscribe(collision);
     }
 
     @Override

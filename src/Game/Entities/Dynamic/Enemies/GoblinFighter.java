@@ -75,6 +75,8 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     public void draw(Graphics g) {
         super.draw(g);
 
+        EntityManager em = handler.getEntityManager();
+
         // Debug Tool // Draw Line to Player
         if(Settings.DEBUG_GOBLIN_DRAW_LINE_TO_PLAYER) {
             if(distanceFromPlayer > playerStopDistance) {
@@ -83,8 +85,8 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
             g.drawLine(
                     (int) this.xpos + width / 2,
                     (int) this.ypos + height / 2,
-                    (int) EntityManager.get().getPlayer().getXpos() + EntityManager.get().getPlayer().getWidth() / 2,
-                    (int) EntityManager.get().getPlayer().getYpos() + EntityManager.get().getPlayer().getHeight() / 2
+                    (int) em.getPlayer().getXpos() + em.getPlayer().getWidth() / 2,
+                    (int) em.getPlayer().getYpos() + em.getPlayer().getHeight() / 2
             );
         }
         // Debug Tool // Draw Line of Facing Direction
@@ -166,10 +168,11 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
 
     @Override
     public void die() {
-        EntityManager.get().subscribe(new ExpDot(this, exp_value));
+        EntityManager em = handler.getEntityManager();
+        em.subscribe(new ExpDot(this, exp_value));
         explode();
-        EntityManager.get().unsubscribe(this);
-        EntityManager.get().unsubscribe(collision);
+        em.unsubscribe(this);
+        em.unsubscribe(collision);
         EnemyDirector.get().unsubscribe(this);
     }
 

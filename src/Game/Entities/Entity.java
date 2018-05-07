@@ -2,6 +2,7 @@ package Game.Entities;
 
 import Game.Entities.Collision.CollisionBox;
 import Game.Data.Settings;
+import Game.Handler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,6 +14,8 @@ import java.awt.image.BufferedImage;
 
 public abstract class Entity {
 // VARIABLES //
+    protected Handler handler = Handler.get();
+
     protected float xpos, ypos;
     protected int width, height;
     protected BufferedImage img;

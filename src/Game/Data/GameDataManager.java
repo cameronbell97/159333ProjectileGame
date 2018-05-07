@@ -3,6 +3,7 @@ package Game.Data;
 import Game.Display.UserInterface.GameUIManager;
 import Game.Entities.EnemyDirector;
 import Game.Entities.EntityManager;
+import Game.Handler;
 import Game.Timer.TimerManager;
 
 public class GameDataManager {
@@ -14,7 +15,7 @@ public class GameDataManager {
     boolean alive = true;
 
     // Sources
-    private EntityManager em;
+    Handler handler;
     private EnemyDirector ed;
     private Save save;
 
@@ -26,17 +27,23 @@ public class GameDataManager {
 
 // CONSTRUCTORS //
     public GameDataManager() {
-        em = EntityManager.get();
         ed = EnemyDirector.get();
 
         player_hp = 0;
         enemies_remaining = 0;
         current_level = 0;
         score = 0;
+        handler = Handler.get();
     }
 
 // METHODS //
     public void update() {
+        EntityManager em;
+        if(handler == null)
+            em = handler.getEntityManager();
+        else
+            em = handler.getEntityManager();
+
         if(em.getPlayer() != null) player_hp = em.getPlayer().getHP();
         else player_hp = 0;
         enemies_remaining = ed.getRemainingEnemies();
@@ -44,12 +51,11 @@ public class GameDataManager {
     }
 
     public void clearData() {
-        em.clear();
+        handler.getEntityManager().clear();
         ed.clear();
         TimerManager.get().clear();
 //        GameUIManager.get().clear();
         alive = false;
-        em = null;
         ed = null;
 
         self = new GameDataManager();

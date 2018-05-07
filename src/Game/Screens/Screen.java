@@ -1,5 +1,7 @@
 package Game.Screens;
 
+import Game.Handler;
+
 import java.awt.*;
 
 /**
@@ -10,6 +12,7 @@ import java.awt.*;
 
 public abstract class Screen {
 // VARIABLES //
+    protected Handler handler;
 
 // CONSTRUCTORS //
     public Screen() {

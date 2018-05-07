@@ -116,6 +116,8 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
 
     @Override
     public void die() {
+        EntityManager em = handler.getEntityManager();
+
         // Create 2 child asteroids if big enough to do so
         if(level > 1) {
             for(int i = -1; i < 2; i+=2) {
@@ -125,7 +127,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
 
                 Asteroid ast = new Asteroid(newX, newY, level-1, newDir, moveSpeed*1.2, white);
                 ast.setCollisionBox();
-                EntityManager.get().subscribe(ast);
+                em.subscribe(ast);
                 EnemyDirector.get().subscribe(ast);
             }
         }
@@ -136,29 +138,32 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
 
             Asteroid ast = new Asteroid(newX, newY, level-1, direction, moveSpeed*1.2, white);
             ast.setCollisionBox();
-            EntityManager.get().subscribe(ast);
+            em.subscribe(ast);
             EnemyDirector.get().subscribe(ast);
         }
 
-        EntityManager.get().subscribe(new ExpDot(this, level+1));
+        em.subscribe(new ExpDot(this, level+1));
         explode();
         kill();
     }
 
     // Hard die, just kills the object
     public void kill() {
-        EntityManager.get().unsubscribe(this);
-        EntityManager.get().unsubscribe(collision);
+        EntityManager em = handler.getEntityManager();
+        em.unsubscribe(this);
+        em.unsubscribe(collision);
         EnemyDirector.get().unsubscribe(this);
     }
     // Method to explode rock particles
 
     protected void explode() {
+        EntityManager em = handler.getEntityManager();
+
         int particNum = 3 + (2 * level);
 
         for(int i = 0; i < particNum; i++) {
-            if(!white) EntityManager.get().subscribe(new AsteroidParticle(this, ((i * 2 * Math.PI) /(particNum)), level));
-            else EntityManager.get().subscribe(new AsteroidParticleWhite(this, ((i * 2 * Math.PI) /(particNum)), level));
+            if(!white) em.subscribe(new AsteroidParticle(this, ((i * 2 * Math.PI) /(particNum)), level));
+            else em.subscribe(new AsteroidParticleWhite(this, ((i * 2 * Math.PI) /(particNum)), level));
         }
     }
 

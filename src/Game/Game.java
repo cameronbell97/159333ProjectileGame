@@ -43,6 +43,7 @@ public class Game implements Runnable{
     private boolean isRunning;
 
     // Managers
+    private Handler handler;
     private KeyManager km;
     private TimerManager timerMan;
     private MouseManager mouseMan;
@@ -57,6 +58,7 @@ public class Game implements Runnable{
         gameHeight = height;
         gameWidth = width;
         gameTitle = title;
+        handler = Handler.get();
     }
 
 // METHODS //

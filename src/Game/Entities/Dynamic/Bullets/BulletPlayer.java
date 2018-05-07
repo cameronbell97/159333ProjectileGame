@@ -36,7 +36,7 @@ public class BulletPlayer extends Bullet {
     public void collide(Entity ec) {
         if(ec instanceof Game.Entities.Dynamic.Enemies.Asteroid) {
             destroy();
-            EntityManager.get().subscribe(new PlayerBulletParticle(this));
+            handler.getEntityManager().subscribe(new PlayerBulletParticle(this));
         } else if(ec instanceof GoblinFighter) {
             destroy();
         }

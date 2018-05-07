@@ -7,6 +7,7 @@ import Game.Entities.Dynamic.PlayerEntity;
 import Game.Entities.EnemyDirector;
 import Game.Data.Settings;
 import Game.Display.UserInterface.GameUIManager;
+import Game.Handler;
 import Game.Timer.CodeTimer;
 import Game.Timer.TimerManager;
 import Game.Timer.iCanHaveCodeTimer;
@@ -22,8 +23,6 @@ import java.io.IOException;
 public class GameScreen extends Screen implements iCanHaveCodeTimer {
 // VARIABLES //
     // Managers
-    private PlayerEntity player;
-    private EntityManager entityManager;
     private EnemyDirector enemyDirector;
     private GameUIManager UIManager;
     private GameDataManager GDataMananger;
@@ -40,15 +39,13 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
         this.lastScreen = lastScreen;
 
         // Declarations
-        entityManager = EntityManager.get();
+        handler = Handler.get();
         enemyDirector = EnemyDirector.get();
         enemyDirector.startGame();
         UIManager = GameUIManager.get();
         GDataMananger = GameDataManager.get();
-        player = new PlayerEntity(
-                Settings.game_width/2 - player.DEF_PLAYER_WIDTH/2,
-                Settings.game_height/2 - player.DEF_PLAYER_HEIGHT/2)
-        ;
+
+        handler.newGame();
     }
 
 // METHODS //
@@ -56,7 +53,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
     @Override
     public void update() {
         if(gameIsRunning) {
-            entityManager.update();
+            handler.update();
             enemyDirector.update();
             UIManager.update();
         } else endGame();
@@ -69,13 +66,10 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
         g.setColor(new Color(0, 0, 20));
         g.fillRect(0, 0, Settings.game_width, Settings.game_height);
 
-        // Draw All Game.Entities
-        entityManager.draw(g);
+        // Draw All Game Entities
+        handler.draw(g);
 
-        // If DEBUG_DRAW_COLLISIONS = true, draw all subscribed collision boxes
-        if(Settings.DEBUG_DRAW_COLLISIONS) entityManager.drawCollisionBoxes(g);
-
-        // Draw Game.Display.UserInterface Last // So it appears over everything else
+        // Draw User Interface Last // So it appears over everything else
         UIManager.draw(g);
     }
 

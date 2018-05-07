@@ -27,12 +27,12 @@ public class GoblinFighterSmall extends GoblinFighter {
     }
 
     public void shoot() {
-        EntityManager.get().subscribe(new GoblinBulletSmall(this));
+        handler.getEntityManager().subscribe(new GoblinBulletSmall(this));
     }
 
     @Override
     protected void explode() {
-        EntityManager em = EntityManager.get();
+        EntityManager em = handler.getEntityManager();
         AssetManager am = AssetManager.get();
 
         // Explosion

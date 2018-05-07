@@ -22,7 +22,7 @@ public class GoblinFighterLarge extends GoblinFighter {
     }
 
     public void shoot() {
-        EntityManager.get().subscribe(new GoblinBulletLarge(this));
+        handler.getEntityManager().subscribe(new GoblinBulletLarge(this));
     }
 
     @Override

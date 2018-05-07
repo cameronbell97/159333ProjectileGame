@@ -4,6 +4,7 @@ import Game.Display.UserInterface.GameUIManager;
 import Game.Entities.Dynamic.DynamicEntity;
 import Game.Entities.Dynamic.Enemies.*;
 import Game.Game;
+import Game.Handler;
 import Game.Data.Settings;
 import Game.Timer.*;
 
@@ -29,7 +30,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
     private static final int LEVEL_WAIT_TIME = 4*60;
 
     // Managers
-    private EntityManager entityManager;
+    Handler handler = Handler.get();
     private TimerManager timerManager;
 
     // Enemy Director Variables
@@ -50,7 +51,6 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
         this.gameLevel = 0;
         this.limboEntities = 0;
         this.currentTimer = null;
-        this.entityManager = EntityManager.get();
         this.timerManager = TimerManager.get();
         this.spawn_queue_minsec = 0;
         this.spawn_queue_maxsec = 0;
@@ -120,7 +120,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
         enem.setCollisionBox();
 
         limboEntities--; // Decrement Limbo Game.Entities Counter
-        entityManager.subscribe(enem); // // Subscribe Enemy to EntityManager for Managing (Updating and Drawing)
+        handler.getEntityManager().subscribe(enem); // // Subscribe Enemy to EntityManager for Managing (Updating and Drawing)
         remaining_queue.add(enem); // Count it as a remaining enemy
     }
 

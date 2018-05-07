@@ -18,10 +18,6 @@ import java.util.List;
  */
 
 public class EntityManager implements iObserver {
-// SINGLETON PATTERN //
-    private static EntityManager self = new EntityManager();
-    public static EntityManager get() { return self; }
-
 // VARIABLES //
     boolean alive = true;
     PlayerEntity player;
@@ -36,8 +32,11 @@ public class EntityManager implements iObserver {
     List<Particle> p_unsub_queue; // A list of CollisionBoxes
 
 // CONSTRUCTORS //
-    private EntityManager() {
-        player = null;
+    public EntityManager() {
+        player = new PlayerEntity(
+                        Settings.game_width/2 - PlayerEntity.DEF_PLAYER_WIDTH/2,
+                        Settings.game_height/2 - PlayerEntity.DEF_PLAYER_HEIGHT/2)
+        ;
 
         ents = new ArrayList<Entity>();
         sub_queue = new ArrayList<Entity>();
@@ -64,10 +63,6 @@ public class EntityManager implements iObserver {
     public void subscribe(CollisionBox e) {
         sub_cueue.add(e);
     }
-    public void subPlayer(PlayerEntity p) {
-        player = p;
-        subscribe(p);
-    }
 
     // Methods that unsubscribe Game.Entities from this Entity Manager
 
@@ -88,6 +83,8 @@ public class EntityManager implements iObserver {
 
     // Method that calls update() on every entity
     public void update() {
+        if(player != null) player.update();
+
         // ENTITIES //
         // Update Game.Entities
         for(Entity e : ents) {
@@ -211,7 +208,6 @@ public class EntityManager implements iObserver {
         player = null;
         this.update();
         alive = false;
-        self = new EntityManager();
     }
 
 // GETTERS & SETTERS //

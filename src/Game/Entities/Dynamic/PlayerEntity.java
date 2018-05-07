@@ -16,6 +16,7 @@ import Game.Display.Assets.AssetManager;
 import Game.Data.GameDataManager;
 import Game.Data.KeyManager;
 import Game.Data.Settings;
+import Game.Handler;
 import Game.Screens.GameScreen;
 import Game.Screens.Screen;
 import Game.Screens.ScreenManager;
@@ -41,7 +42,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 
     AssetManager assMan = AssetManager.get();
     KeyManager km = KeyManager.get();
-    GameDataManager gdm = GameDataManager.get();
+//    GameDataManager gdm = GameDataManager.get();
     private double speedMultiplier;
     private double rotationSpeed;
     private boolean reverseThrust; // If true, player can reverse
@@ -70,13 +71,11 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         img = assMan.getSprite("player");
         reverseThrust = true;
         decelerate = (float)0.06;
-        setCollisionBox();
         health = DEF_HEALTH;
         shoot_release = true;
         shoot_reloaded = true;
         slowTimeStart = 0;
         slowTimeCurrent = 0;
-        EntityManager.get().subPlayer(this);
         timeMoving = 0;
         xmove = 0;
         ymove = 0;
@@ -164,7 +163,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             slow(50);
         }
         else if(ec instanceof Game.Entities.Dynamic.ExpDot) {
-            gdm.addScore(((ExpDot) ec).getValue());
+            GameDataManager.get().addScore(((ExpDot) ec).getValue());
         }
         else if(ec instanceof GoblinBulletSmall) {
             addHP(-1);
@@ -256,7 +255,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         }
         if(km.spacebar && shoot_release && shoot_reloaded) {
             if(Settings.player_gun_main) {
-                EntityManager.get().subscribe(new BulletPlayer(this));
+                handler.getEntityManager().subscribe(new BulletPlayer(this));
                 TimerManager.get().newCodeTimer(DEF_RELOAD_SPEED, this, "REL");
             }
 
@@ -275,7 +274,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         }
 
         if(km.delete && Settings.DEBUG_CHEATS) addHP(-20);
-        if(km.insert && Settings.DEBUG_CHEATS) gdm.addScore(1);;
+        if(km.insert && Settings.DEBUG_CHEATS) GameDataManager.get().addScore(1);;
     }
 
     @Override
@@ -287,8 +286,9 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     // Method to destroy / delete entity
     @Override
     public void die() {
-        EntityManager.get().unsubPlayer(this);
-        EntityManager.get().unsubscribe(this.collision);
+        EntityManager em = handler.getEntityManager();
+        em.unsubPlayer(this);
+        em.unsubscribe(this.collision);
 //        EntityManager.get().unsubscribe(this.headCollision);
         explode();
 
@@ -299,7 +299,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     }
 
     private void explode() {
-        EntityManager em = EntityManager.get();
+        EntityManager em = handler.getEntityManager();
 
         // Explosion
         em.subscribe(new EnergyExplParticle(this));

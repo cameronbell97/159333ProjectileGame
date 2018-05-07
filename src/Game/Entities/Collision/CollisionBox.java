@@ -21,7 +21,7 @@ public class CollisionBox extends DynamicEntity{
         yoff = yo;
         this.parent = parent;
         if(Settings.DEBUG_DRAW_COLLISIONS) img = AssetManager.get().getSprite("Coll");
-        EntityManager.get().subscribe(this);
+        handler.getEntityManager().subscribe(this);
     }
 
 // METHODS //
@@ -54,7 +54,7 @@ public class CollisionBox extends DynamicEntity{
         return new Point2D(xpos + width / 2, ypos + height / 2);
     }
     private void destroy() {
-        EntityManager.get().unsubscribe(this);
+        handler.getEntityManager().unsubscribe(this);
     }
 
     @Override
