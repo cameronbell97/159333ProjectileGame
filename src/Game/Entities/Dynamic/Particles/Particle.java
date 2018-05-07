@@ -41,6 +41,7 @@ public abstract class Particle extends DynamicEntity implements iCanHaveCodeTime
 
     @Override
     public void update() {
+        // Fading Mechanics
         if(fade && alphaFade > 0) alphaFade = Math.max(alphaFade - DEF_FADE_DECREMENT, 0);
         if(alphaFade <= 0) destroy();
     }

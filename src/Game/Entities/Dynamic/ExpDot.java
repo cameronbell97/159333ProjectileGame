@@ -9,6 +9,8 @@ import Game.Timer.CodeTimer;
 import Game.Timer.TimerManager;
 import Game.Timer.iCanHaveCodeTimer;
 
+import java.awt.*;
+
 /**
  * Created by Cameron on 6/04/2018.
  */
@@ -17,8 +19,12 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
     // Statics
     private static final int OFFSCREEN_BOUNDARY = 0;
     private static final int DEF_HEIGHT_WIDTH = 16;
-    private static final int DESPAWN_TIME = 18*60;
+    private static final int DESPAWN_TIME = 16*60;
     private static final int DEF_MOVE_SPEED = 2;
+
+    protected static final double DEF_FADE_DECREMENT = 0.02;
+    protected double alphaFade;
+    protected boolean fade;
 
     private int value;
     private int yImg;
@@ -82,10 +88,32 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         deceleration = (float)0.04;
         xmove = 0;
         ymove = 0;
+
+        fade = false;
+        alphaFade = 1;
+    }
+
+    @Override
+    public void draw(Graphics g) {
+//        if(img == null) return;
+        Graphics2D g2d = (Graphics2D) g;
+        if(fade) {
+            AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float)alphaFade);
+            g2d.setComposite(ac);
+            g2d.drawImage(aTransOp.filter(img, null), (int) xpos, (int) ypos, null);
+            ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1);
+            g2d.setComposite(ac);
+        } else {
+            g2d.drawImage(aTransOp.filter(img, null), (int) xpos, (int) ypos, null);
+        }
     }
 
     @Override
     public void update() {
+        // Fading Mechanics
+        if(fade && alphaFade > 0) alphaFade = Math.max(alphaFade - DEF_FADE_DECREMENT, 0);
+        if(alphaFade <= 0) destroy();
+
         // Check for out-of-screen
         if(     xpos <= -OFFSCREEN_BOUNDARY ||
                 ypos <= -OFFSCREEN_BOUNDARY ||
@@ -204,7 +232,7 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         switch (code) {
             case "DIE":
                 if(active) {
-                    destroy();
+                    fade = true;
                     active = false;
                 }
                 break;
