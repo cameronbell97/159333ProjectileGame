@@ -1,7 +1,5 @@
 package Game.Screens;
 
-import Game.Data.GameDataManager;
-import Game.Data.SaveManager;
 import Game.Data.Settings;
 import Game.Handler;
 import Game.Timer.CodeTimer;
@@ -59,7 +57,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
     private void endGame() {
         int score = handler.getGameDataManager().getScore();
 
-        if(SaveManager.get().getSave().getScoreBoard().isHighScore(score)) {
+        if(handler.getSave().getScoreBoard().isHighScore(score)) {
             ScreenManager.setScreen(new AddScoreScreen(lastScreen, this, score));
         } else {
             ScreenManager.setScreen(new ScoresScreen(lastScreen, this));

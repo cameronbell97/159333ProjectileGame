@@ -1,9 +1,6 @@
 package Game.Screens;
 
-import Game.Data.KeyManager;
-import Game.Data.SaveManager;
-import Game.Data.ScoreBoard;
-import Game.Data.Settings;
+import Game.Data.*;
 import Game.Display.DisplayElements.*;
 
 import java.awt.*;
@@ -93,9 +90,9 @@ public class AddScoreScreen extends Screen {
         submitButton = new ButtonElement("SUBMIT") {
             @Override
             protected void onClick() {
-                SaveManager sm = SaveManager.get();
-                sm.getSave().getScoreBoard().addNewScore(score, nameTyper.getText());
-                sm.getSave().save();
+                Save save = handler.getSave();
+                save.getScoreBoard().addNewScore(score, nameTyper.getText());
+                save.save();
                 ScreenManager.setScreen(new ScoresScreen(returnScreen, drawScreen));
             }
 

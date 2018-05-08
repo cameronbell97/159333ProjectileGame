@@ -1,7 +1,5 @@
 package Game.Entities.Dynamic;
 import Game.Entities.Collision.CollisionBox;
-import Game.Entities.Collision.PlayerCollisionBoxBody;
-import Game.Entities.Collision.PlayerCollisionBoxHead;
 import Game.Entities.Dynamic.Bullets.BulletPlayer;
 import Game.Entities.Dynamic.Bullets.GoblinBulletLarge;
 import Game.Entities.Dynamic.Bullets.GoblinBulletSmall;
@@ -13,10 +11,8 @@ import Game.Entities.EntityManager;
 import Game.Entities.iVulnerable;
 
 import Game.Display.Assets.AssetManager;
-import Game.Data.GameDataManager;
 import Game.Data.KeyManager;
 import Game.Data.Settings;
-import Game.Handler;
 import Game.Screens.GameScreen;
 import Game.Screens.Screen;
 import Game.Screens.ScreenManager;

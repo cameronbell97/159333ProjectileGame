@@ -1,10 +1,9 @@
 package Game.Screens;
 
-import Game.Data.GameDataManager;
-import Game.Data.SaveManager;
 import Game.Data.ScoreBoard;
 import Game.Data.Settings;
 import Game.Display.DisplayElements.*;
+import Game.Handler;
 
 import java.awt.*;
 
@@ -37,7 +36,7 @@ public class ScoresScreen extends Screen {
         this.returnScreen = returnScreen;
         this.drawScreen = drawScreen;
         scoreBoard =
-                SaveManager
+                Handler
                 .get()
                 .getSave()
                 .getScoreBoard();

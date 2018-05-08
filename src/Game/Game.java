@@ -2,12 +2,10 @@ package Game;
 
 import Game.Data.KeyManager;
 import Game.Data.MouseManager;
-import Game.Data.SaveManager;
 import Game.Display.DisplayWindow;
 import Game.Screens.MainMenuScreen;
 import Game.Screens.Screen;
 import Game.Screens.ScreenManager;
-import Game.Timer.TimerManager;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -44,7 +42,6 @@ public class Game implements Runnable{
     private Handler handler;
     private KeyManager km;
     private MouseManager mm;
-    private SaveManager saveMan;
 
     // Game.Screens
     private Screen mainMenuScreen;
@@ -64,7 +61,6 @@ public class Game implements Runnable{
         // Create Managers
         km = handler.getKeyManager();
         mm = handler.getMouseManager();
-        saveMan = SaveManager.get();
 
         // Create Window
         display = new DisplayWindow(gameTitle, gameWidth, gameHeight);
