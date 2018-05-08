@@ -1,6 +1,7 @@
 package Game.Timer;
 
 import Game.Entities.Dynamic.Enemies.Enemy;
+import Game.Handler;
 
 public class EnemyTimer extends Timer {
 // VARIABLES //
@@ -18,7 +19,7 @@ public class EnemyTimer extends Timer {
     @Override
     protected void notifyFinished() {
         if(notifiee != null) notifiee.timerNotify(this);
-        else TimerManager.get().unsubTimer(this);
+        else Handler.get().getTimerManager().unsubTimer(this);
     }
 
 // GETTERS & SETTERS //

@@ -27,7 +27,6 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
 
     // Managers
     Handler handler;
-    private TimerManager timerManager;
 
     // Enemy Director Variables
     private int gameLevel;
@@ -47,7 +46,6 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
         this.gameLevel = 0;
         this.limboEntities = 0;
         this.currentTimer = null;
-        this.timerManager = TimerManager.get();
         this.spawn_queue_minsec = 0;
         this.spawn_queue_maxsec = 0;
 
@@ -63,11 +61,12 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
     public void update() {
         // Generate time new enemy will wait to spawn
         int nextEnemyTime = Game.getIntFromRange(spawn_queue_minsec, spawn_queue_maxsec);
+        TimerManager tm = Handler.get().getTimerManager();
 
         // Create Enemy "to-be-spawned" Timers
         for(Enemy e : spawn_queue) {
             // Make new Enemy Game.Timer
-            timerManager.newEnemyTimer(nextEnemyTime, this, e);
+            tm.newEnemyTimer(nextEnemyTime, this, e);
 
             // Increment Limbo Game.Entities - Enemy e is yet to spawn so can't be counted in "Remaining Enemies"
             limboEntities++;
@@ -84,7 +83,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
 
         // Go to next level if no more enemies remain, or are yet to spawn
         if(limboEntities == 0 && remaining_queue.isEmpty() && currentTimer == null)
-            currentTimer = timerManager.newCodeTimer(LEVEL_WAIT_TIME, this, "LVL+", 0);
+            currentTimer = tm.newCodeTimer(LEVEL_WAIT_TIME, this, "LVL+", 0);
     }
 
     // Method - Recieve CodeTimer
@@ -94,7 +93,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
         String code = t.getCode();
 
         // Clear CurrentTimer so Game doesn't think we're still waiting for the next level
-        timerManager.unsubTimer(currentTimer);
+        Handler.get().getTimerManager().unsubTimer(currentTimer);
         currentTimer = null;
 
         // Do depending on the code
@@ -111,7 +110,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
     @Override
     public void timerNotify(EnemyTimer t) {
         // Unsub Game.Timer so it can be deleted
-        timerManager.unsubTimer(t);
+        Handler.get().getTimerManager().unsubTimer(t);
 
         // Give new position and direction to enemy, ready for spawning
         Enemy enem = generateEnemyPosition(t.getEnemy(), t.getEnemy().getMaxSize());
@@ -411,8 +410,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
     }
 
     public void startGame() {
-        timerManager = TimerManager.get();
-        if(currentTimer != null) TimerManager.get().unsubTimer(currentTimer);
+        if(currentTimer != null) Handler.get().getTimerManager().unsubTimer(currentTimer);
         currentTimer = null;
         handler.getEnemyDirector().startGame();
     }

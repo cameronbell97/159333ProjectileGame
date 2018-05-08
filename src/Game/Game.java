@@ -43,7 +43,6 @@ public class Game implements Runnable{
     // Managers
     private Handler handler;
     private KeyManager km;
-    private TimerManager timerMan;
     private MouseManager mm;
     private SaveManager saveMan;
 
@@ -65,7 +64,6 @@ public class Game implements Runnable{
         // Create Managers
         km = handler.getKeyManager();
         mm = handler.getMouseManager();
-        timerMan = TimerManager.get();
         saveMan = SaveManager.get();
 
         // Create Window
@@ -87,12 +85,7 @@ public class Game implements Runnable{
 
     // Method - Updates Everything in the Game
     public void update() {
-        // Update Managers
-        if(!timerMan.isAlive())
-            timerMan = TimerManager.get();
-
         handler.update();
-        timerMan.update();
 
         // Update Current Screen
         if (ScreenManager.getScreen() != null) {

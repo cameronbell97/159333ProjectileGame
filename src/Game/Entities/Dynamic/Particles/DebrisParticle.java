@@ -41,7 +41,7 @@ public abstract class DebrisParticle extends Particle {
         spriteRotSpeed = Game.Game.getDoubleFromRange(-0.001*Math.PI, 0.001*Math.PI);;
         rotateSprite();
 
-        TimerManager.get().newCodeTimer(200, this, "DIE");
+        handler.getTimerManager().newCodeTimer(200, this, "DIE");
     }
 
 // METHODS //

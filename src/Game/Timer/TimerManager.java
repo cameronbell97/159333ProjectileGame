@@ -12,10 +12,6 @@ import java.util.List;
  */
 
 public class TimerManager {
-// SINGLETON PATTERN //
-    private static TimerManager self = new TimerManager();
-    public static TimerManager get() { return self; }
-
 // VARIABLES //
     boolean alive = true;
 
@@ -25,7 +21,7 @@ public class TimerManager {
     List<Timer> unsub_queue;
 
 // CONSTRUCTORS //
-    private TimerManager() {
+    public TimerManager() {
         // Instantiate Game.Timer Lists
         timers = new ArrayList();
         sub_queue = new ArrayList();
@@ -86,7 +82,6 @@ public class TimerManager {
             unsubTimer(timer);
         }
         alive = false;
-        self = new TimerManager();
     }
 
     public boolean isAlive() {

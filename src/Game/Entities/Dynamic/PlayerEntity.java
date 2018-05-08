@@ -257,7 +257,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         if(km.spacebar && shoot_release && shoot_reloaded) {
             if(Settings.player_gun_main) {
                 handler.getEntityManager().subscribe(new BulletPlayer(this));
-                TimerManager.get().newCodeTimer(DEF_RELOAD_SPEED, this, "REL");
+                handler.getTimerManager().newCodeTimer(DEF_RELOAD_SPEED, this, "REL");
             }
 
             shoot_reloaded = false;
@@ -436,7 +436,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
                 break;
 
         }
-        TimerManager.get().unsubTimer(t); // Unsubscribe the timer
+        handler.getTimerManager().unsubTimer(t); // Unsubscribe the timer
     }
 
 // GETTERS & SETTERS //

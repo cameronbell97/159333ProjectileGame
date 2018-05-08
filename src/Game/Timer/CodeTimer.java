@@ -1,5 +1,7 @@
 package Game.Timer;
 
+import Game.Handler;
+
 /**
  * Cameron Bell - 05/04/2018
  * CodeTimer  Class
@@ -31,7 +33,7 @@ public class CodeTimer extends Timer {
     @Override
     protected void notifyFinished() {
         if(notifiee != null) notifiee.timerNotify(this);
-        else TimerManager.get().unsubTimer(this);
+        else Handler.get().getTimerManager().unsubTimer(this);
     }
 
 // GETTERS & SETTERS //

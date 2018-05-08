@@ -3,6 +3,7 @@ package Game.Entities.Dynamic.Particles;
 import Game.Display.Assets.AssetManager;
 import Game.Entities.Dynamic.DynamicEntity;
 import Game.Entities.Entity;
+import Game.Handler;
 import Game.Timer.TimerManager;
 
 import java.awt.geom.AffineTransform;
@@ -21,7 +22,7 @@ public class AsteroidParticle extends Particle {
 // CONSTRUCTORS //
     public AsteroidParticle(DynamicEntity parent, Double direction, int level) {
         super(parent.getXpos(), parent.getYpos(), DEF_PARTICLE_WIDTH, DEF_PARTICLE_HEIGHT, direction);
-        TimerManager.get().newCodeTimer(100, this, "DIE");
+        handler.getTimerManager().newCodeTimer(100, this, "DIE");
         setNewPosition();
         this.spriteDirection = direction;
         this.level = level;

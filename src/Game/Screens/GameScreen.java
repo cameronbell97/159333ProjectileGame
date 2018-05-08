@@ -3,6 +3,7 @@ package Game.Screens;
 import Game.Data.GameDataManager;
 import Game.Data.SaveManager;
 import Game.Data.Settings;
+import Game.Handler;
 import Game.Timer.CodeTimer;
 import Game.Timer.TimerManager;
 import Game.Timer.iCanHaveCodeTimer;
@@ -57,7 +58,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
     }
 
     public void end() {
-        TimerManager.get().newCodeTimer(120, this, "END");
+        handler.getTimerManager().newCodeTimer(120, this, "END");
     }
 
     private void endGame() {
@@ -72,7 +73,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
 
     @Override
     public void timerNotify(CodeTimer t) {
-        TimerManager.get().unsubTimer(t);
+        handler.getTimerManager().unsubTimer(t);
         switch (t.getCode()) {
             case "END":
                 gameIsRunning = false;

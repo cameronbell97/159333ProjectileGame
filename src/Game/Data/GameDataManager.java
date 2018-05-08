@@ -47,7 +47,7 @@ public class GameDataManager {
     public void clearData() {
         handler.getEntityManager().clear();
         handler.getEnemyDirector().clear();
-        TimerManager.get().clear();
+        handler.getTimerManager().clear();
 //        GameUIManager.get().clear();
         alive = false;
 

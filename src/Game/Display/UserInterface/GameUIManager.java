@@ -2,6 +2,7 @@ package Game.Display.UserInterface;
 
 import Game.Data.GameDataManager;
 import Game.Data.Settings;
+import Game.Handler;
 import Game.Timer.CodeTimer;
 import Game.Timer.TimerManager;
 import Game.Timer.iCanHaveCodeTimer;
@@ -131,7 +132,7 @@ public class GameUIManager implements iCanHaveCodeTimer {
     @Override
     public void timerNotify(CodeTimer t) {
         String code = t.getCode();
-        TimerManager.get().unsubTimer(t);
+        Handler.get().getTimerManager().unsubTimer(t);
 
         switch(code) {
             case "FLA":
@@ -148,6 +149,6 @@ public class GameUIManager implements iCanHaveCodeTimer {
 // GETTERS & SETTERS //
     public void setFlashAlert(String alert, int numberOfFlashes) {
         flashAlert = alert;
-        TimerManager.get().newCodeTimer(numberOfFlashes * DEF_FLASH_TIME, this, "FLA");
+        Handler.get().getTimerManager().newCodeTimer(numberOfFlashes * DEF_FLASH_TIME, this, "FLA");
     }
 }

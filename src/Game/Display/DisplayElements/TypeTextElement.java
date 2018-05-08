@@ -59,7 +59,7 @@ public class TypeTextElement extends Element implements iCanHaveCodeTimer {
         }
 
         underscoreFlash = false;
-        TimerManager.get().newCodeTimer(UNDERSCORE_FLASH_TIME, this, "_");
+        Handler.get().getTimerManager().newCodeTimer(UNDERSCORE_FLASH_TIME, this, "_");
     }
 
 // METHODS //
@@ -115,16 +115,17 @@ public class TypeTextElement extends Element implements iCanHaveCodeTimer {
     @Override
     public void timerNotify(CodeTimer t) {
         String code = t.getCode();
+        TimerManager tm = Handler.get().getTimerManager();
 
         if(code.equals("_")) {
             underscoreFlash = true;
-            TimerManager.get().newCodeTimer(UNDERSCORE_FLASH_TIME, this, " ");
+            tm.newCodeTimer(UNDERSCORE_FLASH_TIME, this, " ");
         } else if(code.equals(" ")) {
             underscoreFlash = false;
-            TimerManager.get().newCodeTimer(UNDERSCORE_FLASH_TIME, this, "_");
+            tm.newCodeTimer(UNDERSCORE_FLASH_TIME, this, "_");
         }
 
-        TimerManager.get().unsubTimer(t);
+        tm.unsubTimer(t);
     }
 
     private String setUnderscore(String t) {

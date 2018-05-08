@@ -5,6 +5,7 @@ import Game.Entities.Collision.CollisionBox;
 import Game.Entities.Entity;
 import Game.Entities.EntityManager;
 import Game.Data.Settings;
+import Game.Handler;
 import Game.Timer.CodeTimer;
 import Game.Timer.TimerManager;
 import Game.Timer.iCanHaveCodeTimer;
@@ -79,8 +80,8 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
 
         setCollisionBox();
 
-        // Set Despawn Game.Timer
-        TimerManager.get().newCodeTimer(DESPAWN_TIME + Game.Game.getIntFromRange(-30, 30), this, "DIE");
+        // Set Despawn Timer
+        Handler.get().getTimerManager().newCodeTimer(DESPAWN_TIME + Game.Game.getIntFromRange(-30, 30), this, "DIE");
 
         // Set Variables
         moveSpeed = DEF_MOVE_SPEED;
@@ -240,7 +241,7 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
                 break;
         }
 
-        TimerManager.get().unsubTimer(t);
+        Handler.get().getTimerManager().unsubTimer(t);
     }
 
 // GETTERS & SETTERS //

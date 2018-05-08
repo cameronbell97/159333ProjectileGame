@@ -7,6 +7,7 @@ import Game.Display.UserInterface.GameUIManager;
 import Game.Entities.Dynamic.PlayerEntity;
 import Game.Entities.EnemyDirector;
 import Game.Entities.EntityManager;
+import Game.Timer.TimerManager;
 
 import java.awt.*;
 
@@ -24,6 +25,7 @@ public class Handler {
     private MouseManager mouseManager;
 
     // Game Managers //
+    private TimerManager timerManager;
     private EntityManager entityManager;
     private EnemyDirector enemyDirector;
     private GameUIManager gameUIManager;
@@ -43,6 +45,7 @@ public class Handler {
     }
 
     public void updateGame() {
+        timerManager.update();
         entityManager.update();
         enemyDirector.update();
         gameUIManager.update();
@@ -58,11 +61,16 @@ public class Handler {
     }
 
     public void newGame() {
+        timerManager = new TimerManager();
         entityManager = new EntityManager();
         entityManager.getPlayer().setCollisionBox();
         enemyDirector = new EnemyDirector(this);
         gameUIManager = new GameUIManager();
         setUIVisible();
+    }
+
+    public void endGame() {
+
     }
 
 // GETTERS & SETTERS //
@@ -81,6 +89,9 @@ public class Handler {
     }
     public MouseManager getMouseManager() {
         return mouseManager;
+    }
+    public TimerManager getTimerManager() {
+        return timerManager;
     }
 
     public void setUIHidden() {

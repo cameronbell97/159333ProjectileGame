@@ -2,6 +2,7 @@ package Game.Entities.Dynamic.Particles;
 
 import Game.Entities.Dynamic.DynamicEntity;
 import Game.Entities.EntityManager;
+import Game.Handler;
 import Game.Timer.*;
 
 import java.awt.*;
@@ -30,7 +31,7 @@ public abstract class Particle extends DynamicEntity implements iCanHaveCodeTime
     @Override
     public void timerNotify(CodeTimer t) {
         String timerCode = t.getCode(); // Get timer code
-        TimerManager.get().unsubTimer(t); // Unsubscribe the timer
+        handler.getTimerManager().unsubTimer(t); // Unsubscribe the timer
 
         switch (timerCode) {
             case "DIE":
