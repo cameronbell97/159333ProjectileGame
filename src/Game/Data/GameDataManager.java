@@ -16,7 +16,6 @@ public class GameDataManager {
 
     // Sources
     Handler handler;
-    private EnemyDirector ed;
     private Save save;
 
     // Shortcuts
@@ -27,8 +26,6 @@ public class GameDataManager {
 
 // CONSTRUCTORS //
     public GameDataManager() {
-        ed = EnemyDirector.get();
-
         player_hp = 0;
         enemies_remaining = 0;
         current_level = 0;
@@ -38,11 +35,8 @@ public class GameDataManager {
 
 // METHODS //
     public void update() {
-        EntityManager em;
-        if(handler == null)
-            em = handler.getEntityManager();
-        else
-            em = handler.getEntityManager();
+        EntityManager em = handler.getEntityManager();
+        EnemyDirector ed = handler.getEnemyDirector();
 
         if(em.getPlayer() != null) player_hp = em.getPlayer().getHP();
         else player_hp = 0;
@@ -52,11 +46,10 @@ public class GameDataManager {
 
     public void clearData() {
         handler.getEntityManager().clear();
-        ed.clear();
+        handler.getEnemyDirector().clear();
         TimerManager.get().clear();
 //        GameUIManager.get().clear();
         alive = false;
-        ed = null;
 
         self = new GameDataManager();
     }

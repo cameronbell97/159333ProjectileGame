@@ -3,6 +3,7 @@ package Game.Entities.Dynamic.Enemies;
 import Game.Data.Settings;
 import Game.Entities.*;
 import Game.Entities.Dynamic.ExpDot;
+import Game.Handler;
 
 import java.awt.*;
 
@@ -173,7 +174,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
         explode();
         em.unsubscribe(this);
         em.unsubscribe(collision);
-        EnemyDirector.get().unsubscribe(this);
+        handler.getEnemyDirector().unsubscribe(this);
     }
 
     // Death animation

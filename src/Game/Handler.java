@@ -2,6 +2,7 @@ package Game;
 
 import Game.Data.Settings;
 import Game.Entities.Dynamic.PlayerEntity;
+import Game.Entities.EnemyDirector;
 import Game.Entities.EntityManager;
 
 import java.awt.*;
@@ -17,15 +18,17 @@ public class Handler {
 // VARIABLES //
     // Managers //
     private EntityManager entityManager;
+    private EnemyDirector enemyDirector;
 
 // CONSTRUCTOR //
     private Handler() {
-        entityManager = new EntityManager();
+        
     }
 
 // METHODS //
     public void update() {
         entityManager.update();
+        enemyDirector.update();
     }
 
     public void draw(Graphics g) {
@@ -36,10 +39,14 @@ public class Handler {
     public void newGame() {
         entityManager = new EntityManager();
         entityManager.getPlayer().setCollisionBox();
+        enemyDirector = new EnemyDirector(this);
     }
 
 // GETTERS & SETTERS //
     public EntityManager getEntityManager() {
         return entityManager;
+    }
+    public EnemyDirector getEnemyDirector() {
+        return enemyDirector;
     }
 }

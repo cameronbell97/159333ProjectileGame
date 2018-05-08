@@ -117,6 +117,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
     @Override
     public void die() {
         EntityManager em = handler.getEntityManager();
+        EnemyDirector ed = handler.getEnemyDirector();
 
         // Create 2 child asteroids if big enough to do so
         if(level > 1) {
@@ -128,7 +129,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
                 Asteroid ast = new Asteroid(newX, newY, level-1, newDir, moveSpeed*1.2, white);
                 ast.setCollisionBox();
                 em.subscribe(ast);
-                EnemyDirector.get().subscribe(ast);
+                ed.subscribe(ast);
             }
         }
         // 1 in 5 chance to generate a third asteroid child upon death of lvl 3 asteroid
@@ -139,7 +140,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
             Asteroid ast = new Asteroid(newX, newY, level-1, direction, moveSpeed*1.2, white);
             ast.setCollisionBox();
             em.subscribe(ast);
-            EnemyDirector.get().subscribe(ast);
+            ed.subscribe(ast);
         }
 
         em.subscribe(new ExpDot(this, level+1));
@@ -152,7 +153,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
         EntityManager em = handler.getEntityManager();
         em.unsubscribe(this);
         em.unsubscribe(collision);
-        EnemyDirector.get().unsubscribe(this);
+        handler.getEnemyDirector().unsubscribe(this);
     }
     // Method to explode rock particles
 

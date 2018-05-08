@@ -19,10 +19,6 @@ import java.util.List;
  */
 
 public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
-// SINGLETON PATTERN //
-    private static EnemyDirector self = new EnemyDirector();
-    public static EnemyDirector get() { return self; }
-
 // VARIABLES //
     boolean alive = true;
 
@@ -30,7 +26,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
     private static final int LEVEL_WAIT_TIME = 4*60;
 
     // Managers
-    Handler handler = Handler.get();
+    Handler handler;
     private TimerManager timerManager;
 
     // Enemy Director Variables
@@ -46,7 +42,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
     List<Enemy> dead_queue; // A list of Enemies
 
 // CONSTRUCTORS //
-    private EnemyDirector() {
+    public EnemyDirector(Handler parentHandler) {
         // Set Variables
         this.gameLevel = 0;
         this.limboEntities = 0;
@@ -59,6 +55,8 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
         this.remaining_queue = new ArrayList();
         this.spawn_queue = new ArrayList();
         this.dead_queue = new ArrayList();
+
+        handler = parentHandler;
     }
 
 // METHODS //
@@ -410,13 +408,13 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
 
         this.update();
         alive = false;
-        self = new EnemyDirector();
     }
 
     public void startGame() {
         timerManager = TimerManager.get();
         if(currentTimer != null) TimerManager.get().unsubTimer(currentTimer);
         currentTimer = null;
+        handler.getEnemyDirector().startGame();
     }
 
 // GETTERS & SETTERS //

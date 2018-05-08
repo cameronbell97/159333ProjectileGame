@@ -23,7 +23,6 @@ import java.io.IOException;
 public class GameScreen extends Screen implements iCanHaveCodeTimer {
 // VARIABLES //
     // Managers
-    private EnemyDirector enemyDirector;
     private GameUIManager UIManager;
     private GameDataManager GDataMananger;
     private Screen lastScreen;
@@ -40,8 +39,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
 
         // Declarations
         handler = Handler.get();
-        enemyDirector = EnemyDirector.get();
-        enemyDirector.startGame();
+//        handler.getEnemyDirector().startGame(); // TODO // Delete this if program running smoothly
         UIManager = GameUIManager.get();
         GDataMananger = GameDataManager.get();
 
@@ -54,7 +52,6 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
     public void update() {
         if(gameIsRunning) {
             handler.update();
-            enemyDirector.update();
             UIManager.update();
         } else endGame();
     }
