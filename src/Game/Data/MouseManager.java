@@ -8,16 +8,12 @@ import java.awt.event.MouseMotionListener;
  * Created by Cameron on 13/04/2018.
  */
 public class MouseManager implements MouseListener, MouseMotionListener{
-// SINGLETON PATTERN //
-    private static MouseManager self = new MouseManager();
-    public static MouseManager get() { return self; }
-
 // VARIABLES //
     private boolean leftMouse, rightMouse;
     private int mouseX, mouseY;
 
 // CONSTRUCTORS //
-    private MouseManager() {
+    public MouseManager() {
         leftMouse = false;
         rightMouse = false;
         mouseX = 0;

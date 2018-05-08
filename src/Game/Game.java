@@ -2,10 +2,8 @@ package Game;
 
 import Game.Data.KeyManager;
 import Game.Data.MouseManager;
-import Game.Data.Save;
 import Game.Data.SaveManager;
 import Game.Display.DisplayWindow;
-import Game.Screens.GameScreen;
 import Game.Screens.MainMenuScreen;
 import Game.Screens.Screen;
 import Game.Screens.ScreenManager;
@@ -46,7 +44,7 @@ public class Game implements Runnable{
     private Handler handler;
     private KeyManager km;
     private TimerManager timerMan;
-    private MouseManager mouseMan;
+    private MouseManager mm;
     private SaveManager saveMan;
 
     // Game.Screens
@@ -66,8 +64,8 @@ public class Game implements Runnable{
     public void initialise() throws IOException {
         // Create Managers
         km = handler.getKeyManager();
+        mm = handler.getMouseManager();
         timerMan = TimerManager.get();
-        mouseMan = MouseManager.get();
         saveMan = SaveManager.get();
 
         // Create Window
@@ -75,10 +73,10 @@ public class Game implements Runnable{
 
         // Set Listeners
         display.getFrame().addKeyListener(km);
-        display.getFrame().addMouseListener(mouseMan);
-        display.getFrame().addMouseMotionListener(mouseMan);
-        display.getCanvas().addMouseListener(mouseMan);
-        display.getCanvas().addMouseMotionListener(mouseMan);
+        display.getFrame().addMouseListener(mm);
+        display.getFrame().addMouseMotionListener(mm);
+        display.getCanvas().addMouseListener(mm);
+        display.getCanvas().addMouseMotionListener(mm);
 
         displayCanvas = display.getCanvas();
 

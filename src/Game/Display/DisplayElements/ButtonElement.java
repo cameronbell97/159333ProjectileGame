@@ -100,10 +100,9 @@ public abstract class ButtonElement extends PaddedElement {
 
     private void initialise() {
         km = Handler.get().getKeyManager();
+        mouseManager = Handler.get().getMouseManager();
 
         setButtonText();
-
-        mouseManager = MouseManager.get();
 
         leftMouse = false;
         rightMouse = false;
