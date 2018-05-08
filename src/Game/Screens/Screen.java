@@ -16,7 +16,7 @@ public abstract class Screen {
 
 // CONSTRUCTORS //
     public Screen() {
-
+        handler = Handler.get();
     }
 
 // METHODS //

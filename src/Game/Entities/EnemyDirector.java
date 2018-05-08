@@ -191,7 +191,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
                 break;
 
             case 6: // Level 6 // Asteroid Belt
-                GameUIManager.get().setFlashAlert("! ASTEROID BELT !", 2);
+                handler.getGameUIManager().setFlashAlert("! ASTEROID BELT !", 2);
                 for(int i = 0; i < 3; i++) {
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 3, 0, 2, true), Asteroid.DEFAULT_SIZE));
                     spawn_queue.add(EnemyDirector.generateEnemyPosition(new Asteroid(0, 0, 2, 0, 2, true), Asteroid.DEFAULT_SIZE));
@@ -272,7 +272,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
                 if(gameLevel <= 10) break;
 
                 int X = gameLevel - 10;
-                GameUIManager.get().setFlashAlert(("X" + Integer.toString(X)), 1);
+                handler.getGameUIManager().setFlashAlert(("X" + Integer.toString(X)), 1);
 
                 // Grey Asteroid Small
                 if(X%2==1)

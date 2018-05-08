@@ -109,7 +109,7 @@ public class ScoresScreen extends Screen {
 
                 ScreenManager.setScreen(returnScreen);
                 if(drawScreen instanceof GameScreen) {
-                    ((GameScreen) drawScreen).clearUIManager();
+                    handler.setUIHidden();
                     GameDataManager.get().clearData();
                 }
             }

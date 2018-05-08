@@ -9,10 +9,6 @@ import Game.Timer.iCanHaveCodeTimer;
 import java.awt.*;
 
 public class GameUIManager implements iCanHaveCodeTimer {
-// SINGLETON PATTERN //
-    private static GameUIManager self = new GameUIManager();
-    public static GameUIManager get() { return self; }
-
 // VARIABLES //
     private static final int DEF_FLASH_TIME = 110;
 
@@ -145,7 +141,6 @@ public class GameUIManager implements iCanHaveCodeTimer {
 
     public void clear() {
         gameDataManager = null;
-        self = new GameUIManager();
     }
 
 
