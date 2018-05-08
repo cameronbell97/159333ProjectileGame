@@ -164,7 +164,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             slow(50);
         }
         else if(ec instanceof Game.Entities.Dynamic.ExpDot) {
-            GameDataManager.get().addScore(((ExpDot) ec).getValue());
+            handler.getGameDataManager().addScore(((ExpDot) ec).getValue());
         }
         else if(ec instanceof GoblinBulletSmall) {
             addHP(-1);
@@ -275,7 +275,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         }
 
         if(km.delete && Settings.DEBUG_CHEATS) addHP(-20);
-        if(km.insert && Settings.DEBUG_CHEATS) GameDataManager.get().addScore(1);;
+        if(km.insert && Settings.DEBUG_CHEATS) handler.getGameDataManager().addScore(1);;
     }
 
     @Override

@@ -18,10 +18,7 @@ import java.io.IOException;
 
 public class GameScreen extends Screen implements iCanHaveCodeTimer {
 // VARIABLES //
-    // Managers
-    private GameDataManager GDataMananger;
     private Screen lastScreen;
-
     private boolean gameIsRunning;
 
 // CONSTRUCTORS //
@@ -31,8 +28,6 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
         gameIsRunning = true;
 
         this.lastScreen = lastScreen;
-
-        GDataMananger = GameDataManager.get();
 
         handler.newGame();
     }
@@ -62,7 +57,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
     }
 
     private void endGame() {
-        int score = GDataMananger.getScore();
+        int score = handler.getGameDataManager().getScore();
 
         if(SaveManager.get().getSave().getScoreBoard().isHighScore(score)) {
             ScreenManager.setScreen(new AddScoreScreen(lastScreen, this, score));

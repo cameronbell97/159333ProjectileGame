@@ -1,5 +1,6 @@
 package Game;
 
+import Game.Data.GameDataManager;
 import Game.Data.KeyManager;
 import Game.Data.MouseManager;
 import Game.Data.Settings;
@@ -29,6 +30,7 @@ public class Handler {
     private EntityManager entityManager;
     private EnemyDirector enemyDirector;
     private GameUIManager gameUIManager;
+    private GameDataManager gameDataManager;
 
     private boolean visibleUI;
 
@@ -49,6 +51,7 @@ public class Handler {
         entityManager.update();
         enemyDirector.update();
         gameUIManager.update();
+        gameDataManager.update();
     }
 
     public void draw(Graphics g) {
@@ -65,7 +68,8 @@ public class Handler {
         entityManager = new EntityManager();
         entityManager.getPlayer().setCollisionBox();
         enemyDirector = new EnemyDirector(this);
-        gameUIManager = new GameUIManager();
+        gameUIManager = new GameUIManager(this);
+        gameDataManager = new GameDataManager();
         setUIVisible();
     }
 
@@ -92,6 +96,9 @@ public class Handler {
     }
     public TimerManager getTimerManager() {
         return timerManager;
+    }
+    public GameDataManager getGameDataManager() {
+        return gameDataManager;
     }
 
     public void setUIHidden() {

@@ -7,10 +7,6 @@ import Game.Handler;
 import Game.Timer.TimerManager;
 
 public class GameDataManager {
-// SINGLETON PATTERN //
-    private static GameDataManager self = new GameDataManager();
-    public static GameDataManager get() { return self; }
-
 // VARIABLES //
     boolean alive = true;
 
@@ -44,15 +40,13 @@ public class GameDataManager {
         current_level = ed.getGameLevel();
     }
 
-    public void clearData() {
-        handler.getEntityManager().clear();
-        handler.getEnemyDirector().clear();
-        handler.getTimerManager().clear();
-//        GameUIManager.get().clear();
-        alive = false;
-
-        self = new GameDataManager();
-    }
+//    public void clearData() {
+//        handler.getEntityManager().clear();
+//        handler.getEnemyDirector().clear();
+//        handler.getTimerManager().clear();
+////        GameUIManager.get().clear();
+//        alive = false;
+//    }
 
 // GETTERS & SETTERS //
     public void addScore(int score) {

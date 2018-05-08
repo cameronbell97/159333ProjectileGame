@@ -13,7 +13,7 @@ public class GameUIManager implements iCanHaveCodeTimer {
 // VARIABLES //
     private static final int DEF_FLASH_TIME = 110;
 
-    GameDataManager gameDataManager;
+    Handler handler;
     TextManager textManager;
 
     String flashAlert;
@@ -22,8 +22,8 @@ public class GameUIManager implements iCanHaveCodeTimer {
     private static final int FLASH_ALERT_Y = (Settings.ui_upper_boundary * 2) + (Settings.character_height * Settings.character_size) * 2;
 
 // CONSTRUCTORS //
-    public GameUIManager() {
-        gameDataManager = GameDataManager.get();
+    public GameUIManager(Handler parentHandler) {
+        handler = parentHandler;
         textManager = new TextManager();
         flashAlertAlpha = 0;
         flashAlertAlphaPhase = 0;
@@ -31,7 +31,6 @@ public class GameUIManager implements iCanHaveCodeTimer {
 
 // METHODS //
     public void update() {
-        gameDataManager.update();
         flashAlert();
     }
 
@@ -50,7 +49,7 @@ public class GameUIManager implements iCanHaveCodeTimer {
         // Get Parameters
         int xoffset = Settings.ui_left_boundary;
         int yoffset = Settings.ui_upper_boundary;
-        int score = gameDataManager.getScore();
+        int score = Handler.get().getGameDataManager().getScore();
 
         // Draw Score Word
         textManager.drawString(g, "SCORE", "left", xoffset, yoffset);
@@ -66,7 +65,7 @@ public class GameUIManager implements iCanHaveCodeTimer {
         // Get Parameters
         int xoffset = Settings.game_width / 2;
         int yoffset = Settings.ui_upper_boundary;
-        int level = gameDataManager.getCurrent_level();
+        int level = handler.getGameDataManager().getCurrent_level();
 
         // Draw Level Word
         textManager.drawString(g, "LEVEL", "center", xoffset, yoffset);
@@ -82,7 +81,7 @@ public class GameUIManager implements iCanHaveCodeTimer {
         // Get Parameters
         int xoffset = Settings.game_width - Settings.ui_right_boundary - textManager.getCharacterWidth();
         int yoffset = Settings.ui_upper_boundary;
-        int remaining = gameDataManager.getEnemies_remaining();
+        int remaining = handler.getGameDataManager().getEnemies_remaining();
 
         // Draw Remaining Enemies Word
         textManager.drawString(g, "ENEMIES", "right", xoffset, yoffset);
@@ -98,7 +97,7 @@ public class GameUIManager implements iCanHaveCodeTimer {
         // Get Parameters
         int xoffset = Settings.ui_left_boundary;
         int yoffset = (Settings.game_height - Settings.ui_lower_boundary) - (textManager.getCharacterHeight()) * 2 - 4;
-        int hp = gameDataManager.getPlayer_hp();
+        int hp = handler.getGameDataManager().getPlayer_hp();
 
         // Draw HP Word
         textManager.drawString(g, "HP", "left", xoffset, yoffset);
@@ -139,12 +138,6 @@ public class GameUIManager implements iCanHaveCodeTimer {
                 killFlashAlert();
         }
     }
-
-    public void clear() {
-        gameDataManager = null;
-    }
-
-
 
 // GETTERS & SETTERS //
     public void setFlashAlert(String alert, int numberOfFlashes) {
