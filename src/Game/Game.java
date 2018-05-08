@@ -65,7 +65,7 @@ public class Game implements Runnable{
     // Method - Initialise Game
     public void initialise() throws IOException {
         // Create Managers
-        km = KeyManager.get();
+        km = handler.getKeyManager();
         timerMan = TimerManager.get();
         mouseMan = MouseManager.get();
         saveMan = SaveManager.get();
@@ -93,7 +93,7 @@ public class Game implements Runnable{
         if(!timerMan.isAlive())
             timerMan = TimerManager.get();
 
-        km.update();
+        handler.update();
         timerMan.update();
 
         // Update Current Screen

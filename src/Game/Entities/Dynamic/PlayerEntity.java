@@ -40,8 +40,8 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     private static final int THRUST_FRAME_TIME_2 = 25;
     private static final int THRUST_FRAME_TIME_3 = 40;
 
-    AssetManager assMan = AssetManager.get();
-    KeyManager km = KeyManager.get();
+    private AssetManager assMan = AssetManager.get();
+    private KeyManager km;
 //    GameDataManager gdm = GameDataManager.get();
     private double speedMultiplier;
     private double rotationSpeed;
@@ -65,6 +65,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 
 // METHODS //
     public void initialise() {
+        km = handler.getKeyManager();
         speedMultiplier = 1;
         setSpeed(3.5);
         rotationSpeed = DEF_ROT_SPEED;
@@ -153,7 +154,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         getInput();
         move();
         collision.update();
-//        headCollision.update();
+//        headCollision.updateGame();
     }
 
     @Override

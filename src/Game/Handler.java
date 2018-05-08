@@ -1,5 +1,6 @@
 package Game;
 
+import Game.Data.KeyManager;
 import Game.Data.Settings;
 import Game.Display.UserInterface.GameUIManager;
 import Game.Entities.Dynamic.PlayerEntity;
@@ -18,6 +19,7 @@ public class Handler {
 
 // VARIABLES //
     // Managers //
+    private KeyManager keyManager;
     private EntityManager entityManager;
     private EnemyDirector enemyDirector;
     private GameUIManager gameUIManager;
@@ -26,11 +28,16 @@ public class Handler {
 
 // CONSTRUCTOR //
     private Handler() {
+        keyManager = new KeyManager();
         visibleUI = true;
     }
 
 // METHODS //
     public void update() {
+        keyManager.update();
+    }
+
+    public void updateGame() {
         entityManager.update();
         enemyDirector.update();
         gameUIManager.update();
@@ -64,6 +71,10 @@ public class Handler {
     public GameUIManager getGameUIManager() {
         return gameUIManager;
     }
+    public KeyManager getKeyManager() {
+        return keyManager;
+    }
+
     public void setUIHidden() {
         visibleUI = false;
     }

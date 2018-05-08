@@ -101,7 +101,7 @@ public class AddScoreScreen extends Screen {
 
             @Override
             protected void additionalActions() {
-                if(KeyManager.get().enter) onClick();
+                if(km.enter) onClick();
             }
         };
 

@@ -1,7 +1,9 @@
 package Game.Display.DisplayElements;
 
+import Game.Data.KeyManager;
 import Game.Data.MouseManager;
 import Game.Data.Settings;
+import Game.Handler;
 import Game.Screens.Screen;
 import Game.Screens.ScreenManager;
 
@@ -16,6 +18,7 @@ public abstract class ButtonElement extends PaddedElement {
     private String text;
     private Color inactiveColour;
     private Color activeColour;
+    protected KeyManager km;
 
 // CONSTRUCTORS //
     public ButtonElement(String text) {
@@ -96,6 +99,8 @@ public abstract class ButtonElement extends PaddedElement {
     }
 
     private void initialise() {
+        km = Handler.get().getKeyManager();
+
         setButtonText();
 
         mouseManager = MouseManager.get();

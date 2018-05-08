@@ -10,10 +10,6 @@ import java.awt.event.KeyListener;
  */
 
 public class KeyManager implements KeyListener{
-// SINGLETON PATTERN //
-    private static KeyManager self = new KeyManager();
-    public static KeyManager get() { return self; }
-
 // VARIABLES //
     // All Keys
     private boolean[] keys;

@@ -2,6 +2,7 @@ package Game.Display.DisplayElements;
 
 import Game.Data.KeyManager;
 import Game.Display.UserInterface.TextManager;
+import Game.Handler;
 import Game.Timer.CodeTimer;
 import Game.Timer.TimerManager;
 import Game.Timer.iCanHaveCodeTimer;
@@ -28,7 +29,7 @@ public class TypeTextElement extends Element implements iCanHaveCodeTimer {
 // CONSTRUCTORS //
     public TypeTextElement(int maxLength) {
         super(0, 0);
-        km = KeyManager.get();
+        km = Handler.get().getKeyManager();
         textManager = new TextManager();
         setWidth(textManager.getWordWidth(maxLength));
         setHeight(textManager.getCharacterHeight());

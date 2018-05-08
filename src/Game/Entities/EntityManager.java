@@ -81,7 +81,7 @@ public class EntityManager implements iObserver {
         unsubscribe(p);
     }
 
-    // Method that calls update() on every entity
+    // Method that calls updateGame() on every entity
     public void update() {
         if(player != null) player.update();
 

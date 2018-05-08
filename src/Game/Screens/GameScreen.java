@@ -2,12 +2,7 @@ package Game.Screens;
 
 import Game.Data.GameDataManager;
 import Game.Data.SaveManager;
-import Game.Entities.EntityManager;
-import Game.Entities.Dynamic.PlayerEntity;
-import Game.Entities.EnemyDirector;
 import Game.Data.Settings;
-import Game.Display.UserInterface.GameUIManager;
-import Game.Handler;
 import Game.Timer.CodeTimer;
 import Game.Timer.TimerManager;
 import Game.Timer.iCanHaveCodeTimer;
@@ -46,7 +41,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
     @Override
     public void update() {
         if(gameIsRunning) {
-            handler.update();
+            handler.updateGame();
         } else endGame();
     }
 
