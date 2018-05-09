@@ -3,6 +3,8 @@ package Game.Entities.Dynamic.Enemies;
 import Game.Display.Assets.AssetManager;
 import Game.Entities.Collision.CollisionBox;
 import Game.Entities.Dynamic.Bullets.GoblinBulletLarge;
+import Game.Entities.Dynamic.Particles.DebrisParticle;
+import Game.Entities.Dynamic.Particles.EnergyExplParticle;
 import Game.Entities.EntityManager;
 
 public class GoblinFighterLarge extends GoblinFighter {
@@ -27,6 +29,113 @@ public class GoblinFighterLarge extends GoblinFighter {
 
     @Override
     protected void explode() {
+        EntityManager em = handler.getEntityManager();
+        AssetManager am = AssetManager.get();
+
+        // Explosion
+        em.subscribe(new EnergyExplParticle(this, 10, 1));
+
+        // Head Guns of Ship
+        em.subscribe(new DebrisParticle(this, am.getSprite(11, 0, 11)) {
+            @Override
+            protected void setPosAndDir() {
+                double saveSpeed = moveSpeed;
+
+                moveSpeed = 20;
+                setMoveSpeeds();
+                move();
+
+                strafeLeft(9);
+
+                direction += (Math.PI/10);
+
+                moveSpeed = saveSpeed;
+            }
+        });
+        em.subscribe(new DebrisParticle(this, am.getSprite(11, 1, 11)) {
+            @Override
+            protected void setPosAndDir() {
+                double saveSpeed = moveSpeed;
+
+                moveSpeed = 20;
+                setMoveSpeeds();
+                move();
+
+                strafeRight(9);
+
+                direction -= (Math.PI/10);
+
+                moveSpeed = saveSpeed;
+            }
+        });
+
+        // Sides of Ship
+        em.subscribe(new DebrisParticle(this, am.getSprite(11, 0, 12)) {
+            @Override
+            protected void setPosAndDir() {
+                double saveSpeed = moveSpeed;
+
+                moveSpeed = 4;
+                setMoveSpeeds();
+                move();
+
+                strafeLeft(11);
+
+                direction += (Math.PI/2);
+
+                moveSpeed = saveSpeed;
+            }
+        });
+        em.subscribe(new DebrisParticle(this, am.getSprite(11, 1, 12)) {
+            @Override
+            protected void setPosAndDir() {
+                double saveSpeed = moveSpeed;
+
+                moveSpeed = 4;
+                setMoveSpeeds();
+                move();
+
+                strafeRight(11);
+
+                direction += 3*(Math.PI/2);
+
+                moveSpeed = saveSpeed;
+            }
+        });
+
+        // Thrusters of Ship
+        em.subscribe(new DebrisParticle(this, am.getSprite(11, 2, 11)) {
+            @Override
+            protected void setPosAndDir() {
+                double saveSpeed = moveSpeed;
+
+                moveSpeed = -16;
+                setMoveSpeeds();
+                move();
+
+                strafeLeft(11);
+
+                direction += (Math.PI)-(Math.PI/8);
+
+                moveSpeed = saveSpeed;
+            }
+        });
+        em.subscribe(new DebrisParticle(this, am.getSprite(11, 3, 11)) {
+            @Override
+            protected void setPosAndDir() {
+                double saveSpeed = moveSpeed;
+
+                moveSpeed = -16;
+                setMoveSpeeds();
+                move();
+
+                strafeRight(11);
+
+                direction += (Math.PI)+(Math.PI/8);
+
+                moveSpeed = saveSpeed;
+            }
+        });
 
     }
 

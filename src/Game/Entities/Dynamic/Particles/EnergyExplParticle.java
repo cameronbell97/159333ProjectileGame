@@ -13,6 +13,7 @@ public class EnergyExplParticle extends Particle {
 // VARIABLES //
     private static final int DEF_LINGER_TIME = 15;
     private int ticksLeft;
+    private int ySprExpl;
 
 // CONSTRUCTORS //
     public EnergyExplParticle(DynamicEntity parent) {
@@ -22,22 +23,35 @@ public class EnergyExplParticle extends Particle {
                 DEF_PARTICLE_HEIGHT,
                 0
         );
-        img = AssetManager.get().getSprite(11, 3, 7);
+        ySprExpl = 7;
+        img = AssetManager.get().getSprite(11, 3, ySprExpl);
         ticksLeft = DEF_LINGER_TIME;
     }
-    public EnergyExplParticle(DynamicEntity parent, int ticks) {
+    public EnergyExplParticle(DynamicEntity parent, int ticks, int type) { // TYPE 0 = yellow, 1 = red
         super(  parent.getXpos() + (parent.getWidth() / 2) - (DEF_PARTICLE_WIDTH / 2),
                 parent.getYpos() + (parent.getHeight() / 2) - (DEF_PARTICLE_HEIGHT / 2),
                 DEF_PARTICLE_WIDTH,
                 DEF_PARTICLE_HEIGHT,
                 0
         );
-        if(ticks <= DEF_LINGER_TIME/3)
-            AssetManager.get().getSprite(11, 1, 7);
-        else if(ticks <= 2*(DEF_LINGER_TIME/3))
-            AssetManager.get().getSprite(11, 2, 7);
-        else
-            img = AssetManager.get().getSprite(11, 3, 7);
+
+        switch (type) {
+            case 1:
+                ySprExpl = 12;
+                break;
+            default:
+                ySprExpl = 7;
+        }
+
+        if(ticks <= DEF_LINGER_TIME/3) {
+            AssetManager.get().getSprite(11, 1, ySprExpl);
+        }
+        else if(ticks <= 2*(DEF_LINGER_TIME/3)) {
+            AssetManager.get().getSprite(11, 2, ySprExpl);
+        }
+        else {
+            img = AssetManager.get().getSprite(11, 3, ySprExpl);
+        }
 
         ticksLeft = ticks;
     }
@@ -49,9 +63,9 @@ public class EnergyExplParticle extends Particle {
             destroy();
         } else {
             if(ticksLeft == 10) {
-                img = AssetManager.get().getSprite(11, 2, 7);
+                img = AssetManager.get().getSprite(11, 2, ySprExpl);
             } else if(ticksLeft == 5) {
-                img = AssetManager.get().getSprite(11, 1, 7);
+                img = AssetManager.get().getSprite(11, 1, ySprExpl);
             }
 
             ticksLeft--;
