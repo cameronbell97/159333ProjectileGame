@@ -112,6 +112,11 @@ public class Save {
         }
     }
 
+    public void clearScores() {
+        scoreBoard.clearScores();
+        save();
+    }
+
 // GETTERS & SETTERS //
     public ScoreBoard getScoreBoard() {
         return scoreBoard;

@@ -80,7 +80,7 @@ public class MainMenuScreen extends Screen{
         buttonList.addChild(new ButtonElement("OPTIONS", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
             @Override
             protected void onClick() {
-
+                ScreenManager.setScreen(new OptionsScreen(ScreenManager.getScreen()));
             }
         });
         buttonList.addChild(new ButtonElement("QUIT", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
