@@ -23,7 +23,7 @@ public class ScoresScreen extends Screen {
     Color borderColor;
     Color fillColour;
 
-    // Elements
+    // Elements //
     PaddedElement mainElement;
     VerticalListElement titleWrapper;
     HorizontalListElement columnsContainer;

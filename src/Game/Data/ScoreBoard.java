@@ -102,6 +102,14 @@ public class ScoreBoard {
         }
     }
 
+    public void clearScores() {
+        scores = new int[DEF_SCORES_NUM];
+        scoreNames = new String[DEF_SCORES_NUM];
+        for(int i = 0; i < scoreNames.length; i++) {
+            scoreNames[i] = "---";
+        }
+    }
+
 // GETTERS & SETTERS //
     public int[] getScores() {
         return scores;
