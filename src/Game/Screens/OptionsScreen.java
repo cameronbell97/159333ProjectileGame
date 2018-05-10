@@ -69,14 +69,17 @@ public class OptionsScreen extends Screen {
         mainColumn = new VerticalListElement(SPACE_BETWEEN_ROWS);
 
         // Add Elements
+        TextElement cleared = new TextElement("CLEARED!");
+        cleared.setVisible(false);
         clearScoresButton = new ButtonElement("CLEAR HIGH SCORES", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
             @Override
             protected void onClick() {
                 Handler.get().getSave().clearScores();
-
+                cleared.setVisible(true);
             }
         };
         mainColumn.addChild(clearScoresButton);
+        mainColumn.addChild(cleared);
 
         titleWrapper.addChild(new TextElement("OPTIONS"));
         titleWrapper.addChild(mainColumn);

@@ -44,18 +44,20 @@ public abstract class ButtonElement extends PaddedElement {
 
     @Override
     public void draw(Graphics g, int xStart, int yStart) {
-        this.xpos = xStart;
-        this.ypos = yStart;
+        if (isVisible()) {
+            this.xpos = xStart;
+            this.ypos = yStart;
 
-        if(isHovered || isClicked) {
-            fillColour = activeColour;
-        } else fillColour = inactiveColour;
+            if (isHovered || isClicked) {
+                fillColour = activeColour;
+            } else fillColour = inactiveColour;
 
-        super.draw(g, xStart, yStart);
+            super.draw(g, xStart, yStart);
 
-        // Draw Element Border
-        g.setColor(borderColour);
-        g.drawRect(xStart, yStart, width-1, height-1); // The -1 is because drawRect doesn't include  the bottom and right lines in the rectangle (draws them outside)
+            // Draw Element Border
+            g.setColor(borderColour);
+            g.drawRect(xStart, yStart, width - 1, height - 1); // The -1 is because drawRect doesn't include  the bottom and right lines in the rectangle (draws them outside)
+        }
     }
 
     @Override

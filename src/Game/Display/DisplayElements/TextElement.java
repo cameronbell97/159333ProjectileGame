@@ -26,6 +26,8 @@ public class TextElement extends Element {
 
     @Override
     public void draw(Graphics g, int xStart, int yStart) {
-        textManager.drawString(g, text, "left", xStart, yStart);
+        if(isVisible()) {
+            textManager.drawString(g, text, "left", xStart, yStart);
+        }
     }
 }

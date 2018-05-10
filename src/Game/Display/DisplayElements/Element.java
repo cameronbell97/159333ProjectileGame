@@ -9,9 +9,12 @@ public abstract class Element {
     protected int borderWidth; // Width of Element Border (Grows inwards into element)
     protected Color borderColour;
     protected Color fillColour;
+    private boolean visible;
 
 // CONSTRUCTORS //
     public Element(int width, int height) {
+        this.visible = true;
+
         this.width = width;
         this.height = height;
 
@@ -22,6 +25,8 @@ public abstract class Element {
     }
 
     public Element(int width, int height, int borderWidth, Color borderColour, Color fillColour) {
+        this.visible = true;
+
         this.width = width;
         this.height = height;
         this.borderWidth = borderWidth;
@@ -32,13 +37,15 @@ public abstract class Element {
 // METHODS //
     public abstract void update();
     public void draw(Graphics g, int xStart, int yStart) {
-        // Draw Element Fill Colour
-        g.setColor(fillColour);
-        g.fillRect(xStart, yStart, width, height);
+        if (visible) {
+            // Draw Element Fill Colour
+            g.setColor(fillColour);
+            g.fillRect(xStart, yStart, width, height);
 
-        // Draw Element Border
-        g.setColor(borderColour);
-        g.drawRect(xStart, yStart, width-1, height-1); // The -1 is because drawRect doesn't include  the bottom and right lines in the rectangle (draws them outside)
+            // Draw Element Border
+            g.setColor(borderColour);
+            g.drawRect(xStart, yStart, width - 1, height - 1); // The -1 is because drawRect doesn't include  the bottom and right lines in the rectangle (draws them outside)
+        }
     }
 
 // GETTERS & SETTERS //
@@ -56,5 +63,13 @@ public abstract class Element {
 
     protected void setHeight(int height) {
         this.height = height;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 }
