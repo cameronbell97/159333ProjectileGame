@@ -209,7 +209,7 @@ public class Game implements Runnable{
 
             // FPS Counter
             if (timer >= 1000000000) {
-            System.out.println("FPS = " + ticks);   // DEBUG // Print FPS here to get one every second
+//            System.out.println("FPS = " + ticks);   // DEBUG // Print FPS here to get one every second
                 ticks = 0;
                 timer = 0;
             }
