@@ -23,8 +23,6 @@ public class OptionsScreen extends Screen {
 
     // Elements //
     PaddedElement mainElement;
-    VerticalListElement titleWrapper;
-    VerticalListElement mainColumn;
     ButtonElement backButton;
     ButtonElement clearScoresButton;
 
@@ -65,8 +63,9 @@ public class OptionsScreen extends Screen {
 
     private void fillElements() {
         mainElement = new PaddedElement(1, borderColor, fillColour, OUTER_PADDING);
-        titleWrapper = new VerticalListElement((int)(SPACE_BETWEEN_ROWS*1.5));
-        mainColumn = new VerticalListElement(SPACE_BETWEEN_ROWS);
+        VerticalListElement titleWrapper = new VerticalListElement((int)(SPACE_BETWEEN_ROWS*1.5));
+        VerticalListElement mainColumn = new VerticalListElement(SPACE_BETWEEN_ROWS);
+        HorizontalListElement clearScoresRow = new HorizontalListElement(SPACE_BETWEEN_COLUMNS);
 
         // Add Elements
         TextElement cleared = new TextElement("CLEARED!");
@@ -78,8 +77,10 @@ public class OptionsScreen extends Screen {
                 cleared.setVisible(true);
             }
         };
-        mainColumn.addChild(clearScoresButton);
-        mainColumn.addChild(cleared);
+        clearScoresRow.addChild(clearScoresButton);
+        clearScoresRow.addChild(cleared);
+        clearScoresRow.setCenterAlign(true);
+        mainColumn.addChild(clearScoresRow);
 
         titleWrapper.addChild(new TextElement("OPTIONS"));
         titleWrapper.addChild(mainColumn);
