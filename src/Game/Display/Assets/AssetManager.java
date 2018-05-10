@@ -20,15 +20,12 @@ public class AssetManager {
 
     // Spritesheets
     private SpriteSheet sheet1 = null;
-    private SpriteSheet sheet2 = null;
     private SpriteSheet wall_sheet = null;
     private SpriteSheet char_sheet_01 = null;
     private SpriteSheet char_sheet_02 = null;
     private SpriteSheet bullet_sheet = null;
-    private SpriteSheet particles_sheet_8 = null;
     private SpriteSheet particles_sheet_16 = null;
     private BufferedImage walls[];
-    private BufferedImage collColour;
 
     // Maps / Dictionaries
     private HashMap<String, BufferedImage> charset_1;
@@ -52,13 +49,6 @@ public class AssetManager {
         }
         try {
             walls[1] = ImageLoader.load(imagePath + "wall_v.png");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // Collision Colour
-        try {
-            collColour = ImageLoader.load(imagePath + "collision.png");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -105,8 +95,6 @@ public class AssetManager {
                 return sheet1.getSprite(1,2);
             case "AstSmallWhite":
                 return sheet1.getSprite(2,2);
-            case "Coll":
-                return collColour;
         }
 
         return null; // If key is unknown, return null
@@ -116,10 +104,6 @@ public class AssetManager {
         switch(s) {
             case 1:
                 return sheet1.getSprite(x, y);
-            case 2:
-                return sheet2.getSprite(x, y);
-            case 10:
-                return particles_sheet_8.getSprite(x, y);
             case 11:
                 return particles_sheet_16.getSprite(x, y);
             case 20:
@@ -132,10 +116,6 @@ public class AssetManager {
     private void buildSpritesheets() {
         // Sheet01
         try { sheet1 = new SpriteSheet(ImageLoader.load(imagePath + "tile01.png")); // load the spritesheet
-        } catch (IOException e) { e.printStackTrace(); }
-
-        // Sheet02
-        try { sheet2 = new SpriteSheet(ImageLoader.load(imagePath + "tile02.png"), 4, 4, 32, 32); // load the spritesheet
         } catch (IOException e) { e.printStackTrace(); }
 
         // Walls sheet
@@ -152,10 +132,6 @@ public class AssetManager {
 
         // Bullet Sheet
         try { bullet_sheet = new SpriteSheet(ImageLoader.load(imagePath + "bullets.png"), 2, 2, 10, 10); // load the spritesheet
-        } catch (IOException e) { e.printStackTrace(); }
-
-        // Particle Sheet 8x8
-        try { particles_sheet_8 = new SpriteSheet(ImageLoader.load(imagePath + "particles8.png"), 4, 4, 8, 8); // load the spritesheet
         } catch (IOException e) { e.printStackTrace(); }
 
         // Particle Sheet 16x16
