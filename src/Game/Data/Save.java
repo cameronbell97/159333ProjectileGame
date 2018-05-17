@@ -2,22 +2,25 @@ package Game.Data;
 
 import java.io.*;
 
+/**
+ * Cameron Bell - 30/03/2018
+ * Save Class
+ * Class Object to Load, Save, & Store Save Data
+ */
 public class Save {
 // VARIABLES //
     private static final String DEF_SAVE_PATH = "data/save.txt";
 
+    // Data //
     private ScoreBoard scoreBoard;
-
-    private Settings settings;
 
 // CONSTRUCTORS //
     public Save() {
         scoreBoard = new ScoreBoard();
-        settings = new Settings();
-        //save();
     }
 
 // METHODS //
+    // Method - Save Data to File // TODO // Implement Saved Settings
     public void save() {
         File file = new File(DEF_SAVE_PATH);
         if(!file.isFile()) create();
@@ -29,10 +32,9 @@ public class Save {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // TODO // Implement Saved Settings
-        settings = new Settings();
     }
 
+    // Method - Load Data from File // TODO // Implement Saved Settings
     public boolean load() {
         if(!(new File(DEF_SAVE_PATH).isFile())) return false;
 
@@ -65,15 +67,17 @@ public class Save {
             }
         }
 
+        // Attempt to load into scoreboard
         if(scoreBoard.load(scores, scoreNames))
             return true;
         else return false;
     }
 
-    // Method to turn a file to a string
+    // Method - Turn Save File into a String //
     private String filepathToString(String path) {
         StringBuilder builder = new StringBuilder();
 
+        // Load Text Data
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
             String line;
@@ -85,10 +89,11 @@ public class Save {
             e.printStackTrace();
         }
 
+        // Return as String
         return builder.toString();
     }
 
-    // Method to turn a string of number characters into an integer
+    // Method - Turn a String of Number Characters into an Integer //
     private int parseInt(String n) {
         try{
             return Integer.parseInt(n);
@@ -98,7 +103,7 @@ public class Save {
         }
     }
 
-    // Create save file if it doesn't already exist
+    // Method - Create Save File if it Doesn't Already Exist //
     public void create() {
         File file = new File(DEF_SAVE_PATH);
         try {
@@ -112,6 +117,7 @@ public class Save {
         }
     }
 
+    // Method - Clear High Scores //
     public void clearScores() {
         scoreBoard.clearScores();
         save();

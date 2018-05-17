@@ -11,10 +11,10 @@ import java.awt.event.KeyListener;
 
 public class KeyManager implements KeyListener{
 // VARIABLES //
-    // All Keys
+    // All Keys //
     private boolean[] keys;
 
-    // Key Shortcuts
+    // Key Shortcuts //
     public boolean
         left,
         right,
@@ -34,7 +34,7 @@ public class KeyManager implements KeyListener{
     }
 
 // METHODS //
-    // Method - Update Shortcuts
+    // Method - Update Key Shortcuts //
     public void update() {
         // Update the Key Shortcut Booleans
         left = keys[KeyEvent.VK_A];
@@ -50,25 +50,27 @@ public class KeyManager implements KeyListener{
         insert = keys[KeyEvent.VK_INSERT];
     }
 
+    // Method - KeyTyped Event Override //
     @Override
     public void keyTyped(KeyEvent e) {
 
     }
 
-    // Method - Update Keys[] Entry on Key Press
+    // Method - Update Keys[] Entry on Key Press //
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         keys[key] = true;
     }
 
-    // Method - Update Keys[] Entry on Key Release
+    // Method - Update Keys[] Entry on Key Release //
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
         keys[key] = false;
     }
 
+    // Return a Key's Value Based on Virtual Key Code //
     public boolean checkKey(int KeyEventCode) {
         return keys[KeyEventCode];
     }
