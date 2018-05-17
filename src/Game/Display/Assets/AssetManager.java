@@ -9,16 +9,16 @@ import java.util.HashMap;
  * Asset Manager Class
  * Class that holds the game assets
  */
-
 public class AssetManager {
 // SINGLETON PATTERN //
     private static AssetManager self = new AssetManager();
     public static AssetManager get() { return self; }
 
 // VARIABLES //
+    // Statics //
     private static final String imagePath = "../../../img/";
 
-    // Spritesheets
+    // Spritesheets //
     private SpriteSheet sheet1 = null;
     private SpriteSheet wall_sheet = null;
     private SpriteSheet char_sheet_01 = null;
@@ -27,58 +27,33 @@ public class AssetManager {
     private SpriteSheet particles_sheet_16 = null;
     private BufferedImage walls[];
 
-    // Maps / Dictionaries
+    // Maps / Dictionaries //
     private HashMap<String, BufferedImage> charset_1;
     private HashMap<String, BufferedImage> charset_2;
 
-    // Animations
+    // Animations //
     private BufferedImage[] player_thrust_anim;
 
 // CONSTRUCTORS //
     private AssetManager() {
+        // Build Sprites //
         buildSpritesheets();
         buildMaps();
 
-    // Individual Sprites //
-        // Walls //
-        walls = new BufferedImage[2];
-        try {
-            walls[0] = ImageLoader.load(imagePath + "wall_h.png");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            walls[1] = ImageLoader.load(imagePath + "wall_v.png");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    // Animations //
+        // Animations //
         player_thrust_anim = new BufferedImage[4];
         for(int i = 0; i < 4; i++)
             player_thrust_anim[i] = getSprite(1, i, 0);
     }
 
 // METHODS //
-    // Method to get an extracted image from a preset name
+    // Method - Get an Extracted Image Using a Preset Name //
     public BufferedImage getSprite(String key) {
         if(key == null) return null; // If key is null, return null
 
         switch (key) {
             case "player":
                 return sheet1.getSprite(0, 0);
-            case "LTWall":
-                return wall_sheet.getSprite(0, 0);
-            case "RTWall":
-                return wall_sheet.getSprite(1, 0);
-            case "RBWall":
-                return wall_sheet.getSprite(1, 1);
-            case "LBWall":
-                return wall_sheet.getSprite(0, 1);
-            case "HozWall":
-                return walls[0];
-            case "VerWall":
-                return walls[1];
             case "BulletPlayer":
                 return bullet_sheet.getSprite(0, 0);
             case "BulletEnemy":
@@ -100,6 +75,7 @@ public class AssetManager {
         return null; // If key is unknown, return null
     }
 
+    // Method - Get a Sprite from a Sprite Sheet //
     public BufferedImage getSprite(int s, int x, int y) {
         switch(s) {
             case 1:
@@ -113,16 +89,13 @@ public class AssetManager {
         return null;
     }
 
+    // Method - Build Spritesheets from Image Files //
     private void buildSpritesheets() {
-        // Sheet01
+        // Main 64x64 Sheet
         try { sheet1 = new SpriteSheet(ImageLoader.load(imagePath + "tile01.png")); // load the spritesheet
         } catch (IOException e) { e.printStackTrace(); }
 
-        // Walls sheet
-        try { wall_sheet = new SpriteSheet(ImageLoader.load(imagePath + "walls.png"), 2, 2, 16, 16); // load the spritesheet
-        } catch (IOException e) { e.printStackTrace(); }
-
-        // Characters sheet Roman
+        // Characters sheet Roman/English
         try { char_sheet_01 = new SpriteSheet(ImageLoader.load(imagePath + "characters01.png"), 10, 5, 5, 9); // load the spritesheet
         } catch (IOException e) { e.printStackTrace(); }
 
@@ -139,6 +112,7 @@ public class AssetManager {
         } catch (IOException e) { e.printStackTrace(); }
     }
 
+    // Method - Build Text Character Maps //
     private void buildMaps() {
         // Character Sets
         String[][] letters = {
@@ -163,11 +137,13 @@ public class AssetManager {
     }
 
 // GETTERS & SETTERS //
+    // Getter Method - Get Animation Frame for Player Thrust //
     public BufferedImage getAnimPThrust(int frame) {
         if (frame >= 4) frame = 0;
         return player_thrust_anim[frame];
     }
 
+    // Getter Method - Get Text Map Determined by Given Name //
     public HashMap<String, BufferedImage> getMap(String mapName) {
         switch (mapName) {
             case "charset_1":

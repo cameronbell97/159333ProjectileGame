@@ -8,10 +8,11 @@ import java.net.URL;
 /**
  * Cameron Bell - 21/03/2018
  * Image Loader Class
+ * Static Class for Loading Images from Filepath
  */
 public class ImageLoader {
 // METHODS //
-    // Method to return a BufferedImage object from a given filepath
+    // Method - Return a BufferedImage Object From a Given Filepath //
     public static BufferedImage load(String filepath) throws IOException {
         URL url = ImageLoader.class.getResource(filepath);
         try {
