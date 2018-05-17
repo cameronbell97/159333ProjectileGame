@@ -3,6 +3,11 @@ package Game.Display.DisplayElements;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Cameron Bell - 19/04/2018
+ * Horizontal List Element Class
+ * Element Class for Holding and Managing a List of Elements
+ */
 public class HorizontalListElement extends Element {
 // VARIABLES //
     private ArrayList<Element> children;
@@ -18,6 +23,7 @@ public class HorizontalListElement extends Element {
     }
 
 // METHODS //
+    // Method - Update Contained Elements //
     @Override
     public void update() {
         for(Element e : children) {
@@ -25,6 +31,7 @@ public class HorizontalListElement extends Element {
         }
     }
 
+    // Method - For Drawing Element & Child Elements //
     @Override
     public void draw(Graphics g, int xStart, int yStart) {
         int xPencil = xStart;
@@ -38,6 +45,7 @@ public class HorizontalListElement extends Element {
 
     }
 
+    // Method - Add a Child Element //
     public void addChild(Element child) {
         if(child != null && children != null) {
             children.add(child);
@@ -47,6 +55,8 @@ public class HorizontalListElement extends Element {
         height = calculateHeight();
     }
 
+    // Method - Calculate the Width in Pixels of the Element, Based on //
+    //          the Combined Widths (+ Spacing) of the Child Elements. //
     private int calculateWidth() {
         int newWidth = 0;
 
@@ -60,6 +70,7 @@ public class HorizontalListElement extends Element {
         return newWidth;
     }
 
+    // Method - Calculate the Height in Pixels of the Element Based on the Maximum Height of the Child Elements //
     private int calculateHeight() {
         int newHeight = 0;
 

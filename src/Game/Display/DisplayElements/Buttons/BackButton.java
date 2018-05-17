@@ -6,6 +6,11 @@ import Game.Screens.ScreenManager;
 
 import java.awt.*;
 
+/**
+ * Cameron Bell - 19/04/2018
+ * Back Button Element Class
+ * Button Element Class for Returning to Previous Screen
+ */
 public class BackButton extends ButtonElement {
 // VARIABLES //
     private Screen previousScreen;
@@ -27,6 +32,7 @@ public class BackButton extends ButtonElement {
     }
 
 // METHODS //
+    // Method - On Button Click, Return to Previous Screen //
     @Override
     protected void onClick() {
         ScreenManager.setScreen(previousScreen);

@@ -422,6 +422,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         slowTimeCurrent = 0;
     }
 
+    // Method - Recieve Timer Notification //
     @Override
     public void timerNotify(CodeTimer t) {
         String timerCode = t.getCode(); // Get timer code

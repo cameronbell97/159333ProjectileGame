@@ -225,6 +225,7 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         em.unsubscribe(collision);
     }
 
+    // Method - Recieve Timer Notification //
     @Override
     public void timerNotify(CodeTimer t) {
         // Get Code

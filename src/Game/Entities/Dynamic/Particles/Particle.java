@@ -28,6 +28,7 @@ public abstract class Particle extends DynamicEntity implements iCanHaveCodeTime
     }
 
 // METHODS //
+    // Method - Recieve Timer Notification //
     @Override
     public void timerNotify(CodeTimer t) {
         String timerCode = t.getCode(); // Get timer code

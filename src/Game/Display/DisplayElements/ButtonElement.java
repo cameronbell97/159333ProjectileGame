@@ -4,21 +4,30 @@ import Game.Data.KeyManager;
 import Game.Data.MouseManager;
 import Game.Data.Settings;
 import Game.Handler;
-import Game.Screens.Screen;
-import Game.Screens.ScreenManager;
 
 import java.awt.*;
 
+/**
+ * Cameron Bell - 19/04/2018
+ * Button Element Class
+ * Abstract Element Class for Providing Button Functionality
+ */
+
 public abstract class ButtonElement extends PaddedElement {
 // VARIABLES //
+    // Managers //
     MouseManager mouseManager;
+    protected KeyManager km;
+
+    // Data //
     private int xpos, ypos; // x & y positions needed for mouse detection
     private boolean leftMouse, rightMouse;
     private boolean isHovered, wasJustClicked, isClicked;
     private String text;
+
+    // Colours //
     private Color inactiveColour;
     private Color activeColour;
-    protected KeyManager km;
 
 // CONSTRUCTORS //
     public ButtonElement(String text) {
@@ -40,8 +49,10 @@ public abstract class ButtonElement extends PaddedElement {
     }
 
 // METHODS //
+    // Method - On Click to be Overridden for Button Click Functionality //
     protected abstract void onClick();
 
+    // Method - For Drawing Element //
     @Override
     public void draw(Graphics g, int xStart, int yStart) {
         if (isVisible()) {
@@ -60,6 +71,7 @@ public abstract class ButtonElement extends PaddedElement {
         }
     }
 
+    // Method - For Checking Mouse Position and Updating Values Accordingly //
     @Override
     public void update() {
         additionalActions();
@@ -96,10 +108,12 @@ public abstract class ButtonElement extends PaddedElement {
         }
     }
 
+    // Method - Can be Overridden on Instantiations of Buttons for Extra Functionality //
     protected void additionalActions() {
 
     }
 
+    // Method - Initialise Variables //
     private void initialise() {
         km = Handler.get().getKeyManager();
         mouseManager = Handler.get().getMouseManager();
@@ -116,14 +130,13 @@ public abstract class ButtonElement extends PaddedElement {
         activeColour = new Color(46, 47, 120);
     }
 
+// GETTERS & SETTERS //
     private void setButtonText() {
         setChildElement(new TextElement(text));
     }
-
     public void setInactiveColour(Color inactiveColour) {
         this.inactiveColour = inactiveColour;
     }
-
     public void setActiveColour(Color activeColour) {
         this.activeColour = activeColour;
     }

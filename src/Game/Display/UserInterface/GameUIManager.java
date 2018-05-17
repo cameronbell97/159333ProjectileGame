@@ -128,6 +128,7 @@ public class GameUIManager implements iCanHaveCodeTimer {
         flashAlertAlphaPhase = 0;
     }
 
+    // Method - Recieve Timer Notification //
     @Override
     public void timerNotify(CodeTimer t) {
         String code = t.getCode();

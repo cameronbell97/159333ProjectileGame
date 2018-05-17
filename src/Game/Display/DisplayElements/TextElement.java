@@ -4,6 +4,11 @@ import Game.Display.UserInterface.TextManager;
 
 import java.awt.*;
 
+/**
+ * Cameron Bell - 19/04/2018
+ * Text Element Class
+ * Element Class for Holding and Displaying Text
+ */
 public class TextElement extends Element {
 // VARIABLES //
     TextManager textManager;
@@ -19,11 +24,13 @@ public class TextElement extends Element {
     }
 
 // METHODS //
+    // Method - Empty Update Method as Nothing Needs Updating //
     @Override
     public void update() {
 
     }
 
+    // Method - For Drawing Element //
     @Override
     public void draw(Graphics g, int xStart, int yStart) {
         if(isVisible()) {

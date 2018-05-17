@@ -2,6 +2,11 @@ package Game.Display.DisplayElements;
 
 import java.awt.*;
 
+/**
+ * Cameron Bell - 19/04/2018
+ * Padded Element Class
+ * Element Class for Providing Basic Padding around One Element
+ */
 public class PaddedElement extends Element {
 // VARIABLES //
     protected int padding; // Inner Padding of Element
@@ -38,6 +43,7 @@ public class PaddedElement extends Element {
     }
 
     // METHODS //
+    // Method - For Drawing Element & Child Element //
     @Override
     public void draw(Graphics g, int xStart, int yStart) {
         // Draw Element Border & Fill
@@ -49,6 +55,7 @@ public class PaddedElement extends Element {
     }
 
 // GETTERS & SETTERS //
+    // Setter Method - Set the Child Element //
     public void setChildElement(Element child) {
         // In case the child is set twice, we don't want the first child's width included
         if(childElement != null) {

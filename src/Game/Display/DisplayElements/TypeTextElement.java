@@ -11,28 +11,46 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
 
+/**
+ * Cameron Bell - 19/04/2018
+ * Type Text Element Class
+ * Element Class for Managing and Tracking User Input for Typing
+ */
 public class TypeTextElement extends Element implements iCanHaveCodeTimer {
 // VARIABLES //
+    // Statics //
     private static final int UNDERSCORE_FLASH_TIME = 30;
 
+    // Managers //
     TextManager textManager;
-    int maxLength;
-    int activeIndex;
-    String letters[][];
-    int letterCodes[][];
-    boolean isTyped[][];
-    boolean backTyped;
-    String text;
     KeyManager km;
-    boolean underscoreFlash;
+
+    // Data
+    int
+            maxLength,
+            activeIndex,
+            letterCodes[][];
+    String
+            text,
+            letters[][];
+    boolean
+            backTyped,
+            underscoreFlash,
+            isTyped[][];
 
 // CONSTRUCTORS //
     public TypeTextElement(int maxLength) {
         super(0, 0);
+
+        // Get Managers //
         km = Handler.get().getKeyManager();
         textManager = new TextManager();
+
+        // Set Dimensions //
         setWidth(textManager.getWordWidth(maxLength));
         setHeight(textManager.getCharacterHeight());
+
+        // Set Data //
         this.maxLength = maxLength;
         activeIndex = 0;
         this.text = "";
@@ -49,8 +67,9 @@ public class TypeTextElement extends Element implements iCanHaveCodeTimer {
                 element = false;
         }
         backTyped = false;
+        underscoreFlash = false;
 
-        // Build Letter Codes
+        // Build Letter Codes //
         letterCodes = new int[letters.length][letters[0].length];
         for(int i = 0; i < letters.length; i++) {
             for(int j = 0; j < letters[0].length; j++) {
@@ -58,11 +77,12 @@ public class TypeTextElement extends Element implements iCanHaveCodeTimer {
             }
         }
 
-        underscoreFlash = false;
+        // Start Flashing Underscore //
         Handler.get().getTimerManager().newCodeTimer(UNDERSCORE_FLASH_TIME, this, "_");
     }
 
 // METHODS //
+    // Method - Update Text Box Data //
     @Override
     public void update() {
         for(int i = 0; i < letters.length; i++) {
@@ -87,6 +107,7 @@ public class TypeTextElement extends Element implements iCanHaveCodeTimer {
         }
     }
 
+    // Method - For Drawing Element //
     @Override
     public void draw(Graphics g, int xStart, int yStart) {
         if(underscoreFlash) {
@@ -96,6 +117,7 @@ public class TypeTextElement extends Element implements iCanHaveCodeTimer {
         }
     }
 
+    // Method - Append Typed Key Character to Text Box String Value, if Possible //
     private void keyTyped(String key) {
         // Handle Backspace
         if(key.equals("\b")) {
@@ -112,6 +134,7 @@ public class TypeTextElement extends Element implements iCanHaveCodeTimer {
         return text;
     }
 
+    // Method - Recieve Timer Notification //
     @Override
     public void timerNotify(CodeTimer t) {
         String code = t.getCode();
@@ -128,6 +151,7 @@ public class TypeTextElement extends Element implements iCanHaveCodeTimer {
         tm.unsubTimer(t);
     }
 
+    // Method - Append Underscore to String //
     private String setUnderscore(String t) {
         if(t.length() == 0) {
             return "_";

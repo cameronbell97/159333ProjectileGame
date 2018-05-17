@@ -2,16 +2,25 @@ package Game.Display.DisplayElements;
 
 import java.awt.*;
 
+/**
+ * Cameron Bell - 19/04/2018
+ * Element Class
+ * Abstract Class for Display Elements
+ */
 public abstract class Element {
 // VARIABLES //
+    // Data //
     protected int width; // Width of Element
     protected int height; // Height of Element
     protected int borderWidth; // Width of Element Border (Grows inwards into element)
-    protected Color borderColour;
-    protected Color fillColour;
     private boolean visible;
 
+    // Colours //
+    protected Color borderColour;
+    protected Color fillColour;
+
 // CONSTRUCTORS //
+    // Default Constructor //
     public Element(int width, int height) {
         this.visible = true;
 
@@ -24,6 +33,7 @@ public abstract class Element {
         this.fillColour = transparent;
     }
 
+    // Constructor Overload - For Exact Dimensions //
     public Element(int width, int height, int borderWidth, Color borderColour, Color fillColour) {
         this.visible = true;
 
@@ -35,7 +45,10 @@ public abstract class Element {
     }
 
 // METHODS //
+    // Abstract Method - For Updating Data //
     public abstract void update();
+
+    // Method - Basic Drawing of Border and Fill //
     public void draw(Graphics g, int xStart, int yStart) {
         if (visible) {
             // Draw Element Fill Colour
@@ -52,23 +65,18 @@ public abstract class Element {
     public int getWidth() {
         return width;
     }
-
     public int getHeight() {
         return height;
     }
-
     protected void setWidth(int width) {
         this.width = width;
     }
-
     protected void setHeight(int height) {
         this.height = height;
     }
-
     public boolean isVisible() {
         return visible;
     }
-
     public void setVisible(boolean visible) {
         this.visible = visible;
     }

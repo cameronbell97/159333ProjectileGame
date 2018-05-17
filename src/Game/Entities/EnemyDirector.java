@@ -84,7 +84,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
             currentTimer = tm.newCodeTimer(LEVEL_WAIT_TIME, this, "LVL+", 0);
     }
 
-    // Method - Recieve CodeTimer
+    // Method - Recieve CodeTimer Notification //
     @Override
     public void timerNotify(CodeTimer t) {
         // Get Game.Timer Code
@@ -104,7 +104,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
         }
     }
 
-    // Method - Recieve EnemyTimer
+    // Method - Recieve Timer Notification //
     @Override
     public void timerNotify(EnemyTimer t) {
         // Unsub Game.Timer so it can be deleted

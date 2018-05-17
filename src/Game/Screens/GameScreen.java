@@ -64,6 +64,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
         }
     }
 
+    // Method - Recieve Timer Notification //
     @Override
     public void timerNotify(CodeTimer t) {
         handler.getTimerManager().unsubTimer(t);
