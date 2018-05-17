@@ -11,6 +11,7 @@ import Game.Entities.EntityManager;
 import Game.Timer.TimerManager;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * Created by Cameron on 7/05/2018.
@@ -34,7 +35,10 @@ public class Handler {
 
     Save save;
 
+    // Data //
     private boolean visibleUI;
+    private int gameHeight;
+    private int gameWidth;
 
 // CONSTRUCTOR //
     private Handler() {
@@ -89,7 +93,62 @@ public class Handler {
 
     }
 
+// STATIC METHODS //
+    // Method - Generate a Random Integer in a Range
+    public static int getIntFromRange(int min, int max) {
+        // Switch the values if needed
+        if(max < min) {
+            int temp = min;
+            min = max;
+            max = temp;
+        }
+
+        max += 1;
+
+        Random generator = new Random();
+        return min + generator.nextInt(max - min);
+    }
+
+    // Method - Generate a Random Float in a Range
+    public static float getFloatFromRange(float min, float max) {
+        // Switch the values if needed
+        if(max < min) {
+            float temp = min;
+            min = max;
+            max = temp;
+        }
+        Random generator = new Random();
+        return min + generator.nextFloat() * (max - min);
+    }
+
+    // Method - Generate a Random Double in a Range
+    public static double getDoubleFromRange(double min, double max) {
+        // Switch the values if needed
+        if(max < min) {
+            double temp = min;
+            min = max;
+            max = temp;
+        }
+        Random generator = new Random();
+        return min + generator.nextDouble() * (max - min);
+    }
+
+    // Method - Convert Seconds to Ticks / Frames
+    public static int secsToTicks(int seconds) {
+        return seconds * 60;
+    }
+
 // GETTERS & SETTERS //
+    public void setGameDimensions(int width, int height) {
+        this.gameWidth = width;
+        this.gameHeight = height;
+    }
+    public int getHeight() {
+        return gameHeight;
+    }
+    public int getWidth() {
+        return gameWidth;
+    }
 
     public EntityManager getEntityManager() {
         return entityManager;

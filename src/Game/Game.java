@@ -28,7 +28,7 @@ public class Game implements Runnable{
     private int gameHeight;
     private int gameWidth;
 
-    // Window / Game.Display variables
+    // Window / Display
     private DisplayWindow display;
     private Canvas displayCanvas;
     private Graphics g;
@@ -43,7 +43,7 @@ public class Game implements Runnable{
     private KeyManager km;
     private MouseManager mm;
 
-    // Game.Screens
+    // Screens
     private Screen mainMenuScreen;
 
 // CONSTRUCTORS //
@@ -53,112 +53,8 @@ public class Game implements Runnable{
         gameWidth = width;
         gameTitle = title;
         handler = Handler.get();
+        handler.setGameDimensions(width, height);
     }
-
-// METHODS //
-    // Method - Initialise Game
-    public void initialise() throws IOException {
-        // Create Managers
-        km = handler.getKeyManager();
-        mm = handler.getMouseManager();
-
-        // Create Window
-        display = new DisplayWindow(gameTitle, gameWidth, gameHeight);
-
-        // Set Listeners
-        display.getFrame().addKeyListener(km);
-        display.getFrame().addMouseListener(mm);
-        display.getFrame().addMouseMotionListener(mm);
-        display.getCanvas().addMouseListener(mm);
-        display.getCanvas().addMouseMotionListener(mm);
-
-        displayCanvas = display.getCanvas();
-
-        // Initialise Game.Screens
-        mainMenuScreen = new MainMenuScreen();
-        ScreenManager.setScreen(mainMenuScreen);
-    }
-
-    // Method - Updates Everything in the Game
-    public void update() {
-        handler.update();
-
-        // Update Current Screen
-        if (ScreenManager.getScreen() != null) {
-            ScreenManager.getScreen().update();
-        }
-    }
-
-    // Method - Render the Graphics on the Screen
-    public void draw() throws IOException {
-        // Set-Up
-        bufferStrategy = displayCanvas.getBufferStrategy();
-        if(bufferStrategy == null) {
-            displayCanvas.createBufferStrategy(3);
-            return;
-        }
-        g = bufferStrategy.getDrawGraphics();
-
-        // Draw to the Screen
-        g.clearRect(0, 0, gameWidth, gameHeight); // Clear the screen before drawing
-        if (ScreenManager.getScreen() != null) {
-            ScreenManager.getScreen().draw(g);
-        }
-
-        // Game.Display the new drawn-to Screen
-        bufferStrategy.show();
-        g.dispose();
-    }
-
-    // Method - Generate a Random Integer in a Range
-    public static int getIntFromRange(int min, int max) {
-        // Switch the values if needed
-        if(max < min) {
-            int temp = min;
-            min = max;
-            max = temp;
-        }
-
-        max += 1;
-
-        Random generator = new Random();
-        return min + generator.nextInt(max - min);
-    }
-
-    // Method - Generate a Random Float in a Range
-    public static float getFloatFromRange(float min, float max) {
-        // Switch the values if needed
-        if(max < min) {
-            float temp = min;
-            min = max;
-            max = temp;
-        }
-        Random generator = new Random();
-        return min + generator.nextFloat() * (max - min);
-    }
-
-    // Method - Generate a Random Double in a Range
-    public static double getDoubleFromRange(double min, double max) {
-        // Switch the values if needed
-        if(max < min) {
-            double temp = min;
-            min = max;
-            max = temp;
-        }
-        Random generator = new Random();
-        return min + generator.nextDouble() * (max - min);
-    }
-
-    // Method - Convert Seconds to Ticks / Frames
-    public static int secsToTicks(int seconds) {
-        return seconds * 60;
-    }
-
-    public static void end() {
-        System.exit(0);
-    }
-
-    // -------------------------------------------- // Threading Methods // --------------------------------------------
 
     // Method - Start the Game
     public synchronized void start() {
@@ -168,7 +64,9 @@ public class Game implements Runnable{
         thread.start(); // Calls run() on Game object in the thread
     }
 
-    // Method - Main Game Thread Method
+// METHODS //
+    // Method - Run Game
+    // - Start Main Thread
     public void run() {
         // Initialise Game
         try { initialise(); }
@@ -217,6 +115,65 @@ public class Game implements Runnable{
         // The Main Game Loop // ----- End -----
     }
 
+    // Method - Initialise Game
+    public void initialise() throws IOException {
+        // Get Managers
+        km = handler.getKeyManager();
+        mm = handler.getMouseManager();
+
+        // Create Window
+        display = new DisplayWindow(gameTitle, gameWidth, gameHeight);
+
+        // Set Listeners
+        display.getFrame().addKeyListener(km);
+        display.getFrame().addMouseListener(mm);
+        display.getFrame().addMouseMotionListener(mm);
+        display.getCanvas().addMouseListener(mm);
+        display.getCanvas().addMouseMotionListener(mm);
+
+        displayCanvas = display.getCanvas();
+
+        // Initialise Game.Screens
+        mainMenuScreen = new MainMenuScreen();
+        ScreenManager.setScreen(mainMenuScreen);
+    }
+
+    // Method - Updates Everything in the Game
+    public void update() {
+        handler.update();
+
+        // Update Current Screen
+        if (ScreenManager.getScreen() != null) {
+            ScreenManager.getScreen().update();
+        }
+    }
+
+    // Method - Render the Graphics on the Screen
+    public void draw() throws IOException {
+        // Set-Up
+        bufferStrategy = displayCanvas.getBufferStrategy();
+        if(bufferStrategy == null) {
+            displayCanvas.createBufferStrategy(3);
+            return;
+        }
+        g = bufferStrategy.getDrawGraphics();
+
+        // Draw to the Screen
+        g.clearRect(0, 0, gameWidth, gameHeight); // Clear the screen before drawing
+        if (ScreenManager.getScreen() != null) {
+            ScreenManager.getScreen().draw(g);
+        }
+
+        // Display the new drawn-to Screen
+        bufferStrategy.show();
+        g.dispose();
+    }
+
+    // Method - End / Exit
+    public static void end() {
+        System.exit(0);
+    }
+
     // Method - Executed on Game Stop
     public synchronized void stop() {
         if (!isRunning) return; // Safeguard in case stop() is called a second time
@@ -226,13 +183,5 @@ public class Game implements Runnable{
         // Kill Thread
         try { thread.join(); }
         catch (java.lang.InterruptedException e) { e.printStackTrace(); }
-    }
-
-// GETTERS & SETTERS //
-    public int getHeight() {
-        return gameHeight;
-    }
-    public int getWidth() {
-        return gameWidth;
     }
 }

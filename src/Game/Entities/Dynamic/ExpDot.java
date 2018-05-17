@@ -7,7 +7,6 @@ import Game.Entities.EntityManager;
 import Game.Data.Settings;
 import Game.Handler;
 import Game.Timer.CodeTimer;
-import Game.Timer.TimerManager;
 import Game.Timer.iCanHaveCodeTimer;
 
 import java.awt.*;
@@ -76,12 +75,12 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         }
         img = AssetManager
                 .get()
-                .getSprite(11, Game.Game.getIntFromRange(0, 3), yImg);
+                .getSprite(11, Handler.getIntFromRange(0, 3), yImg);
 
         setCollisionBox();
 
         // Set Despawn Timer
-        Handler.get().getTimerManager().newCodeTimer(DESPAWN_TIME + Game.Game.getIntFromRange(-30, 30), this, "DIE");
+        Handler.get().getTimerManager().newCodeTimer(DESPAWN_TIME + Handler.getIntFromRange(-30, 30), this, "DIE");
 
         // Set Variables
         moveSpeed = DEF_MOVE_SPEED;

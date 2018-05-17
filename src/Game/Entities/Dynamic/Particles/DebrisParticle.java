@@ -2,7 +2,7 @@ package Game.Entities.Dynamic.Particles;
 
 import Game.Entities.Dynamic.DynamicEntity;
 import Game.Entities.Entity;
-import Game.Timer.TimerManager;
+import Game.Handler;
 
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -38,7 +38,7 @@ public abstract class DebrisParticle extends Particle {
         xmove = (float)(moveSpeed * Math.cos(direction));
 
         // Set Rotation Speed
-        spriteRotSpeed = Game.Game.getDoubleFromRange(-0.001*Math.PI, 0.001*Math.PI);;
+        spriteRotSpeed = Handler.getDoubleFromRange(-0.001*Math.PI, 0.001*Math.PI);;
         rotateSprite();
 
         handler.getTimerManager().newCodeTimer(200, this, "DIE");

@@ -12,6 +12,7 @@ import Game.Entities.iOutOfBounds;
 import Game.Entities.iVulnerable;
 import Game.Entities.EnemyDirector;
 import Game.Data.Settings;
+import Game.Handler;
 
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -62,7 +63,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
         setMoveSpeeds();
 
         // Set Rotation
-        spriteRotation = Game.Game.getDoubleFromRange(-0.01*Math.PI, 0.01*Math.PI);
+        spriteRotation = Handler.getDoubleFromRange(-0.01*Math.PI, 0.01*Math.PI);
 
         // Rotate the sprite
         rotateSprite();
@@ -122,9 +123,9 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
         // Create 2 child asteroids if big enough to do so
         if(level > 1) {
             for(int i = -1; i < 2; i+=2) {
-                float newX = Game.Game.getFloatFromRange(xpos-width/8, xpos+width/8);
-                float newY = Game.Game.getFloatFromRange(ypos-height/8, ypos+height/8);
-                double newDir = Game.Game.getDoubleFromRange(direction + (i*(Math.PI/4)), direction + (i*(Math.PI/8)));
+                float newX = Handler.getFloatFromRange(xpos-width/8, xpos+width/8);
+                float newY = Handler.getFloatFromRange(ypos-height/8, ypos+height/8);
+                double newDir = Handler.getDoubleFromRange(direction + (i*(Math.PI/4)), direction + (i*(Math.PI/8)));
 
                 Asteroid ast = new Asteroid(newX, newY, level-1, newDir, moveSpeed*1.2, white);
                 ast.setCollisionBox();
@@ -133,9 +134,9 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
             }
         }
         // 1 in 5 chance to generate a third asteroid child upon death of lvl 3 asteroid
-        if(level == 3 && Game.Game.getIntFromRange(0, 4) == 4) {
-            float newX = Game.Game.getFloatFromRange(xpos-width/8, xpos+width/8);
-            float newY = Game.Game.getFloatFromRange(ypos-height/8, ypos+height/8);
+        if(level == 3 && Handler.getIntFromRange(0, 4) == 4) {
+            float newX = Handler.getFloatFromRange(xpos-width/8, xpos+width/8);
+            float newY = Handler.getFloatFromRange(ypos-height/8, ypos+height/8);
 
             Asteroid ast = new Asteroid(newX, newY, level-1, direction, moveSpeed*1.2, white);
             ast.setCollisionBox();

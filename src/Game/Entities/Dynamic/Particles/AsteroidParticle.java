@@ -4,7 +4,6 @@ import Game.Display.Assets.AssetManager;
 import Game.Entities.Dynamic.DynamicEntity;
 import Game.Entities.Entity;
 import Game.Handler;
-import Game.Timer.TimerManager;
 
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -34,7 +33,7 @@ public class AsteroidParticle extends Particle {
         xmove = (float)(moveSpeed * Math.cos(direction));
 
         // Set Rotation
-        spriteRotation = Game.Game.getDoubleFromRange(-0.05*Math.PI, 0.02*Math.PI);
+        spriteRotation = Handler.getDoubleFromRange(-0.05*Math.PI, 0.02*Math.PI);
         rotateSprite();
     }
 
@@ -52,8 +51,8 @@ public class AsteroidParticle extends Particle {
     }
 
     protected BufferedImage getSprite() {
-        if(level < 3) return AssetManager.get().getSprite(11, Game.Game.getIntFromRange(0, 3), 3);
-        else return AssetManager.get().getSprite(11, Game.Game.getIntFromRange(0, 3), 4);
+        if(level < 3) return AssetManager.get().getSprite(11, Handler.getIntFromRange(0, 3), 3);
+        else return AssetManager.get().getSprite(11, Handler.getIntFromRange(0, 3), 4);
     }
 
     @Override
@@ -67,7 +66,7 @@ public class AsteroidParticle extends Particle {
     // Method that sets a new position at a random point up to
     // 4 pixels away from the current position in every direction
     private void setNewPosition() {
-        setXpos(Game.Game.getFloatFromRange(xpos-(width/2/2)+22, xpos+(width/2/2)+22));
-        setYpos(Game.Game.getFloatFromRange(ypos-(height/2/2)+22, ypos+(height/2/2)+22));
+        setXpos(Handler.getFloatFromRange(xpos-(width/2/2)+22, xpos+(width/2/2)+22));
+        setYpos(Handler.getFloatFromRange(ypos-(height/2/2)+22, ypos+(height/2/2)+22));
     }
 }

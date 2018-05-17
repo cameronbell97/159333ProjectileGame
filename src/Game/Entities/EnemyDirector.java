@@ -1,9 +1,7 @@
 package Game.Entities;
 
-import Game.Display.UserInterface.GameUIManager;
 import Game.Entities.Dynamic.DynamicEntity;
 import Game.Entities.Dynamic.Enemies.*;
-import Game.Game;
 import Game.Handler;
 import Game.Data.Settings;
 import Game.Timer.*;
@@ -60,7 +58,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
 // METHODS //
     public void update() {
         // Generate time new enemy will wait to spawn
-        int nextEnemyTime = Game.getIntFromRange(spawn_queue_minsec, spawn_queue_maxsec);
+        int nextEnemyTime = Handler.getIntFromRange(spawn_queue_minsec, spawn_queue_maxsec);
         TimerManager tm = Handler.get().getTimerManager();
 
         // Create Enemy "to-be-spawned" Timers
@@ -72,7 +70,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
             limboEntities++;
 
             // Increment Time
-            nextEnemyTime += Game.getIntFromRange(1*60, 4*60);
+            nextEnemyTime += Handler.getIntFromRange(1*60, 4*60);
         }
         spawn_queue.clear(); // Clear the spawn_queue
 
@@ -316,11 +314,11 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
     // Method - Dynamically Generate A New Position & Direction for the Enemy
     private static Enemy generateEnemyPosition(Enemy e, int enemySize) {
         // Generate new (x,y) Co-ordinates
-        float newXpos = Game.getFloatFromRange(-enemySize, Settings.game_width);
-        float newYpos = Game.getFloatFromRange(-enemySize, Settings.game_height);
+        float newXpos = Handler.getFloatFromRange(-enemySize, Settings.game_width);
+        float newYpos = Handler.getFloatFromRange(-enemySize, Settings.game_height);
 
         // Randomly choose one wall to move behind (so the enemy spawns off-screen)
-        switch (Game.getIntFromRange(0, 1)) {
+        switch (Handler.getIntFromRange(0, 1)) {
             case 0:
                 if(newXpos < (Settings.game_width + enemySize) / 2) newXpos = -enemySize;
                 else newXpos = Settings.game_width;
@@ -382,7 +380,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
         }
 
         // Add small variation to direction
-        newDir += Game.getDoubleFromRange(-(Math.PI / 8), Math.PI / 8);
+        newDir += Handler.getDoubleFromRange(-(Math.PI / 8), Math.PI / 8);
 
         return newDir;
     }
