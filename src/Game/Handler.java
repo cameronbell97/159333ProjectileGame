@@ -14,7 +14,9 @@ import java.awt.*;
 import java.util.Random;
 
 /**
- * Created by Cameron on 7/05/2018.
+ * Cameron Bell - 07/05/2018
+ * Handler Class
+ * Global Point of Access & Management for Game Data
  */
 public class Handler {
 // SINGLETON PATTERN //

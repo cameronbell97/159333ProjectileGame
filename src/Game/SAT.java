@@ -8,10 +8,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Cameron Bell - 03/04/2018
+ * SAT Class
+ * Contains SAT Algorithms for Checking Collision Between two Rotated Squares
+ */
 public class SAT {
+    // Method - Check if Two Rotated Squares are Colliding //
     public static boolean isColliding(CollisionBox c1, CollisionBox c2) {
-        // TODO // check
-
         List<Point2D> axes = new ArrayList<>();
         axes.addAll(getAxes(c1.getDirection()));
         axes.addAll(getAxes(c2.getDirection()));
@@ -35,6 +39,7 @@ public class SAT {
         return true;
     }
 
+    // Method - Get Axes of square at a rotation //
     public static List<Point2D> getAxes(double rotation){
         return Arrays.asList(
                 new Point2D(Math.cos(rotation), Math.sin(rotation)),
@@ -42,6 +47,7 @@ public class SAT {
         );
     }
 
+    // Method - Get Corner Vectors of Rotated Square //
     private static List<Point2D> getCornerVs(CollisionBox e) {
         return Arrays.asList(
                 new Point2D(e.getXpos(), e.getYpos()),
@@ -52,6 +58,7 @@ public class SAT {
         // p -> p.subtract(e.getCentre()) // is where the y axis gets fucked // turns to 17
     }
 
+    // Method - Get Corners of Rotated Square //
     public static List<Point2D> getCorners(CollisionBox e) {
         return getCornerVs(e).stream().map(p -> new Point2D(
                 p.getX() * Math.cos(e.getDirection()) - p.getY() * Math.sin(e.getDirection()),
