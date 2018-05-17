@@ -1,20 +1,20 @@
 package Game.Data;
 
-import Game.Display.UserInterface.GameUIManager;
 import Game.Entities.EnemyDirector;
 import Game.Entities.EntityManager;
 import Game.Handler;
-import Game.Timer.TimerManager;
 
 public class GameDataManager {
 // VARIABLES //
     boolean alive = true;
 
-    // Sources
+    // Sources //
     Handler handler;
     private Save save;
+    EntityManager em;
+    EnemyDirector ed;
 
-    // Shortcuts
+    // Shortcuts //
     private int player_hp;
     private int enemies_remaining;
     private int current_level;
@@ -22,22 +22,25 @@ public class GameDataManager {
 
 // CONSTRUCTORS //
     public GameDataManager() {
+        // Initialise Variables
         player_hp = 0;
         enemies_remaining = 0;
         current_level = 0;
         score = 0;
         handler = Handler.get();
+        em = handler.getEntityManager();
+        ed = handler.getEnemyDirector();
     }
 
 // METHODS //
+    // Method - Update Shortcuts //
     public void update() {
-        EntityManager em = handler.getEntityManager();
-        EnemyDirector ed = handler.getEnemyDirector();
-
-        if(em.getPlayer() != null) player_hp = em.getPlayer().getHP();
-        else player_hp = 0;
-        enemies_remaining = ed.getRemainingEnemies();
-        current_level = ed.getGameLevel();
+        if(em != null && ed != null) {
+            if (em.getPlayer() != null) player_hp = em.getPlayer().getHP();
+            else player_hp = 0;
+            enemies_remaining = ed.getRemainingEnemies();
+            current_level = ed.getGameLevel();
+        }
     }
 
 //    public void clearData() {
@@ -64,7 +67,6 @@ public class GameDataManager {
     public int getScore() {
         return score;
     }
-
     public boolean isAlive() {
         return alive;
     }
