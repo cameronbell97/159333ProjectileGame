@@ -1,25 +1,31 @@
 package Game.Display.UserInterface;
 
-import Game.Data.GameDataManager;
 import Game.Data.Settings;
 import Game.Handler;
 import Game.Timer.CodeTimer;
-import Game.Timer.TimerManager;
 import Game.Timer.iCanHaveCodeTimer;
 
 import java.awt.*;
 
+/**
+ * Cameron Bell - 12/04/2018
+ * Game UI Manager Class
+ * Displays the Game UI When Playing
+ */
 public class GameUIManager implements iCanHaveCodeTimer {
 // VARIABLES //
+    // Statics //
     private static final int DEF_FLASH_TIME = 110;
+    private static final int FLASH_ALERT_Y = (Settings.ui_upper_boundary * 2) + (Settings.character_height * Settings.character_size) * 2;
 
+    // Managers //
     Handler handler;
-    TextManager textManager;
 
+    TextManager textManager;
+    // Data //
     String flashAlert;
     float flashAlertAlpha;
     int flashAlertAlphaPhase;
-    private static final int FLASH_ALERT_Y = (Settings.ui_upper_boundary * 2) + (Settings.character_height * Settings.character_size) * 2;
 
 // CONSTRUCTORS //
     public GameUIManager(Handler parentHandler) {
@@ -30,10 +36,12 @@ public class GameUIManager implements iCanHaveCodeTimer {
     }
 
 // METHODS //
+    // Method - Update Flashing Alert //
     public void update() {
         flashAlert();
     }
 
+    // Method - Draw UI To Screen //
     public void draw(Graphics g) {
         drawPlayerHP(g);
         drawRemainingEnemies(g);
@@ -45,6 +53,7 @@ public class GameUIManager implements iCanHaveCodeTimer {
             textManager.drawString(g, flashAlert, "center", Settings.game_width / 2, FLASH_ALERT_Y, flashAlertAlpha);
     }
 
+    // Method - Draw Score to Screen //
     private void drawScore(Graphics g) {
         // Get Parameters
         int xoffset = Settings.ui_left_boundary;
@@ -61,6 +70,7 @@ public class GameUIManager implements iCanHaveCodeTimer {
         textManager.drawString(g, Integer.toString(score), "left", xoffset, yoffset);
     }
 
+    // Method - Draw Game Level to Screen //
     private void drawGameLevel(Graphics g) {
         // Get Parameters
         int xoffset = Settings.game_width / 2;
@@ -77,6 +87,7 @@ public class GameUIManager implements iCanHaveCodeTimer {
         textManager.drawString(g, Integer.toString(level), "center", xoffset, yoffset);
     }
 
+    // Method - Draw Remaining Enemies to Screen //
     private void drawRemainingEnemies(Graphics g) {
         // Get Parameters
         int xoffset = Settings.game_width - Settings.ui_right_boundary - textManager.getCharacterWidth();
@@ -93,6 +104,7 @@ public class GameUIManager implements iCanHaveCodeTimer {
         textManager.drawString(g, Integer.toString(remaining), "right", xoffset, yoffset);
     }
 
+    // Method - Draw Player Health to Screen //
     private void drawPlayerHP(Graphics g) {
         // Get Parameters
         int xoffset = Settings.ui_left_boundary;
@@ -109,6 +121,7 @@ public class GameUIManager implements iCanHaveCodeTimer {
         textManager.drawString(g, Integer.toString(hp), "left", xoffset, yoffset);
     }
 
+    // Method - Update Alpha Value of Flashing Alert //
     public void flashAlert() {
         if(flashAlert == null) return;
 
@@ -122,6 +135,7 @@ public class GameUIManager implements iCanHaveCodeTimer {
         }
     }
 
+    // Method - End Flashing Alert //
     private void killFlashAlert() {
         flashAlert = null;
         flashAlertAlpha = 0;
@@ -141,6 +155,7 @@ public class GameUIManager implements iCanHaveCodeTimer {
     }
 
 // GETTERS & SETTERS //
+    // Setter Method - Set a Flashing Alert //
     public void setFlashAlert(String alert, int numberOfFlashes) {
         flashAlert = alert;
         Handler.get().getTimerManager().newCodeTimer(numberOfFlashes * DEF_FLASH_TIME, this, "FLA");

@@ -10,12 +10,19 @@ import java.util.Collections;
 import java.util.HashMap;
 
 /**
- * Created by Cameron on 13/04/2018.
+ * Cameron Bell - 13/04/2018
+ * Text Manager Class
+ * Prints Text on the Screen from Given Values
  */
 public class TextManager {
 // VARIABLES //
+    // Statics //
     private static final float MAX_ALPHA = 1;
+
+    // Managers //
     private AssetManager assMan;
+
+    // Maps //
     private HashMap<String, BufferedImage> charset_1;
     private HashMap<String, BufferedImage> charset_2;
 
@@ -28,9 +35,12 @@ public class TextManager {
     }
 
 // METHODS //
+    // Method - Draw a String on the screen at 100% Alpha //
     public void drawString(Graphics g, String text, String alignment, int xpos, int ypos) {
         drawString(g, text, alignment, xpos, ypos, MAX_ALPHA);
     }
+
+    // Method Overload - Draw a String on the screen at custom Alpha //
     public void drawString(Graphics g, String text, String alignment, int xpos, int ypos, float alpha) {
         if(text.length() == 0) return;
 
@@ -51,8 +61,8 @@ public class TextManager {
                 break;
         }
 
+        // Draw Text
         Graphics2D g2d = (Graphics2D) g;
-
         if(alignment.equals("left") || alignment.equals("right") || alignment.equals("center")) {
             for(int i = 0; i < wordArray.length; i++) {
                 // Set Alpha
@@ -80,18 +90,16 @@ public class TextManager {
 
 
 // GETTERS & SETTERS //
+    // Getter Method - Get Width of Word Depending on Word Length & Character Size //
     public static int getWordWidth(String word) {
         return (word.length() * getCharacterWidth()) + ((word.length() - 1) * Settings.character_size);
     }
-
     public static int getWordWidth(int wordSize) {
         return (wordSize * getCharacterWidth()) + ((wordSize - 1) * Settings.character_size);
     }
-
     public static int getCharacterHeight() {
         return Settings.character_height * Settings.character_size;
     }
-
     public static int getCharacterWidth() {
         return Settings.character_width * Settings.character_size;
     }

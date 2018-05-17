@@ -5,10 +5,9 @@ import java.awt.*;
 
 /**
  * Cameron Bell - 20/03/2018
- * Game.Display.DisplayWindow Class
+ * DisplayWindow Class
  * Displays the window in which the game operates
  */
-
 public class DisplayWindow {
 // VARIABLES //
     private JFrame frame;
@@ -47,7 +46,6 @@ public class DisplayWindow {
     public Canvas getCanvas() {
         return canvas;
     }
-
     public JFrame getFrame() {
         return frame;
     }
