@@ -23,27 +23,27 @@ public class Game implements Runnable{
     // Statics
     private static final int FPS = 60;
 
-    // Basic Game Parameters / Settings
+    // Basic Game Parameters / Settings //
     private String gameTitle;
     private int gameHeight;
     private int gameWidth;
 
-    // Window / Display
+    // Window / Display //
     private DisplayWindow display;
     private Canvas displayCanvas;
     private Graphics g;
     private BufferStrategy bufferStrategy;
 
-    // Background Program Mechanics
+    // Background Program Mechanics //
     private Thread thread;
     private boolean isRunning;
 
-    // Managers
+    // Managers //
     private Handler handler;
     private KeyManager km;
     private MouseManager mm;
 
-    // Screens
+    // Screens //
     private Screen mainMenuScreen;
 
 // CONSTRUCTORS //
@@ -56,7 +56,8 @@ public class Game implements Runnable{
         handler.setGameDimensions(width, height);
     }
 
-    // Method - Start the Game
+// METHODS //
+    // Method - Start the Game //
     public synchronized void start() {
         if(isRunning) return; // Safeguard in case start() is called a second time
         isRunning = true;
@@ -64,9 +65,8 @@ public class Game implements Runnable{
         thread.start(); // Calls run() on Game object in the thread
     }
 
-// METHODS //
-    // Method - Run Game
-    // - Start Main Thread
+    // Method - Run Game //
+    // Start Main Thread //
     public void run() {
         // Initialise Game
         try { initialise(); }
@@ -115,7 +115,7 @@ public class Game implements Runnable{
         // The Main Game Loop // ----- End -----
     }
 
-    // Method - Initialise Game
+    // Method - Initialise Game //
     public void initialise() throws IOException {
         // Get Managers
         km = handler.getKeyManager();
@@ -138,7 +138,7 @@ public class Game implements Runnable{
         ScreenManager.setScreen(mainMenuScreen);
     }
 
-    // Method - Updates Everything in the Game
+    // Method - Updates Everything in the Game //
     public void update() {
         handler.update();
 
@@ -148,7 +148,7 @@ public class Game implements Runnable{
         }
     }
 
-    // Method - Render the Graphics on the Screen
+    // Method - Render the Graphics on the Screen //
     public void draw() throws IOException {
         // Set-Up
         bufferStrategy = displayCanvas.getBufferStrategy();
@@ -169,12 +169,12 @@ public class Game implements Runnable{
         g.dispose();
     }
 
-    // Method - End / Exit
+    // Method - End / Exit //
     public static void end() {
         System.exit(0);
     }
 
-    // Method - Executed on Game Stop
+    // Method - Executed on Game Stop //
     public synchronized void stop() {
         if (!isRunning) return; // Safeguard in case stop() is called a second time
 

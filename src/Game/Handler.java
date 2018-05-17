@@ -22,7 +22,7 @@ public class Handler {
     public static Handler get() { return self; }
 
 // VARIABLES //
-    // Managers //
+    // Input Managers //
     private KeyManager keyManager;
     private MouseManager mouseManager;
 
@@ -51,17 +51,20 @@ public class Handler {
             }
         }
 
-        // Initialise Managers
+        // Initialise Input Managers //
         keyManager = new KeyManager();
         mouseManager = new MouseManager();
+
         visibleUI = true;
     }
 
 // METHODS //
+    // Method - Updates Keyboard Input //
     public void update() {
         keyManager.update();
     }
 
+    // Method - Updates All Data Managers //
     public void updateGame() {
         timerManager.update();
         entityManager.update();
@@ -70,6 +73,7 @@ public class Handler {
         gameDataManager.update();
     }
 
+    // Method - Draw Entire Game //
     public void draw(Graphics g) {
         // Draw All Game Entities (and their collision boxes if enabled)
         entityManager.draw(g);
@@ -79,6 +83,7 @@ public class Handler {
         if(visibleUI) gameUIManager.draw(g);
     }
 
+    // Method - Create a New Game //
     public void newGame() {
         timerManager = new TimerManager();
         entityManager = new EntityManager();
@@ -89,12 +94,13 @@ public class Handler {
         setUIVisible();
     }
 
+    // Method - Run on End of Game //
     public void endGame() {
 
     }
 
 // STATIC METHODS //
-    // Method - Generate a Random Integer in a Range
+    // Method - Generate a Random Integer in a Range //
     public static int getIntFromRange(int min, int max) {
         // Switch the values if needed
         if(max < min) {
@@ -109,7 +115,7 @@ public class Handler {
         return min + generator.nextInt(max - min);
     }
 
-    // Method - Generate a Random Float in a Range
+    // Method - Generate a Random Float in a Range //
     public static float getFloatFromRange(float min, float max) {
         // Switch the values if needed
         if(max < min) {
@@ -121,7 +127,7 @@ public class Handler {
         return min + generator.nextFloat() * (max - min);
     }
 
-    // Method - Generate a Random Double in a Range
+    // Method - Generate a Random Double in a Range //
     public static double getDoubleFromRange(double min, double max) {
         // Switch the values if needed
         if(max < min) {
@@ -133,12 +139,13 @@ public class Handler {
         return min + generator.nextDouble() * (max - min);
     }
 
-    // Method - Convert Seconds to Ticks / Frames
+    // Method - Convert Seconds to Ticks / Frames //
     public static int secsToTicks(int seconds) {
         return seconds * 60;
     }
 
 // GETTERS & SETTERS //
+    // Width & Height //
     public void setGameDimensions(int width, int height) {
         this.gameWidth = width;
         this.gameHeight = height;
@@ -150,6 +157,7 @@ public class Handler {
         return gameWidth;
     }
 
+    // Managers //
     public EntityManager getEntityManager() {
         return entityManager;
     }
@@ -175,6 +183,7 @@ public class Handler {
         return save;
     }
 
+    // UI //
     public void setUIHidden() {
         visibleUI = false;
     }
