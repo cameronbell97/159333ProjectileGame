@@ -3,3 +3,6 @@
 .idea/uiDesigner.xml
 out/
 doc/
+.idea/
+data/
+src/META-INF/
