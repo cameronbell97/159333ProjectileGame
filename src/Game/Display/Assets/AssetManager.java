@@ -1,6 +1,7 @@
 package Game.Display.Assets;
 
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -16,7 +17,7 @@ public class AssetManager {
 
 // VARIABLES //
     // Statics //
-    private static final String imagePath = "../../../img/";
+    private static final String imagePath = "/img/";//"../../../res/img/";
 
     // Spritesheets //
     private SpriteSheet sheet1 = null;
@@ -91,25 +92,25 @@ public class AssetManager {
 
     // Method - Build Spritesheets from Image Files //
     private void buildSpritesheets() {
-        // Main 64x64 Sheet
-        try { sheet1 = new SpriteSheet(ImageLoader.load(imagePath + "tile01.png")); // load the spritesheet
-        } catch (IOException e) { e.printStackTrace(); }
+        try {
+            // Main 64x64 Sheet
+            sheet1 = new SpriteSheet(ImageLoader.load(imagePath + "tile01.png")); // load the spritesheet
 
-        // Characters sheet Roman/English
-        try { char_sheet_01 = new SpriteSheet(ImageLoader.load(imagePath + "characters01.png"), 10, 5, 5, 9); // load the spritesheet
-        } catch (IOException e) { e.printStackTrace(); }
+            // Characters sheet Roman/English
+            char_sheet_01 = new SpriteSheet(ImageLoader.load(imagePath + "characters01.png"), 10, 5, 5, 9); // load the spritesheet
 
-        // Characters sheet Alien
-        try { char_sheet_02 = new SpriteSheet(ImageLoader.load(imagePath + "characters02.png"), 10, 5, 5, 9); // load the spritesheet
-        } catch (IOException e) { e.printStackTrace(); }
+            // Characters sheet Alien
+            char_sheet_02 = new SpriteSheet(ImageLoader.load(imagePath + "characters02.png"), 10, 5, 5, 9); // load the spritesheet
 
-        // Bullet Sheet
-        try { bullet_sheet = new SpriteSheet(ImageLoader.load(imagePath + "bullets.png"), 2, 2, 10, 10); // load the spritesheet
-        } catch (IOException e) { e.printStackTrace(); }
+            // Bullet Sheet
+            bullet_sheet = new SpriteSheet(ImageLoader.load(imagePath + "bullets.png"), 2, 2, 10, 10); // load the spritesheet
 
-        // Particle Sheet 16x16
-        try { particles_sheet_16 = new SpriteSheet(ImageLoader.load(imagePath + "particles16.png"), 4, 13, 16, 16); // load the spritesheet
-        } catch (IOException e) { e.printStackTrace(); }
+            // Particle Sheet 16x16
+            particles_sheet_16 = new SpriteSheet(ImageLoader.load(imagePath + "particles16.png"), 4, 13, 16, 16); // load the spritesheet
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // Method - Build Text Character Maps //

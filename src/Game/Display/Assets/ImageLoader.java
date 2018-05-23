@@ -18,8 +18,12 @@ public class ImageLoader {
         try {
             return ImageIO.read(url);
         } catch (IOException e) {
+            System.out.println("ERROR Loading File: " + filepath);
             e.printStackTrace();
             System.exit(5);
+        } catch (IllegalArgumentException e) {
+            System.out.println("ERROR Loading File: " + filepath);
+            e.printStackTrace();
         }
         return null;
     }
