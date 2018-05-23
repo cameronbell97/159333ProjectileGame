@@ -96,8 +96,8 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
             g.drawLine(
                     (int) this.xpos + width / 2,
                     (int) this.ypos + height / 2,
-                    (int) (this.xpos + width / 2) + (int) (xmove * 24),
-                    (int) (this.ypos + height / 2) + (int) (ymove * 24)
+                    (int) (this.xpos + width / 2) + (int) (getDebugLineX() * 48),
+                    (int) (this.ypos + height / 2) + (int) (getDebugLineY() * 48)
             );
         }
     }
@@ -179,4 +179,12 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
 
     // Death animation
     protected abstract void explode();
+
+    private float getDebugLineX() {
+        return (float)(moveSpeed * Math.cos(direction));
+    }
+
+    private float getDebugLineY() {
+        return (float)(moveSpeed * -Math.sin(direction));
+    }
 }
