@@ -21,13 +21,13 @@ public abstract class Bullet extends DynamicEntity {
 
 // METHODS //
     @Override
-    public void update() {
-        move();
+    public void update(int dt) {
+        move(dt);
         if(xpos <= -OFFSCREEN_BOUNDARY || ypos <= -OFFSCREEN_BOUNDARY || xpos >= Settings.game_width + OFFSCREEN_BOUNDARY || ypos >= Settings.game_height + OFFSCREEN_BOUNDARY) {
             destroy();
         }
         if(collision != null) {
-            collision.update();
+            collision.update(dt);
             collision.rotateSprite(direction);
         }
     }

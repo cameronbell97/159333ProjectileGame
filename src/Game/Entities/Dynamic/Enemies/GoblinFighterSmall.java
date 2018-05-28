@@ -46,7 +46,7 @@ public class GoblinFighterSmall extends GoblinFighter {
 
                 moveSpeed = 15;
                 setMoveSpeeds();
-                move();
+                move(1);
 
                 strafeLeft(5);
 
@@ -62,7 +62,7 @@ public class GoblinFighterSmall extends GoblinFighter {
 
                 moveSpeed = 15;
                 setMoveSpeeds();
-                move();
+                move(1);
 
                 strafeRight(5);
 
@@ -80,7 +80,7 @@ public class GoblinFighterSmall extends GoblinFighter {
 
                 moveSpeed = -9;
                 setMoveSpeeds();
-                move();
+                move(1);
 
                 strafeLeft(6);
 
@@ -96,7 +96,7 @@ public class GoblinFighterSmall extends GoblinFighter {
 
                 moveSpeed = -9;
                 setMoveSpeeds();
-                move();
+                move(1);
 
                 strafeRight(6);
 
@@ -114,7 +114,7 @@ public class GoblinFighterSmall extends GoblinFighter {
 
                 moveSpeed = 2;
                 setMoveSpeeds();
-                move();
+                move(1);
 
                 strafeLeft(8);
 
@@ -130,7 +130,7 @@ public class GoblinFighterSmall extends GoblinFighter {
 
                 moveSpeed = 2;
                 setMoveSpeeds();
-                move();
+                move(1);
 
                 strafeRight(8);
 

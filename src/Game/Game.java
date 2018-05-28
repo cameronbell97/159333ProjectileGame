@@ -94,7 +94,9 @@ public class Game implements Runnable{
 
             // Time for another frame
             if (delta >= 1) {
-                //DEBUGCODE// System.out.println("TICKS: " + delta);
+//                System.out.println("DELTA: " + delta); // DEBUG // Prints The Delta
+//                if(delta > 2) System.out.println("DELTA: " + delta); // DEBUG // Prints The Delta if skipping a tick
+
                 // Update Game State
                 update((int)delta);
 
@@ -103,7 +105,7 @@ public class Game implements Runnable{
                 catch (IOException e) { e.printStackTrace(); }
 
                 // FPS / Gamestate Limiting Code
-                delta--;
+                delta-=(int)delta;
                 ticks++;
             }
 

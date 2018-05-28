@@ -83,12 +83,12 @@ public class EntityManager implements iObserver {
 
     // Method that calls updateGame() on every entity
     public void update(int dt) {
-        if(player != null) player.update();
+        if(player != null) player.update(dt);
 
         // ENTITIES //
         // Update Game.Entities
         for(Entity e : ents) {
-            e.update();
+            e.update(dt);
         }
         // Add Queued Game.Entities
         for(Entity e : sub_queue) {
@@ -98,7 +98,7 @@ public class EntityManager implements iObserver {
         // Remove Queued Game.Entities
         for(Entity e : unsub_queue) {
             if(!ents.remove(e)) {
-                System.out.println("ERROR: Could Not Remove: " + e.toString());
+//                System.out.println("ERROR: Could Not Remove: " + e.toString()); // DEBUG //
             }
         }
         unsub_queue.clear(); // Clear the unsub_queue
@@ -133,7 +133,7 @@ public class EntityManager implements iObserver {
 
         // Update Game.Entities
         for(Particle p : particles) {
-            p.update();
+            p.update(dt);
         }
         // Add Queued Game.Entities
         for(Particle p : p_sub_queue) {

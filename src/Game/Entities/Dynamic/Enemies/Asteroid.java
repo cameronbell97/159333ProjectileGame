@@ -71,14 +71,14 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
 
     // METHODS //
     @Override
-    public void update() {
-        move();
-        if(collision != null) collision.update();
-        rotateSprite();
+    public void update(int dt) {
+        move(dt);
+        if(collision != null) collision.update(dt);
+        rotateSprite(dt);
 
         // If asteroid goes out of bounds
         if(checkOOB()) {
-            doWhenOutOfBounds();
+            doWhenOutOfBounds(dt);
         }
     }
 
@@ -106,13 +106,11 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
         }
     }
 
-    @Override
-    public void rotateSprite() {
+    public void rotateSprite(int dt) {
         // TODO // Rotate Sprite Without Cutoffs
-        spriteDirection += spriteRotation;
+        spriteDirection += dt * spriteRotation;
         aTrans = AffineTransform.getRotateInstance(-spriteDirection+(Math.PI/2), width/2, height/2);
         aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
-
     }
 
     @Override
@@ -182,13 +180,13 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
     }
 
     @Override
-    public void doWhenOutOfBounds() {
+    public void doWhenOutOfBounds(int dt) {
 
         // 1 in 3 chance to bounce back
         if(white) {
             xpos = getOverlapX();
             ypos = getOverlapY();
-            move();
+            move(dt);
         } else kill();
     }
 

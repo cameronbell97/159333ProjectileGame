@@ -34,15 +34,15 @@ public class AsteroidParticle extends Particle {
 
         // Set Rotation
         spriteRotation = Handler.getDoubleFromRange(-0.05*Math.PI, 0.02*Math.PI);
-        rotateSprite();
+        rotateSprite(1);
     }
 
 // METHODS //
     @Override
-    public void update() {
-        super.update();
-        move();
-        rotateSprite();
+    public void update(int dt) {
+        super.update(dt);
+        move(dt);
+        rotateSprite(dt);
     }
 
     @Override
@@ -55,10 +55,9 @@ public class AsteroidParticle extends Particle {
         else return AssetManager.get().getSprite(11, Handler.getIntFromRange(0, 3), 4);
     }
 
-    @Override
-    public void rotateSprite() {
+    public void rotateSprite(int dt) {
         // TODO // Rotate Sprite Without Cutoffs
-        spriteDirection += spriteRotation;
+        spriteDirection += dt * spriteRotation;
         aTrans = AffineTransform.getRotateInstance(-spriteDirection + (Math.PI / 2), width / 2, height / 2);
         aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
     }

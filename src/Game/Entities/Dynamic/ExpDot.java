@@ -109,9 +109,9 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
     }
 
     @Override
-    public void update() {
+    public void update(int dt) {
         // Fading Mechanics
-        if(fade && alphaFade > 0) alphaFade = Math.max(alphaFade - DEF_FADE_DECREMENT, 0);
+        if(fade && alphaFade > 0) alphaFade = Math.max(alphaFade - dt * DEF_FADE_DECREMENT, 0);
         if(alphaFade <= 0) destroy();
 
         // Check for out-of-screen
@@ -129,10 +129,10 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         }
 
         // Deceleration mechanics
-        decelerate(deceleration);
+        decelerate(dt, deceleration);
 
-        if(collision != null) collision.update();
-        move();
+        if(collision != null) collision.update(dt);
+        move(dt);
     }
 
     // Method - Determine the distance from the Player

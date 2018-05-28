@@ -45,8 +45,8 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
 
 // METHODS //
     @Override
-    public void update() {
-        super.update();
+    public void update(int dt) {
+        super.update(dt);
         if((distanceFromPlayer > playerStopDistance || checkOOB()) && checkMovingIsWorth()) {
             setMoveSpeeds();
         }
@@ -54,10 +54,10 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
             currentRotateWaitTime = timeBeforeRotating;
         }
 
-        move();
-        tryShoot();
+        move(dt);
+        tryShoot(dt);
         if(collision != null) {
-            collision.update();
+            collision.update(dt);
             collision.rotateSprite(direction);
         }
     }
@@ -102,7 +102,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
         }
     }
 
-    private void tryShoot() {
+    private void tryShoot(int dt) {
         if(phaseBullet < phaseBulletsNumber) {
             if (shootTimer == 0 || shootTimer == TIME_BETWEEN_SHOTS) {
                 if (shootTimer == 0) shootPhase = 0;
@@ -115,10 +115,10 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
                     shoot();
                 }
 
-                phaseBullet++;
+                phaseBullet+=dt;
             }
-            if (shootPhase == 0 && shootTimer < TIME_BETWEEN_SHOTS) shootTimer++;
-            else if (shootPhase == 1 && shootTimer > 0) shootTimer--;
+            if (shootPhase == 0 && shootTimer < TIME_BETWEEN_SHOTS) shootTimer+=dt;
+            else if (shootPhase == 1 && shootTimer > 0) shootTimer-=dt;
         } else {
             phaseBullet = 0;
             shootTimer = timeBetweenPhases;
@@ -141,7 +141,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     }
 
     @Override
-    public void doWhenOutOfBounds() {
+    public void doWhenOutOfBounds(int dt) {
 
     }
 

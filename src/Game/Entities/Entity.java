@@ -32,7 +32,7 @@ public abstract class Entity {
     }
 
 // METHODS //
-    public abstract void update();
+    public abstract void update(int dt);
     public abstract void draw(Graphics g);
     public float getOverlapX() {
         int w = Settings.game_width / 2;

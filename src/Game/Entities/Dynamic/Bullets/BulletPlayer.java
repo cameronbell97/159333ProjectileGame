@@ -21,7 +21,7 @@ public class BulletPlayer extends Bullet {
         // Move bullet to nose of Player ship
         moveSpeed = 20;
         setMoveSpeeds();
-        move();
+        move(1);
 
         // Reset move speed
         moveSpeed = 12;

@@ -24,14 +24,14 @@ public class PlayerBulletParticle extends Particle {
 
 // METHODS //
     @Override
-    public void update() {
+    public void update(int dt) {
         if(timeAlive > 0) {
             if(timeAlive > (DEF_LIVE_TIME/2))
                 img = AssetManager.get().getSprite(11, 2, 10);
             else
                 img = AssetManager.get().getSprite(11, 3, 10);
 
-            timeAlive--;
+            timeAlive-=dt;
         } else {
             destroy();
         }

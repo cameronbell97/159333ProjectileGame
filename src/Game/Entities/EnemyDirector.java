@@ -22,6 +22,8 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
 
     // Statics
     private static final int LEVEL_WAIT_TIME = 4*60;
+    private static final int DEF_SPAWN_MINSEC = 60;
+    private static final int DEF_SPAWN_MAXSEC = 4*60;
 
     // Managers
     Handler handler;
@@ -44,8 +46,8 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
         this.gameLevel = 0;
         this.limboEntities = 0;
         this.currentTimer = null;
-        this.spawn_queue_minsec = 0;
-        this.spawn_queue_maxsec = 0;
+        this.spawn_queue_minsec = DEF_SPAWN_MINSEC;
+        this.spawn_queue_maxsec = DEF_SPAWN_MAXSEC;
 
         // Instantiate Enemy Lists
         this.remaining_queue = new ArrayList();
@@ -70,6 +72,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
             limboEntities++;
 
             // Increment Time
+            //nextEnemyTime += Handler.getIntFromRange(60, 4*60);
             nextEnemyTime += Handler.getIntFromRange(spawn_queue_minsec, spawn_queue_maxsec);
         }
         spawn_queue.clear(); // Clear the spawn_queue
@@ -98,7 +101,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
         switch (code) {
             // LVL+ is the code for Start Next Level
             case "LVL+":
-                gameLevel++; // Increment Level
+                gameLevel+=1; // Increment Level
                 populateEnemies(); // Spawn Enemies
                 break;
         }

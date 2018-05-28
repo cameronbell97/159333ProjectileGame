@@ -8,5 +8,5 @@ package Game.Entities;
 
 public interface iOutOfBounds {
     public boolean checkOOB();
-    public void doWhenOutOfBounds();
+    public void doWhenOutOfBounds(int dt);
 }

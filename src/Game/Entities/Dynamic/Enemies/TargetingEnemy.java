@@ -38,24 +38,24 @@ public abstract class TargetingEnemy extends Enemy{
 
 // METHODS //
     @Override
-    public void update() {
+    public void update(int dt) {
         calcPlayerDistanceAndDirection();
         if(directionToPlayer != this.direction && currentRotateWaitTime <= 0) {
-            rotateToPlayer();
+            rotateToPlayer(dt);
         } else if(currentRotateWaitTime > 0) {
-            currentRotateWaitTime--;
+            currentRotateWaitTime-=dt;
         }
 
         rotateSprite();
 
         // Deceleration mechanics
-        decelerate(deceleration);
+        decelerate(dt, deceleration);
     }
 
     @Override
     public abstract void collide(Entity ec);
 
-    private void rotateToPlayer() {
+    private void rotateToPlayer(int dt) {
         // Keep the entity's direction in the range 0 < x < 2(PI)
         if(this.direction > (2 * Math.PI)) this.direction -= (2 * Math.PI);
         if(this.direction < 0) this.direction += (2 * Math.PI);
@@ -64,15 +64,15 @@ public abstract class TargetingEnemy extends Enemy{
         if(directionToPlayer == this.direction) return;
 
         if((directionToPlayer > this.direction && directionToPlayer - this.direction < Math.PI) || ((this.direction - directionToPlayer) > Math.PI)) {
-            if(this.direction + rotationSpeed > directionToPlayer && !((this.direction - directionToPlayer) > Math.PI)) {
+            if(this.direction + (dt * rotationSpeed) > directionToPlayer && !((this.direction - directionToPlayer) > Math.PI)) {
                 this.direction = directionToPlayer;
             }
-            else this.direction += rotationSpeed;
+            else this.direction += dt * rotationSpeed;
         } else {
-            if (this.direction - rotationSpeed < directionToPlayer && directionToPlayer - this.direction < (Math.PI / 2)) {
+            if (this.direction - (dt * rotationSpeed) < directionToPlayer && directionToPlayer - this.direction < (Math.PI / 2)) {
                 this.direction = directionToPlayer;
             }
-            else this.direction -= rotationSpeed;
+            else this.direction -= dt * rotationSpeed;
         }
     }
 

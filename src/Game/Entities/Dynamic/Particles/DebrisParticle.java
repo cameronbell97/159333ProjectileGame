@@ -39,17 +39,17 @@ public abstract class DebrisParticle extends Particle {
 
         // Set Rotation Speed
         spriteRotSpeed = Handler.getDoubleFromRange(-0.001*Math.PI, 0.001*Math.PI);;
-        rotateSprite();
+        rotateSprite(1);
 
         handler.getTimerManager().newCodeTimer(200, this, "DIE");
     }
 
 // METHODS //
     @Override
-    public void update() {
-        super.update();
-        move();
-        rotateSprite();
+    public void update(int dt) {
+        super.update(dt);
+        move(dt);
+        rotateSprite(dt);
     }
 
     @Override
@@ -57,10 +57,9 @@ public abstract class DebrisParticle extends Particle {
 
     }
 
-    @Override
-    public void rotateSprite() {
+    public void rotateSprite(int dt) {
         // TODO // Rotate Sprite Without Cutoffs
-        spriteDirection += spriteRotSpeed;
+        spriteDirection += dt * spriteRotSpeed;
         aTrans = AffineTransform.getRotateInstance(-spriteDirection + (Math.PI / 2), width / 2, height / 2);
         aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
     }

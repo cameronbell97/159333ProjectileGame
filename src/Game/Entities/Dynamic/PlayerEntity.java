@@ -89,18 +89,18 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 //        headCollision.setAnchor(5, 25);
     }
 
-    public void move() {
-        moveX();
-        moveY();
+    public void move(int dt) {
+        moveX(dt);
+        moveY(dt);
     }
 
     @Override
-    protected void moveX() {
+    protected void moveX(int dt) {
         // If moving right
         if(xmove > 0) {
             // If you would NOT move out of the screen
             if(collision.getXpos() + collision.getWidth() + xmove <= Settings.game_width)
-                xpos += xmove;
+                xpos += dt * xmove;
             else {
                 xpos = Settings.game_width - collision.getWidth() - collision.getXoff();
                 xmove = 0;
@@ -110,7 +110,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         if(xmove < 0) {
             // If you would NOT move out of the screen
             if(collision.getXpos() + xmove >= 0)
-                xpos += xmove;
+                xpos += dt * xmove;
             else {
                 // else player's X position = zero - the difference between the collision's X position and the player's
                 xpos = 0 - (collision.getXpos() - xpos);
@@ -120,12 +120,12 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     }
 
     @Override
-    protected void moveY() {
+    protected void moveY(int dt) {
         // If moving down
         if(ymove > 0) {
             // If you would NOT move out of the screen
             if(collision.getYpos() + collision.getHeight()/*CollisionBox Width*/ + ymove <= Settings.game_height)
-                ypos += ymove;
+                ypos += dt * ymove;
             else {
 //                ypos = handler.getHeight() - height + (collision.getYpos() - ypos);
                 ypos = Settings.game_height - collision.getHeight() - collision.getYoff();
@@ -136,7 +136,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         if(ymove < 0) {
             // If you would NOT move out of the screen
             if(collision.getYpos() + ymove >= 0)
-                ypos += ymove;
+                ypos += dt * ymove;
             else {
                 // else player's Y position = zero - the difference between the collision's Y position and the player's
                 ypos = 0 - (collision.getYpos()-ypos);
@@ -146,10 +146,10 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     }
 
     @Override
-    public void update() {
-        getInput();
-        move();
-        collision.update();
+    public void update(int dt) {
+        getInput(dt);
+        move(dt);
+        collision.update(dt);
 //        headCollision.updateGame();
     }
 
@@ -174,10 +174,10 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         }
     }
 
-    private void getInput() {
+    private void getInput(int dt) {
         // Deceleration mechanics
         if (Settings.player_deceleration) {
-            decelerate(decelerate);
+            decelerate(dt, decelerate);
         }
 
         // Slow (if you hit an enemy) mechanics
@@ -212,14 +212,18 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 
         // Thrust Animation Code
             if (timeMoving < THRUST_FRAME_TIME_2) {
-                timeMoving++;
+                timeMoving+=dt;
+
+                // TODO // FIX TO WORK WITH DT
                 if(timeMoving == THRUST_FRAME_TIME_1) setImg(assMan.getAnimPThrust(1));
                 else if(timeMoving == THRUST_FRAME_TIME_2) setImg(assMan.getAnimPThrust(2));
             }
         }
         else {
             if (timeMoving != 0) {
-                timeMoving--;
+                timeMoving-=dt;
+
+                // TODO // FIX TO WORK WITH DT
                 if(timeMoving == THRUST_FRAME_TIME_1) setImg(assMan.getAnimPThrust(0));
                 else if(timeMoving == THRUST_FRAME_TIME_2 - 1) setImg(assMan.getAnimPThrust(1));
                 else if(timeMoving == THRUST_FRAME_TIME_3 - 1) setImg(assMan.getAnimPThrust(2));
@@ -234,7 +238,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             if (km.ctrl && Settings.player_strafe) {
                 strafeLeft(moveSpeed / 2);
             } else {
-                direction += rotationSpeed * speedMultiplier;
+                direction += dt * rotationSpeed * speedMultiplier;
                 rotateSprite();
                 collision.rotateSprite(direction);
 //                headCollision.rotateSprite(direction);
@@ -244,7 +248,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             if (km.ctrl && Settings.player_strafe) {
                 strafeRight(moveSpeed / 2);
             } else {
-                direction -= rotationSpeed * speedMultiplier;
+                direction -= dt * rotationSpeed * speedMultiplier;
                 rotateSprite();
                 collision.rotateSprite(direction);
 //                headCollision.rotateSprite(direction);
@@ -261,9 +265,9 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         }
         if(!km.spacebar) shoot_release = true;
         // Slow/Speedup Mechanics for collision with asteroid
-        if(slowTimeStart > 0) slowTimeCurrent++;
+        if(slowTimeStart > 0) slowTimeCurrent+=dt;
         if(slowTimeStart == slowTimeCurrent) slowTimeStart = 0;
-        if(slowTimeStart == 0 && slowTimeCurrent > 0) slowTimeCurrent--;
+        if(slowTimeStart == 0 && slowTimeCurrent > 0) slowTimeCurrent-=dt;
 
         if(slowTimeCurrent == 1 && Settings.player_acceleration) {
             ymove = ymove / 3;
@@ -309,7 +313,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 
                 moveSpeed = 18;
                 setMoveSpeeds();
-                move();
+                move(1);
 
                 moveSpeed = saveSpeed;
             }
@@ -323,7 +327,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 
                 moveSpeed = -18;
                 setMoveSpeeds();
-                move();
+                move(1);
 
                 strafeLeft(9);
 
@@ -339,7 +343,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 
                 moveSpeed = -18;
                 setMoveSpeeds();
-                move();
+                move(1);
 
                 strafeRight(9);
 
@@ -357,7 +361,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 
                 moveSpeed = 9;
                 setMoveSpeeds();
-                move();
+                move(1);
 
                 strafeLeft(7);
 
@@ -373,7 +377,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 
                 moveSpeed = -2;
                 setMoveSpeeds();
-                move();
+                move(1);
 
                 strafeLeft(13);
 
@@ -389,7 +393,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 
                 moveSpeed = 9;
                 setMoveSpeeds();
-                move();
+                move(1);
 
                 strafeRight(7);
 
@@ -405,7 +409,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 
                 moveSpeed = -2;
                 setMoveSpeeds();
-                move();
+                move(1);
 
                 strafeRight(13);
 

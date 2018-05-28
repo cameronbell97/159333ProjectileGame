@@ -44,23 +44,23 @@ public abstract class DynamicEntity extends Entity{
         xmove = (float)(moveSpeed * Math.cos(direction));
     }
 
-    protected void move() {
-        moveX();
-        moveY();
+    protected void move(int dt) {
+        moveX(dt);
+        moveY(dt);
     }
-    protected void moveX() {
-        xpos += xmove;
+    protected void moveX(int dt) {
+        xpos += dt * xmove;
     }
-    protected void moveY() {
-        ypos += ymove;
+    protected void moveY(int dt) {
+        ypos += dt * ymove;
     }
 
     // Deceleration mechanics
-    protected void decelerate(float decelRate) {
-        if (xmove > 0) xmove = Math.max(0, xmove - xmove * ((float) 0.01 + decelRate));
-        if (xmove < 0) xmove = Math.min(0, xmove - xmove * ((float) 0.01 + decelRate));
-        if (ymove > 0) ymove = Math.max(0, ymove - ymove * ((float) 0.01 + decelRate));
-        if (ymove < 0) ymove = Math.min(0, ymove - ymove * ((float) 0.01 + decelRate));
+    protected void decelerate(int dt, float decelRate) {
+        if (xmove > 0) xmove = Math.max(0, xmove - dt * xmove * ((float) 0.01 + decelRate));
+        if (xmove < 0) xmove = Math.min(0, xmove - dt * xmove * ((float) 0.01 + decelRate));
+        if (ymove > 0) ymove = Math.max(0, ymove - dt * ymove * ((float) 0.01 + decelRate));
+        if (ymove < 0) ymove = Math.min(0, ymove - dt * ymove * ((float) 0.01 + decelRate));
 
     }
 
@@ -70,7 +70,7 @@ public abstract class DynamicEntity extends Entity{
 
         ymove = (float)(speed * -Math.sin(direction+(Math.PI/2)));
         xmove = (float)(speed * Math.cos(direction+(Math.PI/2)));
-        move();
+        move(1);
 
         ymove = oldymove;
         xmove = oldxmove;
@@ -82,7 +82,7 @@ public abstract class DynamicEntity extends Entity{
 
         ymove = (float)(speed * -Math.sin(direction-(Math.PI/2)));
         xmove = (float)(speed * Math.cos(direction-(Math.PI/2)));
-        move();
+        move(1);
 
         ymove = oldymove;
         xmove = oldxmove;

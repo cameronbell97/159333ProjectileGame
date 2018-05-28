@@ -58,17 +58,17 @@ public class EnergyExplParticle extends Particle {
 
 // METHODS //
     @Override
-    public void update() {
+    public void update(int dt) {
         if(ticksLeft <= 0) {
             destroy();
         } else {
-            if(ticksLeft == 10) {
+            if(ticksLeft <= 10 && ticksLeft > 5) {
                 img = AssetManager.get().getSprite(11, 2, ySprExpl);
-            } else if(ticksLeft == 5) {
+            } else if(ticksLeft <= 5) {
                 img = AssetManager.get().getSprite(11, 1, ySprExpl);
             }
 
-            ticksLeft--;
+            ticksLeft-=dt;
         }
     }
 

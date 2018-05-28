@@ -25,7 +25,7 @@ public class CollisionBox extends DynamicEntity{
     }
 
 // METHODS //
-    public void update() {
+    public void update(int dt) {
         setXpos(parent.getXpos()+xoff);
         setYpos(parent.getYpos()+yoff);
         // TODO // Get min & max values to use for checking out of bounds / screen

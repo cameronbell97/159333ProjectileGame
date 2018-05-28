@@ -22,7 +22,7 @@ public class GoblinBulletSmall extends Bullet {
         // Move to correct position
         this.moveSpeed = 18;
         setMoveSpeeds();
-        move();
+        move(1);
 
         if(parent.getShootPhase() == 0) strafeLeft(6);
         else strafeRight(6);
