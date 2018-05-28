@@ -33,9 +33,9 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
 // METHODS //
     // Method - Update Managers
     @Override
-    public void update() {
+    public void update(int dt) {
         if(gameIsRunning) {
-            handler.updateGame();
+            handler.updateGame(dt);
         } else endGame();
     }
 

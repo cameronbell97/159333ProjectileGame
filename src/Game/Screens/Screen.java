@@ -20,6 +20,6 @@ public abstract class Screen {
     }
 
 // METHODS //
-    public abstract void update();
+    public abstract void update(int dt);
     public abstract void draw(Graphics g);
 }

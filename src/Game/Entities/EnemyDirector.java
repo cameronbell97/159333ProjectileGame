@@ -56,7 +56,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
     }
 
 // METHODS //
-    public void update() {
+    public void update(int dt) {
         // Generate time new enemy will wait to spawn
         int nextEnemyTime = Handler.getIntFromRange(spawn_queue_minsec, spawn_queue_maxsec);
         TimerManager tm = Handler.get().getTimerManager();
@@ -70,7 +70,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
             limboEntities++;
 
             // Increment Time
-            nextEnemyTime += Handler.getIntFromRange(1*60, 4*60);
+            nextEnemyTime += Handler.getIntFromRange(spawn_queue_minsec, spawn_queue_maxsec);
         }
         spawn_queue.clear(); // Clear the spawn_queue
 
@@ -395,6 +395,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
         remaining_queue.add(e);
     }
 
+    // DEPRECATED METHOD //
     public void clear() {
         for (Enemy enem : spawn_queue) {
             unsubscribe(enem);
@@ -403,7 +404,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
             unsubscribe(enem);
         }
 
-        this.update();
+        this.update(1);
         alive = false;
     }
 

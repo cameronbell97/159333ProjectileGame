@@ -30,12 +30,12 @@ public class TimerManager {
 
 // METHODS //
     // Method - Update Timers
-    public void update() {
+    public void update(int dt) {
         if(timers == null) return; // Safeguard
 
         // Update Subscribed Timers
         for(Timer t : timers) {
-            t.update();
+            t.update(dt);
         }
 
         // Subscribe Queued Timers

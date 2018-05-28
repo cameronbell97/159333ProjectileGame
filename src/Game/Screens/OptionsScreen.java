@@ -41,7 +41,7 @@ public class OptionsScreen extends Screen {
     // METHODS //
 
     @Override
-    public void update() {
+    public void update(int dt) {
         backButton.update();
         clearScoresButton.update();
     }

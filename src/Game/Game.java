@@ -2,6 +2,7 @@ package Game;
 
 import Game.Data.KeyManager;
 import Game.Data.MouseManager;
+import Game.Data.Settings;
 import Game.Display.DisplayWindow;
 import Game.Screens.MainMenuScreen;
 import Game.Screens.Screen;
@@ -93,8 +94,9 @@ public class Game implements Runnable{
 
             // Time for another frame
             if (delta >= 1) {
+                //DEBUGCODE// System.out.println("TICKS: " + delta);
                 // Update Game State
-                update();
+                update((int)delta);
 
                 // Draw Game State to Screen
                 try { draw(); }
@@ -139,12 +141,12 @@ public class Game implements Runnable{
     }
 
     // Method - Updates Everything in the Game //
-    public void update() {
+    public void update(int dt) {
         handler.update();
 
         // Update Current Screen
         if (ScreenManager.getScreen() != null) {
-            ScreenManager.getScreen().update();
+            ScreenManager.getScreen().update(dt);
         }
     }
 

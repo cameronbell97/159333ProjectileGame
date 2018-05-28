@@ -49,7 +49,7 @@ public class AddScoreScreen extends Screen {
 
 // METHODS //
     @Override
-    public void update() {
+    public void update(int dt) {
         submitButton.update();
         nameTyper.update();
     }

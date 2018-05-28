@@ -12,8 +12,8 @@ public abstract class Timer {
 
 
 // METHODS //
-    public void update() {
-        if(ticktime > 0) ticktime--;
+    public void update(int dt) {
+        if(ticktime > 0) ticktime-=dt;
         else {
             notifyFinished();
         }

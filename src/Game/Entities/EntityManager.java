@@ -82,7 +82,7 @@ public class EntityManager implements iObserver {
     }
 
     // Method that calls updateGame() on every entity
-    public void update() {
+    public void update(int dt) {
         if(player != null) player.update();
 
         // ENTITIES //
@@ -201,7 +201,7 @@ public class EntityManager implements iObserver {
         }
     }
 
-    // Clear Data //
+    // DEPRECATED METHOD // Clear Data //
     public void clear() {
         for (Entity entity : ents) {
             entity.clearData();
@@ -214,7 +214,7 @@ public class EntityManager implements iObserver {
             unsubscribe(particle);
         }
         player = null;
-        this.update();
+        this.update(1);
         alive = false;
     }
 

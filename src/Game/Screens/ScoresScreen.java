@@ -50,7 +50,7 @@ public class ScoresScreen extends Screen {
 
 // METHODS //
     @Override
-    public void update() {
+    public void update(int dt) {
         backButton.update();
     }
 

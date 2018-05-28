@@ -67,11 +67,11 @@ public class Handler {
     }
 
     // Method - Updates All Data Managers //
-    public void updateGame() {
-        timerManager.update();
-        entityManager.update();
-        enemyDirector.update();
-        gameUIManager.update();
+    public void updateGame(int dt) {
+        timerManager.update(dt);
+        entityManager.update(dt);
+        enemyDirector.update(dt);
+        gameUIManager.update(dt);
         gameDataManager.update();
     }
 

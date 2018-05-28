@@ -40,7 +40,7 @@ public class MainMenuScreen extends Screen{
 
     // METHODS //
     @Override
-    public void update() {
+    public void update(int dt) {
         buttonList.update();
     }
 

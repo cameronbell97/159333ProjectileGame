@@ -37,8 +37,8 @@ public class GameUIManager implements iCanHaveCodeTimer {
 
 // METHODS //
     // Method - Update Flashing Alert //
-    public void update() {
-        flashAlert();
+    public void update(int dt) {
+        flashAlert(dt);
     }
 
     // Method - Draw UI To Screen //
@@ -122,16 +122,16 @@ public class GameUIManager implements iCanHaveCodeTimer {
     }
 
     // Method - Update Alpha Value of Flashing Alert //
-    public void flashAlert() {
+    public void flashAlert(int dt) {
         if(flashAlert == null) return;
 
         if(flashAlertAlpha == 0) flashAlertAlphaPhase = 0;
         else if(flashAlertAlpha == 1) flashAlertAlphaPhase = 1;
 
         if(flashAlertAlphaPhase == 0) {
-            flashAlertAlpha = Math.min(1, flashAlertAlpha + ((float)1/((float)DEF_FLASH_TIME/(float)2)));
+            flashAlertAlpha = Math.min(1, flashAlertAlpha + dt * ((float)1/((float)DEF_FLASH_TIME/(float)2)));
         } else {
-            flashAlertAlpha = Math.max(0, flashAlertAlpha - ((float)1/((float)DEF_FLASH_TIME/(float)2)));
+            flashAlertAlpha = Math.max(0, flashAlertAlpha - dt * ((float)1/((float)DEF_FLASH_TIME/(float)2)));
         }
     }
 
