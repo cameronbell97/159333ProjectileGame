@@ -10,6 +10,7 @@ import java.io.*;
 public class Save {
 // VARIABLES //
     private static final String DEF_SAVE_PATH = "data/save.txt";
+    private static final String DEF_XML_SAVE_PATH = "data/save.xml";
 
     // Data //
     private ScoreBoard scoreBoard;
@@ -28,6 +29,21 @@ public class Save {
         try {
             BufferedWriter br = new BufferedWriter(new FileWriter(file));
             br.write(scoreBoard.saveScoresAsString());
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        saveXML();
+    }
+
+    public void saveXML() {
+        File file = new File(DEF_XML_SAVE_PATH);
+        if(!file.isFile()) create();
+
+        try {
+            BufferedWriter br = new BufferedWriter(new FileWriter(file));
+            br.write(scoreBoard.toXML());
             br.close();
         } catch (IOException e) {
             e.printStackTrace();

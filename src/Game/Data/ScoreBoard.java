@@ -5,7 +5,7 @@ package Game.Data;
  * Scoreboard Class
  * Class Object to Keep Score Data
  */
-public class ScoreBoard {
+public class ScoreBoard implements iXMLSerializable{
 // VARIABLES //
     // Statics //
     public static final String DEF_SCORES_FORMAT = "0 0 1 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 9 0 ";
@@ -122,6 +122,34 @@ public class ScoreBoard {
         for(int i = 0; i < scoreNames.length; i++) {
             scoreNames[i] = "---";
         }
+    }
+
+    @Override
+    public String fromXML() {
+        return null;
+    }
+
+    @Override
+    public String toXML() {
+        String xml = "";
+        String scoresxml = "";
+
+        for(int i = 0; i < scoreNames.length; i++) {
+            scoresxml += XMLSerializer.makeElement(
+                    "score",
+                    XMLSerializer.makeElement(
+                            "name",
+                            scoreNames[i]
+                    ) + XMLSerializer.makeElement(
+                            "value",
+                            Integer.toString(scores[i])
+                    )
+            );
+        }
+
+        xml = XMLSerializer.makeElement("scoreboard", scoresxml);
+
+        return xml;
     }
 
 // GETTERS & SETTERS //
