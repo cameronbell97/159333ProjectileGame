@@ -33,14 +33,11 @@ public class Save {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        saveXML();
     }
 
     public void saveXML() {
         File file = new File(DEF_XML_SAVE_PATH);
-        if(!file.isFile()) create();
-
+        //if(!file.isFile()) create();
         try {
             BufferedWriter br = new BufferedWriter(new FileWriter(file));
             br.write(scoreBoard.toXML());
@@ -48,6 +45,14 @@ public class Save {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        scoreBoard.fromXML(DEF_XML_SAVE_PATH); // TODO // REMOVE
+    }
+
+    public boolean loadXML() {
+        if(!(new File(DEF_XML_SAVE_PATH).isFile())) saveXML();
+
+        return scoreBoard.fromXML(DEF_XML_SAVE_PATH);
     }
 
     // Method - Load Data from File // TODO // Implement Saved Settings
@@ -110,7 +115,7 @@ public class Save {
     }
 
     // Method - Turn a String of Number Characters into an Integer //
-    private int parseInt(String n) {
+    public static int parseInt(String n) {
         try{
             return Integer.parseInt(n);
         } catch (NumberFormatException e) {
@@ -136,7 +141,7 @@ public class Save {
     // Method - Clear High Scores //
     public void clearScores() {
         scoreBoard.clearScores();
-        save();
+        saveXML();
     }
 
 // GETTERS & SETTERS //
