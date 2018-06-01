@@ -20,8 +20,6 @@ import java.io.IOException;
 public class ScoreBoard implements iXMLSerializable{
 // VARIABLES //
     // Statics //
-    public static final String DEF_SCORES_FORMAT = "0 0 1 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 9 0 ";
-    public static final String DEF_SCORE_NAMES_FORMAT = "--- --- --- --- --- --- --- --- --- --- ";
     public static final String DEF_SCORE_NAME_FORMAT = "---";
     public static final int DEF_SCORES_NUM = 10;
 
@@ -132,7 +130,7 @@ public class ScoreBoard implements iXMLSerializable{
         scoreNames = new String[DEF_SCORES_NUM];
         // Write over all score names with '---'
         for(int i = 0; i < scoreNames.length; i++) {
-            scoreNames[i] = "---";
+            scoreNames[i] = DEF_SCORE_NAME_FORMAT;
         }
     }
 
@@ -200,7 +198,7 @@ public class ScoreBoard implements iXMLSerializable{
 
         for(int i = 0; i < scoreNames.length; i++) {
             if(scoreNames[i] == null || scoreNames[i].equals(""))
-                scoreNames[i] = "---";
+                scoreNames[i] = DEF_SCORE_NAME_FORMAT;
             scoresxml += XMLSerializer.makeElement(
                     "score",
                     XMLSerializer.makeElement(
