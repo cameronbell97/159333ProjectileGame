@@ -1,15 +1,25 @@
 package Game.Data;
 
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import org.w3c.dom.Document;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.IOException;
+
 /**
  * Cameron Bell - 13/04/2018
  * Scoreboard Class
  * Class Object to Keep Score Data
  */
-public class ScoreBoard {
+public class ScoreBoard implements iXMLSerializable{
 // VARIABLES //
     // Statics //
-    public static final String DEF_SCORES_FORMAT = "0 0 1 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 9 0 ";
-    public static final String DEF_SCORE_NAMES_FORMAT = "--- --- --- --- --- --- --- --- --- --- ";
     public static final String DEF_SCORE_NAME_FORMAT = "---";
     public static final int DEF_SCORES_NUM = 10;
 
@@ -120,8 +130,90 @@ public class ScoreBoard {
         scoreNames = new String[DEF_SCORES_NUM];
         // Write over all score names with '---'
         for(int i = 0; i < scoreNames.length; i++) {
-            scoreNames[i] = "---";
+            scoreNames[i] = DEF_SCORE_NAME_FORMAT;
         }
+    }
+
+    @Override
+    public boolean fromXML(String path) {
+        // Load Data From File
+        File file = new File(path);
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docb = null;
+        Document doc = null;
+
+        try {
+            docb = dbf.newDocumentBuilder();
+            doc = docb.parse(file);
+        } catch (SAXException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+            return false;
+        }
+        doc.getDocumentElement().normalize();
+
+        // Load Data Into ScoreBoard
+        NodeList scoreList = doc.getElementsByTagName("score");
+
+        String[] sNames = new String[scoreList.getLength()];
+        String[] sValues = new String[scoreList.getLength()];
+
+        for(int i = 0; i < scoreList.getLength(); i++) {
+            Node score = scoreList.item(i);
+            Element scoreElem = (Element)score;
+
+            sNames[i] = scoreElem
+                    .getElementsByTagName("name")
+                    .item(0)
+                    .getFirstChild()
+                    .getNodeValue();
+
+            sValues[i] = scoreElem
+                    .getElementsByTagName("value")
+                    .item(0)
+                    .getFirstChild()
+                    .getNodeValue();
+        }
+
+        if(scores.length != sValues.length || scoreNames.length != sNames.length)
+            return false;
+
+        for(int i = 0; i < scores.length; i++) {
+            scoreNames[i] = sNames[i];
+            scores[i] = Save.parseInt(sValues[i]);
+        }
+
+        return true;
+    }
+
+    @Override
+    public String toXML() {
+        String xml = "";
+        String scoresxml = "";
+
+        for(int i = 0; i < scoreNames.length; i++) {
+            if(scoreNames[i] == null || scoreNames[i].equals(""))
+                scoreNames[i] = DEF_SCORE_NAME_FORMAT;
+            scoresxml += XMLSerializer.makeElement(
+                    "score",
+                    XMLSerializer.makeElement(
+                            "name",
+                            scoreNames[i]
+                    ) + XMLSerializer.makeElement(
+                            "value",
+                            Integer.toString(scores[i])
+                    )
+            );
+        }
+
+        xml = XMLSerializer.makeElement("scoreboard", scoresxml);
+
+        return xml;
     }
 
 // GETTERS & SETTERS //

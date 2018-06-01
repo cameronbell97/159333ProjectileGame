@@ -46,9 +46,9 @@ public class Handler {
     private Handler() {
         // Initialise Save Data
         save = new Save();
-        if(!save.load()) {
-            save.create(); // If load fails, create a blank save
-            if(!save.load()) {
+        if(!save.loadXML()) {
+            //save.create(); // If load fails, create a blank save
+            if(!save.loadXML()) {
                 Game.end(); // If load fails a second time, kill the program
             }
         }

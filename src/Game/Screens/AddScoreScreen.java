@@ -92,7 +92,7 @@ public class AddScoreScreen extends Screen {
             protected void onClick() {
                 Save save = handler.getSave();
                 save.getScoreBoard().addNewScore(score, nameTyper.getText());
-                save.save();
+                save.saveXML();
                 ScreenManager.setScreen(new ScoresScreen(returnScreen, drawScreen));
             }
 
