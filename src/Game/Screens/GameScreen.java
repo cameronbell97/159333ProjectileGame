@@ -1,9 +1,7 @@
 package Game.Screens;
 
 import Game.Data.Settings;
-import Game.Handler;
 import Game.Timer.CodeTimer;
-import Game.Timer.TimerManager;
 import Game.Timer.iCanHaveCodeTimer;
 
 import java.awt.*;
@@ -12,6 +10,7 @@ import java.io.IOException;
 /**
  * Cameron Bell - 26/03/2018
  * Game Screen Class
+ * The Screen in which the actual Game is played
  */
 
 public class GameScreen extends Screen implements iCanHaveCodeTimer {
@@ -31,7 +30,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
     }
 
 // METHODS //
-    // Method - Update Managers
+    // Method - Update Managers //
     @Override
     public void update(int dt) {
         if(gameIsRunning) {
@@ -39,7 +38,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
         } else endGame();
     }
 
-    // Method - Draw Everything in the Screen
+    // Method - Draw Everything in the Screen //
     @Override
     public void draw(Graphics g) {
         // Draw Background
@@ -50,10 +49,12 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
         handler.draw(g);
     }
 
+    // Method - Start to End the Game //
     public void end() {
         handler.getTimerManager().newCodeTimer(120, this, "END");
     }
 
+    // Method - Really End the Game //
     private void endGame() {
         int score = handler.getGameDataManager().getScore();
 

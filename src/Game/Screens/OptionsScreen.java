@@ -2,10 +2,15 @@ package Game.Screens;
 
 import Game.Data.Settings;
 import Game.Display.DisplayElements.*;
-import Game.Display.UserInterface.TextManager;
 import Game.Handler;
 
 import java.awt.*;
+
+/**
+ * Cameron Bell - 09/05/2018
+ * Options Screen Class
+ * The Options Menu Screen
+ */
 
 public class OptionsScreen extends Screen {
 // VARIABLES //
@@ -38,13 +43,15 @@ public class OptionsScreen extends Screen {
         fillElements();
     }
 
-    // METHODS //
-
+// METHODS //
+    // Method - Update Buttons //
     @Override
     public void update(int dt) {
         backButton.update();
         clearScoresButton.update();
     }
+
+    // Method - Draw Elements of the Screen //
     @Override
     public void draw(Graphics g) {
         // Draw Background
@@ -61,6 +68,7 @@ public class OptionsScreen extends Screen {
         backButton.draw(g, xStart - backButton.getWidth() + 1, yStart);
     }
 
+    // Method - Generate All The Main Menu Elements //
     private void fillElements() {
         mainElement = new PaddedElement(1, borderColor, fillColour, OUTER_PADDING);
         VerticalListElement titleWrapper = new VerticalListElement((int)(SPACE_BETWEEN_ROWS*1.5));

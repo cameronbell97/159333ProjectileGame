@@ -7,6 +7,12 @@ import Game.Handler;
 
 import java.awt.*;
 
+/**
+ * Cameron Bell - 18/04/2018
+ * Scores Screen Class
+ * The Screen Displaying the High Scores
+ */
+
 public class ScoresScreen extends Screen {
 // VARIABLES //
     // Statics //
@@ -49,11 +55,13 @@ public class ScoresScreen extends Screen {
     }
 
 // METHODS //
+    // Method - Update Buttons //
     @Override
     public void update(int dt) {
         backButton.update();
     }
 
+    // Method - Draw Elements of the Screen //
     @Override
     public void draw(Graphics g) {
         // Draw Background
@@ -73,6 +81,7 @@ public class ScoresScreen extends Screen {
         backButton.draw(g, xStart - backButton.getWidth() + 1, yStart);
     }
 
+    // Method - Generate All The Main Menu Elements //
     private void fillElements() {
         mainElement = new PaddedElement(1, borderColor, fillColour, OUTER_PADDING);
         titleWrapper = new VerticalListElement((int)(SPACE_BETWEEN_ROWS*1.5));

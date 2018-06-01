@@ -5,6 +5,12 @@ import Game.Display.DisplayElements.*;
 
 import java.awt.*;
 
+/**
+ * Cameron Bell - 18/04/2018
+ * Add Score Screen Class
+ * The Screen that appears at the end of the game to record your High Score
+ */
+
 public class AddScoreScreen extends Screen {
 // VARIABLES //
     // Statics
@@ -48,12 +54,14 @@ public class AddScoreScreen extends Screen {
     }
 
 // METHODS //
+    // Method - Update Buttons & TypeText Box //
     @Override
     public void update(int dt) {
         submitButton.update();
         nameTyper.update();
     }
 
+    // Method - Draw Elements of the Screen //
     @Override
     public void draw(Graphics g) {
         // Draw Background
@@ -70,6 +78,7 @@ public class AddScoreScreen extends Screen {
         mainElement.draw(g, xStart, yStart);
     }
 
+    // Method - Generate All The Main Menu Elements //
     private void fillElements() {
         mainElement = new PaddedElement(1, borderColor, fillColour, OUTER_PADDING);
         titleWrapper = new VerticalListElement((int)(SPACE_BETWEEN_ROWS*1.5));

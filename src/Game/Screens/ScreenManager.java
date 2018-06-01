@@ -3,6 +3,7 @@ package Game.Screens;
 /**
  * Cameron Bell - 26/03/2018
  * Screen Manager Class
+ * Keeps track of the current screen
  */
 
 public class ScreenManager {

@@ -6,11 +6,11 @@ import Game.Display.DisplayElements.VerticalListElement;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Cameron Bell - 26/03/2018
  * Main Menu Screen Class
+ * The Main Menu Screen
  */
 
 public class MainMenuScreen extends Screen{
@@ -38,12 +38,14 @@ public class MainMenuScreen extends Screen{
         fillElements();
     }
 
-    // METHODS //
+// METHODS //
+    // Method - Update Buttons //
     @Override
     public void update(int dt) {
         buttonList.update();
     }
 
+    // Method - Draw Elements of the Screen //
     @Override
     public void draw(Graphics g) {
         // Draw Background
@@ -57,6 +59,7 @@ public class MainMenuScreen extends Screen{
         mainElement.draw(g, xStart, yStart);
     }
 
+    // Method - Generate All The Main Menu Elements //
     private void fillElements() {
         mainElement = new PaddedElement(OUTER_PADDING);
         buttonList = new VerticalListElement(SPACE_BETWEEN_ROWS);
