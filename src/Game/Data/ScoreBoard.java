@@ -134,6 +134,7 @@ public class ScoreBoard implements iXMLSerializable{
         }
     }
 
+    // Method - Load ScoreBoard Data from XML File into Class //
     @Override
     public boolean fromXML(String path) {
         // Load Data From File
@@ -191,6 +192,7 @@ public class ScoreBoard implements iXMLSerializable{
         return true;
     }
 
+    // Method - Write ScoreBoard Data as XML & Return as String //
     @Override
     public String toXML() {
         String xml = "";
