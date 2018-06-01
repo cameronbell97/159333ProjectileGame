@@ -15,7 +15,7 @@ public class Launcher {
         new Settings();
 
         // Launch Game
-        Game game = new Game("PROJECTILE", Settings.game_height, Settings.game_width);
+        Game game = new Game("YOZNOVA", Settings.game_height, Settings.game_width);
         game.start();
     }
 }

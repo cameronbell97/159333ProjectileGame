@@ -23,7 +23,7 @@ public class Save {
     // Method - Save Data to File // TODO // Implement Saved Settings
     public void saveXML() {
         File file = new File(DEF_XML_SAVE_PATH);
-        //if(!file.isFile()) create();
+        file.getParentFile().mkdirs();
         try {
             BufferedWriter br = new BufferedWriter(new FileWriter(file));
             br.write(scoreBoard.toXML());
