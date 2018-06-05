@@ -1,7 +1,8 @@
 package Game.Entities.Collision;
 
 import Game.Entities.Dynamic.PlayerEntity;
-import Game.Entities.Entity;
+
+// Code for Future Use //
 
 public class PlayerCollisionBoxBody extends CollisionBox {
     public PlayerCollisionBoxBody(float xpos, float ypos, int width, int height, int xoff, int yoff, PlayerEntity playerEntity) {

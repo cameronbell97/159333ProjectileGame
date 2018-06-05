@@ -4,7 +4,6 @@ import Game.Data.Settings;
 import Game.Display.Assets.AssetManager;
 import Game.Entities.Dynamic.DynamicEntity;
 import Game.Entities.Entity;
-import Game.Entities.EntityManager;
 import javafx.geometry.Point2D;
 
 import java.awt.*;
@@ -25,20 +24,19 @@ public class CollisionBox extends DynamicEntity{
     }
 
 // METHODS //
+    // Method - Updates (x,y) pos //
     public void update(int dt) {
         setXpos(parent.getXpos()+xoff);
         setYpos(parent.getYpos()+yoff);
-        // TODO // Get min & max values to use for checking out of bounds / screen
-//        corners = SAT.getCorners(this);
-//        double min1 = corns1.stream().mapToDouble(p -> p.dotProduct(ax)).min().getAsDouble();
-//        double min2 = corns1.stream().mapToDouble(p -> p.dotProduct(ax)).min().getAsDouble();
     }
 
+    // Method Override - To Empty setCollisionBox Method //
     @Override
     public void setCollisionBox() {
 
     }
 
+    // Method - Draw a Rotated Box Representing the Collision Box - Only used for debug //
     @Override
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -49,14 +47,12 @@ public class CollisionBox extends DynamicEntity{
         g2d.rotate(-direction-Math.PI/2, xpos + width/2, ypos + height/2);
     }
 
-    // Get the position of the centre of the entity
+    // Method - Get the position of the centre of the entity //
     public Point2D getCentre() {
         return new Point2D(xpos + width / 2, ypos + height / 2);
     }
-    private void destroy() {
-        handler.getEntityManager().unsubscribe(this);
-    }
 
+    // Method - Collide with another Collision Box //
     @Override
     public void collide(Entity ec) {
         if(ec.getParent() != null && parent != null) parent.collide(ec.getParent());
@@ -64,7 +60,6 @@ public class CollisionBox extends DynamicEntity{
 
 
 // GETTERS & SETTERS //
-
     public float getXpos() {
         return xpos;
     }
@@ -85,9 +80,5 @@ public class CollisionBox extends DynamicEntity{
     }
     public Entity getParent() {
         return parent;
-    }
-    public void setAnchor(int x, int y) {
-        anchorx = x;
-        anchory = y;
     }
 }

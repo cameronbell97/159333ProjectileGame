@@ -7,9 +7,11 @@ package Game.Entities;
  */
 
 public interface iVulnerable {
+// METHODS //
+    public void addHP(int hp);
+    public void die();
+
 // GETTERS & SETTERS //
     public int getHP();
     public void setHP(int hp);
-    public void addHP(int hp);
-    public void die();
 }
