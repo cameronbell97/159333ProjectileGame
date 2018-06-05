@@ -21,12 +21,16 @@ public class EntityManager implements iObserver {
 // VARIABLES //
     boolean alive = true;
     PlayerEntity player;
-    List<Entity> ents; // A list of Game.Entities
-    List<Entity> sub_queue; // A list of Game.Entities
-    List<Entity> unsub_queue; // A list of Game.Entities
+
+    // Lists //
+    List<Entity> ents; // A list of Entities
+    List<Entity> sub_queue; // A list of Entities
+    List<Entity> unsub_queue; // A list of Entities
+
     List<CollisionBox> cols; // A list of CollisionBoxes
     List<CollisionBox> sub_cueue; // A list of CollisionBoxes
     List<CollisionBox> unsub_cueue; // A list of CollisionBoxes
+
     List<Particle> particles; // A list of CollisionBoxes
     List<Particle> p_sub_queue; // A list of CollisionBoxes
     List<Particle> p_unsub_queue; // A list of CollisionBoxes
@@ -52,8 +56,7 @@ public class EntityManager implements iObserver {
     }
 
 // METHODS //
-    // Methods that subscribe Game.Entities to this Entity Manager
-
+    // Methods - That subscribe Entities to this Entity Manager
     public void subscribe(Particle p) {
         p_sub_queue.add(p);
     }
@@ -64,14 +67,13 @@ public class EntityManager implements iObserver {
         sub_cueue.add(e);
     }
 
-    // Methods that unsubscribe Game.Entities from this Entity Manager
-
-    public void unsubscribe(Particle p) {
-        p_unsub_queue.add(p);
-    }
+    // Methods - That unsubscribe Entities from this Entity Manager
     @Override
     public void unsubscribe(Entity e) {
         unsub_queue.add(e);
+    }
+    public void unsubscribe(Particle p) {
+        p_unsub_queue.add(p);
     }
     public void unsubscribe(CollisionBox e) {
         unsub_cueue.add(e);
@@ -81,21 +83,24 @@ public class EntityManager implements iObserver {
         unsubscribe(p);
     }
 
-    // Method that calls updateGame() on every entity
+    // Method - Update State //
     public void update(int dt) {
         if(player != null) player.update(dt);
 
-        // ENTITIES //
-        // Update Game.Entities
+    // ENTITIES //
+
+        // Update Entities
         for(Entity e : ents) {
             e.update(dt);
         }
-        // Add Queued Game.Entities
+
+        // Add Queued Entities
         for(Entity e : sub_queue) {
             ents.add(e);
         }
         sub_queue.clear(); // Clear the sub_queue
-        // Remove Queued Game.Entities
+
+        // Remove Queued Entities
         for(Entity e : unsub_queue) {
             if(!ents.remove(e)) {
 //                System.out.println("ERROR: Could Not Remove: " + e.toString()); // DEBUG //
@@ -103,51 +108,58 @@ public class EntityManager implements iObserver {
         }
         unsub_queue.clear(); // Clear the unsub_queue
 
-        // COLLISION BOXES //
+    // COLLISION BOXES //
+
         // Check for collisions
         checkCollisions();
+
         // Add Queued Collision Boxes
         for(CollisionBox e : sub_cueue) {
             cols.add(e);
         }
         sub_cueue.clear(); // Clear the sub_cueue
-        // Remove Collision Boxes
+
+        // Remove Unsubbed Collision Boxes
         for(CollisionBox e : unsub_cueue) {
             if(e == null) continue;
             if(!cols.remove(e)) {
-                try {
-                    System.out.println("ERROR: Could Not Remove: " + e.toString());
-                } catch (NullPointerException ex) {
-                    ex.printStackTrace();
-                }
+            // DEBUG CODE //
+//                try {
+//                    System.out.println("ERROR: Could Not Remove: " + e.toString());
+//                } catch (NullPointerException ex) {
+//                    ex.printStackTrace();
+//                }
             }
         }
         unsub_cueue.clear(); // Clear the unsub_cueue
 
-        // PARTICLES //
-        // Limit Particles
+    // PARTICLES //
+
+        // Limit Particles to Maximum Allowed Particles
         while(particles.size() > Settings.max_particles) {
             Particle particleToRemove = particles.get(0);
             particles.remove(particleToRemove);
         }
 
-        // Update Game.Entities
+        // Update Particles
         for(Particle p : particles) {
             p.update(dt);
         }
-        // Add Queued Game.Entities
+
+        // Add Queued Particles
         for(Particle p : p_sub_queue) {
             particles.add(p);
         }
         p_sub_queue.clear(); // Clear the sub_queue
-        // Remove Queued Game.Entities
+
+        // Remove Queued Particles
         for(Particle p : p_unsub_queue) {
             particles.remove(p);
         }
         p_unsub_queue.clear(); // Clear the unsub_queue
     }
 
-    // Method that calls draw() on every entity
+    // Method - Draw State of Entities & Particles //
     public void draw(Graphics g) {
         for(Entity e : ents) {
             if(!(e instanceof Game.Entities.Dynamic.PlayerEntity)) // Don't draw player yet because it will be drawn later
@@ -160,33 +172,33 @@ public class EntityManager implements iObserver {
         if(player != null) player.draw(g);
     }
 
+    // Method - Check for collisions between collision boxes //
     private void checkCollisions() {
         int x1 = 0;
         int x2 = 0;
         for(CollisionBox e : cols) {
             for(CollisionBox f : cols) {
                 if(
-                    x2 > x1 && ( // Skip checking collisions twice
-                        e != f || // The entities are not the same entity
-                        ( // One of the entities's parent object is not the bullet of the other's (aka ignore player bullets colliding with player)
-                          // And also check they're not both from the same entity (two bullets colliding both going in the same direction from the same entity)
-                                f.getParent() != null && // The first entity has a parent and
-                                e.getParent() != null && // The second entity has a parent and
-                                f.getParent().getParent() != null && // The first entity's parent has a parent and
-                                e.getParent().getParent() != null && // The second entity's parent has a parent and
-                                f.getParent().getParent() != e.getParent() && // The first entity's parent's parent is not the second entity's parent
-                                e.getParent().getParent() != f.getParent() &&// The second entity's parent's parent is not the first entity's parent
-                                f.getParent().getParent() != e.getParent().getParent() // The first and second entities' parents' parents are not the same
-                        )
-                    ) &&
+                    x2 > x1 && // Skip checking collisions twice
+//                    (
+//                        e != f || // The entities are not the same entity
+//                        ( // One of the entities's parent object is not the bullet of the other's (aka ignore player bullets colliding with player)
+//                          // And also check they're not both from the same entity (two bullets colliding both going in the same direction from the same entity)
+//                                f.getParent() != null && // The first entity has a parent and
+//                                e.getParent() != null && // The second entity has a parent and
+//                                f.getParent().getParent() != null && // The first entity's parent has a parent and
+//                                e.getParent().getParent() != null && // The second entity's parent has a parent and
+//                                f.getParent().getParent() != e.getParent() && // The first entity's parent's parent is not the second entity's parent
+//                                e.getParent().getParent() != f.getParent() &&// The second entity's parent's parent is not the first entity's parent
+//                                f.getParent().getParent() != e.getParent().getParent() // The first and second entities' parents' parents are not the same
+//                        )
+//                    ) &&
                         SAT.isColliding(e, f) // The entities are colliding
                     ) { // Collide the Entities
                     Entity ep = e.getParent();
                     Entity fp = f.getParent();
                     ep.collide(fp);
                     fp.collide(ep);
-
-                    //f.getParent().collide(e.getParent()); // (CURRENTLY) no need to call collide() on f because f and e will switch places in a later check
                 }
                 x2++;
             }
@@ -195,34 +207,17 @@ public class EntityManager implements iObserver {
         }
     }
 
+    // Method - Draws Collision Boxes //
     public void drawCollisionBoxes(Graphics g) {
         for(CollisionBox c : cols) {
             c.draw(g);
         }
     }
 
-    // DEPRECATED METHOD // Clear Data //
-    public void clear() {
-        for (Entity entity : ents) {
-            entity.clearData();
-            unsubscribe(entity);
-        }
-        for (CollisionBox col : cols) {
-            unsubscribe(col);
-        }
-        for (Particle particle : particles) {
-            unsubscribe(particle);
-        }
-        player = null;
-        this.update(1);
-        alive = false;
-    }
-
 // GETTERS & SETTERS //
     public PlayerEntity getPlayer() {
         return player;
     }
-
     public boolean isAlive() {
         return alive;
     }

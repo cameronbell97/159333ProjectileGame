@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 /**
  * Cameron Bell - 02/04/2018
  * Entity Abstract Class
+ * Class to define basic methods all entities should have
  */
 
 public abstract class Entity {
@@ -18,6 +19,7 @@ public abstract class Entity {
 
     protected float xpos, ypos;
     protected int width, height;
+
     protected BufferedImage img;
     protected CollisionBox collision;
     protected Entity parent;
@@ -32,8 +34,11 @@ public abstract class Entity {
     }
 
 // METHODS //
+    // Methods - Abstract Update & Draw methods, to be implemented & then called at the Update & Draw phases //
     public abstract void update(int dt);
     public abstract void draw(Graphics g);
+
+    // Methods - For getting Overlapping (x,y) for wrapping when out of bounds //
     public float getOverlapX() {
         int w = Settings.game_width / 2;
         if(xpos > w) return w - (xpos - w);
@@ -45,11 +50,13 @@ public abstract class Entity {
         else return h + (h - ypos);
     }
 
+    // Method - Clearing values //
     public void clearData() {
         parent = null;
         collision = null;
     }
 
+    // Method - Nulls Parent Variable //
     public void nullParent() {
         if(parent != null) parent = null;
     }

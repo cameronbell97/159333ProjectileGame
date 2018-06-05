@@ -2,7 +2,7 @@ package Game.Entities;
 
 /**
  * Cameron Bell - 13/04/2018
- * i
+ * iOutOfBounds
  *
  */
 

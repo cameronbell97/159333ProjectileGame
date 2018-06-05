@@ -18,7 +18,7 @@ import java.util.List;
 
 public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
 // VARIABLES //
-    boolean alive = true;
+    private boolean alive = true;
 
     // Statics
     private static final int LEVEL_WAIT_TIME = 4*60;
@@ -26,7 +26,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
     private static final int DEF_SPAWN_MAXSEC = 4*60;
 
     // Managers
-    Handler handler;
+    private Handler handler;
 
     // Enemy Director Variables
     private int gameLevel;
@@ -36,9 +36,9 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
     private int spawn_queue_maxsec;
 
     // Enemy Lists
-    List<Enemy> remaining_queue; // A list of Enemies
-    List<Enemy> spawn_queue; // A list of Enemies
-    List<Enemy> dead_queue; // A list of Enemies
+    private List<Enemy> remaining_queue; // A list of Enemies
+    private List<Enemy> spawn_queue; // A list of Enemies
+    private List<Enemy> dead_queue; // A list of Enemies
 
 // CONSTRUCTORS //
     public EnemyDirector(Handler parentHandler) {
@@ -58,28 +58,31 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
     }
 
 // METHODS //
+// Method - Update State //
     public void update(int dt) {
         // Generate time new enemy will wait to spawn
         int nextEnemyTime = Handler.getIntFromRange(spawn_queue_minsec, spawn_queue_maxsec);
         TimerManager tm = Handler.get().getTimerManager();
 
-        // Create Enemy "to-be-spawned" Timers
+        // Create Enemy "to-be-spawned" Timers //
         for(Enemy e : spawn_queue) {
-            // Make new Enemy Game.Timer
+            // Make new Enemy Timer
             tm.newEnemyTimer(nextEnemyTime, this, e);
 
-            // Increment Limbo Game.Entities - Enemy e is yet to spawn so can't be counted in "Remaining Enemies"
+            // Increment Limbo Entities - Enemy e is yet to spawn so can't be counted in "Remaining Enemies"
             limboEntities++;
 
             // Increment Time
-            //nextEnemyTime += Handler.getIntFromRange(60, 4*60);
             nextEnemyTime += Handler.getIntFromRange(spawn_queue_minsec, spawn_queue_maxsec);
         }
-        spawn_queue.clear(); // Clear the spawn_queue
+        // Clear the spawn_queue
+        spawn_queue.clear();
 
+        // Remove Unsubbed Entities  //
         for(Enemy e : dead_queue)
             remaining_queue.remove(e);
-        dead_queue.clear(); // Clear the dead_queue
+        // Clear the dead_queue
+        dead_queue.clear();
 
 
         // Go to next level if no more enemies remain, or are yet to spawn
@@ -110,14 +113,14 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
     // Method - Recieve Timer Notification //
     @Override
     public void timerNotify(EnemyTimer t) {
-        // Unsub Game.Timer so it can be deleted
+        // Unsub Timer so it can be deleted
         Handler.get().getTimerManager().unsubTimer(t);
 
         // Give new position and direction to enemy, ready for spawning
         Enemy enem = generateEnemyPosition(t.getEnemy(), t.getEnemy().getMaxSize());
         enem.setCollisionBox();
 
-        limboEntities--; // Decrement Limbo Game.Entities Counter
+        limboEntities--; // Decrement Limbo Entities Counter
         handler.getEntityManager().subscribe(enem); // // Subscribe Enemy to EntityManager for Managing (Updating and Drawing)
         remaining_queue.add(enem); // Count it as a remaining enemy
     }
@@ -268,7 +271,7 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
 
                 break;
 
-            default: // DYNAMIC LEVEL GENERATION
+            default: // DYNAMIC LEVEL GENERATION //
                 if(gameLevel <= 10) break;
 
                 int X = gameLevel - 10;
@@ -398,34 +401,13 @@ public class EnemyDirector implements iCanHaveCodeTimer, iCanHaveEnemyTimer {
         remaining_queue.add(e);
     }
 
-    // DEPRECATED METHOD //
-    public void clear() {
-        for (Enemy enem : spawn_queue) {
-            unsubscribe(enem);
-        }
-        for (Enemy enem : remaining_queue) {
-            unsubscribe(enem);
-        }
-
-        this.update(1);
-        alive = false;
-    }
-
-    public void startGame() {
-        if(currentTimer != null) Handler.get().getTimerManager().unsubTimer(currentTimer);
-        currentTimer = null;
-        handler.getEnemyDirector().startGame();
-    }
-
 // GETTERS & SETTERS //
     public int getRemainingEnemies() {
         return remaining_queue.size() + limboEntities;
     }
-
     public int getGameLevel() {
         return gameLevel;
     }
-
     public boolean isAlive() {
         return alive;
     }
