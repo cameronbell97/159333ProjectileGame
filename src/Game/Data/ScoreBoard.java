@@ -202,14 +202,4 @@ public class ScoreBoard implements iXMLSerializable {
     public int getBiggestScore() {
         return scores[0];
     }
-//    // Getter Method - Get the Largest Score // OLD //
-//    public int getBiggestScore() {
-//        int biggest = 0;
-//
-//        for(int i = 0; i < scores.length; i++) {
-//            if(biggest < scores[i]) biggest = scores[i];
-//        }
-//
-//        return biggest;
-//    }
 }
