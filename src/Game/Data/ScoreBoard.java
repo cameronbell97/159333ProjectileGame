@@ -17,11 +17,12 @@ import java.io.IOException;
  * Scoreboard Class
  * Class Object to Keep Score Data
  */
-public class ScoreBoard implements iXMLSerializable{
+public class ScoreBoard implements iXMLSerializable {
 // VARIABLES //
     // Statics //
     public static final String DEF_SCORE_NAME_FORMAT = "---";
     public static final int DEF_SCORES_NUM = 10;
+    private static final int DEVELOPER_HIGH_SCORE = 1361;
 
     // Data //
     private int scores[];
@@ -34,33 +35,6 @@ public class ScoreBoard implements iXMLSerializable{
     }
 
 // METHODS //
-    // Method - Load Passed Data //
-    public boolean load(int[] scores, String[] scoreNames) {
-        if(this.scores.length == scores.length) this.scores = scores;
-        else return false;
-
-        if(this.scoreNames.length == scoreNames.length) this.scoreNames = scoreNames;
-        else return false;
-
-        return true;
-    }
-
-    // Method - Build Scores into String for File Saving //
-    public String saveScoresAsString() {
-        StringBuilder builder = new StringBuilder();
-
-        for(int i = 0; i < DEF_SCORES_NUM; i++) {
-            builder.append(parseString(i) + " " + parseString(scores[i]) + " ");
-        }
-
-        for(int i = 0; i < DEF_SCORES_NUM; i++) {
-            if(scoreNames[i] != null) builder.append(scoreNames[i] + " ");
-            else builder.append(DEF_SCORE_NAME_FORMAT + " ");
-        }
-
-        return builder.toString();
-    }
-
     // Method - Turn an Integer into a String of Number Characters //
     private String parseString(int n) {
         try{
