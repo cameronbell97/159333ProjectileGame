@@ -24,18 +24,18 @@ public class AddScoreScreen extends Screen {
     private Screen drawScreen;
 
     // Colours
-    Color backgroundColor;
-    Color borderColor;
-    Color fillColour;
+    private Color backgroundColor;
+    private Color borderColor;
+    private Color fillColour;
 
     // Elements
-    PaddedElement mainElement;
-    VerticalListElement titleWrapper;
-    HorizontalListElement columnsContainer;
-    VerticalListElement nameColumn;
-    VerticalListElement scoreColumn;
-    ButtonElement submitButton;
-    TypeTextElement nameTyper;
+    private PaddedElement mainElement;
+    private VerticalListElement titleWrapper;
+    private HorizontalListElement columnsContainer;
+    private VerticalListElement nameColumn;
+    private VerticalListElement scoreColumn;
+    private ButtonElement submitButton;
+    private TypeTextElement nameTyper;
 
     private int score;
 
@@ -50,7 +50,6 @@ public class AddScoreScreen extends Screen {
         backgroundColor = new Color(0, 0, 20);
 
         fillElements();
-
     }
 
 // METHODS //

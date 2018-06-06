@@ -26,7 +26,8 @@ public class KeyManager implements KeyListener{
         alt,
         delete,
         enter,
-        insert;
+        insert,
+        esc;
 
 // CONSTRUCTORS //
     public KeyManager() {
@@ -48,6 +49,7 @@ public class KeyManager implements KeyListener{
         delete = keys[KeyEvent.VK_DELETE];
         enter = keys[KeyEvent.VK_ENTER];
         insert = keys[KeyEvent.VK_INSERT];
+        esc = keys[KeyEvent.VK_ESCAPE];
     }
 
     // Method - KeyTyped Event Override //

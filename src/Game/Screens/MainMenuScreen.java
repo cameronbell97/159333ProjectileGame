@@ -74,6 +74,12 @@ public class MainMenuScreen extends Screen{
                 }
             }
         });
+        buttonList.addChild(new ButtonElement("TUTORIAL", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
+            @Override
+            protected void onClick() {
+//                ScreenManager.setScreen(new TutorialScreen());
+            }
+        });
         buttonList.addChild(new ButtonElement("HIGH SCORES", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
             @Override
             protected void onClick() {
