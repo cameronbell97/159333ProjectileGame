@@ -43,13 +43,9 @@ public class EnergyExplParticle extends Particle {
                 ySprExpl = 7;
         }
 
-        if(ticks <= DEF_LINGER_TIME/3) {
-            AssetManager.get().getSprite(11, 1, ySprExpl);
-        }
-        else if(ticks <= 2*(DEF_LINGER_TIME/3)) {
-            AssetManager.get().getSprite(11, 2, ySprExpl);
-        }
-        else {
+        if (ticks <= (DEF_LINGER_TIME / 3)) {
+                AssetManager.get().getSprite(11, 2, ySprExpl);
+        } else {
             img = AssetManager.get().getSprite(11, 3, ySprExpl);
         }
 
@@ -62,10 +58,18 @@ public class EnergyExplParticle extends Particle {
         if(ticksLeft <= 0) {
             destroy();
         } else {
-            if(ticksLeft <= 10 && ticksLeft > 5) {
-                img = AssetManager.get().getSprite(11, 2, ySprExpl);
-            } else if(ticksLeft <= 5) {
-                img = AssetManager.get().getSprite(11, 1, ySprExpl);
+            if(ySprExpl == 7) {
+                if (ticksLeft <= 10 && ticksLeft > 5) {
+                    img = AssetManager.get().getSprite(11, 2, ySprExpl);
+                } else if (ticksLeft <= 5) {
+                    img = AssetManager.get().getSprite(11, 1, ySprExpl);
+                }
+            } else if (ySprExpl == 12) {
+                if (ticksLeft <= 10 && ticksLeft > 5) {
+                    img = AssetManager.get().getSprite(11, 3, ySprExpl);
+                } else if (ticksLeft <= 5) {
+                    img = AssetManager.get().getSprite(11, 2, ySprExpl);
+                }
             }
 
             ticksLeft-=dt;
