@@ -23,6 +23,7 @@ public class PlayerBulletParticle extends Particle {
     }
 
 // METHODS //
+    // Method Override - Update Particle Entity State //
     @Override
     public void update(int dt) {
         if(timeAlive > 0) {
@@ -37,6 +38,7 @@ public class PlayerBulletParticle extends Particle {
         }
     }
 
+    // Method Override - To Handle Collisions //
     @Override
     public void collide(Entity ec) {
 

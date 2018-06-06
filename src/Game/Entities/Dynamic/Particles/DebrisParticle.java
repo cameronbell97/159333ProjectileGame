@@ -9,14 +9,16 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
 /**
- * Created by Cameron on 4/05/2018.
+ * Cameron Bell - 04/05/2018.
+ * Debris Particle Entity
+ * Ship Debris Particle Effect
  */
+
 public abstract class DebrisParticle extends Particle {
 // VARIABLES //
     private static final double DEF_MOVE_SPEED = 0.55;
 
-    private double spriteDirection;
-    private double spriteRotSpeed;
+    private double spriteDirection, spriteRotSpeed;
 
 // CONSTRUCTORS //
     public DebrisParticle(DynamicEntity parent, BufferedImage sprite) {
@@ -45,6 +47,7 @@ public abstract class DebrisParticle extends Particle {
     }
 
 // METHODS //
+    // Method Override - Update Particle Entity State //
     @Override
     public void update(int dt) {
         super.update(dt);
@@ -52,11 +55,13 @@ public abstract class DebrisParticle extends Particle {
         rotateSprite(dt);
     }
 
+    // Method Override - To Handle Collisions //
     @Override
     public void collide(Entity ec) {
 
     }
 
+    // Method - Rotate Sprite to Given Direction //
     public void rotateSprite(int dt) {
         // TODO // Rotate Sprite Without Cutoffs
         spriteDirection += dt * spriteRotSpeed;
@@ -64,5 +69,6 @@ public abstract class DebrisParticle extends Particle {
         aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
     }
 
+    // Abstract Method - Set Position and Direction of Particle //
     protected abstract void setPosAndDir();
 }

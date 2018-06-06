@@ -41,6 +41,7 @@ public abstract class Particle extends DynamicEntity implements iCanHaveCodeTime
         }
     }
 
+    // Method Override - Update Particle Entity State //
     @Override
     public void update(int dt) {
         // Fading Mechanics
@@ -48,9 +49,9 @@ public abstract class Particle extends DynamicEntity implements iCanHaveCodeTime
         if(alphaFade <= 0) destroy();
     }
 
+    // Method Override - Draw Particle Entity State //
     @Override
     public void draw(Graphics g) {
-//        if(img == null) return;
         Graphics2D g2d = (Graphics2D) g;
         if(fade) {
             AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float)alphaFade);
@@ -63,10 +64,12 @@ public abstract class Particle extends DynamicEntity implements iCanHaveCodeTime
         }
     }
 
+    // Method - Destroy Entity //
     protected void destroy() {
         handler.getEntityManager().unsubscribe(this);
     }
 
+    // Method Override - Used for initial spacial setup for the Collision Box //
     @Override
     public void setCollisionBox() {
 

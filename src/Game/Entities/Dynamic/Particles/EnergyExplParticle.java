@@ -53,6 +53,7 @@ public class EnergyExplParticle extends Particle {
     }
 
 // METHODS //
+    // Method Override - Update Particle Entity State //
     @Override
     public void update(int dt) {
         if(ticksLeft <= 0) {
@@ -76,11 +77,13 @@ public class EnergyExplParticle extends Particle {
         }
     }
 
+    // Method Override - To Handle Collisions //
     @Override
     public void collide(Entity ec) {
 
     }
 
+    // Method Override - Draw Particle Entity State //
     @Override
     public void draw(Graphics g) {
         g.drawImage(img, (int)xpos, (int)ypos, width, height, null);
