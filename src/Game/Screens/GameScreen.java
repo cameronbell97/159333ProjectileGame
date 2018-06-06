@@ -1,5 +1,6 @@
 package Game.Screens;
 
+import Game.Data.KeyManager;
 import Game.Data.Settings;
 import Game.Timer.CodeTimer;
 import Game.Timer.iCanHaveCodeTimer;
@@ -17,6 +18,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
 // VARIABLES //
     private Screen lastScreen;
     private boolean gameIsRunning;
+    private KeyManager keyManager;
 
 // CONSTRUCTORS //
     public GameScreen(Screen lastScreen) throws IOException {
@@ -27,6 +29,8 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
         this.lastScreen = lastScreen;
 
         handler.newGame();
+
+        keyManager = handler.getKeyManager();
     }
 
 // METHODS //
@@ -35,6 +39,7 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
     public void update(int dt) {
         if(gameIsRunning) {
             handler.updateGame(dt);
+            if(keyManager.esc) ScreenManager.setScreen(new PauseMenuScreen(this));
         } else endGame();
     }
 
