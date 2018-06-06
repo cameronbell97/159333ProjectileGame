@@ -15,21 +15,23 @@ import java.awt.*;
 
 public class ScoresScreen extends Screen {
 // VARIABLES //
-    // Statics //
-    private static final int SPACE_BETWEEN_COLUMNS = 24;
-    private static final int SPACE_BETWEEN_ROWS = 16;
-    private static final int BORDER_WIDTH = 1;
-    private static final int OUTER_PADDING = 24;
-
-    private ScoreBoard scoreBoard;
+    // Screens
     private Screen returnScreen;
     private Screen drawScreen;
 
+    // Data
+    private ScoreBoard scoreBoard;
+    private int space_between_columns = DEF_SPACE_BETWEEN_COLUMNS;
+    private int space_between_rows = DEF_SPACE_BETWEEN_ROWS;
+    private int border_width = DEF_BORDER_WIDTH;
+    private int outer_padding = DEF_OUTER_PADDING;
+
+    // Colors
     Color backgroundColor;
     Color borderColor;
     Color fillColour;
 
-    // Elements //
+    // Elements
     PaddedElement mainElement;
     VerticalListElement titleWrapper;
     HorizontalListElement columnsContainer;
@@ -83,12 +85,12 @@ public class ScoresScreen extends Screen {
 
     // Method - Generate All The Main Menu Elements //
     private void fillElements() {
-        mainElement = new PaddedElement(1, borderColor, fillColour, OUTER_PADDING);
-        titleWrapper = new VerticalListElement((int)(SPACE_BETWEEN_ROWS*1.5));
-        columnsContainer = new HorizontalListElement(SPACE_BETWEEN_COLUMNS);
+        mainElement = new PaddedElement(1, borderColor, fillColour, outer_padding);
+        titleWrapper = new VerticalListElement((int)(space_between_rows *1.5));
+        columnsContainer = new HorizontalListElement(space_between_columns);
 
-        nameColumn = new VerticalListElement(SPACE_BETWEEN_ROWS);
-        scoreColumn = new VerticalListElement(SPACE_BETWEEN_ROWS);
+        nameColumn = new VerticalListElement(space_between_rows);
+        scoreColumn = new VerticalListElement(space_between_rows);
 
         // Add Names
         for(String name : scoreBoard.getScoreNames()) {
@@ -111,7 +113,7 @@ public class ScoresScreen extends Screen {
         mainElement.setChildElement(titleWrapper);
 
         // Back Button
-        backButton = new ButtonElement("<", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
+        backButton = new ButtonElement("<", border_width, borderColor, fillColour, Settings.button_padding) {
             @Override
             protected void onClick() {
 

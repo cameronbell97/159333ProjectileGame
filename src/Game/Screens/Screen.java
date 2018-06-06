@@ -12,6 +12,13 @@ import java.awt.*;
 
 public abstract class Screen {
 // VARIABLES //
+    // Statics //
+    protected static final int DEF_SPACE_BETWEEN_COLUMNS = 24;
+    protected static final int DEF_SPACE_BETWEEN_ROWS = 16;
+    protected static final int DEF_BORDER_WIDTH = 1;
+    protected static final int DEF_OUTER_PADDING = 24;
+
+
     protected Handler handler;
 
 // CONSTRUCTORS //

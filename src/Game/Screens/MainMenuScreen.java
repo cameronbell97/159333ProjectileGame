@@ -15,10 +15,14 @@ import java.io.IOException;
 
 public class MainMenuScreen extends Screen{
 // VARIABLES //
+    // Statics
     private static final int SPACE_BETWEEN_ROWS = 8;
-    private static final int BORDER_WIDTH = 1;
     private static final int OUTER_PADDING = 32;
 
+    // Data
+    private int border_width = DEF_BORDER_WIDTH;
+
+    // Colours
     Color backgroundColor;
     Color borderColor;
     Color fillColour;
@@ -64,7 +68,7 @@ public class MainMenuScreen extends Screen{
         mainElement = new PaddedElement(OUTER_PADDING);
         buttonList = new VerticalListElement(SPACE_BETWEEN_ROWS);
 
-        buttonList.addChild(new ButtonElement("PLAY", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
+        buttonList.addChild(new ButtonElement("PLAY", border_width, borderColor, fillColour, Settings.button_padding) {
             @Override
             protected void onClick() {
                 try {
@@ -74,25 +78,25 @@ public class MainMenuScreen extends Screen{
                 }
             }
         });
-        buttonList.addChild(new ButtonElement("TUTORIAL", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
+        buttonList.addChild(new ButtonElement("TUTORIAL", border_width, borderColor, fillColour, Settings.button_padding) {
             @Override
             protected void onClick() {
 //                ScreenManager.setScreen(new TutorialScreen());
             }
         });
-        buttonList.addChild(new ButtonElement("HIGH SCORES", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
+        buttonList.addChild(new ButtonElement("HIGH SCORES", border_width, borderColor, fillColour, Settings.button_padding) {
             @Override
             protected void onClick() {
                 ScreenManager.setScreen(new ScoresScreen(ScreenManager.getScreen(), ScreenManager.getScreen()));
             }
         });
-        buttonList.addChild(new ButtonElement("OPTIONS", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
+        buttonList.addChild(new ButtonElement("OPTIONS", border_width, borderColor, fillColour, Settings.button_padding) {
             @Override
             protected void onClick() {
                 ScreenManager.setScreen(new OptionsScreen(ScreenManager.getScreen()));
             }
         });
-        buttonList.addChild(new ButtonElement("QUIT", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
+        buttonList.addChild(new ButtonElement("QUIT", border_width, borderColor, fillColour, Settings.button_padding) {
             @Override
             protected void onClick() {
                 Game.Game.end();

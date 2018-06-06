@@ -16,8 +16,10 @@ public class PauseMenuScreen extends Screen {
 // VARIABLES //
     // Statics
     private static final int SPACE_BETWEEN_ROWS = 8;
-    private static final int BORDER_WIDTH = 1;
-    private static final int OUTER_PADDING = 24;
+
+    // Data
+    private int border_width = DEF_BORDER_WIDTH;
+    private int outer_padding = DEF_OUTER_PADDING;
 
     // Screens
     private Screen returnScreen;
@@ -69,18 +71,18 @@ public class PauseMenuScreen extends Screen {
     // Method - Generate All The Menu Elements //
     private void fillElements() {
         // Create Encompassing Elements
-        mainElement = new PaddedElement(1, borderColor, fillColour, OUTER_PADDING);
-        titleWrapper = new VerticalListElement((int)(OUTER_PADDING));
+        mainElement = new PaddedElement(1, borderColor, fillColour, outer_padding);
+        titleWrapper = new VerticalListElement((int)(outer_padding));
         menuList = new VerticalListElement(SPACE_BETWEEN_ROWS);
 
         // Create Buttons
-        resumeButton = new ButtonElement("RESUME", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
+        resumeButton = new ButtonElement("RESUME", border_width, borderColor, fillColour, Settings.button_padding) {
             @Override
             protected void onClick() {
                 ScreenManager.setScreen(returnScreen);
             }
         };
-        mainMenuButton = new ButtonElement("EXIT", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
+        mainMenuButton = new ButtonElement("EXIT", border_width, borderColor, fillColour, Settings.button_padding) {
             @Override
             protected void onClick() {
                 try {
