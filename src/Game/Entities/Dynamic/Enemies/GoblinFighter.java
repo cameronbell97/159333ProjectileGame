@@ -3,30 +3,37 @@ package Game.Entities.Dynamic.Enemies;
 import Game.Data.Settings;
 import Game.Entities.*;
 import Game.Entities.Dynamic.ExpDot;
-import Game.Handler;
 
 import java.awt.*;
 
+/**
+ * Cameron Bell - 16/04/2018
+ * Goblin Fighter Abstract Class
+ * Encompasses Goblin Fighter Mechanics
+ */
+
 public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBounds, iVulnerable {
 // VARIABLES //
-    private static final int DEF_PLAYER_STOP_DISTANCE = 500;
     private static final double GOBLIN_FIGHTER_MOVE_SPEED = 1.4;
-    private static final int OFFSCREEN_BOUNDARY = -32;
-    private static final int INITIAL_TIME_BEFORE_SHOOTING = 3*60;
-    private static final int TIME_BETWEEN_SHOOT_PHASES = 3*60;
-    private static final int TIME_BETWEEN_SHOTS = 25;
-    private static final int DEF_SHOOT_PHASE_BULLET_NUMBER = 4;
-    private static final int DEF_HP = 1;
-    private static final int DEF_EXP = 8;
+    private static final int
+            DEF_PLAYER_STOP_DISTANCE = 500,
+            OFFSCREEN_BOUNDARY = -32,
+            INITIAL_TIME_BEFORE_SHOOTING = 3*60,
+            TIME_BETWEEN_SHOOT_PHASES = 3*60,
+            TIME_BETWEEN_SHOTS = 25,
+            DEF_SHOOT_PHASE_BULLET_NUMBER = 4,
+            DEF_HP = 1,
+            DEF_EXP = 8;
 
-    protected int shootTimer;
-    protected int shootPhase;
-    protected int phaseBullet;
-    protected int hp;
-    protected int exp_value;
-    protected int phaseBulletsNumber = 4;
-    protected int playerStopDistance;
-    protected int timeBetweenPhases;
+    protected int
+            shootTimer,
+            shootPhase,
+            phaseBullet,
+            hp,
+            exp_value,
+            phaseBulletsNumber = 4,
+            playerStopDistance,
+            timeBetweenPhases;
 
 // CONSTRUCTORS //
     public GoblinFighter(float x, float y, double direction) {
@@ -44,6 +51,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     }
 
 // METHODS //
+    // Method Override - Update Entity State //
     @Override
     public void update(int dt) {
         super.update(dt);
@@ -62,6 +70,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
         }
     }
 
+    // Method Override - To Handle Collisions //
     @Override
     public void collide(Entity ec) {
         if(ec instanceof Game.Entities.Dynamic.Bullets.BulletPlayer) {
@@ -72,6 +81,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
         }
     }
 
+    // Methpd - Draw Goblin to Screen //
     @Override
     public void draw(Graphics g) {
         super.draw(g);
@@ -102,6 +112,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
         }
     }
 
+    // Method - Will try to shoot bullets at the player if it can //
     private void tryShoot(int dt) {
         if(phaseBullet < phaseBulletsNumber) {
             if (shootTimer == 0 || shootTimer == TIME_BETWEEN_SHOTS) {
@@ -126,8 +137,10 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
         }
     }
 
+    // Abstract Method - Shoot Bullets //
     protected abstract void shoot();
 
+    // Method Override - Check if the Asteroid is Out Of Bounds //
     @Override
     public boolean checkOOB() {
         if(     xpos <= -OFFSCREEN_BOUNDARY ||
@@ -140,25 +153,13 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
         return false;
     }
 
+    // Method Override - Do when the Goblin is Out Of Bounds //
     @Override
     public void doWhenOutOfBounds(int dt) {
 
     }
 
-    public int getShootPhase() {
-        return shootPhase;
-    }
-
-    @Override
-    public int getHP() {
-        return hp;
-    }
-
-    @Override
-    public void setHP(int hp) {
-        this.hp = hp;
-    }
-
+    // Method - Add HP (remove using negative integers) //
     @Override
     public void addHP(int hp) {
         this.hp += hp;
@@ -167,6 +168,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
         }
     }
 
+    // Method - Destroy Goblin //
     @Override
     public void die() {
         EntityManager em = handler.getEntityManager();
@@ -177,14 +179,27 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
         handler.getEnemyDirector().unsubscribe(this);
     }
 
-    // Death animation
+    // Abstract Method - Death Animation //
     protected abstract void explode();
 
+    // Methods - Gets information for drawing line for debug mode //
     private float getDebugLineX() {
         return (float)(moveSpeed * Math.cos(direction));
     }
-
     private float getDebugLineY() {
         return (float)(moveSpeed * -Math.sin(direction));
+    }
+
+// GETTERS & SETTERS //
+    public int getShootPhase() {
+        return shootPhase;
+    }
+    @Override
+    public int getHP() {
+        return hp;
+    }
+    @Override
+    public void setHP(int hp) {
+        this.hp = hp;
     }
 }

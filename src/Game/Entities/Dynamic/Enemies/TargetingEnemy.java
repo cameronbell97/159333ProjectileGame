@@ -1,9 +1,14 @@
 package Game.Entities.Dynamic.Enemies;
 
-import Game.Entities.Entity;
 import Game.Entities.EntityManager;
 
-public abstract class TargetingEnemy extends Enemy{
+/**
+ * Cameron Bell - 15/04/2018
+ * Targeting Enemy Abstract Class
+ * Encompasses Player-Targeting Mechanics
+ */
+
+public abstract class TargetingEnemy extends Enemy {
 // VARIABLES //
     private static final double DEF_ROTATE_SPEED = 0.003 * Math.PI;
     private static final float DEF_DECELERATION = (float)0.03;
@@ -37,6 +42,7 @@ public abstract class TargetingEnemy extends Enemy{
     }
 
 // METHODS //
+    // Method Override - Update Entity State //
     @Override
     public void update(int dt) {
         calcPlayerDistanceAndDirection();
@@ -52,9 +58,7 @@ public abstract class TargetingEnemy extends Enemy{
         decelerate(dt, deceleration);
     }
 
-    @Override
-    public abstract void collide(Entity ec);
-
+    // Method - Rotate Towards the Player //
     private void rotateToPlayer(int dt) {
         // Keep the entity's direction in the range 0 < x < 2(PI)
         if(this.direction > (2 * Math.PI)) this.direction -= (2 * Math.PI);
@@ -76,6 +80,7 @@ public abstract class TargetingEnemy extends Enemy{
         }
     }
 
+    // Method - Calculate a Future Distance from the Player //
     protected float getFutureDistanceFromPlayer(float futureX, float futureY) {
         EntityManager em = handler.getEntityManager();
 
@@ -105,11 +110,13 @@ public abstract class TargetingEnemy extends Enemy{
         return distance;
     }
 
+    // Method - Check if it is worth moving towards the player //
     protected boolean checkMovingIsWorth() {
         if(getFutureDistanceFromPlayer(xpos + xmove, ypos + ymove) < distanceFromPlayer) return true;
         return false;
     }
 
+    // Method - Calculate the Distance to the Player and the Direction needed to move to face it //
     protected void calcPlayerDistanceAndDirection() {
         EntityManager em = handler.getEntityManager();
 

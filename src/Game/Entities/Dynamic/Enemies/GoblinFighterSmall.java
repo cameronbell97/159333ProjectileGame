@@ -7,6 +7,12 @@ import Game.Entities.Dynamic.Particles.DebrisParticle;
 import Game.Entities.Dynamic.Particles.EnergyExplParticle;
 import Game.Entities.EntityManager;
 
+/**
+ * Cameron Bell - 16/04/2018
+ * Small Goblin Fighter Class
+ * Small Goblin Fighter Enemy
+ */
+
 public class GoblinFighterSmall extends GoblinFighter {
 // VARIABLES //
     private static final int GOBLIN_FIGHTER_SMALL_DEF_HP = 4;
@@ -26,10 +32,12 @@ public class GoblinFighterSmall extends GoblinFighter {
         timeBetweenPhases = GOBLIN_FIGHTER_TIME_BEFORE_SHOOTING;
     }
 
+    // Method - Shoot Bullet //
     public void shoot() {
         handler.getEntityManager().subscribe(new GoblinBulletSmall(this));
     }
 
+    // Method - Explode out ship particles on death //
     @Override
     protected void explode() {
         EntityManager em = handler.getEntityManager();
@@ -141,9 +149,9 @@ public class GoblinFighterSmall extends GoblinFighter {
         });
     }
 
+    // Method Override - Used for initial spacial setup for the Collision Box //
     @Override
     public void setCollisionBox() {
-
         collision = new CollisionBox(xpos+21, ypos+17, 22, 30, 21, 17, this);
     }
 

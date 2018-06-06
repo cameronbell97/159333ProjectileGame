@@ -19,8 +19,8 @@ import java.awt.image.AffineTransformOp;
 
 /**
  * Cameron Bell - 04/04/2018
- * Asteroid cEntity Class
- * An asteroid object
+ * Asteroid Entity Class
+ * Asteroid Enemy
  */
 
 public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
@@ -30,8 +30,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
 
     protected int level;
     private int hp;
-    private double spriteDirection;
-    private double spriteRotation;
+    private double spriteDirection, spriteRotation;
     private boolean white;
 
 // CONSTRUCTORS //
@@ -69,7 +68,8 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
         rotateSprite();
     }
 
-    // METHODS //
+// METHODS //
+    // Method Override - Update Entity State //
     @Override
     public void update(int dt) {
         move(dt);
@@ -82,6 +82,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
         }
     }
 
+    // Method Override - To Handle Collisions //
     @Override
     public void collide(Entity ec) {
         if(ec instanceof BulletPlayer) {
@@ -93,6 +94,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
 
     }
 
+    // Method Override - Used for initial spacial setup for the Collision Box //
     @Override
     public void setCollisionBox() {
         if(level >=3) {
@@ -106,15 +108,17 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
         }
     }
 
+    // Method - Rotates the Sprite //
     public void rotateSprite(int dt) {
-        // TODO // Rotate Sprite Without Cutoffs
         spriteDirection += dt * spriteRotation;
         aTrans = AffineTransform.getRotateInstance(-spriteDirection+(Math.PI/2), width/2, height/2);
         aTransOp = new AffineTransformOp(aTrans, AffineTransformOp.TYPE_BILINEAR);
     }
 
+    // Method - Destroy Asteroid - Creates Additional Smaller Asteroids if Possible //
     @Override
     public void die() {
+        // Get Managers
         EntityManager em = handler.getEntityManager();
         EnemyDirector ed = handler.getEnemyDirector();
 
@@ -147,15 +151,15 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
         kill();
     }
 
-    // Hard die, just kills the object
+    // Method - Hard die, just kills the object //
     public void kill() {
         EntityManager em = handler.getEntityManager();
         em.unsubscribe(this);
         em.unsubscribe(collision);
         handler.getEnemyDirector().unsubscribe(this);
     }
-    // Method to explode rock particles
 
+    // Method - Explode out rock particles on death //
     protected void explode() {
         EntityManager em = handler.getEntityManager();
 
@@ -167,6 +171,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
         }
     }
 
+    // Method Override - Check if the Asteroid is Out Of Bounds //
     @Override
     public boolean checkOOB() {
         if(     xpos <= -OFFSCREEN_BOUNDARY ||
@@ -179,6 +184,7 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
         return false;
     }
 
+    // Method Override - Do when the Asteroid is Out Of Bounds //
     @Override
     public void doWhenOutOfBounds(int dt) {
 

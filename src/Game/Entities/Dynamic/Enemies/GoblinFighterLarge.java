@@ -7,6 +7,12 @@ import Game.Entities.Dynamic.Particles.DebrisParticle;
 import Game.Entities.Dynamic.Particles.EnergyExplParticle;
 import Game.Entities.EntityManager;
 
+/**
+ * Cameron Bell - 15/04/2018
+ * Large Goblin Fighter Class
+ * Large Goblin Fighter Enemy
+ */
+
 public class GoblinFighterLarge extends GoblinFighter {
 // VARIABLES //
     private static final int LARGE_GOBLIN_STOP_DISTANCE = 650;
@@ -23,10 +29,12 @@ public class GoblinFighterLarge extends GoblinFighter {
         playerStopDistance = LARGE_GOBLIN_STOP_DISTANCE;
     }
 
+    // Method - Shoot Bullet //
     public void shoot() {
         handler.getEntityManager().subscribe(new GoblinBulletLarge(this));
     }
 
+    // Method - Explode out ship particles on death //
     @Override
     protected void explode() {
         EntityManager em = handler.getEntityManager();
@@ -139,6 +147,7 @@ public class GoblinFighterLarge extends GoblinFighter {
 
     }
 
+    // Method Override - Used for initial spacial setup for the Collision Box //
     @Override
     public void setCollisionBox() {
         collision = new CollisionBox(xpos+15, ypos+9, 34, 45, 15, 9, this);
