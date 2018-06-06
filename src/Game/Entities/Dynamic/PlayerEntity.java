@@ -36,21 +36,27 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     private static final int THRUST_FRAME_TIME_2 = 25;
     private static final int THRUST_FRAME_TIME_3 = 40;
 
+    // Managers
     private AssetManager assMan = AssetManager.get();
     private KeyManager km;
-//    GameDataManager gdm = GameDataManager.get();
-    private double speedMultiplier;
-    private double rotationSpeed;
-    private boolean reverseThrust; // If true, player can reverse
-    private float decelerate;
-    private int health;
-    private boolean shoot_release;
-    private boolean shoot_reloaded;
-    private int slowTimeStart;
-    private int slowTimeCurrent;
-    private int timeMoving;
-    private int acceleration;
-//    private PlayerCollisionBoxHead headCollision;
+
+    private double
+            speedMultiplier,
+            rotationSpeed;
+    private boolean
+            reverseThrust, // If true, player can reverse
+            shoot_release,
+            shoot_reloaded;
+    private float
+            decelerate;
+    private int
+            health,
+            slowTimeStart,
+            slowTimeCurrent,
+            timeMoving,
+            acceleration;
+
+//    private PlayerCollisionBoxHead headCollision; // EXPERIMENTAL //
 
 
 // CONSTRUCTORS //
@@ -60,6 +66,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     }
 
 // METHODS //
+    // Method - Initialise the Entity //
     public void initialise() {
         km = handler.getKeyManager();
         speedMultiplier = 1;
@@ -80,20 +87,19 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         acceleration = 60;
     }
 
+    // Method Override - Used for initial spacial setup for the Collision Box //
     @Override
     public void setCollisionBox() {
         collision = new CollisionBox(xpos+22, ypos+17, 20, 35, 22, 17, this);
+
+        // EXPERIMENTAL CODE //
 //        collision = new PlayerCollisionBoxBody(xpos+17, ypos+26, 30, 30, 17, 26, this);
 //        collision.setAnchor(15, 6);
 //        headCollision = new PlayerCollisionBoxHead(xpos+27, ypos+7, 10, 18, 27, 7, this);
 //        headCollision.setAnchor(5, 25);
     }
 
-    public void move(int dt) {
-        moveX(dt);
-        moveY(dt);
-    }
-
+    // Method Override - Move on the X axis unless the entity would move outside the screen //
     @Override
     protected void moveX(int dt) {
         // If moving right
@@ -119,6 +125,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         }
     }
 
+    // Method Override - Move on the Y axis unless the entity would move outside the screen //
     @Override
     protected void moveY(int dt) {
         // If moving down
@@ -145,14 +152,16 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         }
     }
 
+    // Method Override - Update Entity State //
     @Override
     public void update(int dt) {
         getInput(dt);
         move(dt);
         collision.update(dt);
-//        headCollision.updateGame();
+//        headCollision.updateGame(); // EXPERIMENTAL //
     }
 
+    // Method Override - To handle Collisions //
     @Override
     public void collide(Entity ec) {
         if(ec instanceof Game.Entities.Dynamic.Enemies.Asteroid) {
@@ -174,6 +183,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         }
     }
 
+    // Method - Change variables depending on key presses //
     private void getInput(int dt) {
         // Deceleration mechanics
         if (Settings.player_deceleration) {
@@ -184,6 +194,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         if(slowTimeStart <= 0) speedMultiplier = 1;
         else speedMultiplier = (double)slowTimeCurrent/slowTimeStart;
 
+        // Thrust Mechanics
         if(km.shift && slowTimeStart <= 0) {
             if(slowTimeCurrent <= 0) speedMultiplier = 1.8;
             else speedMultiplier = (double)1 + ((double)((double)50 - slowTimeCurrent) / 50);
@@ -194,9 +205,11 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
                 timeMoving = THRUST_FRAME_TIME_3;
             }
         }
+        // Precision Movement Mechanics
         if(km.ctrl ) {
             speedMultiplier = (float)0.25;
         }
+        // Move Forward Mechanics
         if(km.forward) {
             if(!Settings.player_acceleration) {
                 ymove = (float) (moveSpeed * -Math.sin(direction) * speedMultiplier);
@@ -210,30 +223,31 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 //                acceleration++;
             }
 
-        // Thrust Animation Code
+            // Thrust Animation Code
             if (timeMoving < THRUST_FRAME_TIME_2) {
                 timeMoving+=dt;
 
-                // TODO // FIX TO WORK WITH DT
                 if(timeMoving == THRUST_FRAME_TIME_1) setImg(assMan.getAnimPThrust(1));
                 else if(timeMoving == THRUST_FRAME_TIME_2) setImg(assMan.getAnimPThrust(2));
             }
         }
         else {
+            // Thrust Animation Code
             if (timeMoving != 0) {
                 timeMoving-=dt;
 
-                // TODO // FIX TO WORK WITH DT
                 if(timeMoving == THRUST_FRAME_TIME_1) setImg(assMan.getAnimPThrust(0));
                 else if(timeMoving == THRUST_FRAME_TIME_2 - 1) setImg(assMan.getAnimPThrust(1));
                 else if(timeMoving == THRUST_FRAME_TIME_3 - 1) setImg(assMan.getAnimPThrust(2));
             }
         }
 
+        // Reverse Mechanics
         if(km.back && reverseThrust) {
             ymove = (float)(moveSpeed * Math.sin(direction)* speedMultiplier);
             xmove = (float)(moveSpeed * -Math.cos(direction)* speedMultiplier);
         }
+        // Rotate Left Mechanics
         if(km.left) {
             if (km.ctrl && Settings.player_strafe) {
                 strafeLeft(moveSpeed / 2);
@@ -244,6 +258,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 //                headCollision.rotateSprite(direction);
             }
         }
+        // Rotate Right Mechanics
         if(km.right) {
             if (km.ctrl && Settings.player_strafe) {
                 strafeRight(moveSpeed / 2);
@@ -254,6 +269,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 //                headCollision.rotateSprite(direction);
             }
         }
+        // Shooting Mechanics
         if(km.spacebar && shoot_release && shoot_reloaded) {
             if(Settings.player_gun_main) {
                 handler.getEntityManager().subscribe(new BulletPlayer(this));
@@ -264,6 +280,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             if(Settings.player_gun_lock) shoot_release = false;
         }
         if(!km.spacebar) shoot_release = true;
+
         // Slow/Speedup Mechanics for collision with asteroid
         if(slowTimeStart > 0) slowTimeCurrent+=dt;
         if(slowTimeStart == slowTimeCurrent) slowTimeStart = 0;
@@ -274,17 +291,19 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             xmove = xmove / 3;
         }
 
+        // Debug Keys
         if(km.delete && Settings.DEBUG_CHEATS) addHP(-20);
         if(km.insert && Settings.DEBUG_CHEATS) handler.getGameDataManager().addScore(1);;
     }
 
+    // Method - Add HP (remove using negative integers) //
     @Override
     public void addHP(int hp) {
         health += hp;
         if(health <= 0) die();
     }
 
-    // Method to destroy / delete entity
+    // Method - Destroy / Delete entity //
     @Override
     public void die() {
         EntityManager em = handler.getEntityManager();
@@ -299,6 +318,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         }
     }
 
+    // Method - Explode Particles Away from Player After Death //
     private void explode() {
         EntityManager em = handler.getEntityManager();
 
@@ -420,7 +440,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         });
     }
 
-    // Method to setup the slow mechanics
+    // Method - Setup the Slow Mechanics //
     private void slow(int ticks) {
         slowTimeStart = slowTimeStart - slowTimeCurrent + ticks;
         slowTimeCurrent = 0;
@@ -454,6 +474,4 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     public void setHP(int hp) {
         health = hp;
     }
-
-
 }

@@ -9,6 +9,7 @@ import Game.Entities.EntityManager;
 /**
  * Cameron Bell - 27/03/2018
  * Dynamic Entity Abstract Class
+ * Abstract Entity Class encompassing everything an entity that can move in all directions needs
  */
 
 public abstract class DynamicEntity extends Entity{
@@ -37,13 +38,16 @@ public abstract class DynamicEntity extends Entity{
     }
 
 // METHODS //
+    // Abstract Method - Used for initial spacial setup for the Collision Box //
     public abstract void setCollisionBox();
 
+    // Method - Calculates xmove and ymove from direction and move speed //
     public void setMoveSpeeds() {
         ymove = (float)(moveSpeed * -Math.sin(direction));
         xmove = (float)(moveSpeed * Math.cos(direction));
     }
 
+    // Methods - Moves on the X and Y axis according to xmove and ymove //
     protected void move(int dt) {
         moveX(dt);
         moveY(dt);
@@ -55,7 +59,7 @@ public abstract class DynamicEntity extends Entity{
         ypos += dt * ymove;
     }
 
-    // Deceleration mechanics
+    // Method - Deceleration Mechanics //
     protected void decelerate(int dt, float decelRate) {
         if (xmove > 0) xmove = Math.max(0, xmove - dt * xmove * ((float) 0.01 + decelRate));
         if (xmove < 0) xmove = Math.min(0, xmove - dt * xmove * ((float) 0.01 + decelRate));
@@ -64,6 +68,7 @@ public abstract class DynamicEntity extends Entity{
 
     }
 
+    // Method - Strafes the Entity Left //
     protected void strafeLeft(double speed) {
         float oldymove = ymove;
         float oldxmove = xmove;
@@ -76,6 +81,7 @@ public abstract class DynamicEntity extends Entity{
         xmove = oldxmove;
     }
 
+    // Method - Strafes the Entity Right //
     protected void strafeRight(double speed) {
         float oldymove = ymove;
         float oldxmove = xmove;
@@ -89,7 +95,7 @@ public abstract class DynamicEntity extends Entity{
 
     }
 
-    // Method to rotateSprite the image
+    // Method - Rotate the Sprite according to the direction and anchor point //
     protected void rotateSprite() {
         // TODO // Rotate Sprite Without Cutoffs
         aTrans = AffineTransform.getRotateInstance(-direction+(Math.PI/2), anchorx, anchorx);
@@ -97,7 +103,7 @@ public abstract class DynamicEntity extends Entity{
 
     }
 
-    // Method to rotateSprite the image
+    // Method - Rotate the Sprite according to the given direction and anchor point //
     public void rotateSprite(double dir) {
         // TODO // Rotate Sprite Without Cutoffs
         direction = -dir;
@@ -106,11 +112,13 @@ public abstract class DynamicEntity extends Entity{
 
     }
 
+    // Method - Draw the Entity's Sprite //
     @Override
     public void draw(Graphics g) {
-//        if(img == null) return;
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(aTransOp.filter(img, null), (int)xpos, (int)ypos,  null);
+        if(img != null) {
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.drawImage(aTransOp.filter(img, null), (int) xpos, (int) ypos, null);
+        }
     }
 
 // GETTERS & SETTERS //
