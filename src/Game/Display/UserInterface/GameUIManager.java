@@ -12,6 +12,7 @@ import java.awt.*;
  * Game UI Manager Class
  * Displays the Game UI When Playing
  */
+
 public class GameUIManager implements iCanHaveCodeTimer {
 // VARIABLES //
     // Statics //
@@ -20,8 +21,8 @@ public class GameUIManager implements iCanHaveCodeTimer {
 
     // Managers //
     Handler handler;
-
     TextManager textManager;
+
     // Data //
     String flashAlert;
     float flashAlertAlpha;
