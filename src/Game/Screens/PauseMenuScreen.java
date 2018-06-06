@@ -6,6 +6,12 @@ import Game.Display.DisplayElements.*;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * Cameron Bell - 06/06/2018
+ * Pause Menu Screen Class
+ * The Pause Menu Screen
+ */
+
 public class PauseMenuScreen extends Screen {
 // VARIABLES //
     // Statics
