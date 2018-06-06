@@ -8,6 +8,12 @@ import Game.Entities.Dynamic.Particles.PlayerBulletParticle;
 import Game.Entities.Entity;
 import Game.Entities.EntityManager;
 
+/**
+ * Cameron Bell - 02/04/2018
+ * Player Bullet Entity
+ * The Player's Bullet - Damages Enemies
+ */
+
 public class BulletPlayer extends Bullet {
 // VARIABLES //
     protected static final int IMG_X_OFFSET = 3;
@@ -32,6 +38,7 @@ public class BulletPlayer extends Bullet {
     }
 
 // METHODS //
+    // Method Override - To Handle Collisions //
     @Override
     public void collide(Entity ec) {
         if(ec instanceof Game.Entities.Dynamic.Enemies.Asteroid) {
@@ -42,6 +49,7 @@ public class BulletPlayer extends Bullet {
         }
     }
 
+    // Method Override - Used for initial spacial setup for the Collision Box //
     @Override
     public void setCollisionBox() {
         collision = new CollisionBox(xpos+IMG_X_OFFSET, ypos, 4, 10, IMG_X_OFFSET, 0, this);

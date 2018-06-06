@@ -4,6 +4,12 @@ import Game.Entities.Dynamic.DynamicEntity;
 import Game.Entities.EntityManager;
 import Game.Data.Settings;
 
+/**
+ * Cameron Bell - 02/04/2018
+ * Bullet Abstract Entity
+ * Encompasses Bullet Related Functionality
+ */
+
 public abstract class Bullet extends DynamicEntity {
 // VARIABLES //
     private static final int OFFSCREEN_BOUNDARY = 8;
@@ -20,6 +26,7 @@ public abstract class Bullet extends DynamicEntity {
     }
 
 // METHODS //
+    // Method - Update the State of the Entity //
     @Override
     public void update(int dt) {
         move(dt);
@@ -32,6 +39,7 @@ public abstract class Bullet extends DynamicEntity {
         }
     }
 
+    // Method - Destroy the Entity //
     protected void destroy() {
         EntityManager em = handler.getEntityManager();
         em.unsubscribe(this.collision);

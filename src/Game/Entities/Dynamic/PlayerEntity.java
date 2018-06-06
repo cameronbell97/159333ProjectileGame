@@ -161,7 +161,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 //        headCollision.updateGame(); // EXPERIMENTAL //
     }
 
-    // Method Override - To handle Collisions //
+    // Method Override - To Handle Collisions //
     @Override
     public void collide(Entity ec) {
         if(ec instanceof Game.Entities.Dynamic.Enemies.Asteroid) {

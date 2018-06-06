@@ -12,8 +12,11 @@ import Game.Timer.iCanHaveCodeTimer;
 import java.awt.*;
 
 /**
- * Created by Cameron on 6/04/2018.
+ * Cameron Bell - 06/04/2018
+ * ExpDot Entity
+ * Currently used to gain score for the player
  */
+
 public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
 // VARIABLES //
     // Statics
@@ -60,6 +63,7 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
     }
 
 // METHODS //
+    // Method - Initialise the Entity //
     private void initialise() {
         active = true;
 
@@ -93,6 +97,7 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         alphaFade = 1;
     }
 
+    // Method - Draw The Entity //
     @Override
     public void draw(Graphics g) {
 //        if(img == null) return;
@@ -108,6 +113,7 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         }
     }
 
+    // Method - Update the State of the Entity //
     @Override
     public void update(int dt) {
         // Fading Mechanics
@@ -135,7 +141,7 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         move(dt);
     }
 
-    // Method - Determine the distance from the Player
+    // Method - Determine the distance from the Player //
     private void calcDistanceFromPlayer() {
         EntityManager em = handler.getEntityManager();
 
@@ -201,6 +207,7 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         this.direction = newDir;
     }
 
+    // Method Override - Collide with another Entity //
     @Override
     public void collide(Entity ec) {
         if(ec instanceof Game.Entities.Dynamic.PlayerEntity) {
@@ -219,6 +226,7 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         }
     }
 
+    // Method - Destroy the Entity //
     public void destroy() {
         EntityManager em = handler.getEntityManager();
         em.unsubscribe(this);
@@ -244,18 +252,9 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         Handler.get().getTimerManager().unsubTimer(t);
     }
 
-// GETTERS & SETTERS //
-    public int getValue() {
-        return value;
-    }
-
-    public void setMerged(boolean merged) {
-        this.merged = merged;
-    }
-
+    // Method Override - Used for initial spacial setup for the Collision Box //
     @Override
     public void setCollisionBox() {
-
         //Set Collision Box
         if(this.value < 10) {
             collision = new CollisionBox(xpos+5, ypos+5, 6, 6, 5, 5, this);
@@ -266,5 +265,13 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         else {
             collision = new CollisionBox(xpos+1, ypos+1, 14, 14, 1, 1, this);
         }
+    }
+
+// GETTERS & SETTERS //
+    public int getValue() {
+        return value;
+    }
+    public void setMerged(boolean merged) {
+        this.merged = merged;
     }
 }

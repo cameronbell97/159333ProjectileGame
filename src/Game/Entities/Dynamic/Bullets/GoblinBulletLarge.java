@@ -7,8 +7,11 @@ import Game.Entities.Dynamic.Enemies.GoblinFighter;
 import Game.Entities.Entity;
 
 /**
- * Created by Cameron on 16/04/2018.
+ * Cameron Bell - 16/04/2018
+ * Large Goblin Fighter Bullet Entity
+ * Bullet from Large Goblin Fighter - Damages the Player
  */
+
 public class GoblinBulletLarge extends Bullet {
 // VARIABLES //
     protected static final int IMG_X_OFFSET = 3;
@@ -34,6 +37,7 @@ public class GoblinBulletLarge extends Bullet {
     }
 
 // METHODS //
+    // Method Override - To Handle Collisions //
     @Override
     public void collide(Entity ec) {
         if(ec instanceof Game.Entities.Dynamic.PlayerEntity) {
@@ -41,9 +45,9 @@ public class GoblinBulletLarge extends Bullet {
         }
     }
 
+    // Method Override - Used for initial spacial setup for the Collision Box //
     @Override
     public void setCollisionBox() {
-
         collision = new CollisionBox(xpos+IMG_X_OFFSET, ypos, 4, 10, IMG_X_OFFSET, 0, this);
     }
 }
