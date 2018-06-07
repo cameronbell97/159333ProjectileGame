@@ -67,14 +67,16 @@ public class TutorialUIManager {
     public void update() {
         switch(tutStage) {
             case 0:
-                if(pressedA && pressedD) tutStage++;
                 if(keyManager.left) pressedA = true; // [A] Key //
                 if(keyManager.right) pressedD = true; // [D] Key //
+
+                if(pressedA && pressedD) tutStage++;
                 break;
             case 1:
-                if(pressedW && pressedS) tutStage++;
                 if(keyManager.forward) pressedW = true; // [W] Key //
                 if(keyManager.back) pressedS = true; // [S] Key //
+
+                if(pressedW && pressedS) tutStage++;
                 break;
             case 2:
                 pressedSpace = keyManager.spacebar;
@@ -83,25 +85,30 @@ public class TutorialUIManager {
                     justPressedSpace = true;
                 }
                 if(!pressedSpace && justPressedSpace) justPressedSpace = false;
+
                 if(pressedSpaceCount >= SPACEBAR_PRESS_COUNT) tutStage++;
                 break;
             case 3:
                 pressedShift = keyManager.shift;
                 pressedW = keyManager.forward;
+
                 if(pressedShift && pressedW) tutStage++;
                 break;
             case 4:
                 pressedShift = keyManager.shift;
+
                 if(!pressedShift) tutStage++;
                 break;
             case 5:
                 pressedCtrl = keyManager.ctrl;
                 pressedA = keyManager.left;
                 pressedD = keyManager.right;
+
                 if((pressedCtrl && pressedA) || (pressedCtrl && pressedD)) tutStage++;
                 break;
             case 6:
                 pressedCtrl = keyManager.ctrl;
+
                 if(!pressedCtrl) tutStage++;
                 break;
             case 7:
@@ -149,5 +156,10 @@ public class TutorialUIManager {
                 textManager.drawString(g, "HIT 'EXIT' IN THE <ESC> SCREEN TO GO", "center", xPencil, yPencil + TextManager.getCharacterHeight() + TextManager.LINE_INCREMENT);
                 textManager.drawString(g, "BACK TO THE MAIN MENU", "center", xPencil, yPencil + (TextManager.getCharacterHeight() + TextManager.LINE_INCREMENT) * 2);
         }
+    }
+
+// GETTERS & SETTERS //
+    public int getStage() {
+        return tutStage;
     }
 }
