@@ -2,12 +2,8 @@ package Game.Display.UserInterface;
 
 import Game.Data.KeyManager;
 import Game.Handler;
-import Game.Screens.MainMenuScreen;
-import Game.Screens.PauseMenuScreen;
-import Game.Screens.ScreenManager;
 
 import java.awt.*;
-import java.io.IOException;
 
 /**
  * Cameron Bell - 06/06/2018
@@ -25,10 +21,12 @@ public class TutorialUIManager {
     private TextManager textManager;
     private KeyManager keyManager;
 
+    // Data //
     private int tutStage;
     private int xPencil;
     private int yPencil;
 
+    // Keyboard Data //
     private boolean pressedA;
     private boolean pressedD;
     private boolean pressedW;
@@ -65,6 +63,7 @@ public class TutorialUIManager {
     }
 
 // METHODS //
+    // Method - Handles the Tutorial Progress //
     public void update() {
         switch(tutStage) {
             case 0:
@@ -111,6 +110,7 @@ public class TutorialUIManager {
         }
     }
 
+    // Method - Draw's Text to the Screen //
     public void draw(Graphics g) {
         switch(tutStage) {
             case 0:
