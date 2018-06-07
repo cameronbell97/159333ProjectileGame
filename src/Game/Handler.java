@@ -75,6 +75,12 @@ public class Handler {
         gameDataManager.update();
     }
 
+    // Method - Updates All Data Managers //
+    public void updateTutorial(int dt) {
+        timerManager.update(dt);
+        entityManager.update(dt);
+    }
+
     // Method - Draw Entire Game //
     public void draw(Graphics g) {
         // Draw All Game Entities (and their collision boxes if enabled)
@@ -94,6 +100,13 @@ public class Handler {
         gameUIManager = new GameUIManager(this);
         gameDataManager = new GameDataManager();
         setUIVisible();
+    }
+
+    // Method - Create a New Tutorial //
+    public void newTutorial() {
+        timerManager = new TimerManager();
+        entityManager = new EntityManager();
+        entityManager.getPlayer().setCollisionBox();
     }
 
     // Method - Run on End of Game //

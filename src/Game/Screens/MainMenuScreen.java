@@ -81,7 +81,7 @@ public class MainMenuScreen extends Screen{
         buttonList.addChild(new ButtonElement("TUTORIAL", border_width, borderColor, fillColour, Settings.button_padding) {
             @Override
             protected void onClick() {
-//                ScreenManager.setScreen(new TutorialScreen());
+                ScreenManager.setScreen(new TutorialScreen());
             }
         });
         buttonList.addChild(new ButtonElement("HIGH SCORES", border_width, borderColor, fillColour, Settings.button_padding) {
