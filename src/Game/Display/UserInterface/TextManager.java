@@ -18,6 +18,7 @@ public class TextManager {
 // VARIABLES //
     // Statics //
     private static final float MAX_ALPHA = 1;
+    public static final int LINE_INCREMENT = 4;
 
     // Managers //
     private AssetManager assMan;

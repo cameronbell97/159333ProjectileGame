@@ -20,13 +20,13 @@ public class GameUIManager implements iCanHaveCodeTimer {
     private static final int FLASH_ALERT_Y = (Settings.ui_upper_boundary * 2) + (Settings.character_height * Settings.character_size) * 2;
 
     // Managers //
-    Handler handler;
-    TextManager textManager;
+    private Handler handler;
+    private TextManager textManager;
 
     // Data //
-    String flashAlert;
-    float flashAlertAlpha;
-    int flashAlertAlphaPhase;
+    private String flashAlert;
+    private float flashAlertAlpha;
+    private int flashAlertAlphaPhase;
 
 // CONSTRUCTORS //
     public GameUIManager(Handler parentHandler) {
