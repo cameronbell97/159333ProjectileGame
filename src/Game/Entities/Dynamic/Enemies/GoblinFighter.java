@@ -55,7 +55,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     @Override
     public void update(int dt) {
         super.update(dt);
-        if((distanceFromPlayer > playerStopDistance || checkOOB()) && checkMovingIsWorth()) {
+        if((distanceFromPlayer > playerStopDistance || checkOOBX() || checkOOBY()) && checkMovingIsWorth()) {
             setMoveSpeeds();
         }
         if(directionToPlayer == this.direction) {
@@ -140,13 +140,19 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     // Abstract Method - Shoot Bullets //
     protected abstract void shoot();
 
-    // Method Override - Check if the Asteroid is Out Of Bounds //
+    // Method Override - Check if the Goblin is Out Of Bounds //
     @Override
-    public boolean checkOOB() {
-        if(     xpos <= -OFFSCREEN_BOUNDARY ||
-                ypos <= -OFFSCREEN_BOUNDARY ||
-                xpos >= Settings.game_width + OFFSCREEN_BOUNDARY ||
-                ypos >= Settings.game_height + OFFSCREEN_BOUNDARY) {
+    public boolean checkOOBX() {
+        if(xpos <= -OFFSCREEN_BOUNDARY || xpos >= Settings.game_width + OFFSCREEN_BOUNDARY){
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean checkOOBY() {
+        if(ypos <= -OFFSCREEN_BOUNDARY || ypos >= Settings.game_height + OFFSCREEN_BOUNDARY){
             return true;
         }
 
@@ -155,7 +161,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
 
     // Method Override - Do when the Goblin is Out Of Bounds //
     @Override
-    public void doWhenOutOfBounds(int dt) {
+    public void doWhenOutOfBounds(int dt, boolean shiftX) {
 
     }
 

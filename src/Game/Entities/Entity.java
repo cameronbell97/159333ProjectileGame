@@ -41,13 +41,13 @@ public abstract class Entity {
     // Methods - For getting Overlapping (x,y) for wrapping when out of bounds //
     public float getOverlapX() {
         int w = Settings.game_width / 2;
-        if(xpos > w) return w - (xpos - w);
-        else return w + (w - xpos);
+        if(xpos > w) return -width;
+        else return Settings.game_width;
     }
     public float getOverlapY() {
         int h = Settings.game_height / 2;
-        if(ypos > h) return h - (ypos - h);
-        else return h + (h - ypos);
+        if(ypos > h) return -height;
+        else return Settings.game_height;
     }
 
     // Method - Clearing values //

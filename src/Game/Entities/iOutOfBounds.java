@@ -6,6 +6,7 @@ package Game.Entities;
  */
 
 public interface iOutOfBounds {
-    boolean checkOOB();
-    void doWhenOutOfBounds(int dt);
+    boolean checkOOBX();
+    boolean checkOOBY();
+    void doWhenOutOfBounds(int dt, boolean shiftX);
 }

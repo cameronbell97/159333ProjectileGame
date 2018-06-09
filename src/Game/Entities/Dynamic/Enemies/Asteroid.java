@@ -25,7 +25,7 @@ import java.awt.image.AffineTransformOp;
 
 public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
 // VARIABLES //
-    private static final int OFFSCREEN_BOUNDARY = 96;
+    private static final int OFFSCREEN_BOUNDARY = 64;
     public static final int DEFAULT_SIZE = 64;
 
     protected int level;
@@ -77,8 +77,11 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
         rotateSprite(dt);
 
         // If asteroid goes out of bounds
-        if(checkOOB()) {
-            doWhenOutOfBounds(dt);
+        if(checkOOBX()) {
+            doWhenOutOfBounds(dt, true);
+        }
+        if(checkOOBY()) {
+            doWhenOutOfBounds(dt, false);
         }
     }
 
@@ -173,11 +176,17 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
 
     // Method Override - Check if the Asteroid is Out Of Bounds //
     @Override
-    public boolean checkOOB() {
-        if(     xpos <= -OFFSCREEN_BOUNDARY ||
-                ypos <= -OFFSCREEN_BOUNDARY ||
-                xpos >= Settings.game_width + OFFSCREEN_BOUNDARY ||
-                ypos >= Settings.game_height + OFFSCREEN_BOUNDARY) {
+    public boolean checkOOBX() {
+        if(xpos <= -OFFSCREEN_BOUNDARY || xpos >= Settings.game_width + OFFSCREEN_BOUNDARY){
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean checkOOBY() {
+        if(ypos <= -OFFSCREEN_BOUNDARY || ypos >= Settings.game_height + OFFSCREEN_BOUNDARY){
             return true;
         }
 
@@ -186,12 +195,10 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
 
     // Method Override - Do when the Asteroid is Out Of Bounds //
     @Override
-    public void doWhenOutOfBounds(int dt) {
-
-        // 1 in 3 chance to bounce back
+    public void doWhenOutOfBounds(int dt, boolean shiftX) {
         if(white) {
-            xpos = getOverlapX();
-            ypos = getOverlapY();
+            if(shiftX) xpos = getOverlapX();
+            else ypos = getOverlapY();
             move(dt);
         } else kill();
     }
