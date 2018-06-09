@@ -17,7 +17,7 @@ public class AssetManager {
 
 // VARIABLES //
     // Statics //
-    private static final String imagePath = "/img/";//"../../../res/img/";
+    private static final String imagePath = "/img/";
 
     // Spritesheets //
     private SpriteSheet sheet1 = null;
@@ -106,7 +106,7 @@ public class AssetManager {
             bullet_sheet = new SpriteSheet(ImageLoader.load(imagePath + "bullets.png"), 2, 2, 10, 10); // load the spritesheet
 
             // Particle Sheet 16x16
-            particles_sheet_16 = new SpriteSheet(ImageLoader.load(imagePath + "particles16.png"), 4, 13, 16, 16); // load the spritesheet
+            particles_sheet_16 = new SpriteSheet(ImageLoader.load(imagePath + "particles16.png"), 4, 14, 16, 16); // load the spritesheet
 
         } catch (IOException e) {
             e.printStackTrace();

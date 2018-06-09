@@ -44,7 +44,13 @@ public class GoblinFighterSmall extends GoblinFighter {
         AssetManager am = AssetManager.get();
 
         // Explosion
-        em.subscribe(new EnergyExplParticle(this, 10, 1));
+        em.subscribe(new EnergyExplParticle(
+                (int)xpos + width / 2,
+                (int)ypos + height / 2,
+                16,
+                2,
+                1
+        ));
 
         // Head Guns of Ship
         em.subscribe(new DebrisParticle(this, am.getSprite(11, 0, 9)) {

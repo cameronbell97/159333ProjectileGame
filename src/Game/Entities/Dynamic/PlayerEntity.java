@@ -323,7 +323,13 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         EntityManager em = handler.getEntityManager();
 
         // Explosion
-        em.subscribe(new EnergyExplParticle(this));
+        em.subscribe(new EnergyExplParticle(
+                (int)xpos + width / 2,
+                (int)ypos + height / 2,
+                21,
+                3,
+                0
+        ));
 
         // Head of Ship
         em.subscribe(new DebrisParticle(this, assMan.getSprite(11, 0, 7)) {

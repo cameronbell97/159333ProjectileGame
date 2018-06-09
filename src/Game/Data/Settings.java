@@ -8,8 +8,8 @@ package Game.Data;
 public class Settings {
 // DEFAULT VALUES //
     // Debug Tools //
-    public static final boolean DEBUG_CHEATS = false;
     public static final boolean DEBUG_MODE = false;
+    public static final boolean DEBUG_CHEATS = DEBUG_MODE;
     public static final boolean DEBUG_GOBLIN_DRAW_LINE_TO_PLAYER = DEBUG_MODE;
     public static final boolean DEBUG_GOBLIN_DRAW_FACING_DIRECTION_LINE = DEBUG_MODE;
     public static final boolean DEBUG_DRAW_COLLISIONS = DEBUG_MODE;
