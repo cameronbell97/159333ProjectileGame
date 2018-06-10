@@ -51,7 +51,7 @@ public class GameUIManager implements iCanHaveCodeTimer {
 
         // Draw Flash Alert
         if(flashAlert != null)
-            textManager.drawString(g, flashAlert, "center", Settings.game_width / 2, FLASH_ALERT_Y, flashAlertAlpha);
+            textManager.drawString(g, flashAlert, "center", Settings.game_width / 2, FLASH_ALERT_Y, 1, flashAlertAlpha);
     }
 
     // Method - Draw Score to Screen //

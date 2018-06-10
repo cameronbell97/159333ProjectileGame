@@ -38,24 +38,29 @@ public class TextManager {
 // METHODS //
     // Method - Draw a String on the screen at 100% Alpha //
     public void drawString(Graphics g, String text, String alignment, int xpos, int ypos) {
-        drawString(g, text, alignment, xpos, ypos, MAX_ALPHA);
+        drawString(g, text, alignment, xpos, ypos, 1);
+    }
+
+    // Method - Draw a String on the screen at 100% Alpha //
+    public void drawString(Graphics g, String text, String alignment, int xpos, int ypos, int sizeMultiplier) {
+        drawString(g, text, alignment, xpos, ypos, sizeMultiplier, MAX_ALPHA);
     }
 
     // Method Overload - Draw a String on the screen at custom Alpha //
-    public void drawString(Graphics g, String text, String alignment, int xpos, int ypos, float alpha) {
+    public void drawString(Graphics g, String text, String alignment, int xpos, int ypos, int sizeMultiplier, float alpha) {
         if(text.length() == 0) return;
 
         // Get Parameters
-        int character_width_final = getCharacterWidth();
-        int character_height_final = getCharacterHeight();
+        int character_width_final = getCharacterWidth() * sizeMultiplier;
+        int character_height_final = getCharacterHeight() * sizeMultiplier;
         int xPencil = xpos;
         int yPencil = ypos;
-        int xIncrement = character_width_final + Settings.character_size;
+        int xIncrement = character_width_final + (Settings.character_size * sizeMultiplier);
         String[] wordArray = text.split("");
 
         switch (alignment) {
             case "center":
-                xPencil -= ((wordArray.length * xIncrement) - Settings.character_size) / 2;
+                xPencil -= ((wordArray.length * xIncrement) - Settings.character_size * sizeMultiplier) / 2;
                 break;
             case "right":
                 Collections.reverse(Arrays.asList(wordArray));

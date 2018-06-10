@@ -2,6 +2,7 @@ package Game.Screens;
 import Game.Data.Settings;
 import Game.Display.DisplayElements.ButtonElement;
 import Game.Display.DisplayElements.PaddedElement;
+import Game.Display.DisplayElements.TextElement;
 import Game.Display.DisplayElements.VerticalListElement;
 
 import java.awt.*;
@@ -29,6 +30,7 @@ public class MainMenuScreen extends Screen{
 
     // Elements
     PaddedElement mainElement;
+    VerticalListElement titleWrapper;
     VerticalListElement buttonList;
 
 // CONSTRUCTORS //
@@ -66,6 +68,7 @@ public class MainMenuScreen extends Screen{
     // Method - Generate All The Main Menu Elements //
     private void fillElements() {
         mainElement = new PaddedElement(OUTER_PADDING);
+        titleWrapper = new VerticalListElement(SPACE_BETWEEN_ROWS*5);
         buttonList = new VerticalListElement(SPACE_BETWEEN_ROWS);
 
         buttonList.addChild(new ButtonElement("PLAY", border_width, borderColor, fillColour, Settings.button_padding) {
@@ -105,6 +108,10 @@ public class MainMenuScreen extends Screen{
 
         buttonList.setCenterAlign(true);
 
-        mainElement.setChildElement(buttonList);
+        titleWrapper.addChild(new TextElement("YOZNOVA", 2));
+        titleWrapper.addChild(buttonList);
+        titleWrapper.setCenterAlign(true);
+
+        mainElement.setChildElement(titleWrapper);
     }
 }
