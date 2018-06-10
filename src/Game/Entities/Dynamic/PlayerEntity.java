@@ -7,7 +7,6 @@ import Game.Entities.Dynamic.Particles.DebrisParticle;
 import Game.Entities.Dynamic.Particles.EnergyExplParticle;
 import Game.Entities.Entity;
 import Game.Entities.EntityManager;
-import Game.Data.PlayerModules.MainBlasterModule;
 import Game.Data.PlayerModules.WeaponModule;
 import Game.Entities.iVulnerable;
 
@@ -17,7 +16,6 @@ import Game.Data.Settings;
 import Game.Screens.GameScreen;
 import Game.Screens.Screen;
 import Game.Screens.ScreenManager;
-import Game.Timer.*;
 
 /**
  * Cameron Bell - 27/03/2018

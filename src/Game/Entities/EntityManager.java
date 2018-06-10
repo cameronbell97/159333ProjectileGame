@@ -41,7 +41,7 @@ public class EntityManager implements iObserver {
         player = new PlayerEntity(
                 Settings.game_width/2 - PlayerEntity.DEF_PLAYER_WIDTH/2,
                 Settings.game_height/2 - PlayerEntity.DEF_PLAYER_HEIGHT/2,
-                new MainBlasterModule()
+                new MainBlasterModule(Settings.player_gun_lock)
         );
 
         ents = new ArrayList<Entity>();
