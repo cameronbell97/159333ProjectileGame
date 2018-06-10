@@ -15,4 +15,5 @@ public abstract class WeaponModule extends PlayerModule {
 // METHODS //
     public abstract void tryShoot();
     protected abstract void shoot();
+    public abstract void update(int dt);
 }

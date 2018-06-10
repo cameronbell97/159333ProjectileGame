@@ -25,12 +25,11 @@ import Game.Timer.*;
  * The controllable player
  */
 
-public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHaveCodeTimer {
+public class PlayerEntity extends DynamicEntity implements iVulnerable {
 // VARIABLES //
     // Statics //
     public static final int DEF_PLAYER_WIDTH = 64;
     public static final int DEF_PLAYER_HEIGHT = 64;
-//    public static final int DEF_RELOAD_SPEED = 10; // 60 = 1 second
     public static final double DEF_ROT_SPEED = 0.015*Math.PI;
     public static final int DEF_HEALTH = 20;
     private static final int THRUST_FRAME_TIME_1 = 5;
@@ -42,15 +41,9 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     private KeyManager km;
 
     // Data //
-    private double
-            speedMultiplier,
-            rotationSpeed;
-    private boolean
-            reverseThrust, // If true, player can reverse
-            shoot_release/*,
-            shoot_reloaded*/;
-    private float
-            decelerate;
+    private double speedMultiplier, rotationSpeed;
+    private boolean reverseThrust; // If true, player can reverse
+    private float decelerate;
     private int
             health,
             slowTimeStart,
@@ -81,8 +74,6 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         reverseThrust = true;
         decelerate = (float)0.06;
         health = DEF_HEALTH;
-        shoot_release = true;
-//        shoot_reloaded = true;
         slowTimeStart = 0;
         slowTimeCurrent = 0;
         timeMoving = 0;
@@ -162,6 +153,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     // Method Override - Update Entity State //
     @Override
     public void update(int dt) {
+        weaponModule.update(dt);
         getInput(dt);
         move(dt);
         collision.update(dt);
@@ -277,17 +269,9 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             }
         }
         // Shooting Mechanics
-        if(km.spacebar && shoot_release /* && shoot_reloaded*/) {
+        if(km.spacebar) {
             weaponModule.tryShoot();
-//            if(Settings.player_gun_main) {
-//                handler.getEntityManager().subscribe(new BulletPlayer(this));
-//                handler.getTimerManager().newCodeTimer(DEF_RELOAD_SPEED, this, "REL");
-//            }
-//
-//            shoot_reloaded = false;
-            if(Settings.player_gun_lock) shoot_release = false;
         }
-        if(!km.spacebar) shoot_release = true;
 
         // Slow/Speedup Mechanics for collision with asteroid
         if(slowTimeStart > 0) slowTimeCurrent+=dt;
@@ -458,20 +442,6 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     private void slow(int ticks) {
         slowTimeStart = slowTimeStart - slowTimeCurrent + ticks;
         slowTimeCurrent = 0;
-    }
-
-    // Method Override - Recieve Timer Notification //
-    @Override
-    public void timerNotify(CodeTimer t) {
-        String timerCode = t.getCode(); // Get timer code
-
-//        switch (timerCode) {
-//            case "REL":
-//                shoot_reloaded = true;
-//                break;
-//
-//        }
-        handler.getTimerManager().unsubTimer(t); // Unsubscribe the timer
     }
 
 // GETTERS & SETTERS //
