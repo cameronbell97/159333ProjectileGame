@@ -1,5 +1,6 @@
 package Game.Entities;
 
+import Game.Data.PlayerModules.MainBlasterModule;
 import Game.Data.Settings;
 import Game.Entities.Collision.CollisionBox;
 import Game.Entities.Dynamic.Particles.Particle;
@@ -38,9 +39,10 @@ public class EntityManager implements iObserver {
 // CONSTRUCTORS //
     public EntityManager() {
         player = new PlayerEntity(
-                        Settings.game_width/2 - PlayerEntity.DEF_PLAYER_WIDTH/2,
-                        Settings.game_height/2 - PlayerEntity.DEF_PLAYER_HEIGHT/2)
-        ;
+                Settings.game_width/2 - PlayerEntity.DEF_PLAYER_WIDTH/2,
+                Settings.game_height/2 - PlayerEntity.DEF_PLAYER_HEIGHT/2,
+                new MainBlasterModule()
+        );
 
         ents = new ArrayList<Entity>();
         sub_queue = new ArrayList<Entity>();

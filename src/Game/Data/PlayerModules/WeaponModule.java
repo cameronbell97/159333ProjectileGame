@@ -7,13 +7,15 @@ public abstract class WeaponModule extends PlayerModule {
     protected PlayerEntity parent;
 
 // CONSTRUCTORS //
-    public WeaponModule(String moduleName, PlayerEntity parent) {
+    public WeaponModule(String moduleName) {
         super(moduleName);
-        this.parent = parent;
     }
 
 // METHODS //
     public abstract void tryShoot();
     protected abstract void shoot();
     public abstract void update(int dt);
+    public void setParent(PlayerEntity parent) {
+        this.parent = parent;
+    }
 }

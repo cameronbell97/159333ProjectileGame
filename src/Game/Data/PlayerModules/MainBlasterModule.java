@@ -22,8 +22,8 @@ public class MainBlasterModule extends WeaponModule implements iCanHaveCodeTimer
     private boolean released;
 
 // CONSTRUCTORS //
-    public MainBlasterModule(PlayerEntity parent) {
-        super(DEF_MODULE_NAME, parent);
+    public MainBlasterModule() {
+        super(DEF_MODULE_NAME);
         km = handler.getKeyManager();
         gun_lock = Settings.player_gun_lock;
         reloaded = true;

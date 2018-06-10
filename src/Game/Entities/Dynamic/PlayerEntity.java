@@ -58,8 +58,12 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
 
 
 // CONSTRUCTORS //
-    public PlayerEntity(float x, float y) {
+    public PlayerEntity(float x, float y, WeaponModule weaponModule) {
         super(x, y, DEF_PLAYER_WIDTH, DEF_PLAYER_HEIGHT, (Math.PI / 2));
+
+        this.weaponModule = weaponModule;
+        weaponModule.setParent(this);
+
         initialise();
     }
 
@@ -81,8 +85,6 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
         ymove = 0;
         acceleration = 0;
         acceleration = 60;
-
-        weaponModule = new MainBlasterModule(this); // TODO // Pass Module through constructor //
     }
 
     // Method Override - Used for initial spacial setup for the Collision Box //
