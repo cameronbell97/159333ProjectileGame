@@ -1,6 +1,5 @@
 package Game.Entities.Dynamic;
 import Game.Entities.Collision.CollisionBox;
-import Game.Entities.Dynamic.Bullets.BulletPlayer;
 import Game.Entities.Dynamic.Bullets.GoblinBulletLarge;
 import Game.Entities.Dynamic.Bullets.GoblinBulletSmall;
 import Game.Entities.Dynamic.Enemies.GoblinFighter;
@@ -8,6 +7,8 @@ import Game.Entities.Dynamic.Particles.DebrisParticle;
 import Game.Entities.Dynamic.Particles.EnergyExplParticle;
 import Game.Entities.Entity;
 import Game.Entities.EntityManager;
+import Game.Data.PlayerModules.MainBlasterModule;
+import Game.Data.PlayerModules.WeaponModule;
 import Game.Entities.iVulnerable;
 
 import Game.Display.Assets.AssetManager;
@@ -26,27 +27,28 @@ import Game.Timer.*;
 
 public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHaveCodeTimer {
 // VARIABLES //
-    // Statics
+    // Statics //
     public static final int DEF_PLAYER_WIDTH = 64;
     public static final int DEF_PLAYER_HEIGHT = 64;
-    public static final int DEF_RELOAD_SPEED = 10; // 60 = 1 second
+//    public static final int DEF_RELOAD_SPEED = 10; // 60 = 1 second
     public static final double DEF_ROT_SPEED = 0.015*Math.PI;
     public static final int DEF_HEALTH = 20;
     private static final int THRUST_FRAME_TIME_1 = 5;
     private static final int THRUST_FRAME_TIME_2 = 25;
     private static final int THRUST_FRAME_TIME_3 = 40;
 
-    // Managers
+    // Managers //
     private AssetManager assMan = AssetManager.get();
     private KeyManager km;
 
+    // Data //
     private double
             speedMultiplier,
             rotationSpeed;
     private boolean
             reverseThrust, // If true, player can reverse
-            shoot_release,
-            shoot_reloaded;
+            shoot_release/*,
+            shoot_reloaded*/;
     private float
             decelerate;
     private int
@@ -57,6 +59,9 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             acceleration;
 
 //    private PlayerCollisionBoxHead headCollision; // EXPERIMENTAL //
+
+    // Modules //
+    WeaponModule weaponModule;
 
 
 // CONSTRUCTORS //
@@ -77,7 +82,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         decelerate = (float)0.06;
         health = DEF_HEALTH;
         shoot_release = true;
-        shoot_reloaded = true;
+//        shoot_reloaded = true;
         slowTimeStart = 0;
         slowTimeCurrent = 0;
         timeMoving = 0;
@@ -85,6 +90,8 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         ymove = 0;
         acceleration = 0;
         acceleration = 60;
+
+        weaponModule = new MainBlasterModule(this); // TODO // Pass Module through constructor //
     }
 
     // Method Override - Used for initial spacial setup for the Collision Box //
@@ -270,13 +277,14 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             }
         }
         // Shooting Mechanics
-        if(km.spacebar && shoot_release && shoot_reloaded) {
-            if(Settings.player_gun_main) {
-                handler.getEntityManager().subscribe(new BulletPlayer(this));
-                handler.getTimerManager().newCodeTimer(DEF_RELOAD_SPEED, this, "REL");
-            }
-
-            shoot_reloaded = false;
+        if(km.spacebar && shoot_release /* && shoot_reloaded*/) {
+            weaponModule.tryShoot();
+//            if(Settings.player_gun_main) {
+//                handler.getEntityManager().subscribe(new BulletPlayer(this));
+//                handler.getTimerManager().newCodeTimer(DEF_RELOAD_SPEED, this, "REL");
+//            }
+//
+//            shoot_reloaded = false;
             if(Settings.player_gun_lock) shoot_release = false;
         }
         if(!km.spacebar) shoot_release = true;
@@ -452,17 +460,17 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         slowTimeCurrent = 0;
     }
 
-    // Method - Recieve Timer Notification //
+    // Method Override - Recieve Timer Notification //
     @Override
     public void timerNotify(CodeTimer t) {
         String timerCode = t.getCode(); // Get timer code
 
-        switch (timerCode) {
-            case "REL":
-                shoot_reloaded = true;
-                break;
-
-        }
+//        switch (timerCode) {
+//            case "REL":
+//                shoot_reloaded = true;
+//                break;
+//
+//        }
         handler.getTimerManager().unsubTimer(t); // Unsubscribe the timer
     }
 
