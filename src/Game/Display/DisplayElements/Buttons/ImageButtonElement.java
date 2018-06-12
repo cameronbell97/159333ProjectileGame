@@ -13,13 +13,17 @@ public abstract class ImageButtonElement extends ButtonElement {
         super("");
         setChildElement(new ImageElement(image));
         setWidth(childElement.getWidth());
+        width += borderWidth * 2;
         setHeight(childElement.getHeight());
+        height += borderWidth * 2;
     }
     public ImageButtonElement(BufferedImage image, Color borderColour, Color fillColour) {
         super("");
         setChildElement(new ImageElement(image));
         setWidth(childElement.getWidth());
+        width += borderWidth * 2;
         setHeight(childElement.getHeight());
+        height += borderWidth * 2;
         this.borderColour = borderColour;
 
         inactiveColour = fillColour;
@@ -38,7 +42,7 @@ public abstract class ImageButtonElement extends ButtonElement {
                 fillColour = activeColour;
             } else fillColour = inactiveColour;
 
-            // Draw Fill
+            // Draw Fill & Border
             if (isVisible()) {
                 // Draw Element Fill Colour
                 g.setColor(fillColour);
@@ -46,15 +50,15 @@ public abstract class ImageButtonElement extends ButtonElement {
 
                 // Draw Element Border
                 g.setColor(borderColour);
-                g.drawRect(xStart, yStart, width - 1, height - 1); // The -1 is because drawRect doesn't include  the bottom and right lines in the rectangle (draws them outside)
+                /* For the following command,
+                 * -1 to width & height because drawRect doesn't include the bottom and right lines in the rectangle (draws them outside)
+                 * +2 to height to draw border outside the image border
+                 */
+                g.drawRect(xStart, yStart, width + (borderWidth * 2) - 1, height + (borderWidth * 2));
             }
 
             // Draw Image
-            childElement.draw(g, xStart+1, yStart+1);
-
-            // Draw Element Border
-            g.setColor(borderColour);
-            g.drawRect(xStart, yStart, width - 1, height - 1); // The -1 is because drawRect doesn't include  the bottom and right lines in the rectangle (draws them outside)
+            childElement.draw(g, xStart + borderWidth, yStart + borderWidth);
         }
     }
 }
