@@ -74,11 +74,7 @@ public class MainMenuScreen extends Screen{
         buttonList.addChild(new ButtonElement("PLAY", border_width, borderColor, fillColour, Settings.button_padding) {
             @Override
             protected void onClick() {
-                try {
-                    ScreenManager.setScreen(new GameScreen(ScreenManager.getScreen()));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                ScreenManager.setScreen(new ChooseWeaponScreen(ScreenManager.getScreen()));
             }
         });
         buttonList.addChild(new ButtonElement("TUTORIAL", border_width, borderColor, fillColour, Settings.button_padding) {

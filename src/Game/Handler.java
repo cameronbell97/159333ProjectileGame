@@ -3,6 +3,8 @@ package Game;
 import Game.Data.GameDataManager;
 import Game.Data.KeyManager;
 import Game.Data.MouseManager;
+import Game.Data.PlayerModules.MainBlasterModule;
+import Game.Data.PlayerModules.WeaponModule;
 import Game.Data.Save;
 import Game.Data.Settings;
 import Game.Display.UserInterface.GameUIManager;
@@ -92,9 +94,9 @@ public class Handler {
     }
 
     // Method - Create a New Game //
-    public void newGame() {
+    public void newGame(WeaponModule playerWeapon) {
         timerManager = new TimerManager();
-        entityManager = new EntityManager();
+        entityManager = new EntityManager(playerWeapon);
         entityManager.getPlayer().setCollisionBox();
         enemyDirector = new EnemyDirector(this);
         gameUIManager = new GameUIManager(this);
@@ -105,7 +107,7 @@ public class Handler {
     // Method - Create a New Tutorial //
     public void newTutorial() {
         timerManager = new TimerManager();
-        entityManager = new EntityManager();
+        entityManager = new EntityManager(new MainBlasterModule(Settings.player_gun_lock));
         entityManager.getPlayer().setCollisionBox();
     }
 

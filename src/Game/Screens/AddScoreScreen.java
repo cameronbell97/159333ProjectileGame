@@ -78,7 +78,7 @@ public class AddScoreScreen extends Screen {
 
     // Method - Generate All The Main Menu Elements //
     private void fillElements() {
-        mainElement = new PaddedElement(1, borderColor, fillColour, outer_padding);
+        mainElement = new PaddedElement(border_width, borderColor, fillColour, outer_padding);
         titleWrapper = new VerticalListElement((int)(space_between_rows *1.5));
         columnsContainer = new HorizontalListElement(space_between_columns);
 

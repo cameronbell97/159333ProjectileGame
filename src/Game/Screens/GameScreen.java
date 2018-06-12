@@ -1,6 +1,7 @@
 package Game.Screens;
 
 import Game.Data.KeyManager;
+import Game.Data.PlayerModules.WeaponModule;
 import Game.Data.Settings;
 import Game.Timer.CodeTimer;
 import Game.Timer.iCanHaveCodeTimer;
@@ -21,14 +22,14 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
     private KeyManager keyManager;
 
 // CONSTRUCTORS //
-    public GameScreen(Screen lastScreen) throws IOException {
+    public GameScreen(Screen lastScreen, WeaponModule playerWeapon) throws IOException {
         super();
 
         gameIsRunning = true;
 
         this.lastScreen = lastScreen;
 
-        handler.newGame();
+        handler.newGame(playerWeapon);
 
         keyManager = handler.getKeyManager();
     }
