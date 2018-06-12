@@ -3,7 +3,9 @@ package Game.Screens;
 import Game.Data.PlayerModules.MainBlasterModule;
 import Game.Data.PlayerModules.SideBlasterModule;
 import Game.Data.Settings;
+import Game.Display.Assets.AssetManager;
 import Game.Display.DisplayElements.*;
+import Game.Display.DisplayElements.Buttons.ImageButtonElement;
 
 import java.awt.*;
 import java.io.IOException;
@@ -71,7 +73,7 @@ public class ChooseWeaponScreen extends Screen {
 
         titleWrapper.addChild(new TextElement("CHOOSE YOUR WEAPON"));
 
-        mainBlasterButton = new ButtonElement("MAIN") {
+        mainBlasterButton = new ImageButtonElement(AssetManager.get().getSprite(30, 0, 0), borderColor, fillColour) {
                 @Override
                 protected void onClick() {
                 try {
@@ -82,7 +84,7 @@ public class ChooseWeaponScreen extends Screen {
                 }
         };
         buttonsContainer.addChild(mainBlasterButton);
-        sideBlastersButton = new ButtonElement("SIDE") {
+        sideBlastersButton = new ImageButtonElement(AssetManager.get().getSprite(30, 1, 0), borderColor, fillColour) {
                 @Override
                 protected void onClick() {
                 try {

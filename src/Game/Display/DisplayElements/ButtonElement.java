@@ -20,14 +20,14 @@ public abstract class ButtonElement extends PaddedElement {
     protected KeyManager km;
 
     // Data //
-    private int xpos, ypos; // x & y positions needed for mouse detection
-    private boolean leftMouse, rightMouse;
-    private boolean isHovered, wasJustClicked, isClicked;
-    private String text;
+    protected int xpos, ypos; // x & y positions needed for mouse detection
+    protected boolean leftMouse, rightMouse;
+    protected boolean isHovered, wasJustClicked, isClicked;
+    protected String text;
 
     // Colours //
-    private Color inactiveColour;
-    private Color activeColour;
+    protected Color inactiveColour;
+    protected Color activeColour;
 
 // CONSTRUCTORS //
     public ButtonElement(String text) {
