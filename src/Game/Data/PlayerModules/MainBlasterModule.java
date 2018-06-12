@@ -5,8 +5,8 @@ import Game.Entities.Dynamic.Bullets.PlayerBullet;
 
 public class MainBlasterModule extends BlasterModule {
 // CONSTRUCTORS //
-    public MainBlasterModule(boolean gun_lock) {
-        super(gun_lock);
+    public MainBlasterModule() {
+        super(true);
     }
 
 // METHODS //

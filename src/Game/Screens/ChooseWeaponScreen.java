@@ -82,7 +82,7 @@ public class ChooseWeaponScreen extends Screen {
                 @Override
                 protected void onClick() {
                 try {
-                    ScreenManager.setScreen(new GameScreen(new MainMenuScreen(), new MainBlasterModule(Settings.player_gun_lock)));
+                    ScreenManager.setScreen(new GameScreen(new MainMenuScreen(), new MainBlasterModule()));
                     } catch (IOException e) {
                     e.printStackTrace();
                     }

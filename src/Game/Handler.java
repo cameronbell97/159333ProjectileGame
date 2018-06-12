@@ -107,7 +107,7 @@ public class Handler {
     // Method - Create a New Tutorial //
     public void newTutorial() {
         timerManager = new TimerManager();
-        entityManager = new EntityManager(new MainBlasterModule(Settings.player_gun_lock));
+        entityManager = new EntityManager(new MainBlasterModule());
         entityManager.getPlayer().setCollisionBox();
     }
 
