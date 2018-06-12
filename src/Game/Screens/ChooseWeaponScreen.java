@@ -32,6 +32,7 @@ public class ChooseWeaponScreen extends Screen {
 
     private ButtonElement mainBlasterButton;
     private ButtonElement sideBlastersButton;
+    ButtonElement backButton;
 
 // CONSTRUCTORS //
     public ChooseWeaponScreen(Screen returnScreen) {
@@ -51,6 +52,7 @@ public class ChooseWeaponScreen extends Screen {
     public void update(int dt) {
         mainBlasterButton.update();
         sideBlastersButton.update();
+        backButton.update();
     }
 
     @Override
@@ -64,6 +66,9 @@ public class ChooseWeaponScreen extends Screen {
         int yStart = (Settings.game_height / 2) - (mainElement.getHeight() / 2);
 
         mainElement.draw(g, xStart, yStart);
+
+        // Draw Back Button
+        backButton.draw(g, xStart - backButton.getWidth() + 1, yStart);
     }
 
     private void fillElements() {
@@ -98,6 +103,14 @@ public class ChooseWeaponScreen extends Screen {
 
         titleWrapper.addChild(buttonsContainer);
         titleWrapper.setCenterAlign(true);
+
+        // Back Button
+        backButton = new ButtonElement("<", border_width, borderColor, fillColour, Settings.button_padding) {
+            @Override
+            protected void onClick() {
+                ScreenManager.setScreen(returnScreen);
+            }
+        };
 
         mainElement.setChildElement(titleWrapper);
     }
