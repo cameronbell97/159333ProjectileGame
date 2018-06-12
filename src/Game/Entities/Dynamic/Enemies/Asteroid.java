@@ -2,7 +2,7 @@ package Game.Entities.Dynamic.Enemies;
 
 import Game.Display.Assets.AssetManager;
 import Game.Entities.Collision.CollisionBox;
-import Game.Entities.Dynamic.Bullets.BulletPlayer;
+import Game.Entities.Dynamic.Bullets.PlayerBullet;
 import Game.Entities.Dynamic.Particles.AsteroidParticle;
 import Game.Entities.Dynamic.ExpDot;
 import Game.Entities.Dynamic.Particles.AsteroidParticleWhite;
@@ -88,8 +88,8 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
     // Method Override - To Handle Collisions //
     @Override
     public void collide(Entity ec) {
-        if(ec instanceof BulletPlayer) {
-            addHP(-2);
+        if(ec instanceof PlayerBullet) {
+            addHP(-((PlayerBullet) ec).getDamageValue());
         }
         if(ec instanceof Game.Entities.Dynamic.PlayerEntity) {
             setHP(0);

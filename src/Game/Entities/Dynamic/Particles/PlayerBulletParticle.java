@@ -1,8 +1,7 @@
 package Game.Entities.Dynamic.Particles;
 
 import Game.Display.Assets.AssetManager;
-import Game.Entities.Dynamic.Bullets.BulletPlayer;
-import Game.Entities.Dynamic.PlayerEntity;
+import Game.Entities.Dynamic.Bullets.PlayerBullet;
 import Game.Entities.Entity;
 
 public class PlayerBulletParticle extends Particle {
@@ -11,7 +10,7 @@ public class PlayerBulletParticle extends Particle {
     private int timeAlive;
 
 // CONSTRUCTORS //
-    public PlayerBulletParticle(BulletPlayer parent) {
+    public PlayerBulletParticle(PlayerBullet parent) {
         super(  parent.getXpos() + (parent.getWidth() / 2) - (DEF_PARTICLE_WIDTH / 2),
                 parent.getYpos() + (parent.getHeight() / 2) - (DEF_PARTICLE_HEIGHT / 2),
                 DEF_PARTICLE_WIDTH,

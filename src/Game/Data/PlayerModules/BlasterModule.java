@@ -1,8 +1,6 @@
 package Game.Data.PlayerModules;
 
 import Game.Data.KeyManager;
-import Game.Data.Settings;
-import Game.Entities.Dynamic.Bullets.BulletPlayer;
 import Game.Timer.CodeTimer;
 import Game.Timer.iCanHaveCodeTimer;
 
@@ -19,6 +17,7 @@ public abstract class BlasterModule extends WeaponModule implements iCanHaveCode
     private boolean gun_lock;
     private boolean reloaded;
     private boolean released;
+    protected int reload_speed;
 
 // CONSTRUCTORS //
     public BlasterModule(boolean gun_lock) {
@@ -27,6 +26,7 @@ public abstract class BlasterModule extends WeaponModule implements iCanHaveCode
         this.gun_lock = gun_lock;
         reloaded = true;
         released = true;
+        reload_speed = DEF_RELOAD_SPEED;
     }
 
 // METHODS //
@@ -41,7 +41,7 @@ public abstract class BlasterModule extends WeaponModule implements iCanHaveCode
     public void tryShoot() {
         if(reloaded && released) {
             shoot();
-            handler.getTimerManager().newCodeTimer(DEF_RELOAD_SPEED, this, "REL");
+            handler.getTimerManager().newCodeTimer(reload_speed, this, "REL");
             reloaded = false;
 
             /* The following command is placed here instead of in the update function so that if the player
