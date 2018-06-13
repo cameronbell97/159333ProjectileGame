@@ -13,38 +13,27 @@ import java.awt.*;
  * Abstract Element Class for Providing Button Functionality
  */
 
-public abstract class ButtonElement extends PaddedElement {
+public abstract class ButtonElement extends Element {
 // VARIABLES //
+    // Statics //
+    protected static final Color DEF_ACTIVE_COLOUR = new Color(46, 47, 120);
+
     // Managers //
     MouseManager mouseManager;
-    protected KeyManager km;
 
     // Data //
     protected int xpos, ypos; // x & y positions needed for mouse detection
     protected boolean leftMouse, rightMouse;
     protected boolean isHovered, wasJustClicked, isClicked;
-    protected String text;
+    protected Element childElement;
 
     // Colours //
     protected Color inactiveColour;
     protected Color activeColour;
 
 // CONSTRUCTORS //
-    public ButtonElement(String text) {
-        super(Settings.button_padding);
-        this.text = text;
-        initialise();
-    }
-
-    public ButtonElement(String text, int padding) {
-        super(padding);
-        this.text = text;
-        initialise();
-    }
-
-    public ButtonElement(String text, int borderWidth, int padding) {
-        super(borderWidth, padding);
-        this.text = text;
+    public ButtonElement() {
+        super(0, 0);
         initialise();
     }
 
@@ -68,6 +57,8 @@ public abstract class ButtonElement extends PaddedElement {
             // Draw Element Border
             g.setColor(borderColour);
             g.drawRect(xStart, yStart, width - 1, height - 1); // The -1 is because drawRect doesn't include  the bottom and right lines in the rectangle (draws them outside)
+
+            childElement.draw(g, xStart, yStart);
         }
     }
 
@@ -115,10 +106,7 @@ public abstract class ButtonElement extends PaddedElement {
 
     // Method - Initialise Variables //
     private void initialise() {
-        km = Handler.get().getKeyManager();
         mouseManager = Handler.get().getMouseManager();
-
-        setButtonText();
 
         leftMouse = false;
         rightMouse = false;
@@ -127,13 +115,23 @@ public abstract class ButtonElement extends PaddedElement {
         isClicked = false;
 
         inactiveColour = fillColour;
-        activeColour = new Color(46, 47, 120);
+        activeColour = DEF_ACTIVE_COLOUR;
+    }
+
+    // Setter Method - Set the Child Element //
+    public void setChildElement(Element child) {
+        // In case the child is set twice, we don't want the first child's width included
+        if(childElement != null) {
+            width -= childElement.getWidth();
+            height -= childElement.getHeight();
+        }
+
+        childElement = child;
+        width += child.getWidth();
+        height += child.getHeight();
     }
 
 // GETTERS & SETTERS //
-    private void setButtonText() {
-        setChildElement(new TextElement(text));
-    }
     public void setInactiveColour(Color inactiveColour) {
         this.inactiveColour = inactiveColour;
     }

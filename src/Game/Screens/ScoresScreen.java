@@ -104,7 +104,7 @@ public class ScoresScreen extends Screen {
         mainElement.setChildElement(titleWrapper);
 
         // Back Button
-        backButton = new ButtonElement("<", border_width, Settings.button_padding) {
+        backButton = new TextButtonElement("<", border_width, Settings.button_padding) {
             @Override
             protected void onClick() {
 

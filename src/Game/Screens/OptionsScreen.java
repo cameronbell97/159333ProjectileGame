@@ -71,7 +71,7 @@ public class OptionsScreen extends Screen {
         // Add Elements
         TextElement cleared = new TextElement("CLEARED!");
         cleared.setVisible(false);
-        clearScoresButton = new ButtonElement("CLEAR HIGH SCORES", BORDER_WIDTH, Settings.button_padding) {
+        clearScoresButton = new TextButtonElement("CLEAR HIGH SCORES", BORDER_WIDTH, Settings.button_padding) {
             @Override
             protected void onClick() {
                 Handler.get().getSave().clearScores();
@@ -90,7 +90,7 @@ public class OptionsScreen extends Screen {
         mainElement.setChildElement(titleWrapper);
 
         // Back Button
-        backButton = new ButtonElement("<", BORDER_WIDTH, Settings.button_padding) {
+        backButton = new TextButtonElement("<", BORDER_WIDTH, Settings.button_padding) {
             @Override
             protected void onClick() {
                 ScreenManager.setScreen(returnScreen);

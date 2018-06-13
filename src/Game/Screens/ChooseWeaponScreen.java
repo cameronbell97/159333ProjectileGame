@@ -5,7 +5,7 @@ import Game.Data.PlayerModules.SideBlasterModule;
 import Game.Data.Settings;
 import Game.Display.Assets.AssetManager;
 import Game.Display.DisplayElements.*;
-import Game.Display.DisplayElements.Buttons.ImageButtonElement;
+import Game.Display.DisplayElements.ImageButtonElement;
 
 import java.awt.*;
 import java.io.IOException;
@@ -100,7 +100,7 @@ public class ChooseWeaponScreen extends Screen {
         titleWrapper.setCenterAlign(true);
 
         // Back Button
-        backButton = new ButtonElement("<", border_width, Settings.button_padding) {
+        backButton = new TextButtonElement("<", border_width, Settings.button_padding) {
             @Override
             protected void onClick() {
                 ScreenManager.setScreen(returnScreen);

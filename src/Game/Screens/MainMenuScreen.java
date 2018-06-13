@@ -1,9 +1,6 @@
 package Game.Screens;
 import Game.Data.Settings;
-import Game.Display.DisplayElements.ButtonElement;
-import Game.Display.DisplayElements.PaddedElement;
-import Game.Display.DisplayElements.TextElement;
-import Game.Display.DisplayElements.VerticalListElement;
+import Game.Display.DisplayElements.*;
 
 import java.awt.*;
 import java.io.IOException;
@@ -66,31 +63,31 @@ public class MainMenuScreen extends Screen{
         titleWrapper = new VerticalListElement(SPACE_BETWEEN_ROWS*5);
         buttonList = new VerticalListElement(SPACE_BETWEEN_ROWS);
 
-        buttonList.addChild(new ButtonElement("PLAY", border_width, Settings.button_padding) {
+        buttonList.addChild(new TextButtonElement("PLAY", border_width, Settings.button_padding) {
             @Override
             protected void onClick() {
                 ScreenManager.setScreen(new ChooseWeaponScreen(ScreenManager.getScreen()));
             }
         });
-        buttonList.addChild(new ButtonElement("TUTORIAL", border_width, Settings.button_padding) {
+        buttonList.addChild(new TextButtonElement("TUTORIAL", border_width, Settings.button_padding) {
             @Override
             protected void onClick() {
                 ScreenManager.setScreen(new TutorialScreen());
             }
         });
-        buttonList.addChild(new ButtonElement("HIGH SCORES", border_width, Settings.button_padding) {
+        buttonList.addChild(new TextButtonElement("HIGH SCORES", border_width, Settings.button_padding) {
             @Override
             protected void onClick() {
                 ScreenManager.setScreen(new ScoresScreen(ScreenManager.getScreen(), ScreenManager.getScreen()));
             }
         });
-        buttonList.addChild(new ButtonElement("OPTIONS", border_width, Settings.button_padding) {
+        buttonList.addChild(new TextButtonElement("OPTIONS", border_width, Settings.button_padding) {
             @Override
             protected void onClick() {
                 ScreenManager.setScreen(new OptionsScreen(ScreenManager.getScreen()));
             }
         });
-        buttonList.addChild(new ButtonElement("QUIT", border_width, Settings.button_padding) {
+        buttonList.addChild(new TextButtonElement("QUIT", border_width, Settings.button_padding) {
             @Override
             protected void onClick() {
                 Game.Game.end();

@@ -85,7 +85,7 @@ public class AddScoreScreen extends Screen {
 
         nameColumn.addChild(nameTyper);
 
-        submitButton = new ButtonElement("SUBMIT") {
+        submitButton = new TextButtonElement("SUBMIT") {
             @Override
             protected void onClick() {
                 Save save = handler.getSave();
@@ -96,7 +96,7 @@ public class AddScoreScreen extends Screen {
 
             @Override
             protected void additionalActions() {
-                if(km.enter) onClick();
+                if(handler.getKeyManager().enter) onClick();
             }
         };
 

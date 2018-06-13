@@ -1,4 +1,4 @@
-package Game.Display.DisplayElements.Buttons;
+package Game.Display.DisplayElements;
 
 import Game.Display.DisplayElements.ButtonElement;
 import Game.Display.DisplayElements.Element;
@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 public abstract class ImageButtonElement extends ButtonElement {
 // CONSTRUCTORS //
     public ImageButtonElement(BufferedImage image) {
-        super("");
+        super();
         setChildElement(new ImageElement(image));
         setWidth(childElement.getWidth());
         width += borderWidth * 2;

@@ -69,13 +69,13 @@ public class PauseMenuScreen extends Screen {
         menuList = new VerticalListElement(SPACE_BETWEEN_ROWS);
 
         // Create Buttons
-        resumeButton = new ButtonElement("RESUME", border_width, Settings.button_padding) {
+        resumeButton = new TextButtonElement("RESUME", border_width, Settings.button_padding) {
             @Override
             protected void onClick() {
                 ScreenManager.setScreen(returnScreen);
             }
         };
-        mainMenuButton = new ButtonElement("EXIT", border_width, Settings.button_padding) {
+        mainMenuButton = new TextButtonElement("EXIT", border_width, Settings.button_padding) {
             @Override
             protected void onClick() {
                 try {
