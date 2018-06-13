@@ -3,7 +3,7 @@ package Game.Entities.Dynamic.Enemies;
 import Game.Data.Settings;
 import Game.Entities.*;
 import Game.Entities.Dynamic.Bullets.PlayerBullet;
-import Game.Entities.Dynamic.ExpDot;
+import Game.Entities.Dynamic.ScoreDot;
 
 import java.awt.*;
 
@@ -179,7 +179,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     @Override
     public void die() {
         EntityManager em = handler.getEntityManager();
-        em.subscribe(new ExpDot(this, exp_value));
+        em.subscribe(new ScoreDot(this, exp_value));
         explode();
         em.unsubscribe(this);
         em.unsubscribe(collision);

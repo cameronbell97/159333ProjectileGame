@@ -13,17 +13,20 @@ import java.awt.*;
 
 /**
  * Cameron Bell - 06/04/2018
- * ExpDot Entity
+ * ScoreDot Entity
  * Currently used to gain score for the player
  */
 
-public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
+public class ScoreDot extends DynamicEntity implements iCanHaveCodeTimer {
 // VARIABLES //
     // Statics
     private static final int OFFSCREEN_BOUNDARY = 0;
     private static final int DEF_HEIGHT_WIDTH = 16;
     private static final int DESPAWN_TIME = 16*60;
     private static final int DEF_MOVE_SPEED = 2;
+
+    private static final int SPRITE_MEDIUM_THRESHHOLD = 8;
+    private static final int SPRITE_LARGE_THRESHHOLD = 20;
 
     protected static final double DEF_FADE_DECREMENT = 0.02;
     protected double alphaFade;
@@ -38,7 +41,7 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
     private boolean active;
 
 // CONSTRUCTORS //
-    public ExpDot(Entity parent, int value) {
+    public ScoreDot(Entity parent, int value) {
         super(parent.getXpos()+(parent.getWidth() / 2) - DEF_HEIGHT_WIDTH,
                 parent.getYpos()+(parent.getHeight() / 2) - DEF_HEIGHT_WIDTH,
                 DEF_HEIGHT_WIDTH,
@@ -50,7 +53,7 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         initialise();
     }
 
-    public ExpDot(Entity parent, float xpos, float ypos, int value) {
+    public ScoreDot(Entity parent, float xpos, float ypos, int value) {
         super(xpos,
                 ypos,
                 DEF_HEIGHT_WIDTH,
@@ -68,15 +71,10 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
         active = true;
 
         //Set Img
-        if(this.value < 10) {
-            yImg = 0;
-        }
-        else if(this.value < 25) {
-            yImg = 1;
-        }
-        else {
-            yImg = 2;
-        }
+        if(this.value < SPRITE_MEDIUM_THRESHHOLD) yImg = 0;
+        else if(this.value < SPRITE_LARGE_THRESHHOLD) yImg = 1;
+        else yImg = 2;
+
         img = AssetManager
                 .get()
                 .getSprite(11, Handler.getIntFromRange(0, 3), yImg);
@@ -212,16 +210,16 @@ public class ExpDot extends DynamicEntity implements iCanHaveCodeTimer {
     public void collide(Entity ec) {
         if(ec instanceof Game.Entities.Dynamic.PlayerEntity) {
             destroy();
-        } else if (ec instanceof Game.Entities.Dynamic.ExpDot && !merged) {
+        } else if (ec instanceof ScoreDot && !merged) {
             handler.getEntityManager()
-                    .subscribe(new ExpDot(
+                    .subscribe(new ScoreDot(
                             this,
                             (this.getXpos() + ec.getXpos()) / 2,
                             (this.getYpos() + ec.getYpos()) / 2,
-                            this.getValue() + ((ExpDot) ec).getValue()))
+                            this.getValue() + ((ScoreDot) ec).getValue()))
             ;
-            ((ExpDot) ec).setMerged(true);
-            ((ExpDot) ec).destroy();
+            ((ScoreDot) ec).setMerged(true);
+            ((ScoreDot) ec).destroy();
             destroy();
         }
     }

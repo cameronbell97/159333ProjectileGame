@@ -25,7 +25,7 @@ public class GoblinFighterSmall extends GoblinFighter {
         super(x, y, direction);
         img = AssetManager.get().getSprite(1, 0, 3);
         this.hp = GOBLIN_FIGHTER_SMALL_DEF_HP;
-        this.exp_value = 10;
+        this.exp_value = 12;
         timeBeforeRotating = GOBLIN_FIGHTER_SMALL_ROTATE_WAIT_TIME;
         rotationSpeed = GOBLIN_FIGHTER_SMALL_ROTATE_SPEED;
         shootTimer = GOBLIN_FIGHTER_TIME_BEFORE_SHOOTING;

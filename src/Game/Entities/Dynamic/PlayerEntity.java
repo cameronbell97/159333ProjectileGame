@@ -167,8 +167,8 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable {
             addHP(-2);
             slow(50);
         }
-        else if(ec instanceof Game.Entities.Dynamic.ExpDot) {
-            handler.getGameDataManager().addScore(((ExpDot) ec).getValue());
+        else if(ec instanceof ScoreDot) {
+            handler.getGameDataManager().addScore(((ScoreDot) ec).getValue());
         }
         else if(ec instanceof GoblinBulletSmall) {
             addHP(-1);

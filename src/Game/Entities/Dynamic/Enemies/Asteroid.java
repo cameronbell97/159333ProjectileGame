@@ -4,7 +4,7 @@ import Game.Display.Assets.AssetManager;
 import Game.Entities.Collision.CollisionBox;
 import Game.Entities.Dynamic.Bullets.PlayerBullet;
 import Game.Entities.Dynamic.Particles.AsteroidParticle;
-import Game.Entities.Dynamic.ExpDot;
+import Game.Entities.Dynamic.ScoreDot;
 import Game.Entities.Dynamic.Particles.AsteroidParticleWhite;
 import Game.Entities.Entity;
 import Game.Entities.EntityManager;
@@ -149,7 +149,14 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
             ed.subscribe(ast);
         }
 
-        em.subscribe(new ExpDot(this, level+1));
+        /* Drop Score Dot Code
+         * f(x) = -x+4, where f = value and x = level
+         * lvl 1 = 3
+         * lvl 2 = 2
+         * lvl 3 = 1
+         */
+        if(level <= 3 && level >= 1) em.subscribe(new ScoreDot(this, (-level)+4));
+
         explode();
         kill();
     }
