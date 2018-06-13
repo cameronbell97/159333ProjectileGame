@@ -9,7 +9,7 @@ import java.io.*;
  */
 public class Save {
 // VARIABLES //
-    private static final String XML_TAG = "<?xml version=\"1.0\"?>";
+    private static final String XML_TAG = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
     private static final String DEF_XML_SCOREBOARD_SAVE_PATH = "data/scores.xml";
 
     // Data //
