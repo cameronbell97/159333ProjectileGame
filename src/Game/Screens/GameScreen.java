@@ -17,20 +17,16 @@ import java.io.IOException;
 
 public class GameScreen extends Screen implements iCanHaveCodeTimer {
 // VARIABLES //
-    private Screen lastScreen;
+    private Screen returnScreen;
     private boolean gameIsRunning;
     private KeyManager keyManager;
 
 // CONSTRUCTORS //
-    public GameScreen(Screen lastScreen, WeaponModule playerWeapon) throws IOException {
+    public GameScreen(WeaponModule playerWeapon) throws IOException {
         super();
-
         gameIsRunning = true;
-
-        this.lastScreen = lastScreen;
-
+        this.returnScreen = new MainMenuScreen();
         handler.newGame(playerWeapon);
-
         keyManager = handler.getKeyManager();
     }
 
@@ -65,9 +61,9 @@ public class GameScreen extends Screen implements iCanHaveCodeTimer {
         int score = handler.getGameDataManager().getScore();
 
         if(handler.getSave().getScoreBoard().isHighScore(score)) {
-            ScreenManager.setScreen(new AddScoreScreen(lastScreen, this, score));
+            ScreenManager.setScreen(new AddScoreScreen(returnScreen, this, score));
         } else {
-            ScreenManager.setScreen(new ScoresScreen(lastScreen, this));
+            ScreenManager.setScreen(new ScoresScreen(returnScreen, this));
         }
     }
 
