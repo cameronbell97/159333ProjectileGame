@@ -33,7 +33,7 @@ public class Save {
             e.printStackTrace();
         }
 
-        scoreBoard.fromXML(DEF_XML_SCOREBOARD_SAVE_PATH); // TODO // REMOVE
+        scoreBoard.fromXML(DEF_XML_SCOREBOARD_SAVE_PATH);
     }
 
     // Method - Load Save Data from File // TODO // Implement Saved Settings
