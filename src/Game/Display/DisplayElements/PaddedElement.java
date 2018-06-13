@@ -25,14 +25,8 @@ public class PaddedElement extends Element {
         childElement = null;
     }
 
-    public PaddedElement(int width, int height, int borderWidth, Color borderColour, Color fillColour, int padding) {
-        super(width + (padding * 2), height + (padding * 2), borderWidth, borderColour, fillColour);
-        this.padding = padding;
-        childElement = null;
-    }
-
-    public PaddedElement(int borderWidth, Color borderColour, Color fillColour, int padding) {
-        super((padding * 2), (padding * 2), borderWidth, borderColour, fillColour);
+    public PaddedElement(int borderWidth, int padding) {
+        super((padding * 2), (padding * 2), borderWidth);
         this.padding = padding;
         childElement = null;
     }

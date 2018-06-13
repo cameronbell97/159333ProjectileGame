@@ -42,8 +42,8 @@ public abstract class ButtonElement extends PaddedElement {
         initialise();
     }
 
-    public ButtonElement(String text, int borderWidth, Color borderColour, Color fillColour, int padding) {
-        super(borderWidth, borderColour, fillColour, padding);
+    public ButtonElement(String text, int borderWidth, int padding) {
+        super(borderWidth, padding);
         this.text = text;
         initialise();
     }

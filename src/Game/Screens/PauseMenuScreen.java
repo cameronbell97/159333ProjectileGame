@@ -14,35 +14,28 @@ import java.io.IOException;
 
 public class PauseMenuScreen extends Screen {
 // VARIABLES //
-    // Statics
+    // Statics //
     private static final int SPACE_BETWEEN_ROWS = 8;
 
-    // Data
+    // Data //
     private int border_width = DEF_BORDER_WIDTH;
     private int outer_padding = DEF_OUTER_PADDING;
 
-    // Screens
+    // Screens //
     private Screen returnScreen;
 
-    // Colours
-    private Color borderColor;
-    private Color fillColour;
-
-    // Elements
+    // Elements //
     private PaddedElement mainElement;
     private VerticalListElement titleWrapper;
     private VerticalListElement menuList;
 
-    // Buttons
+    // Buttons //
     private ButtonElement resumeButton;
     private ButtonElement mainMenuButton;
 
 // CONSTRUCTORS //
     public PauseMenuScreen(Screen returnScreen) {
         this.returnScreen = returnScreen;
-
-        borderColor = new Color(129,130,174);
-        fillColour = new Color(78, 78, 122, 58);
 
         fillElements();
     }
@@ -71,18 +64,18 @@ public class PauseMenuScreen extends Screen {
     // Method - Generate All The Menu Elements //
     private void fillElements() {
         // Create Encompassing Elements
-        mainElement = new PaddedElement(1, borderColor, fillColour, outer_padding);
+        mainElement = new PaddedElement(1, outer_padding);
         titleWrapper = new VerticalListElement((int)(outer_padding));
         menuList = new VerticalListElement(SPACE_BETWEEN_ROWS);
 
         // Create Buttons
-        resumeButton = new ButtonElement("RESUME", border_width, borderColor, fillColour, Settings.button_padding) {
+        resumeButton = new ButtonElement("RESUME", border_width, Settings.button_padding) {
             @Override
             protected void onClick() {
                 ScreenManager.setScreen(returnScreen);
             }
         };
-        mainMenuButton = new ButtonElement("EXIT", border_width, borderColor, fillColour, Settings.button_padding) {
+        mainMenuButton = new ButtonElement("EXIT", border_width, Settings.button_padding) {
             @Override
             protected void onClick() {
                 try {

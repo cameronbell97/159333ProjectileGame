@@ -9,6 +9,11 @@ import java.awt.*;
  */
 public abstract class Element {
 // VARIABLES //
+    // Statics //
+    protected static final Color DEF_BORDER_COLOUR = new Color(129,130,174);
+    protected static final Color DEF_FILL_COLOUR = new Color(78, 78, 122, 58);
+    protected static final Color TRANSPARENT = new Color(0, 0, 0, 0);
+
     // Data //
     protected int width; // Width of Element
     protected int height; // Height of Element
@@ -28,9 +33,20 @@ public abstract class Element {
         this.height = height;
 
         this.borderWidth = 0;
-        Color transparent = new Color(0, 0, 0, 0);
-        this.borderColour = transparent;
-        this.fillColour = transparent;
+        this.borderColour = DEF_BORDER_COLOUR;
+        this.fillColour = DEF_FILL_COLOUR;
+    }
+
+    // Constructor Overload - For Exact Dimensions //
+    public Element(int width, int height, int borderWidth) {
+        this.visible = true;
+
+        this.width = width;
+        this.height = height;
+
+        this.borderWidth = borderWidth;
+        this.borderColour = DEF_BORDER_COLOUR;
+        this.fillColour = DEF_FILL_COLOUR;
     }
 
     // Constructor Overload - For Exact Dimensions //
@@ -39,6 +55,7 @@ public abstract class Element {
 
         this.width = width;
         this.height = height;
+
         this.borderWidth = borderWidth;
         this.borderColour = borderColour;
         this.fillColour = fillColour;

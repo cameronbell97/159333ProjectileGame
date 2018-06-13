@@ -22,8 +22,6 @@ public class ChooseWeaponScreen extends Screen {
 
     // Colours //
     private Color backgroundColor;
-    private Color borderColor;
-    private Color fillColour;
 
     // Elements //
     private PaddedElement mainElement;
@@ -39,9 +37,6 @@ public class ChooseWeaponScreen extends Screen {
         super();
 
         this.returnScreen = returnScreen;
-
-        borderColor = new Color(129,130,174);
-        fillColour = new Color(78, 78, 122, 58);
         backgroundColor = new Color(0, 0, 20);
 
         fillElements();
@@ -72,13 +67,13 @@ public class ChooseWeaponScreen extends Screen {
     }
 
     private void fillElements() {
-        mainElement = new PaddedElement(border_width, borderColor, fillColour, outer_padding);
+        mainElement = new PaddedElement(border_width, outer_padding);
         titleWrapper = new VerticalListElement((int)(space_between_rows *1.5));
         buttonsContainer = new HorizontalListElement(space_between_columns);
 
         titleWrapper.addChild(new TextElement("CHOOSE YOUR WEAPON"));
 
-        mainBlasterButton = new ImageButtonElement(AssetManager.get().getSprite(30, 0, 0), borderColor, fillColour) {
+        mainBlasterButton = new ImageButtonElement(AssetManager.get().getSprite(30, 0, 0)) {
                 @Override
                 protected void onClick() {
                 try {
@@ -89,7 +84,7 @@ public class ChooseWeaponScreen extends Screen {
                 }
         };
         buttonsContainer.addChild(mainBlasterButton);
-        sideBlastersButton = new ImageButtonElement(AssetManager.get().getSprite(30, 1, 0), borderColor, fillColour) {
+        sideBlastersButton = new ImageButtonElement(AssetManager.get().getSprite(30, 1, 0)) {
                 @Override
                 protected void onClick() {
                 try {
@@ -105,7 +100,7 @@ public class ChooseWeaponScreen extends Screen {
         titleWrapper.setCenterAlign(true);
 
         // Back Button
-        backButton = new ButtonElement("<", border_width, borderColor, fillColour, Settings.button_padding) {
+        backButton = new ButtonElement("<", border_width, Settings.button_padding) {
             @Override
             protected void onClick() {
                 ScreenManager.setScreen(returnScreen);

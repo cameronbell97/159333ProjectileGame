@@ -27,7 +27,7 @@ public class BackButton extends ButtonElement {
     }
 
     public BackButton(String text, int borderWidth, Color borderColour, Color fillColour, int padding, Screen previousScreen) {
-        super(text, borderWidth, borderColour, fillColour, padding);
+        super(text, borderWidth, padding);
         this.previousScreen = previousScreen;
     }
 

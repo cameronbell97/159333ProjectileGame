@@ -17,18 +17,6 @@ public abstract class ImageButtonElement extends ButtonElement {
         setHeight(childElement.getHeight());
         height += borderWidth * 2;
     }
-    public ImageButtonElement(BufferedImage image, Color borderColour, Color fillColour) {
-        super("");
-        setChildElement(new ImageElement(image));
-        setWidth(childElement.getWidth());
-        width += borderWidth * 2;
-        setHeight(childElement.getHeight());
-        height += borderWidth * 2;
-        this.borderColour = borderColour;
-
-        inactiveColour = fillColour;
-        activeColour = new Color(46, 47, 120);
-    }
 
 // METHODS //
     // Method - For Drawing Element //

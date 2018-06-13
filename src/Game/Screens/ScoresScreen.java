@@ -15,23 +15,18 @@ import java.awt.*;
 
 public class ScoresScreen extends Screen {
 // VARIABLES //
-    // Screens
+    // Screens //
     private Screen returnScreen;
     private Screen drawScreen;
 
-    // Data
+    // Data //
     private ScoreBoard scoreBoard;
     private int space_between_columns = DEF_SPACE_BETWEEN_COLUMNS;
     private int space_between_rows = DEF_SPACE_BETWEEN_ROWS;
     private int border_width = DEF_BORDER_WIDTH;
     private int outer_padding = DEF_OUTER_PADDING;
 
-    // Colors
-    Color backgroundColor;
-    Color borderColor;
-    Color fillColour;
-
-    // Elements
+    // Elements //
     PaddedElement mainElement;
     VerticalListElement titleWrapper;
     HorizontalListElement columnsContainer;
@@ -48,10 +43,6 @@ public class ScoresScreen extends Screen {
                 .get()
                 .getSave()
                 .getScoreBoard();
-
-        borderColor = new Color(129,130,174);
-        fillColour = new Color(78, 78, 122, 58);
-        backgroundColor = new Color(0, 0, 20);
 
         fillElements();
     }
@@ -85,7 +76,7 @@ public class ScoresScreen extends Screen {
 
     // Method - Generate All The Main Menu Elements //
     private void fillElements() {
-        mainElement = new PaddedElement(1, borderColor, fillColour, outer_padding);
+        mainElement = new PaddedElement(1, outer_padding);
         titleWrapper = new VerticalListElement((int)(space_between_rows *1.5));
         columnsContainer = new HorizontalListElement(space_between_columns);
 
@@ -113,7 +104,7 @@ public class ScoresScreen extends Screen {
         mainElement.setChildElement(titleWrapper);
 
         // Back Button
-        backButton = new ButtonElement("<", border_width, borderColor, fillColour, Settings.button_padding) {
+        backButton = new ButtonElement("<", border_width, Settings.button_padding) {
             @Override
             protected void onClick() {
 

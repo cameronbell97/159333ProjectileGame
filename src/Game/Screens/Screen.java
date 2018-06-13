@@ -17,13 +17,16 @@ public abstract class Screen {
     protected static final int DEF_SPACE_BETWEEN_ROWS = 16;
     protected static final int DEF_BORDER_WIDTH = 1;
     protected static final int DEF_OUTER_PADDING = 24;
-
+    protected static final Color DEF_BACKGROUND_COLOUR = new Color(0, 0, 20);;
 
     protected Handler handler;
+
+    protected Color backgroundColor;
 
 // CONSTRUCTORS //
     public Screen() {
         handler = Handler.get();
+        backgroundColor = DEF_BACKGROUND_COLOUR;
     }
 
 // METHODS //
