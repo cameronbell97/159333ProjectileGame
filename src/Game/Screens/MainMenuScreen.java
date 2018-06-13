@@ -96,7 +96,7 @@ public class MainMenuScreen extends Screen{
 
         buttonList.setCenterAlign(true);
 
-        titleWrapper.addChild(new TextElement("YOZNOVA", 2));
+        titleWrapper.addChild(new TextElement("YOZNOVA", 4));
         titleWrapper.addChild(buttonList);
         titleWrapper.setCenterAlign(true);
 
