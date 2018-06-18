@@ -3,6 +3,7 @@ package Game.Entities.Dynamic.Enemies;
 import Game.Data.Settings;
 import Game.Entities.*;
 import Game.Entities.Dynamic.Bullets.PlayerBullet;
+import Game.Entities.Dynamic.Bullets.PlayerPiercingBullet;
 import Game.Entities.Dynamic.ScoreDot;
 
 import java.awt.*;
@@ -75,7 +76,14 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     @Override
     public void collide(Entity ec) {
         if(ec instanceof PlayerBullet) {
-            addHP(-((PlayerBullet) ec).getDamageValue());
+            int damageDealt = ((PlayerBullet) ec).getDamageValue();
+
+            if(ec instanceof PlayerPiercingBullet && !checkAlreadyPierced((PlayerPiercingBullet)ec))
+                addPierceBullet((PlayerPiercingBullet)ec);
+            else
+                damageDealt = 0;
+
+            addHP(-damageDealt);
         }
         else if(ec instanceof Game.Entities.Dynamic.PlayerEntity) {
             die();

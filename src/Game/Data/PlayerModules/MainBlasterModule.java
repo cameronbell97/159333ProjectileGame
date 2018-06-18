@@ -1,7 +1,6 @@
 package Game.Data.PlayerModules;
 
 import Game.Entities.Dynamic.Bullets.PlayerBlasterBullet;
-import Game.Entities.Dynamic.Bullets.PlayerBullet;
 
 public class MainBlasterModule extends BlasterModule {
 // CONSTRUCTORS //

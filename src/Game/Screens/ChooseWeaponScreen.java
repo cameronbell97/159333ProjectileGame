@@ -1,6 +1,7 @@
 package Game.Screens;
 
 import Game.Data.PlayerModules.MainBlasterModule;
+import Game.Data.PlayerModules.PierceCannonModule;
 import Game.Data.PlayerModules.SideBlasterModule;
 import Game.Data.Settings;
 import Game.Display.Assets.AssetManager;
