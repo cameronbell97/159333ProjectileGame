@@ -98,7 +98,7 @@ public class ChooseWeaponScreen extends Screen {
                 }
         };
         buttonsContainer.addChild(sideBlastersButton);
-        pierceCannonButton = new ImageButtonElement(AssetManager.get().getSprite(30, 0, 0)) {
+        pierceCannonButton = new ImageButtonElement(AssetManager.get().getSprite(30, 2, 0)) {
             @Override
             protected void onClick() {
                 try {

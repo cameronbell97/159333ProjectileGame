@@ -110,7 +110,7 @@ public class AssetManager {
             particles_sheet_16 = new SpriteSheet(ImageLoader.load(imagePath + "particles16.png"), 4, 14, 16, 16); // load the spritesheet
 
             // Weapon Thumbnails Sheet 128x128
-            weapon_thumbs_128 = new SpriteSheet(ImageLoader.load(imagePath + "weapon_thumbs_128.png"), 2, 1, 128, 128); // load the spritesheet
+            weapon_thumbs_128 = new SpriteSheet(ImageLoader.load(imagePath + "weapon_thumbs_128.png"), 3, 1, 128, 128); // load the spritesheet
 
         } catch (IOException e) {
             e.printStackTrace();
