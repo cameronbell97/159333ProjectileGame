@@ -14,6 +14,7 @@ public class PlayerData implements iXMLSerializable {
     private String playerName;
     private boolean tutorialCompleted;
     private ArrayList<PlayerModule> collectedModules;
+    private int money;
 
 // CONSTRUCTORS //
     public PlayerData() {
@@ -50,6 +51,15 @@ public class PlayerData implements iXMLSerializable {
         return collectedModules.add(module);
     }
 
+    // Method - Adds or substracts money from the player //
+    public boolean addMoney(int m) {
+        if(money + m >= 0) {
+            money+=m;
+            return true;
+        }
+        return false;
+    }
+
 
 // GETTERS & SETTERS //
     public String getPlayerName() {
@@ -66,5 +76,8 @@ public class PlayerData implements iXMLSerializable {
     }
     public ArrayList<PlayerModule> getCollectedModules() {
         return collectedModules;
+    }
+    public int getMoney() {
+        return money;
     }
 }
