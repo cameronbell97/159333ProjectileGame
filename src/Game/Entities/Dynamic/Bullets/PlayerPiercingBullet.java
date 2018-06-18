@@ -43,7 +43,7 @@ public class PlayerPiercingBullet extends PlayerBullet {
     @Override
     protected void setPosition() {
         // Move bullet to nose of Player ship
-        moveSpeed = 20;
+        moveSpeed = 19;
         setMoveSpeeds();
         move(1);
 
@@ -54,7 +54,7 @@ public class PlayerPiercingBullet extends PlayerBullet {
 
     @Override
     protected BufferedImage setSprite() {
-        return AssetManager.get().getSprite(20, 0, 0); // TODO // Change
+        return AssetManager.get().getSprite(20, 2, 0);
     }
 
     @Override

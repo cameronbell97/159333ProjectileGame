@@ -104,7 +104,7 @@ public class AssetManager {
             char_sheet_02 = new SpriteSheet(ImageLoader.load(imagePath + "characters02.png"), 10, 5, 5, 9); // load the spritesheet
 
             // Bullet Sheet
-            bullet_sheet = new SpriteSheet(ImageLoader.load(imagePath + "bullets.png"), 2, 2, 10, 10); // load the spritesheet
+            bullet_sheet = new SpriteSheet(ImageLoader.load(imagePath + "bullets.png"), 3, 2, 10, 10); // load the spritesheet
 
             // Particle Sheet 16x16
             particles_sheet_16 = new SpriteSheet(ImageLoader.load(imagePath + "particles16.png"), 4, 14, 16, 16); // load the spritesheet

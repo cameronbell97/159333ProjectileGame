@@ -92,10 +92,11 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
         if(ec instanceof PlayerBullet) {
             int damageDealt = ((PlayerBullet) ec).getDamageValue();
 
-            if(ec instanceof PlayerPiercingBullet && !checkAlreadyPierced((PlayerPiercingBullet)ec))
-                addPierceBullet((PlayerPiercingBullet)ec);
-            else
-                damageDealt = 0;
+            if(ec instanceof PlayerPiercingBullet) {
+                if (!checkAlreadyPierced((PlayerPiercingBullet) ec))
+                    addPierceBullet((PlayerPiercingBullet) ec);
+                else damageDealt = 0;
+            }
 
             addHP(-damageDealt);
         }

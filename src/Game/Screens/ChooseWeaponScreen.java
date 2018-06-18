@@ -31,6 +31,7 @@ public class ChooseWeaponScreen extends Screen {
 
     private ButtonElement mainBlasterButton;
     private ButtonElement sideBlastersButton;
+    private ButtonElement pierceCannonButton;
     ButtonElement backButton;
 
 // CONSTRUCTORS //
@@ -48,6 +49,7 @@ public class ChooseWeaponScreen extends Screen {
     public void update(int dt) {
         mainBlasterButton.update();
         sideBlastersButton.update();
+        pierceCannonButton.update();
         backButton.update();
     }
 
@@ -96,6 +98,17 @@ public class ChooseWeaponScreen extends Screen {
                 }
         };
         buttonsContainer.addChild(sideBlastersButton);
+        pierceCannonButton = new ImageButtonElement(AssetManager.get().getSprite(30, 0, 0)) {
+            @Override
+            protected void onClick() {
+                try {
+                    ScreenManager.setScreen(new GameScreen(new PierceCannonModule()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        buttonsContainer.addChild(pierceCannonButton);
 
         titleWrapper.addChild(buttonsContainer);
         titleWrapper.setCenterAlign(true);
