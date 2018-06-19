@@ -49,10 +49,13 @@ public class Handler {
         // Initialise Save Data
         save = new Save();
         if(!save.loadXML()) {
-            //save.create(); // If load fails, create a blank save
-            if(!save.loadXML()) {
-                Game.end(); // If load fails a second time, kill the program
+            try {
+                throw new Exception("SavedataLoadError") ;
+            } catch (Exception e) {
+                System.out.println("ERROR LOADING SAVE DATA");
+                e.printStackTrace();
             }
+            Game.end();
         }
 
         // Initialise Input Managers //

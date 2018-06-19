@@ -10,20 +10,25 @@ import java.io.*;
 public class Save {
 // VARIABLES //
     private static final String XML_TAG = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-    private static final String DEF_XML_SCOREBOARD_SAVE_PATH = "data/scores.xml";
+    private static final String DEF_XML_SAVE_DATA_PATH = "data/";
+    private static final String DEF_XML_SCOREBOARD_FILENAME = "scores.xml";
+    private static final String DEF_XML_PLAYERDATA_FILENAME = "pdata.xml";
 
     // Data //
     private ScoreBoard scoreBoard;
+    private PlayerData playerData;
 
 // CONSTRUCTORS //
     public Save() {
         scoreBoard = new ScoreBoard();
+        playerData = new PlayerData();
     }
 
 // METHODS //
     // Method - Save Data to File // TODO // Implement Saved Settings
     public void saveXML() {
-        File file = new File(DEF_XML_SCOREBOARD_SAVE_PATH);
+        // Save ScoreBoard //
+        File file = new File(DEF_XML_SAVE_DATA_PATH + DEF_XML_SCOREBOARD_FILENAME);
         file.getParentFile().mkdirs();
         try {
             BufferedWriter br = new BufferedWriter(new FileWriter(file));
@@ -32,15 +37,35 @@ public class Save {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        scoreBoard.fromXML(DEF_XML_SAVE_DATA_PATH + DEF_XML_SCOREBOARD_FILENAME); // Load Newly Saved Data // TODO // Remove?
 
-        scoreBoard.fromXML(DEF_XML_SCOREBOARD_SAVE_PATH);
+        // Save PlayerData //
+        file = new File(DEF_XML_SAVE_DATA_PATH + DEF_XML_PLAYERDATA_FILENAME);
+        file.getParentFile().mkdirs();
+        try {
+            BufferedWriter br = new BufferedWriter(new FileWriter(file));
+            br.write(XML_TAG + playerData.toXML());
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        playerData.fromXML(DEF_XML_SAVE_DATA_PATH + DEF_XML_PLAYERDATA_FILENAME); // Load Newly Saved Data // TODO // Remove?
     }
 
     // Method - Load Save Data from File // TODO // Implement Saved Settings
     public boolean loadXML() {
-        if(!(new File(DEF_XML_SCOREBOARD_SAVE_PATH).isFile())) saveXML();
+        if(
+                !(new File(DEF_XML_SAVE_DATA_PATH + DEF_XML_SCOREBOARD_FILENAME).isFile()) ||
+                !(new File(DEF_XML_SAVE_DATA_PATH + DEF_XML_PLAYERDATA_FILENAME).isFile())
+        )
+            saveXML();
 
-        return scoreBoard.fromXML(DEF_XML_SCOREBOARD_SAVE_PATH);
+        if(
+                scoreBoard.fromXML(DEF_XML_SAVE_DATA_PATH + DEF_XML_SCOREBOARD_FILENAME) &&
+                playerData.fromXML(DEF_XML_SAVE_DATA_PATH + DEF_XML_PLAYERDATA_FILENAME)
+        ) return true;
+
+        return false;
     }
 
     // Method - Turn Save File into a String //

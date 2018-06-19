@@ -37,6 +37,7 @@ public class PlayerData implements iXMLSerializable {
     // Method - Load ScoreBoard Data from XML File into Class //
     @Override
     public boolean fromXML(String path) {
+        if(true) return true;
         return false;
     }
 
