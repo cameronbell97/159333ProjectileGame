@@ -8,7 +8,7 @@ public abstract class BlasterModule extends WeaponModule implements iCanHaveCode
 // VARIABLES //
     // Statics //
     private static final String DEF_MODULE_NAME = "Blaster";
-    public static final int DEF_RELOAD_SPEED = 8; // 60 = 1 second
+    public static final int DEF_RELOAD_SPEED = 1; // 60 = 1 second
 
     // Managers //
     KeyManager km;

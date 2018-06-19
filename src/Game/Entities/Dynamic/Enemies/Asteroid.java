@@ -44,17 +44,17 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
 
         // Set depending on level
         if(level >=3) {
-            hp = 5;
+            hp = 16;
             if(!white) img = AssetManager.get().getSprite("AstLarge");
             else img = AssetManager.get().getSprite("AstLargeWhite");
         }
         else if(level == 2) {
-            hp = 3;
+            hp = 10;
             if(!white) img = AssetManager.get().getSprite("AstMedium");
             else img = AssetManager.get().getSprite("AstMediumWhite");
         }
         else {
-            hp = 1;
+            hp = 4;
             if(!white) img = AssetManager.get().getSprite("AstSmall");
             else img = AssetManager.get().getSprite("AstSmallWhite");
         }

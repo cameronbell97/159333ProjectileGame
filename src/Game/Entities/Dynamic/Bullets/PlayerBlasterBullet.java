@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 public class PlayerBlasterBullet extends PlayerBullet {
 // VARIABLES //
     private static final int DEF_MOVESPEED = 12;
-    private static final int DEF_DAMAGE_VALUE = 2;
+    private static final int DEF_DAMAGE_VALUE = 5;
 
 // CONSTRUCTORS //
     public PlayerBlasterBullet(DynamicEntity parent) {

@@ -10,7 +10,7 @@ public abstract class PlayerSideBullet extends PlayerBullet {
 // VARIABLES //
     private static final int IMG_X_OFFSET = 3;
     public static final int DEF_MOVESPEED = 12;
-    private static final int DEF_DAMAGE_VALUE = 1;
+    private static final int DEF_DAMAGE_VALUE = 3;
 
 // CONSTRUCTORS //
     public PlayerSideBullet(DynamicEntity parent) {

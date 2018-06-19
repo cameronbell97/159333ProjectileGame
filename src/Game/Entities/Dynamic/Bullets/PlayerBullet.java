@@ -21,9 +21,6 @@ public abstract class PlayerBullet extends Bullet {
     private static final int DEF_IMG_Y_OFFSET = 1;
     private static final int DEF_DIMENSIONS = 10; // Width & Height
 
-    // Data //
-    private int damageValue;
-
 // CONSTRUCTORS //
     public PlayerBullet(DynamicEntity parent) {
         super(DEF_DIMENSIONS, DEF_DIMENSIONS, parent);
@@ -31,8 +28,6 @@ public abstract class PlayerBullet extends Bullet {
         setCollisionBox();
 
         setPosition();
-
-        damageValue = setDamageValue();
 
         // Rotate the sprite
         rotateSprite();
@@ -60,10 +55,4 @@ public abstract class PlayerBullet extends Bullet {
     protected abstract void setPosition();
 
     protected abstract BufferedImage setSprite();
-    protected abstract int setDamageValue();
-
-// GETTERS & SETTERS //
-    public int getDamageValue() {
-        return damageValue;
-    }
 }

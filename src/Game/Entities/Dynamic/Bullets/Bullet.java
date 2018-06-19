@@ -12,7 +12,11 @@ import Game.Data.Settings;
 
 public abstract class Bullet extends DynamicEntity {
 // VARIABLES //
+    // Statics //
     private static final int OFFSCREEN_BOUNDARY = 8;
+
+    // Data //
+    private int damageValue;
 
 // CONSTRUCTORS //
     public Bullet(int w, int h, DynamicEntity parent) {
@@ -22,6 +26,9 @@ public abstract class Bullet extends DynamicEntity {
                 w, h, (parent.getDirection() - (Math.PI/2)))
         ;
         this.parent = parent;
+
+        damageValue = setDamageValue();
+
         setMoveSpeeds();
     }
 
@@ -47,4 +54,11 @@ public abstract class Bullet extends DynamicEntity {
         if(this.collision != null) this.collision.nullParent();
         this.collision = null;
     }
+
+
+// GETTERS & SETTERS //
+    public int getDamageValue() {
+        return damageValue;
+    }
+    protected abstract int setDamageValue();
 }

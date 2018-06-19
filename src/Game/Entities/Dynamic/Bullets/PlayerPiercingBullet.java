@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class PlayerPiercingBullet extends PlayerBullet {
 // VARIABLES //
     private static final int DEF_MOVESPEED = 14;
-    private static final int DEF_DAMAGE_VALUE = 1;
+    private static final int DEF_DAMAGE_VALUE = 2;
     private static final int DEF_HITS = 3;
 
     private ArrayList<Entity> collidedEntities;

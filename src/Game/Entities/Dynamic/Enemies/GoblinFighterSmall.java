@@ -15,7 +15,7 @@ import Game.Entities.EntityManager;
 
 public class GoblinFighterSmall extends GoblinFighter {
 // VARIABLES //
-    private static final int GOBLIN_FIGHTER_SMALL_DEF_HP = 4;
+    private static final int GOBLIN_FIGHTER_SMALL_DEF_HP = 10;
     private static final int GOBLIN_FIGHTER_SMALL_ROTATE_WAIT_TIME = 20;
     private static final int GOBLIN_FIGHTER_TIME_BEFORE_SHOOTING = 2*60;
     private static final double GOBLIN_FIGHTER_SMALL_ROTATE_SPEED = 0.005 * Math.PI;;

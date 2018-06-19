@@ -7,9 +7,14 @@ package Game.Data.PlayerModules;
 import Game.Entities.Dynamic.Bullets.PlayerPiercingBullet;
 
 public class PierceCannonModule extends BlasterModule {
+// VARRIABLES //
+    // Statics //
+    private static final int PIERCE_RELOAD_SPEED = 12; // 60 = 1 second
+
 // CONSTRUCTORS //
     public PierceCannonModule() {
         super(true);
+        reload_speed = PIERCE_RELOAD_SPEED;
     }
 
 // METHODS //

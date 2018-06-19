@@ -25,7 +25,9 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
             TIME_BETWEEN_SHOTS = 25,
             DEF_SHOOT_PHASE_BULLET_NUMBER = 4,
             DEF_HP = 1,
-            DEF_EXP = 8;
+            DEF_EXP = 8,
+            DEF_SHIP_DAMAGE_VALUE = 5
+    ;
 
     protected int
             shootTimer,
@@ -35,7 +37,9 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
             exp_value,
             phaseBulletsNumber = 4,
             playerStopDistance,
-            timeBetweenPhases;
+            timeBetweenPhases,
+            shipDamageValue
+    ;
 
 // CONSTRUCTORS //
     public GoblinFighter(float x, float y, double direction) {
@@ -50,6 +54,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
         playerStopDistance = DEF_PLAYER_STOP_DISTANCE;
         currentRotateWaitTime = timeBeforeRotating;
         timeBetweenPhases = TIME_BETWEEN_SHOOT_PHASES;
+        shipDamageValue = DEF_SHIP_DAMAGE_VALUE;
     }
 
 // METHODS //
@@ -216,5 +221,9 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     @Override
     public void setHP(int hp) {
         this.hp = hp;
+    }
+
+    public int getShipDamageValue() {
+        return shipDamageValue;
     }
 }
