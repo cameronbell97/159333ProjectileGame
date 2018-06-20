@@ -67,7 +67,7 @@ public class Settings {
     public static int max_particles;
 
     // Gameplay //
-    public static int exp_pickup_distance;
+    public static int scoredot_magnet_distance;
     public static boolean player_strafe;
     public static boolean player_deceleration;
     public static boolean player_acceleration;
@@ -100,7 +100,7 @@ public class Settings {
         max_particles = DEF_MAX_PARTICLES;
 
         // Gameplay //
-        exp_pickup_distance = DEF_EXP_PICKUP_DISTANCE;
+        scoredot_magnet_distance = DEF_EXP_PICKUP_DISTANCE;
         player_strafe = DEF_PLAYER_STRAFE;
         player_deceleration = DEF_PLAYER_DECELERATION;
         player_acceleration = DEF_PLAYER_ACCELERATION;
