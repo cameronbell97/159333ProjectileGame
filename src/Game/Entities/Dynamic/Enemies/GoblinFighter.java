@@ -2,7 +2,9 @@ package Game.Entities.Dynamic.Enemies;
 
 import Game.Data.Settings;
 import Game.Entities.*;
-import Game.Entities.Dynamic.ExpDot;
+import Game.Entities.Dynamic.Bullets.PlayerBullet;
+import Game.Entities.Dynamic.Bullets.PlayerPiercingBullet;
+import Game.Entities.Dynamic.ScoreDot;
 
 import java.awt.*;
 
@@ -23,7 +25,9 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
             TIME_BETWEEN_SHOTS = 25,
             DEF_SHOOT_PHASE_BULLET_NUMBER = 4,
             DEF_HP = 1,
-            DEF_EXP = 8;
+            DEF_EXP = 8,
+            DEF_SHIP_DAMAGE_VALUE = 5
+    ;
 
     protected int
             shootTimer,
@@ -33,7 +37,9 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
             exp_value,
             phaseBulletsNumber = 4,
             playerStopDistance,
-            timeBetweenPhases;
+            timeBetweenPhases,
+            shipDamageValue
+    ;
 
 // CONSTRUCTORS //
     public GoblinFighter(float x, float y, double direction) {
@@ -48,6 +54,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
         playerStopDistance = DEF_PLAYER_STOP_DISTANCE;
         currentRotateWaitTime = timeBeforeRotating;
         timeBetweenPhases = TIME_BETWEEN_SHOOT_PHASES;
+        shipDamageValue = DEF_SHIP_DAMAGE_VALUE;
     }
 
 // METHODS //
@@ -73,8 +80,15 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     // Method Override - To Handle Collisions //
     @Override
     public void collide(Entity ec) {
-        if(ec instanceof Game.Entities.Dynamic.Bullets.BulletPlayer) {
-            addHP(-2);
+        if(ec instanceof PlayerBullet) {
+            int damageDealt = ((PlayerBullet) ec).getDamageValue();
+
+            if(ec instanceof PlayerPiercingBullet && !checkAlreadyPierced((PlayerPiercingBullet)ec))
+                addPierceBullet((PlayerPiercingBullet)ec);
+            else
+                damageDealt = 0;
+
+            addHP(-damageDealt);
         }
         else if(ec instanceof Game.Entities.Dynamic.PlayerEntity) {
             die();
@@ -178,7 +192,7 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     @Override
     public void die() {
         EntityManager em = handler.getEntityManager();
-        em.subscribe(new ExpDot(this, exp_value));
+        em.subscribe(new ScoreDot(this, exp_value));
         explode();
         em.unsubscribe(this);
         em.unsubscribe(collision);
@@ -207,5 +221,9 @@ public abstract class GoblinFighter extends TargetingEnemy implements iOutOfBoun
     @Override
     public void setHP(int hp) {
         this.hp = hp;
+    }
+
+    public int getShipDamageValue() {
+        return shipDamageValue;
     }
 }

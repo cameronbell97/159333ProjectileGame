@@ -16,7 +16,7 @@ import Game.Entities.EntityManager;
 public class GoblinFighterLarge extends GoblinFighter {
 // VARIABLES //
     private static final int LARGE_GOBLIN_STOP_DISTANCE = 650;
-    private static final int GOBLIN_FIGHTER_LARGE_DEF_HP = 6;
+    private static final int GOBLIN_FIGHTER_LARGE_DEF_HP = 16;
     private static final int DEF_SHOOT_PHASE_BULLET_NUMBER = 3;
 
 // CONSTRUCTOR //

@@ -21,12 +21,11 @@ public class AssetManager {
 
     // Spritesheets //
     private SpriteSheet sheet1 = null;
-    private SpriteSheet wall_sheet = null;
     private SpriteSheet char_sheet_01 = null;
     private SpriteSheet char_sheet_02 = null;
     private SpriteSheet bullet_sheet = null;
     private SpriteSheet particles_sheet_16 = null;
-    private BufferedImage walls[];
+    private SpriteSheet weapon_thumbs_128 = null;
 
     // Maps / Dictionaries //
     private HashMap<String, BufferedImage> charset_1;
@@ -85,6 +84,8 @@ public class AssetManager {
                 return particles_sheet_16.getSprite(x, y);
             case 20:
                 return bullet_sheet.getSprite(x, y);
+            case 30:
+                return weapon_thumbs_128.getSprite(x, y);
         }
 
         return null;
@@ -103,10 +104,13 @@ public class AssetManager {
             char_sheet_02 = new SpriteSheet(ImageLoader.load(imagePath + "characters02.png"), 10, 5, 5, 9); // load the spritesheet
 
             // Bullet Sheet
-            bullet_sheet = new SpriteSheet(ImageLoader.load(imagePath + "bullets.png"), 2, 2, 10, 10); // load the spritesheet
+            bullet_sheet = new SpriteSheet(ImageLoader.load(imagePath + "bullets.png"), 3, 2, 10, 10); // load the spritesheet
 
             // Particle Sheet 16x16
             particles_sheet_16 = new SpriteSheet(ImageLoader.load(imagePath + "particles16.png"), 4, 14, 16, 16); // load the spritesheet
+
+            // Weapon Thumbnails Sheet 128x128
+            weapon_thumbs_128 = new SpriteSheet(ImageLoader.load(imagePath + "weapon_thumbs_128.png"), 3, 1, 128, 128); // load the spritesheet
 
         } catch (IOException e) {
             e.printStackTrace();

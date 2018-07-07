@@ -20,11 +20,8 @@ public class OptionsScreen extends Screen {
     private static final int BORDER_WIDTH = 1;
     private static final int OUTER_PADDING = 24;
 
+    // Screens //
     private Screen returnScreen;
-
-    Color backgroundColor;
-    Color borderColor;
-    Color fillColour;
 
     // Elements //
     PaddedElement mainElement;
@@ -35,10 +32,6 @@ public class OptionsScreen extends Screen {
 // CONSTRUCTORS //
     public OptionsScreen(Screen returnScreen) {
         this.returnScreen = returnScreen;
-
-        borderColor = new Color(129,130,174);
-        fillColour = new Color(78, 78, 122, 58);
-        backgroundColor = new Color(0, 0, 20);
 
         fillElements();
     }
@@ -70,7 +63,7 @@ public class OptionsScreen extends Screen {
 
     // Method - Generate All The Main Menu Elements //
     private void fillElements() {
-        mainElement = new PaddedElement(1, borderColor, fillColour, OUTER_PADDING);
+        mainElement = new PaddedElement(1, OUTER_PADDING);
         VerticalListElement titleWrapper = new VerticalListElement((int)(SPACE_BETWEEN_ROWS*1.5));
         VerticalListElement mainColumn = new VerticalListElement(SPACE_BETWEEN_ROWS);
         HorizontalListElement clearScoresRow = new HorizontalListElement(SPACE_BETWEEN_COLUMNS);
@@ -78,7 +71,7 @@ public class OptionsScreen extends Screen {
         // Add Elements
         TextElement cleared = new TextElement("CLEARED!");
         cleared.setVisible(false);
-        clearScoresButton = new ButtonElement("CLEAR HIGH SCORES", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
+        clearScoresButton = new TextButtonElement("CLEAR HIGH SCORES", BORDER_WIDTH, Settings.button_padding) {
             @Override
             protected void onClick() {
                 Handler.get().getSave().clearScores();
@@ -97,7 +90,7 @@ public class OptionsScreen extends Screen {
         mainElement.setChildElement(titleWrapper);
 
         // Back Button
-        backButton = new ButtonElement("<", BORDER_WIDTH, borderColor, fillColour, Settings.button_padding) {
+        backButton = new TextButtonElement("<", BORDER_WIDTH, Settings.button_padding) {
             @Override
             protected void onClick() {
                 ScreenManager.setScreen(returnScreen);

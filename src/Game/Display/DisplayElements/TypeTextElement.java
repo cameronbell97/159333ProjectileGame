@@ -1,6 +1,7 @@
 package Game.Display.DisplayElements;
 
 import Game.Data.KeyManager;
+import Game.Data.Settings;
 import Game.Display.UserInterface.TextManager;
 import Game.Handler;
 import Game.Timer.CodeTimer;
@@ -10,6 +11,7 @@ import Game.Timer.iCanHaveCodeTimer;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
+import java.util.Set;
 
 /**
  * Cameron Bell - 19/04/2018
@@ -40,6 +42,9 @@ public class TypeTextElement extends Element implements iCanHaveCodeTimer {
 
 // CONSTRUCTORS //
     public TypeTextElement(int maxLength) {
+        this(maxLength, Settings.character_size);
+    }
+    public TypeTextElement(int maxLength, int textSize) {
         super(0, 0);
 
         // Get Managers //
@@ -47,8 +52,8 @@ public class TypeTextElement extends Element implements iCanHaveCodeTimer {
         textManager = new TextManager();
 
         // Set Dimensions //
-        setWidth(textManager.getWordWidth(maxLength));
-        setHeight(textManager.getCharacterHeight());
+        setWidth(textManager.getWordWidth(maxLength, Settings.character_size));
+        setHeight(textManager.getCharacterHeight(Settings.character_size));
 
         // Set Data //
         this.maxLength = maxLength;

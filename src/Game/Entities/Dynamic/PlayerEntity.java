@@ -1,6 +1,5 @@
 package Game.Entities.Dynamic;
 import Game.Entities.Collision.CollisionBox;
-import Game.Entities.Dynamic.Bullets.BulletPlayer;
 import Game.Entities.Dynamic.Bullets.GoblinBulletLarge;
 import Game.Entities.Dynamic.Bullets.GoblinBulletSmall;
 import Game.Entities.Dynamic.Enemies.GoblinFighter;
@@ -8,6 +7,7 @@ import Game.Entities.Dynamic.Particles.DebrisParticle;
 import Game.Entities.Dynamic.Particles.EnergyExplParticle;
 import Game.Entities.Entity;
 import Game.Entities.EntityManager;
+import Game.Data.PlayerModules.WeaponModule;
 import Game.Entities.iVulnerable;
 
 import Game.Display.Assets.AssetManager;
@@ -16,7 +16,6 @@ import Game.Data.Settings;
 import Game.Screens.GameScreen;
 import Game.Screens.Screen;
 import Game.Screens.ScreenManager;
-import Game.Timer.*;
 
 /**
  * Cameron Bell - 27/03/2018
@@ -24,31 +23,25 @@ import Game.Timer.*;
  * The controllable player
  */
 
-public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHaveCodeTimer {
+public class PlayerEntity extends DynamicEntity implements iVulnerable {
 // VARIABLES //
-    // Statics
+    // Statics //
     public static final int DEF_PLAYER_WIDTH = 64;
     public static final int DEF_PLAYER_HEIGHT = 64;
-    public static final int DEF_RELOAD_SPEED = 10; // 60 = 1 second
     public static final double DEF_ROT_SPEED = 0.015*Math.PI;
     public static final int DEF_HEALTH = 20;
     private static final int THRUST_FRAME_TIME_1 = 5;
     private static final int THRUST_FRAME_TIME_2 = 25;
     private static final int THRUST_FRAME_TIME_3 = 40;
 
-    // Managers
+    // Managers //
     private AssetManager assMan = AssetManager.get();
     private KeyManager km;
 
-    private double
-            speedMultiplier,
-            rotationSpeed;
-    private boolean
-            reverseThrust, // If true, player can reverse
-            shoot_release,
-            shoot_reloaded;
-    private float
-            decelerate;
+    // Data //
+    private double speedMultiplier, rotationSpeed;
+    private boolean reverseThrust; // If true, player can reverse
+    private float decelerate;
     private int
             health,
             slowTimeStart,
@@ -58,10 +51,17 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
 
 //    private PlayerCollisionBoxHead headCollision; // EXPERIMENTAL //
 
+    // Modules //
+    WeaponModule weaponModule;
+
 
 // CONSTRUCTORS //
-    public PlayerEntity(float x, float y) {
+    public PlayerEntity(float x, float y, WeaponModule weaponModule) {
         super(x, y, DEF_PLAYER_WIDTH, DEF_PLAYER_HEIGHT, (Math.PI / 2));
+
+        this.weaponModule = weaponModule;
+        weaponModule.setParent(this);
+
         initialise();
     }
 
@@ -76,8 +76,6 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
         reverseThrust = true;
         decelerate = (float)0.06;
         health = DEF_HEALTH;
-        shoot_release = true;
-        shoot_reloaded = true;
         slowTimeStart = 0;
         slowTimeCurrent = 0;
         timeMoving = 0;
@@ -155,6 +153,7 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     // Method Override - Update Entity State //
     @Override
     public void update(int dt) {
+        weaponModule.update(dt);
         getInput(dt);
         move(dt);
         collision.update(dt);
@@ -168,17 +167,17 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             addHP(-2);
             slow(50);
         }
-        else if(ec instanceof Game.Entities.Dynamic.ExpDot) {
-            handler.getGameDataManager().addScore(((ExpDot) ec).getValue());
+        else if(ec instanceof ScoreDot) {
+            handler.getGameDataManager().addScore(((ScoreDot) ec).getValue());
         }
         else if(ec instanceof GoblinBulletSmall) {
-            addHP(-1);
+            addHP(-((GoblinBulletSmall) ec).getDamageValue());
         }
         else if(ec instanceof GoblinBulletLarge) {
-            addHP(-2);
+            addHP(-((GoblinBulletLarge) ec).getDamageValue());
         }
         else if(ec instanceof GoblinFighter) {
-            addHP(-5);
+            addHP(-((GoblinFighter) ec).getShipDamageValue());
             slow(80);
         }
     }
@@ -270,16 +269,9 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
             }
         }
         // Shooting Mechanics
-        if(km.spacebar && shoot_release && shoot_reloaded) {
-            if(Settings.player_gun_main) {
-                handler.getEntityManager().subscribe(new BulletPlayer(this));
-                handler.getTimerManager().newCodeTimer(DEF_RELOAD_SPEED, this, "REL");
-            }
-
-            shoot_reloaded = false;
-            if(Settings.player_gun_lock) shoot_release = false;
+        if(km.spacebar) {
+            weaponModule.tryShoot();
         }
-        if(!km.spacebar) shoot_release = true;
 
         // Slow/Speedup Mechanics for collision with asteroid
         if(slowTimeStart > 0) slowTimeCurrent+=dt;
@@ -450,20 +442,6 @@ public class PlayerEntity extends DynamicEntity implements iVulnerable, iCanHave
     private void slow(int ticks) {
         slowTimeStart = slowTimeStart - slowTimeCurrent + ticks;
         slowTimeCurrent = 0;
-    }
-
-    // Method - Recieve Timer Notification //
-    @Override
-    public void timerNotify(CodeTimer t) {
-        String timerCode = t.getCode(); // Get timer code
-
-        switch (timerCode) {
-            case "REL":
-                shoot_reloaded = true;
-                break;
-
-        }
-        handler.getTimerManager().unsubTimer(t); // Unsubscribe the timer
     }
 
 // GETTERS & SETTERS //

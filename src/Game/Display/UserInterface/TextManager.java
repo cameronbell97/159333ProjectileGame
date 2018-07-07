@@ -38,29 +38,31 @@ public class TextManager {
 // METHODS //
     // Method - Draw a String on the screen at 100% Alpha //
     public void drawString(Graphics g, String text, String alignment, int xpos, int ypos) {
-        drawString(g, text, alignment, xpos, ypos, 1);
+        drawString(g, text, alignment, xpos, ypos, Settings.character_size);
     }
 
     // Method - Draw a String on the screen at 100% Alpha //
-    public void drawString(Graphics g, String text, String alignment, int xpos, int ypos, int sizeMultiplier) {
-        drawString(g, text, alignment, xpos, ypos, sizeMultiplier, MAX_ALPHA);
+    public void drawString(Graphics g, String text, String alignment, int xpos, int ypos, int textSize) {
+        drawString(g, text, alignment, xpos, ypos, textSize, MAX_ALPHA);
     }
 
     // Method Overload - Draw a String on the screen at custom Alpha //
-    public void drawString(Graphics g, String text, String alignment, int xpos, int ypos, int sizeMultiplier, float alpha) {
+    public void drawString(Graphics g, String text, String alignment, int xpos, int ypos, int textSize, float alpha) {
         if(text.length() == 0) return;
 
+        text = text.toUpperCase(); // Self Explanatory
+
         // Get Parameters
-        int character_width_final = getCharacterWidth() * sizeMultiplier;
-        int character_height_final = getCharacterHeight() * sizeMultiplier;
+        int character_width_final = getCharacterWidth(textSize);
+        int character_height_final = getCharacterHeight(textSize);
         int xPencil = xpos;
         int yPencil = ypos;
-        int xIncrement = character_width_final + (Settings.character_size * sizeMultiplier);
+        int xIncrement = character_width_final + (textSize); // +(textSize) is the space between characters
         String[] wordArray = text.split("");
 
         switch (alignment) {
             case "center":
-                xPencil -= ((wordArray.length * xIncrement) - Settings.character_size * sizeMultiplier) / 2;
+                xPencil -= ((wordArray.length * xIncrement) - textSize) / 2;
                 break;
             case "right":
                 Collections.reverse(Arrays.asList(wordArray));
@@ -97,11 +99,17 @@ public class TextManager {
 
 // GETTERS & SETTERS //
     // Getter Method - Get Width of Word Depending on Word Length & Character Size //
-    public static int getWordWidth(String word) {
-        return (word.length() * getCharacterWidth()) + ((word.length() - 1) * Settings.character_size);
+    public static int getWordWidth(String word, int textSize) {
+        return (word.length() * getCharacterWidth(textSize)) + ((word.length() - 1) * textSize);
     }
-    public static int getWordWidth(int wordSize) {
-        return (wordSize * getCharacterWidth()) + ((wordSize - 1) * Settings.character_size);
+    public static int getWordWidth(int wordSize, int textSize) {
+        return (wordSize * getCharacterWidth(textSize)) + ((wordSize - 1) * textSize);
+    }
+    public static int getCharacterHeight(int textSize) {
+        return Settings.character_height * textSize;
+    }
+    public static int getCharacterWidth(int textSize) {
+        return Settings.character_width * textSize;
     }
     public static int getCharacterHeight() {
         return Settings.character_height * Settings.character_size;

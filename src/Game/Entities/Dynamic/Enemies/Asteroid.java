@@ -2,9 +2,10 @@ package Game.Entities.Dynamic.Enemies;
 
 import Game.Display.Assets.AssetManager;
 import Game.Entities.Collision.CollisionBox;
-import Game.Entities.Dynamic.Bullets.BulletPlayer;
+import Game.Entities.Dynamic.Bullets.PlayerBullet;
+import Game.Entities.Dynamic.Bullets.PlayerPiercingBullet;
 import Game.Entities.Dynamic.Particles.AsteroidParticle;
-import Game.Entities.Dynamic.ExpDot;
+import Game.Entities.Dynamic.ScoreDot;
 import Game.Entities.Dynamic.Particles.AsteroidParticleWhite;
 import Game.Entities.Entity;
 import Game.Entities.EntityManager;
@@ -43,17 +44,17 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
 
         // Set depending on level
         if(level >=3) {
-            hp = 5;
+            hp = 16;
             if(!white) img = AssetManager.get().getSprite("AstLarge");
             else img = AssetManager.get().getSprite("AstLargeWhite");
         }
         else if(level == 2) {
-            hp = 3;
+            hp = 10;
             if(!white) img = AssetManager.get().getSprite("AstMedium");
             else img = AssetManager.get().getSprite("AstMediumWhite");
         }
         else {
-            hp = 1;
+            hp = 4;
             if(!white) img = AssetManager.get().getSprite("AstSmall");
             else img = AssetManager.get().getSprite("AstSmallWhite");
         }
@@ -88,10 +89,18 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
     // Method Override - To Handle Collisions //
     @Override
     public void collide(Entity ec) {
-        if(ec instanceof BulletPlayer) {
-            addHP(-2);
+        if(ec instanceof PlayerBullet) {
+            int damageDealt = ((PlayerBullet) ec).getDamageValue();
+
+            if(ec instanceof PlayerPiercingBullet) {
+                if (!checkAlreadyPierced((PlayerPiercingBullet) ec))
+                    addPierceBullet((PlayerPiercingBullet) ec);
+                else damageDealt = 0;
+            }
+
+            addHP(-damageDealt);
         }
-        if(ec instanceof Game.Entities.Dynamic.PlayerEntity) {
+        else if(ec instanceof Game.Entities.Dynamic.PlayerEntity) {
             setHP(0);
         }
 
@@ -149,7 +158,14 @@ public class Asteroid extends Enemy implements iVulnerable, iOutOfBounds {
             ed.subscribe(ast);
         }
 
-        em.subscribe(new ExpDot(this, level+1));
+        /* Drop Score Dot Code
+         * f(x) = -x+4, where f = value and x = level
+         * lvl 1 = 3
+         * lvl 2 = 2
+         * lvl 3 = 1
+         */
+        if(level <= 3 && level >= 1) em.subscribe(new ScoreDot(this, (-level)+4));
+
         explode();
         kill();
     }

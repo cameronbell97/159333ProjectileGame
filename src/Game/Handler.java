@@ -3,6 +3,8 @@ package Game;
 import Game.Data.GameDataManager;
 import Game.Data.KeyManager;
 import Game.Data.MouseManager;
+import Game.Data.PlayerModules.MainBlasterModule;
+import Game.Data.PlayerModules.WeaponModule;
 import Game.Data.Save;
 import Game.Data.Settings;
 import Game.Display.UserInterface.GameUIManager;
@@ -47,10 +49,13 @@ public class Handler {
         // Initialise Save Data
         save = new Save();
         if(!save.loadXML()) {
-            //save.create(); // If load fails, create a blank save
-            if(!save.loadXML()) {
-                Game.end(); // If load fails a second time, kill the program
+            try {
+                throw new Exception("SavedataLoadError") ;
+            } catch (Exception e) {
+                System.out.println("ERROR LOADING SAVE DATA");
+                e.printStackTrace();
             }
+            Game.end();
         }
 
         // Initialise Input Managers //
@@ -92,9 +97,9 @@ public class Handler {
     }
 
     // Method - Create a New Game //
-    public void newGame() {
+    public void newGame(WeaponModule playerWeapon) {
         timerManager = new TimerManager();
-        entityManager = new EntityManager();
+        entityManager = new EntityManager(playerWeapon);
         entityManager.getPlayer().setCollisionBox();
         enemyDirector = new EnemyDirector(this);
         gameUIManager = new GameUIManager(this);
@@ -105,7 +110,7 @@ public class Handler {
     // Method - Create a New Tutorial //
     public void newTutorial() {
         timerManager = new TimerManager();
-        entityManager = new EntityManager();
+        entityManager = new EntityManager(new MainBlasterModule());
         entityManager.getPlayer().setCollisionBox();
     }
 

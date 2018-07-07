@@ -22,7 +22,7 @@ public class ScoreBoard implements iXMLSerializable {
     // Statics //
     public static final String DEF_SCORE_NAME_FORMAT = "---";
     public static final int DEF_SCORES_NUM = 10;
-    private static final int DEVELOPER_HIGH_SCORE = 1361;
+    private static final int DEVELOPER_HIGH_SCORE = 0;
 
     // Data //
     private int scores[];

@@ -1,12 +1,12 @@
 package Game.Entities.Dynamic.Bullets;
 
-import Game.Display.Assets.AssetManager;
 import Game.Entities.Collision.CollisionBox;
 import Game.Entities.Dynamic.DynamicEntity;
 import Game.Entities.Dynamic.Enemies.GoblinFighter;
 import Game.Entities.Dynamic.Particles.PlayerBulletParticle;
 import Game.Entities.Entity;
-import Game.Entities.EntityManager;
+
+import java.awt.image.BufferedImage;
 
 /**
  * Cameron Bell - 02/04/2018
@@ -14,24 +14,20 @@ import Game.Entities.EntityManager;
  * The Player's Bullet - Damages Enemies
  */
 
-public class BulletPlayer extends Bullet {
+public abstract class PlayerBullet extends Bullet {
 // VARIABLES //
-    protected static final int IMG_X_OFFSET = 3;
+    // Statics //
+    private static final int DEF_IMG_X_OFFSET = 3;
+    private static final int DEF_IMG_Y_OFFSET = 1;
+    private static final int DEF_DIMENSIONS = 10; // Width & Height
 
 // CONSTRUCTORS //
-    public BulletPlayer(DynamicEntity parent) {
-        super(10, 10, parent);
-        img = AssetManager.get().getSprite("BulletPlayer");
+    public PlayerBullet(DynamicEntity parent) {
+        super(DEF_DIMENSIONS, DEF_DIMENSIONS, parent);
+        img = setSprite();
         setCollisionBox();
 
-        // Move bullet to nose of Player ship
-        moveSpeed = 20;
-        setMoveSpeeds();
-        move(1);
-
-        // Reset move speed
-        moveSpeed = 12;
-        setMoveSpeeds();
+        setPosition();
 
         // Rotate the sprite
         rotateSprite();
@@ -46,12 +42,17 @@ public class BulletPlayer extends Bullet {
             handler.getEntityManager().subscribe(new PlayerBulletParticle(this));
         } else if(ec instanceof GoblinFighter) {
             destroy();
+            handler.getEntityManager().subscribe(new PlayerBulletParticle(this));
         }
     }
 
     // Method Override - Used for initial spacial setup for the Collision Box //
     @Override
     public void setCollisionBox() {
-        collision = new CollisionBox(xpos+IMG_X_OFFSET, ypos, 4, 10, IMG_X_OFFSET, 0, this);
+        collision = new CollisionBox(xpos+ DEF_IMG_X_OFFSET, ypos+DEF_IMG_Y_OFFSET, 4, 10, DEF_IMG_X_OFFSET, DEF_IMG_Y_OFFSET, this);
     }
+
+    protected abstract void setPosition();
+
+    protected abstract BufferedImage setSprite();
 }

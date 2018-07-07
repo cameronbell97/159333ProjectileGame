@@ -15,6 +15,7 @@ import Game.Entities.Entity;
 public class GoblinBulletSmall extends Bullet {
 // VARIABLES //
     protected static final int IMG_X_OFFSET = 4;
+    protected static final int DEF_DAMAGE_VALUE = 1;
 
 // CONSTRUCTORS //
     public GoblinBulletSmall(GoblinFighter parent) {
@@ -49,5 +50,10 @@ public class GoblinBulletSmall extends Bullet {
     @Override
     public void setCollisionBox() {
         collision = new CollisionBox(xpos+IMG_X_OFFSET, ypos, 2, 10, IMG_X_OFFSET, 0, this);
+    }
+
+    @Override
+    protected int setDamageValue() {
+        return DEF_DAMAGE_VALUE;
     }
 }

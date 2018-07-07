@@ -13,23 +13,18 @@ import java.awt.*;
 
 public class AddScoreScreen extends Screen {
 // VARIABLES //
-    // Data
+    // Data //
     private int space_between_columns = DEF_SPACE_BETWEEN_COLUMNS;
     private int space_between_rows = DEF_SPACE_BETWEEN_ROWS;
     private int border_width = DEF_BORDER_WIDTH;
     private int outer_padding = DEF_OUTER_PADDING;
     private int score;
 
-    // Screens
+    // Screens //
     private Screen returnScreen;
     private Screen drawScreen;
 
-    // Colours
-    private Color backgroundColor;
-    private Color borderColor;
-    private Color fillColour;
-
-    // Elements
+    // Elements //
     private PaddedElement mainElement;
     private VerticalListElement titleWrapper;
     private HorizontalListElement columnsContainer;
@@ -43,10 +38,6 @@ public class AddScoreScreen extends Screen {
         this.returnScreen = returnScreen;
         this.drawScreen = drawScreen;
         this.score = score;
-
-        borderColor = new Color(129,130,174);
-        fillColour = new Color(78, 78, 122, 58);
-        backgroundColor = new Color(0, 0, 20);
 
         fillElements();
     }
@@ -78,7 +69,7 @@ public class AddScoreScreen extends Screen {
 
     // Method - Generate All The Main Menu Elements //
     private void fillElements() {
-        mainElement = new PaddedElement(1, borderColor, fillColour, outer_padding);
+        mainElement = new PaddedElement(border_width, outer_padding);
         titleWrapper = new VerticalListElement((int)(space_between_rows *1.5));
         columnsContainer = new HorizontalListElement(space_between_columns);
 
@@ -94,7 +85,7 @@ public class AddScoreScreen extends Screen {
 
         nameColumn.addChild(nameTyper);
 
-        submitButton = new ButtonElement("SUBMIT") {
+        submitButton = new TextButtonElement("SUBMIT") {
             @Override
             protected void onClick() {
                 Save save = handler.getSave();
@@ -105,7 +96,7 @@ public class AddScoreScreen extends Screen {
 
             @Override
             protected void additionalActions() {
-                if(km.enter) onClick();
+                if(handler.getKeyManager().enter) onClick();
             }
         };
 

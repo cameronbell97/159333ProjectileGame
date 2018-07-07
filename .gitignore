@@ -1,7 +1,6 @@
 *.docx
-.idea/workspace.xml
-.idea/uiDesigner.xml
 out/
 doc/
 .idea/
 src/META-INF/
+/_planning_material/
